@@ -339,7 +339,7 @@ header {
 .sns-x      .sns-bar-fill { background:#1d9bf0; }
 .sns-reddit .sns-bar-fill { background:#ff4500; }
 .sns-yt     .sns-bar-fill { background:#ff0000; }
-.sns-github .sns-bar-fill { background:#8b949e; }
+.sns-github .sns-bar-fill { background:#22c55e; }
 
 .card-action { display:flex; align-items:center; justify-content:space-between; }
 .visit-btn { display:inline-flex; align-items:center; gap:5px; font-size:.75rem; font-weight:500; color:var(--accent); background:rgba(0,180,220,.07); border:1px solid rgba(0,180,220,.2); padding:6px 13px; border-radius:7px; cursor:pointer; text-decoration:none; font-family:inherit; transition:all .2s; }
@@ -919,12 +919,33 @@ function renderCard(tool, idx) {
   </div>
   <div class="card-action" onclick="event.stopPropagation()">
     <a class="visit-btn" href="${tool.url}" target="_blank" rel="noopener noreferrer">방문하기 →</a>
-    <button class="bookmark-btn" onclick="toggleBookmark(this)">🔖</button>
+    <button class="bookmark-btn${bookmarkedIds.has(tool.id)?' saved':''}" onclick="toggleBookmark(this)">${bookmarkedIds.has(tool.id)?'⭐':'🔖'}</button>
   </div>
 </div>`;
 }
 
-function toggleBookmark(btn){ btn.classList.toggle('saved'); btn.textContent=btn.classList.contains('saved')?'⭐':'🔖'; }
+const BOOKMARKS_KEY = 'airank-bookmarks';
+function loadBookmarks() {
+  try { return new Set(JSON.parse(localStorage.getItem(BOOKMARKS_KEY)) || []); } catch(e) { return new Set(); }
+}
+function saveBookmarks(set) {
+  try { localStorage.setItem(BOOKMARKS_KEY, JSON.stringify([...set])); } catch(e) {}
+}
+const bookmarkedIds = loadBookmarks();
+
+function toggleBookmark(btn) {
+  const id = parseInt(btn.closest('.card').dataset.id);
+  if (bookmarkedIds.has(id)) {
+    bookmarkedIds.delete(id);
+    btn.classList.remove('saved');
+    btn.textContent = '🔖';
+  } else {
+    bookmarkedIds.add(id);
+    btn.classList.add('saved');
+    btn.textContent = '⭐';
+  }
+  saveBookmarks(bookmarkedIds);
+}
 
 /* ════════════════════════════════════════
    FILTER / RENDER STATE
@@ -1058,7 +1079,7 @@ function openCompareModal() {
     {key:'x',      label:'X (트위터)', color:'#1d9bf0'},
     {key:'reddit', label:'Reddit',     color:'#ff4500'},
     {key:'youtube',label:'YouTube',     color:'#ff0000'},
-    {key:'github', label:'GitHub',     color:'#8b949e'},
+    {key:'github', label:'GitHub',     color:'#22c55e'},
   ];
 
   // find winners per platform
@@ -1494,7 +1515,7 @@ function logScale(val, refMax) {
 function setLiveBadge(loading) {
   const badge = document.getElementById('liveBadge');
   if (!badge) return;
-  badge.textContent = loading ? '⏳ 업데이트 중…' : '🔴 LIVE';
+  badge.textContent = loading ? '⏳ 업데이트 중…' : '🟢 LIVE';
   badge.style.background = loading ? 'rgba(251,191,36,0.15)' : '';
   badge.style.color = loading ? '#fbbf24' : '';
 }
