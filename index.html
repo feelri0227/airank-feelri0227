@@ -304,15 +304,19 @@ header {
 [data-theme="dark"]  .si-dark { filter:invert(1) brightness(1.1); }
 [data-theme="light"] .si-dark { filter:none; }
 .card-name-row { display:flex; flex-direction:column; gap:2px; min-width:0; flex:1; }
-.rank-badge { display:flex; align-items:center; gap:6px; font-family:'Syne',sans-serif; }
-.rank-medal { font-size:1.1rem; line-height:1; flex-shrink:0; }
-.rank-num-text { font-size:1rem; font-weight:800; letter-spacing:-.02em; color:var(--text-muted); }
-.rank-label-text { font-size:.58rem; font-weight:700; letter-spacing:.1em; color:var(--accent); }
+.rank-badge { display:flex; align-items:center; gap:7px; }
+.rank-num-text { font-family:'DM Sans',sans-serif; font-size:1.05rem; font-weight:700; letter-spacing:-.03em; color:var(--text-dim); font-variant-numeric:tabular-nums; }
+.rank-label-text { font-family:'DM Sans',sans-serif; font-size:.56rem; font-weight:600; letter-spacing:.14em; color:var(--text-muted); text-transform:uppercase; }
 .live-pip { font-size:.58rem; font-weight:700; color:var(--green); letter-spacing:.04em; animation:blink 1.4s infinite; }
-/* TOP 3 강조 */
-.rank-top-1 .rank-num-text { font-size:1.25rem; background:linear-gradient(135deg,#ffe066,#ffd700,#ffaa00); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-.rank-top-2 .rank-num-text { font-size:1.18rem; background:linear-gradient(135deg,#f0f0f0,#c8c8c8,#a0a0a0); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-.rank-top-3 .rank-num-text { font-size:1.12rem; background:linear-gradient(135deg,#e8a87c,#cd7f32,#a0522d); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+/* 티어 배지 */
+.tier-badge { display:inline-flex; align-items:center; font-size:.58rem; font-weight:800; letter-spacing:.12em; padding:2px 8px; border-radius:4px; flex-shrink:0; }
+.tier-gold     { background:linear-gradient(135deg,#ffe566,#ffd700,#f0a800); color:#3d2800; }
+.tier-platinum { background:linear-gradient(135deg,#e2f0ff,#a8cfe8,#6aaed6); color:#0d2b3e; }
+.tier-silver   { background:linear-gradient(135deg,#f2f2f2,#d0d0d0,#a8a8a8); color:#2a2a2a; }
+/* TOP 3 랭크 번호 컬러 */
+.rank-top-1 .rank-num-text { color:var(--text); font-size:1.1rem; }
+.rank-top-2 .rank-num-text { color:var(--text); font-size:1.07rem; }
+.rank-top-3 .rank-num-text { color:var(--text); font-size:1.05rem; }
 /* TOP 3 카드 보더 */
 .card-rank-1 { border-color:rgba(255,215,0,.22) !important; }
 .card-rank-1:hover { border-color:rgba(255,215,0,.45) !important; box-shadow:var(--shadow), 0 0 0 1px rgba(255,215,0,.15) !important; }
@@ -904,7 +908,7 @@ function renderCard(tool, idx) {
     <div class="tool-icon" style="background:${c}18;border-color:${c}28" data-emoji="${tool.icon}">${getIconHtml(tool)}</div>
     <div class="card-name-row">
       <div class="rank-badge${idx<3?' rank-top-'+(idx+1):''}">
-        ${idx===0?'<span class="rank-medal">🥇</span>':idx===1?'<span class="rank-medal">🥈</span>':idx===2?'<span class="rank-medal">🥉</span>':''}
+        ${idx===0?'<span class="tier-badge tier-gold">GOLD</span>':idx===1?'<span class="tier-badge tier-platinum">PLATINUM</span>':idx===2?'<span class="tier-badge tier-silver">SILVER</span>':''}
         <span class="rank-num-text">#${idx+1}</span>
         <span class="rank-label-text">RANK</span>
         ${livePip}
