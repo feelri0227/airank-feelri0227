@@ -269,15 +269,13 @@ header {
 [data-theme="light"] .card.selected { border-color:var(--accent) !important; box-shadow:0 0 0 2px rgba(2,132,199,.2) !important; }
 
 /* 3. COMPARE CHECKBOX */
-.compare-check-wrap {
-  position:absolute; top:11px; right:11px; z-index:10;
-}
+.compare-check-wrap { display:contents; }
 .compare-check {
   display:flex; align-items:center; gap:5px;
   cursor:pointer;
-  font-size:.64rem; font-weight:600; color:var(--text-muted);
+  font-size:.72rem; font-weight:600; color:var(--text-muted);
   background:var(--surface2); border:1px solid var(--border);
-  padding:3px 9px 3px 7px; border-radius:100px;
+  padding:6px 10px; border-radius:7px;
   transition:all .2s; white-space:nowrap;
   user-select:none;
 }
@@ -296,7 +294,7 @@ header {
 [data-theme="light"] .card.selected .compare-check .cc-box { color:#fff; }
 .card.selected .compare-check { border-color:var(--accent); color:var(--accent); background:rgba(0,229,255,.08); }
 
-.card-life-badges { display:flex; flex-wrap:wrap; gap:4px; margin-bottom:-2px; padding-right:70px; }
+.card-life-badges { display:flex; flex-wrap:wrap; gap:4px; margin-bottom:-2px; }
 .life-badge { font-size:.6rem; font-weight:600; letter-spacing:.05em; text-transform:uppercase; padding:2px 8px; border-radius:100px; border:1px solid var(--life-b); background:var(--life-bg); color:var(--life-c); white-space:nowrap; transition:background .35s, color .35s, border-color .35s; }
 
 .card-top { display:flex; align-items:flex-start; gap:.85rem; }
@@ -306,9 +304,22 @@ header {
 [data-theme="dark"]  .si-dark { filter:invert(1) brightness(1.1); }
 [data-theme="light"] .si-dark { filter:none; }
 .card-name-row { display:flex; flex-direction:column; gap:2px; min-width:0; flex:1; }
-.rank-num { font-size:.66rem; font-weight:500; letter-spacing:.08em; color:var(--text-muted); font-family:'Syne',sans-serif; display:flex; align-items:center; gap:6px; }
+.rank-badge { display:flex; align-items:center; gap:6px; font-family:'Syne',sans-serif; }
+.rank-medal { font-size:1.1rem; line-height:1; flex-shrink:0; }
+.rank-num-text { font-size:1rem; font-weight:800; letter-spacing:-.02em; color:var(--text-muted); }
+.rank-label-text { font-size:.58rem; font-weight:700; letter-spacing:.1em; color:var(--accent); }
 .live-pip { font-size:.58rem; font-weight:700; color:var(--green); letter-spacing:.04em; animation:blink 1.4s infinite; }
-.rank-num span { color:var(--accent); }
+/* TOP 3 강조 */
+.rank-top-1 .rank-num-text { font-size:1.25rem; background:linear-gradient(135deg,#ffe066,#ffd700,#ffaa00); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.rank-top-2 .rank-num-text { font-size:1.18rem; background:linear-gradient(135deg,#f0f0f0,#c8c8c8,#a0a0a0); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.rank-top-3 .rank-num-text { font-size:1.12rem; background:linear-gradient(135deg,#e8a87c,#cd7f32,#a0522d); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+/* TOP 3 카드 보더 */
+.card-rank-1 { border-color:rgba(255,215,0,.22) !important; }
+.card-rank-1:hover { border-color:rgba(255,215,0,.45) !important; box-shadow:var(--shadow), 0 0 0 1px rgba(255,215,0,.15) !important; }
+.card-rank-2 { border-color:rgba(192,192,192,.22) !important; }
+.card-rank-2:hover { border-color:rgba(192,192,192,.45) !important; }
+.card-rank-3 { border-color:rgba(205,127,50,.22) !important; }
+.card-rank-3:hover { border-color:rgba(205,127,50,.45) !important; }
 .tool-name { font-family:'Syne',sans-serif; font-size:.97rem; font-weight:700; color:var(--text); letter-spacing:-.02em; line-height:1.2; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .score-inline { display:flex; align-items:baseline; gap:.4rem; margin-top:3px; }
 .score-num { font-family:'DM Sans',sans-serif; font-size:1.25rem; font-weight:700; line-height:1; letter-spacing:-.02em; }
@@ -341,7 +352,8 @@ header {
 .sns-yt     .sns-bar-fill { background:#ff0000; }
 .sns-github .sns-bar-fill { background:#22c55e; }
 
-.card-action { display:flex; align-items:center; justify-content:space-between; }
+.card-action { display:flex; align-items:center; gap:.5rem; }
+.card-action .visit-btn { flex:1; justify-content:center; }
 .visit-btn { display:inline-flex; align-items:center; gap:5px; font-size:.75rem; font-weight:500; color:var(--accent); background:rgba(0,180,220,.07); border:1px solid rgba(0,180,220,.2); padding:6px 13px; border-radius:7px; cursor:pointer; text-decoration:none; font-family:inherit; transition:all .2s; }
 .visit-btn:hover { background:rgba(0,180,220,.15); }
 .bookmark-btn { background:none; border:1px solid var(--border); color:var(--text-muted); padding:6px 10px; border-radius:7px; cursor:pointer; font-size:.9rem; transition:all .2s; }
@@ -886,19 +898,17 @@ function renderCard(tool, idx) {
   const snsR = (p,v,cls)=>`<div class="sns-item ${cls}"><div class="sns-val">${v}</div><div class="sns-platform">${p}</div><div class="sns-bar"><div class="sns-bar-fill" style="width:${v}%"></div></div></div>`;
   const isSelected = selectedIds.has(tool.id);
   return `
-<div class="card${isSelected?' selected':''}" style="animation-delay:${idx*0.05}s" data-id="${tool.id}" onclick="handleCardClick(event,${tool.id})">
-  <label class="compare-check-wrap" title="비교에 추가" onclick="event.stopPropagation()">
-    <input type="checkbox" class="cc-input" data-id="${tool.id}" ${isSelected?'checked':''} onchange="toggleCompare(${tool.id},this.checked)">
-    <div class="compare-check">
-      <div class="cc-box">${isSelected?'✓':''}</div>
-      비교
-    </div>
-  </label>
+<div class="card${isSelected?' selected':''}${idx<3?' card-rank-'+(idx+1):''}" style="animation-delay:${idx*0.05}s" data-id="${tool.id}" onclick="handleCardClick(event,${tool.id})">
   ${lifeBadges?`<div class="card-life-badges">${lifeBadges}</div>`:''}
   <div class="card-top">
     <div class="tool-icon" style="background:${c}18;border-color:${c}28" data-emoji="${tool.icon}">${getIconHtml(tool)}</div>
     <div class="card-name-row">
-      <div class="rank-num">#${idx+1} <span>RANK</span>${livePip}</div>
+      <div class="rank-badge${idx<3?' rank-top-'+(idx+1):''}">
+        ${idx===0?'<span class="rank-medal">🥇</span>':idx===1?'<span class="rank-medal">🥈</span>':idx===2?'<span class="rank-medal">🥉</span>':''}
+        <span class="rank-num-text">#${idx+1}</span>
+        <span class="rank-label-text">RANK</span>
+        ${livePip}
+      </div>
       <div class="tool-name">${tool.name}</div>
       <div class="score-inline">
         <div class="score-num" style="color:${c}">${tool.score}<span class="score-unit">/100</span></div>
@@ -919,6 +929,13 @@ function renderCard(tool, idx) {
   </div>
   <div class="card-action" onclick="event.stopPropagation()">
     <a class="visit-btn" href="${tool.url}" target="_blank" rel="noopener noreferrer">방문하기 →</a>
+    <label class="compare-check-wrap" title="비교에 추가">
+      <input type="checkbox" class="cc-input" data-id="${tool.id}" ${isSelected?'checked':''} onchange="toggleCompare(${tool.id},this.checked)">
+      <div class="compare-check">
+        <div class="cc-box">${isSelected?'✓':''}</div>
+        비교
+      </div>
+    </label>
     <button class="bookmark-btn${bookmarkedIds.has(tool.id)?' saved':''}" onclick="toggleBookmark(this)">${bookmarkedIds.has(tool.id)?'⭐':'🔖'}</button>
   </div>
 </div>`;
