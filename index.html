@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIrank — AI 도구 트렌드 랭킹</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ════════════════════════════════════════
+   THEME TOKENS
+════════════════════════════════════════ */
+[data-theme="dark"] {
+  --bg: #090b10;
+  --surface: #0f1219;
+  --surface2: #151922;
+  --surface3: #1c2230;
+  --surface4: #222a3a;
+  --border: rgba(255,255,255,0.07);
+  --border-hover: rgba(255,255,255,0.16);
+  --text: #e8ecf3;
+  --text-muted: #5a6478;
+  --text-dim: #8492a6;
+  --accent: #00e5ff;
+  --accent2: #7c3aed;
+  --accent3: #f97316;
+  --green: #22c55e;
+  --red: #ef4444;
+  --yellow: #fbbf24;
+  --header-bg: rgba(9,11,16,0.85);
+  --noise-op: 0.38;
+  --blob-op: 0.12;
+  --bar-bg: rgba(255,255,255,0.06);
+  --shadow: 0 20px 60px rgba(0,0,0,0.55);
+  --shadow-modal: 0 32px 80px rgba(0,0,0,0.7);
+  --tag-cat-bg: rgba(124,58,237,0.15); --tag-cat-c: #a78bfa; --tag-cat-b: rgba(124,58,237,0.25);
+  --life-bg: rgba(251,191,36,0.1); --life-c: #fbbf24; --life-b: rgba(251,191,36,0.22);
+  --ticker-bg: rgba(0,229,255,0.04);
+  --ticker-border: rgba(0,229,255,0.12);
+  --modal-overlay: rgba(0,0,0,0.75);
+  --compare-bar-bg: rgba(15,18,25,0.95);
+}
+[data-theme="light"] {
+  --bg: #f1f4fb;
+  --surface: #ffffff;
+  --surface2: #e8edf8;
+  --surface3: #dde3f0;
+  --surface4: #cdd5e8;
+  --border: rgba(0,0,0,0.09);
+  --border-hover: rgba(0,0,0,0.2);
+  --text: #0f172a;
+  --text-muted: #94a3b8;
+  --text-dim: #475569;
+  --accent: #0284c7;
+  --accent2: #7c3aed;
+  --accent3: #ea580c;
+  --green: #16a34a;
+  --red: #dc2626;
+  --yellow: #d97706;
+  --header-bg: rgba(241,244,251,0.9);
+  --noise-op: 0.07;
+  --blob-op: 0.055;
+  --bar-bg: rgba(0,0,0,0.07);
+  --shadow: 0 4px 28px rgba(0,0,0,0.09);
+  --shadow-modal: 0 32px 80px rgba(0,0,0,0.22);
+  --tag-cat-bg: rgba(124,58,237,0.08); --tag-cat-c: #6d28d9; --tag-cat-b: rgba(124,58,237,0.18);
+  --life-bg: rgba(217,119,6,0.08); --life-c: #92400e; --life-b: rgba(217,119,6,0.22);
+  --ticker-bg: rgba(2,132,199,0.04);
+  --ticker-border: rgba(2,132,199,0.15);
+  --modal-overlay: rgba(15,23,42,0.6);
+  --compare-bar-bg: rgba(255,255,255,0.97);
+}
+
+html { transition: background .35s; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg); color: var(--text);
+  min-height: 100vh; overflow-x: hidden;
+  transition: background .35s, color .35s;
+}
+body::before {
+  content:''; position:fixed; inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none; z-index:0; opacity:var(--noise-op); transition:opacity .35s;
+}
+.blob { position:fixed; border-radius:50%; filter:blur(130px); pointer-events:none; z-index:0; opacity:var(--blob-op); transition:opacity .35s; }
+.blob-1 { width:520px; height:520px; background:var(--accent2); top:-150px; right:-120px; }
+.blob-2 { width:420px; height:420px; background:var(--accent); bottom:-120px; left:-120px; }
+
+/* ════════════════════════════════════════
+   HEADER
+════════════════════════════════════════ */
+header {
+  position:sticky; top:0; z-index:200;
+  padding:0 2rem;
+  display:flex; align-items:center; justify-content:space-between;
+  height:64px;
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(18px);
+  background:var(--header-bg);
+  transition:background .35s, border-color .35s;
+}
+.logo { font-family:'Syne',sans-serif; font-weight:800; font-size:1.4rem; letter-spacing:-.03em; color:var(--text); display:flex; align-items:center; gap:.45rem; }
+.logo span { color:var(--accent); }
+.logo-dot { width:8px; height:8px; background:var(--accent); border-radius:50%; animation:blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.75)} }
+
+.header-right { display:flex; align-items:center; gap:.7rem; }
+.live-badge { display:flex; align-items:center; gap:6px; font-size:.72rem; font-weight:500; color:var(--green); background:rgba(34,197,94,.08); border:1px solid rgba(34,197,94,.2); padding:4px 12px; border-radius:100px; }
+.live-dot { width:6px; height:6px; background:var(--green); border-radius:50%; animation:blink 1.4s infinite; }
+.beta-tag { font-size:.67rem; font-weight:600; letter-spacing:.13em; text-transform:uppercase; color:var(--text-muted); background:var(--surface2); border:1px solid var(--border); padding:4px 11px; border-radius:100px; transition:background .35s, border-color .35s; }
+
+.toggle-wrap { display:flex; align-items:center; gap:7px; }
+.theme-label { font-size:.7rem; color:var(--text-muted); white-space:nowrap; transition:color .35s; }
+.theme-toggle { position:relative; width:52px; height:28px; background:var(--surface3); border:1px solid var(--border); border-radius:100px; cursor:pointer; transition:background .3s, border-color .3s; flex-shrink:0; }
+.theme-toggle:hover { border-color:var(--border-hover); }
+.toggle-thumb { position:absolute; top:3px; left:3px; width:20px; height:20px; background:var(--accent); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; box-shadow:0 2px 8px rgba(0,0,0,.25); transition:transform .3s cubic-bezier(.34,1.56,.64,1); }
+[data-theme="light"] .toggle-thumb { transform:translateX(24px); }
+.icon-dark { display:block; } .icon-light { display:none; }
+[data-theme="light"] .icon-dark { display:none; } [data-theme="light"] .icon-light { display:block; }
+
+/* ════════════════════════════════════════
+   1. TICKER BAR
+════════════════════════════════════════ */
+.ticker-wrap {
+  position:relative; z-index:150;
+  height:34px;
+  background:var(--ticker-bg);
+  border-bottom:1px solid var(--ticker-border);
+  overflow:hidden;
+  display:flex; align-items:center;
+  transition:background .35s, border-color .35s;
+}
+.ticker-label {
+  flex-shrink:0;
+  padding:0 14px 0 16px;
+  font-family:'Syne',sans-serif;
+  font-size:.63rem; font-weight:700;
+  letter-spacing:.14em; text-transform:uppercase;
+  color:var(--accent);
+  border-right:1px solid var(--ticker-border);
+  height:100%; display:flex; align-items:center;
+  white-space:nowrap;
+  background:var(--ticker-bg);
+  z-index:2;
+}
+.ticker-track-wrap { flex:1; overflow:hidden; position:relative; height:100%; }
+/* left & right fade */
+.ticker-track-wrap::before,
+.ticker-track-wrap::after {
+  content:''; position:absolute; top:0; bottom:0; width:48px; z-index:3; pointer-events:none;
+}
+.ticker-track-wrap::before { left:0; background:linear-gradient(to right, var(--bg), transparent); }
+.ticker-track-wrap::after  { right:0; background:linear-gradient(to left, var(--bg), transparent); }
+[data-theme="dark"]  .ticker-track-wrap::before { background:linear-gradient(to right, #090b10ee, transparent); }
+[data-theme="dark"]  .ticker-track-wrap::after  { background:linear-gradient(to left,  #090b10ee, transparent); }
+[data-theme="light"] .ticker-track-wrap::before { background:linear-gradient(to right, #f1f4fbee, transparent); }
+[data-theme="light"] .ticker-track-wrap::after  { background:linear-gradient(to left,  #f1f4fbee, transparent); }
+
+.ticker-track {
+  display:flex; align-items:center;
+  height:100%;
+  animation:ticker-scroll 38s linear infinite;
+  white-space:nowrap;
+  will-change:transform;
+}
+.ticker-track:hover { animation-play-state:paused; }
+@keyframes ticker-scroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+.ticker-item {
+  display:inline-flex; align-items:center; gap:7px;
+  padding:0 28px;
+  font-size:.72rem; font-weight:400;
+  color:var(--text-dim);
+  white-space:nowrap;
+}
+.ticker-item .ti-icon { font-size:.8rem; }
+.ticker-item .ti-hot  { color:var(--accent3); font-weight:600; }
+.ticker-item .ti-new  { color:var(--green);   font-weight:600; }
+.ticker-item .ti-up   { color:var(--accent);  font-weight:600; }
+.ticker-sep { color:var(--border-hover); padding:0 4px; font-size:.8rem; }
+
+/* ════════════════════════════════════════
+   HERO
+════════════════════════════════════════ */
+.hero { position:relative; z-index:5; text-align:center; padding:4rem 2rem 2rem; }
+.hero-eyebrow { display:inline-flex; align-items:center; gap:8px; font-size:.72rem; letter-spacing:.15em; text-transform:uppercase; color:var(--accent); margin-bottom:1.2rem; font-weight:500; }
+.hero-eyebrow::before,.hero-eyebrow::after { content:''; height:1px; width:28px; background:var(--accent); opacity:.4; }
+.hero h1 { font-family:'Syne',sans-serif; font-size:clamp(2.1rem,5vw,3.8rem); font-weight:800; line-height:1.06; letter-spacing:-.04em; margin-bottom:.9rem; color:var(--text); }
+.hero h1 em { font-style:normal; background:linear-gradient(135deg,var(--accent),var(--accent2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.hero p { color:var(--text-dim); font-size:1rem; font-weight:300; max-width:480px; margin:0 auto 1.8rem; line-height:1.65; }
+
+/* ── 2. WIZARD TRIGGER BUTTON ── */
+.wizard-btn-wrap { display:flex; justify-content:center; margin-bottom:.5rem; }
+.wizard-btn {
+  display:inline-flex; align-items:center; gap:10px;
+  font-family:'Syne',sans-serif; font-size:.9rem; font-weight:700;
+  letter-spacing:-.01em;
+  color:#000;
+  background:linear-gradient(135deg, var(--accent), var(--accent2));
+  border:none; border-radius:100px; padding:12px 28px;
+  cursor:pointer;
+  box-shadow:0 0 32px rgba(0,229,255,.25), 0 4px 16px rgba(0,0,0,.3);
+  transition:all .25s cubic-bezier(.34,1.56,.64,1);
+  position:relative; overflow:hidden;
+}
+[data-theme="light"] .wizard-btn { color:#fff; }
+.wizard-btn::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(255,255,255,.15),transparent); }
+.wizard-btn:hover { transform:translateY(-2px) scale(1.03); box-shadow:0 0 48px rgba(0,229,255,.35), 0 8px 24px rgba(0,0,0,.35); }
+.wizard-btn .wb-icon { font-size:1.1rem; }
+.wizard-btn .wb-arrow { font-size:.75rem; opacity:.7; }
+
+/* ════════════════════════════════════════
+   STATS BAR
+════════════════════════════════════════ */
+.stats-bar { position:relative; z-index:5; display:flex; justify-content:center; gap:2.5rem; padding:1.4rem 2rem; border-top:1px solid var(--border); border-bottom:1px solid var(--border); background:rgba(128,128,128,.025); transition:border-color .35s; }
+.stat { text-align:center; }
+.stat-num { font-family:'Syne',sans-serif; font-size:1.45rem; font-weight:700; color:var(--text); display:block; }
+.stat-label { font-size:.67rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:.08em; }
+
+/* FILTERS */
+.filters-wrap { position:relative; z-index:5; max-width:1200px; margin:0 auto; padding:2rem 2rem 0; }
+.filter-group { margin-bottom:1rem; }
+.filter-group-label { font-size:.63rem; font-weight:700; text-transform:uppercase; letter-spacing:.15em; color:var(--text-muted); margin-bottom:.55rem; display:flex; align-items:center; gap:8px; }
+.filter-group-label::after { content:''; flex:1; height:1px; background:var(--border); }
+.filter-row { display:flex; flex-wrap:wrap; gap:.42rem; }
+.filter-btn { cursor:pointer; background:var(--surface2); color:var(--text-dim); border:1px solid var(--border); padding:6px 15px; border-radius:100px; font-size:.79rem; font-family:inherit; font-weight:400; transition:all .2s; }
+.filter-btn:hover { border-color:var(--border-hover); color:var(--text); }
+.filter-btn.active { background:var(--accent); color:#fff; border-color:var(--accent); font-weight:500; }
+.filter-btn.life.active { background:var(--accent3); border-color:var(--accent3); color:#fff; }
+
+/* CONTROLS */
+.controls-row { position:relative; z-index:5; display:flex; align-items:center; justify-content:space-between; gap:1rem; max-width:1200px; margin:1.4rem auto 0; padding:0 2rem; flex-wrap:wrap; }
+.search-box { position:relative; flex:1; min-width:200px; max-width:300px; }
+.search-box input { width:100%; background:var(--surface2); border:1px solid var(--border); color:var(--text); padding:9px 14px 9px 36px; border-radius:8px; font-size:.83rem; font-family:inherit; outline:none; transition:border-color .2s, background .35s; }
+.search-box input::placeholder { color:var(--text-muted); }
+.search-box input:focus { border-color:rgba(0,180,220,.38); }
+.search-icon { position:absolute; left:11px; top:50%; transform:translateY(-50%); color:var(--text-muted); font-size:13px; }
+.sort-row { display:flex; gap:.38rem; align-items:center; }
+.sort-label { font-size:.75rem; color:var(--text-muted); }
+.sort-btn { cursor:pointer; background:transparent; border:1px solid var(--border); color:var(--text-dim); padding:6px 12px; border-radius:7px; font-size:.75rem; font-family:inherit; transition:all .2s; }
+.sort-btn:hover { color:var(--text); border-color:var(--border-hover); }
+.sort-btn.active { color:var(--accent); border-color:rgba(0,200,230,.32); background:rgba(0,200,230,.06); }
+
+/* ════════════════════════════════════════
+   CARD GRID
+════════════════════════════════════════ */
+.grid-wrap { position:relative; z-index:5; max-width:1200px; margin:2rem auto 8rem; padding:0 2rem; display:grid; grid-template-columns:repeat(auto-fill,minmax(308px,1fr)); gap:1.1rem; }
+
+/* CARD */
+.card {
+  background:var(--surface); border:1px solid var(--border); border-radius:14px;
+  padding:1.3rem; display:flex; flex-direction:column; gap:.85rem;
+  transition:transform .3s cubic-bezier(.25,.8,.25,1), box-shadow .3s, border-color .3s, background .35s;
+  position:relative; overflow:hidden;
+  animation:cardIn .45s ease both;
+}
+@keyframes cardIn { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
+.card:hover { border-color:rgba(0,180,220,.24); transform:translateY(-4px); box-shadow:var(--shadow), 0 0 0 1px rgba(0,180,220,.08); }
+.card::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(0,229,255,.35),transparent); opacity:0; transition:opacity .3s; }
+.card:hover::before { opacity:1; }
+/* compare selected */
+.card.selected {
+  border-color:var(--accent) !important;
+  box-shadow:0 0 0 2px rgba(0,229,255,.25) !important;
+  transform:translateY(-4px) !important;
+}
+[data-theme="light"] .card.selected { border-color:var(--accent) !important; box-shadow:0 0 0 2px rgba(2,132,199,.2) !important; }
+
+/* 3. COMPARE CHECKBOX */
+.compare-check-wrap {
+  position:absolute; top:11px; right:11px; z-index:10;
+}
+.compare-check {
+  display:flex; align-items:center; gap:5px;
+  cursor:pointer;
+  font-size:.64rem; font-weight:600; color:var(--text-muted);
+  background:var(--surface2); border:1px solid var(--border);
+  padding:3px 9px 3px 7px; border-radius:100px;
+  transition:all .2s; white-space:nowrap;
+  user-select:none;
+}
+.compare-check:hover { border-color:var(--border-hover); color:var(--text); }
+.compare-check input[type="checkbox"] { display:none; }
+.compare-check .cc-box {
+  width:13px; height:13px; border-radius:3px;
+  border:1.5px solid var(--border-hover);
+  background:transparent;
+  display:flex; align-items:center; justify-content:center;
+  font-size:8px; color:transparent;
+  transition:all .18s;
+  flex-shrink:0;
+}
+.card.selected .compare-check .cc-box { background:var(--accent); border-color:var(--accent); color:#000; }
+[data-theme="light"] .card.selected .compare-check .cc-box { color:#fff; }
+.card.selected .compare-check { border-color:var(--accent); color:var(--accent); background:rgba(0,229,255,.08); }
+
+.card-life-badges { display:flex; flex-wrap:wrap; gap:4px; margin-bottom:-2px; padding-right:70px; }
+.life-badge { font-size:.6rem; font-weight:600; letter-spacing:.05em; text-transform:uppercase; padding:2px 8px; border-radius:100px; border:1px solid var(--life-b); background:var(--life-bg); color:var(--life-c); white-space:nowrap; transition:background .35s, color .35s, border-color .35s; }
+
+.card-top { display:flex; align-items:flex-start; justify-content:space-between; gap:.8rem; }
+.card-left { display:flex; align-items:flex-start; gap:.85rem; flex:1; min-width:0; }
+.tool-icon { width:44px; height:44px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1.35rem; flex-shrink:0; border:1px solid var(--border); transition:background .35s, border-color .35s; }
+.card-name-row { display:flex; flex-direction:column; gap:1px; min-width:0; }
+.rank-num { font-size:.66rem; font-weight:500; letter-spacing:.08em; color:var(--text-muted); font-family:'Syne',sans-serif; display:flex; align-items:center; gap:6px; }
+.live-pip { font-size:.58rem; font-weight:700; color:var(--green); letter-spacing:.04em; animation:blink 1.4s infinite; }
+.rank-num span { color:var(--accent); }
+.tool-name { font-family:'Syne',sans-serif; font-size:.97rem; font-weight:700; color:var(--text); letter-spacing:-.02em; line-height:1.2; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+.score-box { text-align:right; flex-shrink:0; }
+.score-label { font-size:.58rem; text-transform:uppercase; letter-spacing:.1em; color:var(--text-muted); display:block; margin-bottom:1px; }
+.score-num { font-family:'Syne',sans-serif; font-size:1.55rem; font-weight:800; line-height:1; letter-spacing:-.03em; }
+.score-change { font-size:.67rem; font-weight:500; display:flex; align-items:center; justify-content:flex-end; gap:2px; margin-top:2px; }
+.score-change.up { color:var(--green); } .score-change.down { color:var(--red); }
+
+.score-bar-wrap { display:flex; align-items:center; gap:8px; }
+.score-bar-bg { flex:1; height:4px; background:var(--bar-bg); border-radius:2px; overflow:hidden; transition:background .35s; }
+.score-bar-fill { height:100%; border-radius:2px; }
+.score-pct { font-size:.65rem; color:var(--text-muted); min-width:30px; text-align:right; }
+
+.tool-desc { font-size:.82rem; color:var(--text-dim); line-height:1.56; font-weight:300; }
+.tags { display:flex; flex-wrap:wrap; gap:.3rem; }
+.tag { font-size:.65rem; padding:3px 9px; border-radius:100px; font-weight:500; }
+.tag-cat { background:var(--tag-cat-bg); color:var(--tag-cat-c); border:1px solid var(--tag-cat-b); }
+.tag-free { background:rgba(34,197,94,.1); color:var(--green); border:1px solid rgba(34,197,94,.22); }
+.tag-paid { background:rgba(249,115,22,.1); color:#fb923c; border:1px solid rgba(249,115,22,.22); }
+[data-theme="light"] .tag-paid { color:#c2410c; }
+.tag-api  { background:rgba(0,200,230,.08); color:var(--accent); border:1px solid rgba(0,200,230,.18); }
+
+.sns-row { display:flex; gap:.65rem; padding-top:.75rem; border-top:1px solid var(--border); transition:border-color .35s; }
+.sns-item { display:flex; flex-direction:column; align-items:center; gap:3px; flex:1; }
+.sns-platform { font-size:.58rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:.08em; }
+.sns-val { font-family:'Syne',sans-serif; font-size:.83rem; font-weight:700; color:var(--text); }
+.sns-bar { width:100%; height:3px; border-radius:2px; background:var(--bar-bg); overflow:hidden; }
+.sns-bar-fill { height:100%; border-radius:2px; }
+.sns-x      .sns-bar-fill { background:#1d9bf0; }
+.sns-reddit .sns-bar-fill { background:#ff4500; }
+.sns-hn     .sns-bar-fill { background:#f97316; }
+.sns-github .sns-bar-fill { background:#8b949e; }
+
+.card-action { display:flex; align-items:center; justify-content:space-between; }
+.visit-btn { display:inline-flex; align-items:center; gap:5px; font-size:.75rem; font-weight:500; color:var(--accent); background:rgba(0,180,220,.07); border:1px solid rgba(0,180,220,.2); padding:6px 13px; border-radius:7px; cursor:pointer; text-decoration:none; font-family:inherit; transition:all .2s; }
+.visit-btn:hover { background:rgba(0,180,220,.15); }
+.bookmark-btn { background:none; border:1px solid var(--border); color:var(--text-muted); padding:6px 10px; border-radius:7px; cursor:pointer; font-size:.9rem; transition:all .2s; }
+.bookmark-btn:hover { color:var(--accent); border-color:rgba(0,180,220,.28); }
+.bookmark-btn.saved { color:var(--accent); border-color:rgba(0,180,220,.32); }
+
+.no-results { grid-column:1/-1; text-align:center; padding:4rem 2rem; color:var(--text-muted); }
+.no-results big { display:block; font-size:3rem; margin-bottom:1rem; }
+
+/* ════════════════════════════════════════
+   3. COMPARE FLOATING BAR
+════════════════════════════════════════ */
+.compare-bar {
+  position:fixed; bottom:0; left:0; right:0; z-index:300;
+  background:var(--compare-bar-bg);
+  border-top:1px solid var(--border);
+  backdrop-filter:blur(20px);
+  padding:12px 2rem;
+  display:flex; align-items:center; justify-content:space-between; gap:1rem;
+  transform:translateY(100%);
+  transition:transform .35s cubic-bezier(.34,1.56,.64,1), background .35s, border-color .35s;
+  box-shadow:0 -8px 40px rgba(0,0,0,.3);
+}
+.compare-bar.visible { transform:translateY(0); }
+.compare-bar-left { display:flex; align-items:center; gap:.8rem; flex-wrap:wrap; }
+.compare-bar-title { font-family:'Syne',sans-serif; font-size:.85rem; font-weight:700; color:var(--text); }
+.compare-pills { display:flex; gap:.5rem; flex-wrap:wrap; }
+.compare-pill {
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:.72rem; font-weight:500;
+  background:var(--surface2); border:1px solid var(--border);
+  color:var(--text-dim); padding:4px 10px; border-radius:100px;
+}
+.compare-pill .cp-remove { cursor:pointer; opacity:.6; transition:opacity .15s; font-size:.8rem; line-height:1; }
+.compare-pill .cp-remove:hover { opacity:1; }
+.compare-bar-right { display:flex; align-items:center; gap:.7rem; flex-shrink:0; }
+.compare-clear-btn { background:none; border:1px solid var(--border); color:var(--text-muted); font-size:.75rem; font-family:inherit; padding:7px 14px; border-radius:8px; cursor:pointer; transition:all .2s; }
+.compare-clear-btn:hover { border-color:var(--red); color:var(--red); }
+.compare-go-btn {
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:#000; border:none; font-family:'Syne',sans-serif; font-weight:700; font-size:.85rem;
+  padding:9px 22px; border-radius:10px; cursor:pointer;
+  box-shadow:0 4px 20px rgba(0,229,255,.25);
+  transition:all .2s cubic-bezier(.34,1.56,.64,1);
+  white-space:nowrap;
+}
+[data-theme="light"] .compare-go-btn { color:#fff; }
+.compare-go-btn:hover { transform:scale(1.04); box-shadow:0 6px 28px rgba(0,229,255,.35); }
+
+/* ════════════════════════════════════════
+   MODAL BASE
+════════════════════════════════════════ */
+.modal-overlay {
+  position:fixed; inset:0; z-index:400;
+  background:var(--modal-overlay);
+  backdrop-filter:blur(6px);
+  display:flex; align-items:center; justify-content:center;
+  padding:1.5rem;
+  opacity:0; pointer-events:none;
+  transition:opacity .25s;
+}
+.modal-overlay.open { opacity:1; pointer-events:all; }
+.modal {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:20px;
+  width:100%; max-width:620px;
+  max-height:88vh; overflow-y:auto;
+  box-shadow:var(--shadow-modal);
+  transform:scale(.94) translateY(16px);
+  transition:transform .3s cubic-bezier(.34,1.3,.64,1), background .35s;
+}
+.modal-overlay.open .modal { transform:scale(1) translateY(0); }
+.modal-header {
+  padding:1.4rem 1.6rem 1rem;
+  border-bottom:1px solid var(--border);
+  display:flex; align-items:flex-start; justify-content:space-between; gap:1rem;
+  transition:border-color .35s;
+}
+.modal-title { font-family:'Syne',sans-serif; font-size:1.1rem; font-weight:800; color:var(--text); letter-spacing:-.02em; }
+.modal-sub { font-size:.78rem; color:var(--text-dim); margin-top:3px; font-weight:300; }
+.modal-close { background:none; border:1px solid var(--border); color:var(--text-muted); width:32px; height:32px; border-radius:8px; cursor:pointer; font-size:1rem; display:flex; align-items:center; justify-content:center; transition:all .2s; flex-shrink:0; }
+.modal-close:hover { border-color:var(--border-hover); color:var(--text); }
+.modal-body { padding:1.4rem 1.6rem; }
+
+/* ════════════════════════════════════════
+   2. WIZARD MODAL
+════════════════════════════════════════ */
+.wizard-steps { display:flex; gap:.5rem; margin-bottom:1.6rem; }
+.wizard-step-dot {
+  height:4px; flex:1; border-radius:2px;
+  background:var(--surface3);
+  transition:background .3s;
+}
+.wizard-step-dot.done { background:var(--accent); }
+
+.wizard-q { font-family:'Syne',sans-serif; font-size:.95rem; font-weight:700; color:var(--text); margin-bottom:1rem; letter-spacing:-.01em; }
+.wizard-opts { display:grid; grid-template-columns:1fr 1fr; gap:.6rem; }
+.wopt {
+  cursor:pointer; background:var(--surface2); border:1.5px solid var(--border);
+  border-radius:12px; padding:.85rem 1rem;
+  display:flex; align-items:center; gap:.75rem;
+  transition:all .2s;
+  user-select:none;
+}
+.wopt:hover { border-color:var(--border-hover); color:var(--text); background:var(--surface3); }
+.wopt.selected { border-color:var(--accent); background:rgba(0,229,255,.08); }
+[data-theme="light"] .wopt.selected { background:rgba(2,132,199,.07); }
+.wopt-icon { font-size:1.3rem; flex-shrink:0; }
+.wopt-text { display:flex; flex-direction:column; gap:1px; }
+.wopt-label { font-size:.82rem; font-weight:600; color:var(--text); }
+.wopt-sub { font-size:.68rem; color:var(--text-muted); font-weight:300; }
+
+.wizard-nav { display:flex; justify-content:flex-end; gap:.6rem; margin-top:1.4rem; }
+.wbtn { font-family:inherit; font-size:.82rem; font-weight:500; padding:8px 18px; border-radius:9px; cursor:pointer; transition:all .2s; border:1px solid var(--border); background:var(--surface2); color:var(--text-dim); }
+.wbtn:hover { color:var(--text); border-color:var(--border-hover); }
+.wbtn.primary { background:var(--accent); color:#000; border-color:var(--accent); font-weight:700; }
+[data-theme="light"] .wbtn.primary { color:#fff; }
+.wbtn.primary:hover { box-shadow:0 4px 16px rgba(0,229,255,.3); }
+.wbtn:disabled { opacity:.35; cursor:not-allowed; }
+
+/* wizard results */
+.wizard-results-title { font-family:'Syne',sans-serif; font-size:.85rem; font-weight:700; color:var(--text-dim); margin-bottom:.9rem; text-transform:uppercase; letter-spacing:.08em; }
+.wizard-result-card {
+  display:flex; align-items:flex-start; gap:.9rem;
+  background:var(--surface2); border:1px solid var(--border);
+  border-radius:12px; padding:.9rem 1rem;
+  margin-bottom:.6rem;
+  transition:border-color .2s, background .35s;
+}
+.wizard-result-card:hover { border-color:rgba(0,180,220,.2); }
+.wrc-icon { font-size:1.5rem; flex-shrink:0; }
+.wrc-body { flex:1; min-width:0; }
+.wrc-name { font-family:'Syne',sans-serif; font-size:.9rem; font-weight:700; color:var(--text); }
+.wrc-desc { font-size:.75rem; color:var(--text-dim); margin-top:3px; font-weight:300; line-height:1.5; }
+.wrc-score { text-align:right; flex-shrink:0; }
+.wrc-score-num { font-family:'Syne',sans-serif; font-size:1.2rem; font-weight:800; }
+.wrc-score-label { font-size:.6rem; color:var(--text-muted); display:block; text-transform:uppercase; }
+
+/* ════════════════════════════════════════
+   3. COMPARE MODAL TABLE
+════════════════════════════════════════ */
+.compare-table-wrap { overflow-x:auto; border-radius:10px; border:1px solid var(--border); }
+.compare-table {
+  width:100%; border-collapse:collapse;
+  font-size:.82rem;
+}
+.compare-table th, .compare-table td {
+  padding:.7rem 1rem;
+  text-align:left;
+  border-bottom:1px solid var(--border);
+  transition:background .35s, border-color .35s;
+}
+.compare-table th {
+  font-family:'Syne',sans-serif; font-weight:700; font-size:.72rem;
+  text-transform:uppercase; letter-spacing:.1em;
+  color:var(--text-muted); background:var(--surface2);
+  white-space:nowrap;
+}
+.compare-table td { color:var(--text-dim); }
+.compare-table tr:last-child td { border-bottom:none; }
+.compare-table tr:last-child th { border-bottom:none; }
+.compare-table .ct-tool-name { font-family:'Syne',sans-serif; font-weight:700; color:var(--text); font-size:.85rem; white-space:nowrap; }
+.compare-table .ct-score { font-family:'Syne',sans-serif; font-weight:800; font-size:1rem; }
+.compare-table .ct-bar-cell { min-width:120px; }
+.ct-mini-bar { height:6px; border-radius:3px; background:var(--bar-bg); overflow:hidden; margin-top:4px; }
+.ct-mini-bar-fill { height:100%; border-radius:3px; }
+.compare-table .ct-tag { display:inline-block; font-size:.62rem; padding:2px 7px; border-radius:100px; font-weight:500; margin:1px; }
+.compare-winner { background:rgba(0,229,255,.07); }
+[data-theme="light"] .compare-winner { background:rgba(2,132,199,.06); }
+.winner-badge { font-size:.6rem; font-weight:700; color:var(--accent); background:rgba(0,229,255,.12); border:1px solid rgba(0,229,255,.22); padding:1px 6px; border-radius:4px; margin-left:6px; vertical-align:middle; }
+
+/* FOOTER */
+footer { position:relative; z-index:5; border-top:1px solid var(--border); padding:1.8rem 2rem; text-align:center; font-size:.75rem; color:var(--text-muted); transition:border-color .35s; }
+footer span { color:var(--accent); }
+
+@media(max-width:640px){
+  .stats-bar{gap:1.2rem}
+  .hero h1{font-size:2rem}
+  .grid-wrap{grid-template-columns:1fr}
+  .theme-label,.beta-tag{display:none}
+  .wizard-opts{grid-template-columns:1fr}
+  .compare-bar{flex-direction:column;align-items:stretch}
+}
+</style>
+</head>
+<body>
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+
+<!-- HEADER -->
+<header>
+  <div class="logo"><div class="logo-dot"></div>AI<span>rank</span></div>
+  <div class="header-right">
+    <div class="live-badge" id="liveBadge"><div class="live-dot"></div>실시간</div>
+    <div class="beta-tag">Beta</div>
+    <div class="toggle-wrap">
+      <span class="theme-label" id="themeLabel">🌙 다크</span>
+      <button class="theme-toggle" id="themeToggle" title="테마 전환">
+        <div class="toggle-thumb"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></div>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════
+  1. TICKER BAR
+══════════════════════════════════════ -->
+<div class="ticker-wrap">
+  <div class="ticker-label">📡 트렌드</div>
+  <div class="ticker-track-wrap">
+    <div class="ticker-track" id="tickerTrack"></div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">SNS 트렌드 기반 AI 도구 랭킹</div>
+  <h1>AI 도구를<br><em>진짜 인기</em>로 평가하다</h1>
+  <p>X, Reddit, HackerNews, GitHub 데이터를 종합해<br>실시간 AI 도구 트렌드를 분석합니다</p>
+
+  <!-- 2. WIZARD BUTTON -->
+  <div class="wizard-btn-wrap">
+    <button class="wizard-btn" id="openWizardBtn">
+      <span class="wb-icon">✨</span>
+      나에게 딱 맞는 AI 찾기
+      <span class="wb-arrow">→</span>
+    </button>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat"><span class="stat-num">2,847</span><span class="stat-label">등록 도구</span></div>
+  <div class="stat"><span class="stat-num">12M+</span><span class="stat-label">분석 게시글</span></div>
+  <div class="stat"><span class="stat-num">4h</span><span class="stat-label">업데이트 주기</span></div>
+  <div class="stat"><span class="stat-num">94%</span><span class="stat-label">정확도</span></div>
+</div>
+
+<!-- FILTERS -->
+<div class="filters-wrap">
+  <div class="filter-group">
+    <div class="filter-group-label">🎯 유형별</div>
+    <div class="filter-row" id="filterRowType">
+      <button class="filter-btn active" data-cat="all">🔥 전체</button>
+      <button class="filter-btn" data-cat="text">✍️ 텍스트/글쓰기</button>
+      <button class="filter-btn" data-cat="image">🎨 이미지 생성</button>
+      <button class="filter-btn" data-cat="code">💻 코딩</button>
+      <button class="filter-btn" data-cat="video">🎬 영상</button>
+      <button class="filter-btn" data-cat="audio">🎵 오디오</button>
+      <button class="filter-btn" data-cat="search">🔍 검색/리서치</button>
+      <button class="filter-btn" data-cat="productivity">⚡ 생산성</button>
+      <button class="filter-btn" data-cat="design">🖌️ 디자인</button>
+      <button class="filter-btn" data-cat="data">📊 데이터/분석</button>
+    </div>
+  </div>
+  <div class="filter-group">
+    <div class="filter-group-label">👤 대상별</div>
+    <div class="filter-row" id="filterRowLife">
+      <button class="filter-btn life" data-life="all">전체 대상</button>
+      <button class="filter-btn life" data-life="office">💼 직장인 필수</button>
+      <button class="filter-btn life" data-life="freelancer">🖥️ 프리랜서 필수</button>
+      <button class="filter-btn life" data-life="student">🎓 대학생 필수</button>
+      <button class="filter-btn life" data-life="creator">🎥 크리에이터 필수</button>
+      <button class="filter-btn life" data-life="marketer">📣 마케터 필수</button>
+      <button class="filter-btn life" data-life="startup">🚀 스타트업 필수</button>
+    </div>
+  </div>
+</div>
+
+<!-- CONTROLS -->
+<div class="controls-row">
+  <div class="search-box">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="searchInput" placeholder="도구 이름 검색...">
+  </div>
+  <div class="sort-row">
+    <span class="sort-label">정렬:</span>
+    <button class="sort-btn active" data-sort="score">SNS 점수</button>
+    <button class="sort-btn" data-sort="growth">성장률</button>
+    <button class="sort-btn" data-sort="name">이름순</button>
+  </div>
+</div>
+
+<!-- CARD GRID -->
+<div class="grid-wrap" id="cardGrid"></div>
+
+<!-- 3. COMPARE FLOATING BAR -->
+<div class="compare-bar" id="compareBar">
+  <div class="compare-bar-left">
+    <div class="compare-bar-title">비교 선택됨</div>
+    <div class="compare-pills" id="comparePills"></div>
+  </div>
+  <div class="compare-bar-right">
+    <button class="compare-clear-btn" id="compareClearBtn">초기화</button>
+    <button class="compare-go-btn" id="compareGoBtn">비교하기 <span id="compareCount">0</span>개 →</button>
+  </div>
+</div>
+
+<!-- 2. WIZARD MODAL -->
+<div class="modal-overlay" id="wizardOverlay">
+  <div class="modal" id="wizardModal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">✨ AI 도구 찾기 마법사</div>
+        <div class="modal-sub" id="wizardSubtitle">직업군과 주요 작업을 선택하면 딱 맞는 AI를 추천해드려요</div>
+      </div>
+      <button class="modal-close" id="closeWizardBtn">✕</button>
+    </div>
+    <div class="modal-body" id="wizardBody"></div>
+  </div>
+</div>
+
+<!-- 3. COMPARE MODAL -->
+<div class="modal-overlay" id="compareOverlay">
+  <div class="modal" style="max-width:760px" id="compareModal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">📊 도구 비교하기</div>
+        <div class="modal-sub">선택한 AI 도구들의 SNS 트렌드 점수를 비교합니다</div>
+      </div>
+      <button class="modal-close" id="closeCompareBtn">✕</button>
+    </div>
+    <div class="modal-body" id="compareBody"></div>
+  </div>
+</div>
+
+<footer>
+  <p>데이터 출처: X API · Reddit API · HackerNews · GitHub Trending · <span>AIrank</span> 자체 분석</p>
+  <p style="margin-top:.4rem;">© 2026 AIrank. 모든 SNS 점수는 참고용입니다.</p>
+</footer>
+
+<script>
+/* ════════════════════════════════════════
+   DATA
+════════════════════════════════════════ */
+const TOOLS = [
+  {id:1,  cat:'text',       icon:'🤖', name:'ChatGPT',
+   desc:'OpenAI의 대화형 AI. 보고서 작성, 이메일 초안, 브레인스토밍 등 일상 업무 전반에 활용되는 AI의 대명사.',
+   tags:['텍스트','무료','API'], score:99, change:+1.2, sns:{x:98,reddit:95,hn:88,github:70}, free:true,
+   life:['office','student','freelancer','marketer','startup','creator']},
+  {id:2,  cat:'image',      icon:'🎨', name:'Midjourney',
+   desc:'텍스트 프롬프트로 영화 같은 이미지를 만드는 AI. Discord 기반, 아티스트·디자이너 필수 도구.',
+   tags:['이미지 생성','유료','Discord'], score:98, change:+2.1, sns:{x:92,reddit:88,hn:45,github:30}, free:false,
+   life:['creator','freelancer','marketer']},
+  {id:3,  cat:'code',       icon:'💻', name:'GitHub Copilot',
+   desc:'OpenAI와 GitHub이 만든 AI 코딩 어시스턴트. 코드 자동완성부터 함수 생성까지 개발 생산성 극대화.',
+   tags:['코딩','유료','API'], score:96, change:+0.8, sns:{x:78,reddit:95,hn:92,github:98}, free:false,
+   life:['office','freelancer','student','startup']},
+  {id:4,  cat:'text',       icon:'🧠', name:'Claude',
+   desc:'Anthropic의 AI 어시스턴트. 긴 문서 요약, 코드 작성, 창의적 글쓰기에서 뛰어난 성능. 200K 컨텍스트.',
+   tags:['텍스트','무료','API'], score:94, change:+5.3, sns:{x:88,reddit:82,hn:90,github:65}, free:true,
+   life:['office','student','freelancer','startup']},
+  {id:5,  cat:'code',       icon:'🔧', name:'Cursor',
+   desc:'AI가 내장된 차세대 코드 에디터. 자연어로 코딩하고 코드베이스 전체를 AI와 리팩토링.',
+   tags:['코딩','무료','에디터'], score:89, change:+8.7, sns:{x:91,reddit:78,hn:88,github:82}, free:true,
+   life:['freelancer','startup','student']},
+  {id:6,  cat:'video',      icon:'🎬', name:'Sora',
+   desc:'OpenAI의 텍스트-투-비디오 AI. 프롬프트 하나로 영화 수준의 고화질 영상을 자동 생성합니다.',
+   tags:['영상 생성','유료'], score:87, change:+12.4, sns:{x:95,reddit:70,hn:75,github:20}, free:false,
+   life:['creator','marketer']},
+  {id:7,  cat:'search',     icon:'🔍', name:'Perplexity AI',
+   desc:'실시간 웹 검색과 AI를 결합한 차세대 검색 엔진. 출처를 명시해 신뢰할 수 있는 답변을 제공합니다.',
+   tags:['검색','무료','API'], score:85, change:+3.6, sns:{x:80,reddit:75,hn:88,github:45}, free:true,
+   life:['student','office','startup','freelancer']},
+  {id:8,  cat:'audio',      icon:'🎵', name:'Suno AI',
+   desc:'텍스트로 완성된 음악을 만드는 AI. 장르·분위기·가사를 입력하면 몇 초 만에 노래 완성.',
+   tags:['오디오','무료'], score:83, change:+15.2, sns:{x:88,reddit:65,hn:40,github:15}, free:true,
+   life:['creator','freelancer']},
+  {id:9,  cat:'productivity',icon:'⚡', name:'Notion AI',
+   desc:'Notion에 통합된 AI. 회의록 요약, 프로젝트 플랜 작성, 액션 아이템 추출로 업무 효율 극대화.',
+   tags:['생산성','유료'], score:82, change:+1.0, sns:{x:72,reddit:68,hn:55,github:30}, free:false,
+   life:['office','startup','student']},
+  {id:10, cat:'design',     icon:'🖌️', name:'Canva AI',
+   desc:'Magic Design, 배경 제거, 텍스트-투-이미지 등 비전문가도 쉽게 전문가급 디자인을 완성.',
+   tags:['디자인','무료'], score:81, change:+4.2, sns:{x:75,reddit:60,hn:35,github:10}, free:true,
+   life:['marketer','office','freelancer','student','creator']},
+  {id:11, cat:'image',      icon:'🖼️', name:'Stable Diffusion',
+   desc:'오픈소스 이미지 생성 AI. 로컬에서 무료로 실행 가능, 커스터마이즈 자유로워 개발자에게 인기.',
+   tags:['이미지 생성','무료','API','오픈소스'], score:78, change:-0.5, sns:{x:65,reddit:82,hn:72,github:95}, free:true,
+   life:['freelancer','creator','startup']},
+  {id:12, cat:'code',       icon:'🦙', name:'Ollama',
+   desc:'로컬에서 LLM을 실행하는 오픈소스 도구. Llama, Mistral 등 다양한 모델을 PC에서 무료 실행.',
+   tags:['코딩','무료','오픈소스','API'], score:76, change:+9.1, sns:{x:70,reddit:78,hn:85,github:98}, free:true,
+   life:['student','freelancer','startup']},
+  {id:13, cat:'productivity',icon:'📅', name:'Motion AI',
+   desc:'AI가 하루 일정을 자동 최적화. 회의·업무·데드라인을 분석해 가장 효율적인 스케줄을 잡아줍니다.',
+   tags:['생산성','유료'], score:74, change:+6.8, sns:{x:68,reddit:62,hn:48,github:10}, free:false,
+   life:['office','startup','freelancer']},
+  {id:14, cat:'text',       icon:'📝', name:'Grammarly AI',
+   desc:'AI 기반 영어 문법·교정 도구. 이메일, 보고서, 에세이의 어조와 명확성을 실시간으로 개선.',
+   tags:['텍스트','무료'], score:72, change:-0.3, sns:{x:62,reddit:58,hn:30,github:15}, free:true,
+   life:['student','office','freelancer']},
+  {id:15, cat:'data',       icon:'📊', name:'Julius AI',
+   desc:'데이터 분석 특화 AI. CSV·Excel을 업로드하면 AI가 분석·시각화·인사이트 도출을 자동 수행.',
+   tags:['데이터','무료','API'], score:70, change:+11.3, sns:{x:60,reddit:55,hn:65,github:42}, free:true,
+   life:['office','startup','student','marketer']},
+  {id:16, cat:'design',     icon:'✨', name:'Figma AI',
+   desc:'Figma에 통합된 AI. 자동 레이아웃 제안, 디자인 생성, 프로토타입 강화로 UI/UX 속도 향상.',
+   tags:['디자인','유료'], score:68, change:+3.0, sns:{x:65,reddit:60,hn:52,github:35}, free:false,
+   life:['freelancer','startup','office']},
+  {id:17, cat:'productivity',icon:'🎤', name:'Otter AI',
+   desc:'회의 자동 녹취·요약·할 일 추출 AI. Zoom·Meet·Teams와 연동해 회의 내용을 자동 텍스트 변환.',
+   tags:['생산성','무료'], score:66, change:+2.4, sns:{x:58,reddit:52,hn:40,github:12}, free:true,
+   life:['office','startup']},
+  {id:18, cat:'text',       icon:'📣', name:'Jasper AI',
+   desc:'마케팅·카피라이팅 특화 AI. 블로그, 광고 문구, SNS 포스팅 등 마케터를 위한 콘텐츠 빠르게 생성.',
+   tags:['텍스트','유료','마케팅'], score:64, change:-1.8, sns:{x:60,reddit:50,hn:35,github:18}, free:false,
+   life:['marketer','freelancer']},
+];
+
+/* ════════════════════════════════════════
+   1. TICKER BAR
+════════════════════════════════════════ */
+const TICKER_ITEMS = [
+  {icon:'🔥', type:'hot',  text:'ChatGPT 언급량 15% 상승 중!'},
+  {icon:'🆕', type:'new',  text:'신규 등록: Sora AI 영상 생성 기능 오픈'},
+  {icon:'📈', type:'up',   text:'Perplexity 사용자 리뷰 급증'},
+  {icon:'🔥', type:'hot',  text:'Cursor IDE 주간 다운로드 100만 돌파'},
+  {icon:'🆕', type:'new',  text:'Claude 3.5 Sonnet 업데이트 출시'},
+  {icon:'📈', type:'up',   text:'Suno AI 주간 SNS 언급량 +28%'},
+  {icon:'🔥', type:'hot',  text:'GitHub Copilot 기업 도입률 역대 최고'},
+  {icon:'🆕', type:'new',  text:'Midjourney v7 알파 테스트 시작'},
+  {icon:'📈', type:'up',   text:'Julius AI 데이터 분석 쿼리 +45% 증가'},
+  {icon:'🔥', type:'hot',  text:'Notion AI 월간 활성 사용자 5000만 돌파'},
+  {icon:'🆕', type:'new',  text:'Figma AI 자동 컴포넌트 생성 기능 추가'},
+  {icon:'📈', type:'up',   text:'Ollama 로컬 LLM 실행 레포 GitHub 스타 급증'},
+];
+
+function buildTicker() {
+  const track = document.getElementById('tickerTrack');
+  const makeItem = ({icon, type, text}) => {
+    const div = document.createElement('span');
+    div.className = 'ticker-item';
+    div.innerHTML = `<span class="ti-icon">${icon}</span><span class="ti-${type}">${text}</span>`;
+    return div;
+  };
+  const sep = () => { const s=document.createElement('span'); s.className='ticker-sep'; s.textContent='·'; return s; };
+  // duplicate for seamless loop
+  [...TICKER_ITEMS, ...TICKER_ITEMS].forEach((item, i) => {
+    track.appendChild(makeItem(item));
+    track.appendChild(sep());
+  });
+}
+buildTicker();
+
+/* ════════════════════════════════════════
+   CARD HELPERS
+════════════════════════════════════════ */
+const SC = [{min:92,c:'#00e5ff'},{min:80,c:'#7c3aed'},{min:65,c:'#f97316'},{min:0,c:'#5a6478'}];
+function scoreColor(s){ for(const x of SC) if(s>=x.min) return x.c; return '#5a6478'; }
+
+const LIFE_LABELS = {office:'💼 직장인',freelancer:'🖥️ 프리랜서',student:'🎓 대학생',creator:'🎥 크리에이터',marketer:'📣 마케터',startup:'🚀 스타트업'};
+
+function renderCard(tool, idx) {
+  const c = scoreColor(tool.score);
+  const changeHtml = tool.change>=0
+    ? `<div class="score-change up">▲ ${tool.change.toFixed(1)}%</div>`
+    : `<div class="score-change down">▼ ${Math.abs(tool.change).toFixed(1)}%</div>`;
+  const livePip = tool.isLive ? `<span class="live-pip" title="실시간 데이터">● LIVE</span>` : '';
+  const tagsHtml = tool.tags.map(t=>{
+    let cls='tag-cat';
+    if(t==='무료') cls='tag-free'; else if(t==='유료') cls='tag-paid'; else if(t==='API') cls='tag-api';
+    return `<span class="tag ${cls}">${t}</span>`;
+  }).join('');
+  const lifeBadges = tool.life.slice(0,3).map(l=>`<span class="life-badge">${LIFE_LABELS[l]}</span>`).join('');
+  const snsR = (p,v,cls)=>`<div class="sns-item ${cls}"><div class="sns-val">${v}</div><div class="sns-platform">${p}</div><div class="sns-bar"><div class="sns-bar-fill" style="width:${v}%"></div></div></div>`;
+  const isSelected = selectedIds.has(tool.id);
+  return `
+<div class="card${isSelected?' selected':''}" style="animation-delay:${idx*0.05}s" data-id="${tool.id}">
+  <label class="compare-check-wrap" title="비교에 추가">
+    <input type="checkbox" class="cc-input" data-id="${tool.id}" ${isSelected?'checked':''} onchange="toggleCompare(${tool.id},this.checked)">
+    <div class="compare-check">
+      <div class="cc-box">${isSelected?'✓':''}</div>
+      비교
+    </div>
+  </label>
+  ${lifeBadges?`<div class="card-life-badges">${lifeBadges}</div>`:''}
+  <div class="card-top">
+    <div class="card-left">
+      <div class="tool-icon" style="background:${c}18;border-color:${c}28">${tool.icon}</div>
+      <div class="card-name-row">
+        <div class="rank-num">#${idx+1} <span>RANK</span>${livePip}</div>
+        <div class="tool-name">${tool.name}</div>
+      </div>
+    </div>
+    <div class="score-box">
+      <span class="score-label">SNS 점수</span>
+      <div class="score-num" style="color:${c}">${tool.score}</div>
+      ${changeHtml}
+    </div>
+  </div>
+  <div class="score-bar-wrap">
+    <div class="score-bar-bg"><div class="score-bar-fill" style="width:${tool.score}%;background:linear-gradient(90deg,${c}70,${c})"></div></div>
+    <div class="score-pct">${tool.score}/100</div>
+  </div>
+  <div class="tool-desc">${tool.desc}</div>
+  <div class="tags">${tagsHtml}</div>
+  <div class="sns-row">
+    ${snsR('X',tool.sns.x,'sns-x')}
+    ${snsR('Reddit',tool.sns.reddit,'sns-reddit')}
+    ${snsR('HN',tool.sns.hn,'sns-hn')}
+    ${snsR('GitHub',tool.sns.github,'sns-github')}
+  </div>
+  <div class="card-action">
+    <a class="visit-btn" href="#">방문하기 →</a>
+    <button class="bookmark-btn" onclick="toggleBookmark(this)">🔖</button>
+  </div>
+</div>`;
+}
+
+function toggleBookmark(btn){ btn.classList.toggle('saved'); btn.textContent=btn.classList.contains('saved')?'⭐':'🔖'; }
+
+/* ════════════════════════════════════════
+   FILTER / RENDER STATE
+════════════════════════════════════════ */
+let cat='all', life='all', sort='score', search='';
+
+function render() {
+  let data=[...TOOLS];
+  if(cat!=='all')  data=data.filter(t=>t.cat===cat);
+  if(life!=='all') data=data.filter(t=>t.life.includes(life));
+  if(search){ const q=search.toLowerCase(); data=data.filter(t=>t.name.toLowerCase().includes(q)||t.desc.toLowerCase().includes(q)); }
+  if(sort==='score')  data.sort((a,b)=>b.score-a.score);
+  else if(sort==='growth') data.sort((a,b)=>b.change-a.change);
+  else data.sort((a,b)=>a.name.localeCompare(b.name,'ko'));
+  const grid=document.getElementById('cardGrid');
+  grid.innerHTML = data.length
+    ? data.map((t,i)=>renderCard(t,i)).join('')
+    : `<div class="no-results"><big>🤖</big>검색 결과가 없습니다.<br><small style="margin-top:.5rem;display:block">다른 키워드로 검색해보세요</small></div>`;
+}
+
+document.getElementById('filterRowType').addEventListener('click',e=>{
+  const b=e.target.closest('.filter-btn'); if(!b) return;
+  document.querySelectorAll('#filterRowType .filter-btn').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); cat=b.dataset.cat; render();
+});
+document.getElementById('filterRowLife').addEventListener('click',e=>{
+  const b=e.target.closest('.filter-btn'); if(!b) return;
+  document.querySelectorAll('#filterRowLife .filter-btn').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); life=b.dataset.life; render();
+});
+document.querySelectorAll('.sort-btn').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.sort-btn').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); sort=b.dataset.sort; render();
+}));
+document.getElementById('searchInput').addEventListener('input',e=>{ search=e.target.value; render(); });
+
+/* ════════════════════════════════════════
+   THEME
+════════════════════════════════════════ */
+const html=document.documentElement;
+function setTheme(t){ html.setAttribute('data-theme',t); document.getElementById('themeLabel').textContent=t==='dark'?'🌙 다크':'☀️ 라이트'; localStorage.setItem('airank-theme',t); }
+document.getElementById('themeToggle').addEventListener('click',()=>setTheme(html.getAttribute('data-theme')==='dark'?'light':'dark'));
+const savedTheme=localStorage.getItem('airank-theme'); if(savedTheme) setTheme(savedTheme);
+
+/* ════════════════════════════════════════
+   3. COMPARE MODE
+════════════════════════════════════════ */
+const selectedIds = new Set();
+const compareBar = document.getElementById('compareBar');
+const comparePills = document.getElementById('comparePills');
+const compareCount = document.getElementById('compareCount');
+
+function toggleCompare(id, checked) {
+  if(checked) {
+    if(selectedIds.size >= 4) { // max 4
+      const inp = document.querySelector(`.cc-input[data-id="${id}"]`);
+      if(inp) inp.checked=false;
+      return;
+    }
+    selectedIds.add(id);
+  } else {
+    selectedIds.delete(id);
+  }
+  updateCompareBar();
+  // update card classes
+  document.querySelectorAll('.card').forEach(card=>{
+    const cid = parseInt(card.dataset.id);
+    if(selectedIds.has(cid)) {
+      card.classList.add('selected');
+      const box = card.querySelector('.cc-box');
+      if(box) box.textContent='✓';
+      const cc = card.querySelector('.compare-check');
+      if(cc) cc.style.borderColor='var(--accent)';
+    } else {
+      card.classList.remove('selected');
+      const box = card.querySelector('.cc-box');
+      if(box) box.textContent='';
+      const cc = card.querySelector('.compare-check');
+      if(cc) cc.style.borderColor='';
+    }
+  });
+}
+
+function updateCompareBar() {
+  const count = selectedIds.size;
+  compareCount.textContent = count;
+  if(count >= 2) {
+    compareBar.classList.add('visible');
+  } else {
+    compareBar.classList.remove('visible');
+  }
+  // update pills
+  comparePills.innerHTML = '';
+  selectedIds.forEach(id=>{
+    const tool = TOOLS.find(t=>t.id===id);
+    if(!tool) return;
+    const pill = document.createElement('div');
+    pill.className='compare-pill';
+    pill.innerHTML=`${tool.icon} ${tool.name} <span class="cp-remove" onclick="removeFromCompare(${id})">✕</span>`;
+    comparePills.appendChild(pill);
+  });
+}
+
+function removeFromCompare(id) {
+  selectedIds.delete(id);
+  const inp = document.querySelector(`.cc-input[data-id="${id}"]`);
+  if(inp) inp.checked=false;
+  const card = document.querySelector(`.card[data-id="${id}"]`);
+  if(card) {
+    card.classList.remove('selected');
+    const box = card.querySelector('.cc-box');
+    if(box) box.textContent='';
+  }
+  updateCompareBar();
+}
+
+document.getElementById('compareClearBtn').addEventListener('click',()=>{
+  selectedIds.forEach(id=>removeFromCompare(id));
+  selectedIds.clear();
+  updateCompareBar();
+  render();
+});
+
+document.getElementById('compareGoBtn').addEventListener('click',()=>{ openCompareModal(); });
+
+function openCompareModal() {
+  const tools = [...selectedIds].map(id=>TOOLS.find(t=>t.id===id)).filter(Boolean);
+  if(tools.length<2) return;
+
+  const platforms = [
+    {key:'x',      label:'X (트위터)', color:'#1d9bf0'},
+    {key:'reddit', label:'Reddit',     color:'#ff4500'},
+    {key:'hn',     label:'HackerNews', color:'#f97316'},
+    {key:'github', label:'GitHub',     color:'#8b949e'},
+  ];
+
+  // find winners per platform
+  const winners = {};
+  platforms.forEach(p=>{
+    let max=-1, wId=null;
+    tools.forEach(t=>{ if(t.sns[p.key]>max){ max=t.sns[p.key]; wId=t.id; } });
+    winners[p.key]=wId;
+  });
+  const scoreWinner = tools.reduce((a,b)=>a.score>b.score?a:b).id;
+
+  let html = `<div class="compare-table-wrap"><table class="compare-table">`;
+  // header row
+  html += `<tr><th>지표</th>`;
+  tools.forEach(t=>{ html+=`<th>${t.icon} ${t.name}</th>`; });
+  html += `</tr>`;
+
+  // SNS Score row
+  html += `<tr>`;
+  html += `<td style="font-weight:600;color:var(--text)">📊 SNS 종합 점수</td>`;
+  tools.forEach(t=>{
+    const isW = t.id===scoreWinner;
+    html += `<td class="${isW?'compare-winner':''}">
+      <span class="ct-score" style="color:${scoreColor(t.score)}">${t.score}</span>
+      ${isW?'<span class="winner-badge">👑 최고</span>':''}
+      <div class="ct-mini-bar"><div class="ct-mini-bar-fill" style="width:${t.score}%;background:${scoreColor(t.score)}"></div></div>
+    </td>`;
+  });
+  html += `</tr>`;
+
+  // growth row
+  html += `<tr><td style="font-weight:600;color:var(--text)">📈 주간 성장률</td>`;
+  const growthWinner = tools.reduce((a,b)=>a.change>b.change?a:b).id;
+  tools.forEach(t=>{
+    const isW = t.id===growthWinner;
+    const isUp = t.change>=0;
+    html += `<td class="${isW?'compare-winner':''}">
+      <span style="color:${isUp?'var(--green)':'var(--red)'}; font-weight:600">${isUp?'▲':'▼'} ${Math.abs(t.change).toFixed(1)}%</span>
+      ${isW?'<span class="winner-badge">🚀 급성장</span>':''}
+    </td>`;
+  });
+  html += `</tr>`;
+
+  // per-platform rows
+  platforms.forEach(p=>{
+    html += `<tr><td style="font-weight:600;color:var(--text)"><span style="color:${p.color}">●</span> ${p.label}</td>`;
+    tools.forEach(t=>{
+      const isW = t.id===winners[p.key];
+      const val = t.sns[p.key];
+      html += `<td class="${isW?'compare-winner':''} ct-bar-cell">
+        <span style="font-family:'Syne',sans-serif;font-weight:700;color:var(--text)">${val}</span>
+        ${isW?'<span class="winner-badge">TOP</span>':''}
+        <div class="ct-mini-bar"><div class="ct-mini-bar-fill" style="width:${val}%;background:${p.color}"></div></div>
+      </td>`;
+    });
+    html += `</tr>`;
+  });
+
+  // free/paid row
+  html += `<tr><td style="font-weight:600;color:var(--text)">💰 가격</td>`;
+  tools.forEach(t=>{
+    html += `<td><span class="ct-tag ${t.free?'tag-free':'tag-paid'}">${t.free?'무료':'유료'}</span></td>`;
+  });
+  html += `</tr>`;
+
+  // tags row
+  html += `<tr><td style="font-weight:600;color:var(--text)">🏷️ 태그</td>`;
+  tools.forEach(t=>{
+    html += `<td>${t.tags.map(tag=>`<span class="ct-tag tag-cat">${tag}</span>`).join('')}</td>`;
+  });
+  html += `</tr>`;
+
+  html += `</table></div>`;
+
+  // summary sentence
+  const topTool = tools.reduce((a,b)=>a.score>b.score?a:b);
+  html += `<div style="margin-top:1.2rem;padding:1rem;background:var(--surface2);border-radius:10px;border:1px solid var(--border);font-size:.82rem;color:var(--text-dim);line-height:1.6;">
+    💡 <strong style="color:var(--text)">${topTool.name}</strong>이 SNS 종합 점수 <strong style="color:${scoreColor(topTool.score)}">${topTool.score}점</strong>으로 가장 높은 트렌드 점수를 기록 중입니다.
+  </div>`;
+
+  document.getElementById('compareBody').innerHTML = html;
+  document.getElementById('compareOverlay').classList.add('open');
+}
+
+document.getElementById('closeCompareBtn').addEventListener('click',()=>document.getElementById('compareOverlay').classList.remove('open'));
+document.getElementById('compareOverlay').addEventListener('click',e=>{ if(e.target===e.currentTarget) e.currentTarget.classList.remove('open'); });
+
+/* ════════════════════════════════════════
+   2. WIZARD
+════════════════════════════════════════ */
+const WIZARD_Q1 = {
+  question:'어떤 분야에서 일하시나요?',
+  opts:[
+    {icon:'💼', label:'직장인/회사원', sub:'업무·보고서·회의 중심', value:'office'},
+    {icon:'🖥️', label:'프리랜서', sub:'독립 작업·클라이언트 대응', value:'freelancer'},
+    {icon:'🎓', label:'대학생/학생', sub:'과제·논문·학습 중심', value:'student'},
+    {icon:'🎥', label:'크리에이터', sub:'영상·콘텐츠·SNS 운영', value:'creator'},
+    {icon:'📣', label:'마케터', sub:'광고·카피·데이터 분석', value:'marketer'},
+    {icon:'🚀', label:'스타트업/창업', sub:'빠른 제품 개발·피칭', value:'startup'},
+  ]
+};
+const WIZARD_Q2 = {
+  office:    { question:'주로 어떤 작업을 하시나요?', opts:[
+    {icon:'📝', label:'문서·보고서 작성', sub:'요약, 정리, 이메일', value:'text'},
+    {icon:'📊', label:'데이터 분석', sub:'엑셀, 시각화, 인사이트', value:'data'},
+    {icon:'📅', label:'일정·업무 관리', sub:'스케줄, 할 일, 회의록', value:'productivity'},
+    {icon:'🔍', label:'정보 수집·리서치', sub:'빠른 조사, 팩트체크', value:'search'},
+  ]},
+  freelancer:{ question:'주로 어떤 작업을 하시나요?', opts:[
+    {icon:'💻', label:'개발·코딩', sub:'코드 작성, 리뷰, 디버깅', value:'code'},
+    {icon:'🖌️', label:'디자인·편집', sub:'이미지, UI, 브랜딩', value:'design'},
+    {icon:'✍️', label:'글쓰기·번역', sub:'카피, 컨텐츠, 번역', value:'text'},
+    {icon:'🎬', label:'영상·미디어', sub:'편집, 썸네일, 음악', value:'video'},
+  ]},
+  student:   { question:'주로 어떤 작업을 하시나요?', opts:[
+    {icon:'📚', label:'논문·리포트 작성', sub:'자료 조사, 구성, 요약', value:'text'},
+    {icon:'💻', label:'코딩·프로젝트', sub:'과제 코드, 알고리즘', value:'code'},
+    {icon:'🔍', label:'정보 수집·리서치', sub:'빠른 조사, 정리', value:'search'},
+    {icon:'🎨', label:'발표 자료·디자인', sub:'PPT, 포스터, 인포그래픽', value:'design'},
+  ]},
+  creator:   { question:'주로 어떤 작업을 하시나요?', opts:[
+    {icon:'🎬', label:'영상·숏폼 콘텐츠', sub:'편집, 스크립트, 썸네일', value:'video'},
+    {icon:'🎨', label:'이미지·아트 제작', sub:'일러스트, 표지, 굿즈', value:'image'},
+    {icon:'🎵', label:'음악·사운드', sub:'BGM, 효과음, 보이스', value:'audio'},
+    {icon:'✍️', label:'블로그·SNS 글쓰기', sub:'캡션, 스크립트, 기획', value:'text'},
+  ]},
+  marketer:  { question:'주로 어떤 작업을 하시나요?', opts:[
+    {icon:'✍️', label:'카피라이팅·글쓰기', sub:'광고 문구, 뉴스레터', value:'text'},
+    {icon:'🎨', label:'비주얼 콘텐츠 제작', sub:'배너, SNS 이미지', value:'image'},
+    {icon:'📊', label:'데이터·성과 분석', sub:'지표, 리포트, A/B테스트', value:'data'},
+    {icon:'🔍', label:'트렌드·경쟁사 조사', sub:'리서치, 인사이트', value:'search'},
+  ]},
+  startup:   { question:'주로 어떤 작업을 하시나요?', opts:[
+    {icon:'💻', label:'제품 개발·코딩', sub:'MVP, API, 코드 리뷰', value:'code'},
+    {icon:'📊', label:'데이터·투자 분석', sub:'지표, 피칭, 시장조사', value:'data'},
+    {icon:'✍️', label:'문서·피치덱 작성', sub:'사업계획서, 보도자료', value:'text'},
+    {icon:'🎨', label:'브랜딩·디자인', sub:'로고, UI, 마케팅 자료', value:'design'},
+  ]},
+};
+
+let wizardStep=1, wizardQ1Val=null, wizardQ2Val=null;
+
+function openWizard() {
+  wizardStep=1; wizardQ1Val=null; wizardQ2Val=null;
+  document.getElementById('wizardOverlay').classList.add('open');
+  renderWizard();
+}
+function closeWizard() { document.getElementById('wizardOverlay').classList.remove('open'); }
+
+function renderWizard() {
+  const body = document.getElementById('wizardBody');
+  const subtitle = document.getElementById('wizardSubtitle');
+
+  if(wizardStep===1) {
+    subtitle.textContent = '직업군과 주요 작업을 선택하면 딱 맞는 AI를 추천해드려요';
+    body.innerHTML = `
+      <div class="wizard-steps">
+        <div class="wizard-step-dot done"></div>
+        <div class="wizard-step-dot"></div>
+      </div>
+      <div class="wizard-q">${WIZARD_Q1.question}</div>
+      <div class="wizard-opts">
+        ${WIZARD_Q1.opts.map(o=>`
+          <div class="wopt" data-val="${o.value}" onclick="selectWizardQ1('${o.value}')">
+            <span class="wopt-icon">${o.icon}</span>
+            <div class="wopt-text">
+              <div class="wopt-label">${o.label}</div>
+              <div class="wopt-sub">${o.sub}</div>
+            </div>
+          </div>`).join('')}
+      </div>
+      <div class="wizard-nav">
+        <button class="wbtn" onclick="closeWizard()">닫기</button>
+        <button class="wbtn primary" id="wNext1" onclick="goWizardStep2()" disabled>다음 →</button>
+      </div>`;
+  } else if(wizardStep===2) {
+    const q2 = WIZARD_Q2[wizardQ1Val];
+    subtitle.textContent = '2단계: 주요 작업을 선택하세요';
+    body.innerHTML = `
+      <div class="wizard-steps">
+        <div class="wizard-step-dot done"></div>
+        <div class="wizard-step-dot done"></div>
+      </div>
+      <div class="wizard-q">${q2.question}</div>
+      <div class="wizard-opts">
+        ${q2.opts.map(o=>`
+          <div class="wopt" data-val="${o.value}" onclick="selectWizardQ2('${o.value}')">
+            <span class="wopt-icon">${o.icon}</span>
+            <div class="wopt-text">
+              <div class="wopt-label">${o.label}</div>
+              <div class="wopt-sub">${o.sub}</div>
+            </div>
+          </div>`).join('')}
+      </div>
+      <div class="wizard-nav">
+        <button class="wbtn" onclick="wizardStep=1;renderWizard()">← 이전</button>
+        <button class="wbtn primary" id="wNext2" onclick="showWizardResults()" disabled>추천받기 ✨</button>
+      </div>`;
+  } else if(wizardStep===3) {
+    // results
+    subtitle.textContent = '딱 맞는 AI 도구를 찾았어요! 🎉';
+    const recs = TOOLS
+      .filter(t=>t.life.includes(wizardQ1Val) && t.cat===wizardQ2Val)
+      .sort((a,b)=>b.score-a.score)
+      .slice(0,3);
+    const fallback = TOOLS
+      .filter(t=>t.life.includes(wizardQ1Val))
+      .sort((a,b)=>b.score-a.score)
+      .slice(0,3);
+    const results = recs.length>=1 ? recs : fallback;
+
+    body.innerHTML = `
+      <div class="wizard-results-title">🎯 추천 AI 도구 ${results.length}개</div>
+      ${results.map((t,i)=>`
+        <div class="wizard-result-card">
+          <div class="wrc-icon">${t.icon}</div>
+          <div class="wrc-body">
+            <div class="wrc-name">${t.name} ${i===0?'<span style="font-size:.65rem;color:var(--accent);font-weight:700;margin-left:4px">🥇 최적 추천</span>':''}</div>
+            <div class="wrc-desc">${t.desc}</div>
+          </div>
+          <div class="wrc-score">
+            <span class="wrc-score-label">SNS 점수</span>
+            <div class="wrc-score-num" style="color:${scoreColor(t.score)}">${t.score}</div>
+          </div>
+        </div>`).join('')}
+      <div class="wizard-nav" style="justify-content:space-between">
+        <button class="wbtn" onclick="wizardStep=1;wizardQ1Val=null;wizardQ2Val=null;renderWizard()">↺ 다시 찾기</button>
+        <button class="wbtn primary" onclick="applyWizardFilter()">목록에서 보기 →</button>
+      </div>`;
+  }
+}
+
+function selectWizardQ1(val) {
+  wizardQ1Val=val;
+  document.querySelectorAll('#wizardBody .wopt').forEach(el=>el.classList.toggle('selected',el.dataset.val===val));
+  const btn=document.getElementById('wNext1'); if(btn) btn.disabled=false;
+}
+function goWizardStep2() { if(!wizardQ1Val) return; wizardStep=2; renderWizard(); }
+function selectWizardQ2(val) {
+  wizardQ2Val=val;
+  document.querySelectorAll('#wizardBody .wopt').forEach(el=>el.classList.toggle('selected',el.dataset.val===val));
+  const btn=document.getElementById('wNext2'); if(btn) btn.disabled=false;
+}
+function showWizardResults() { if(!wizardQ2Val) return; wizardStep=3; renderWizard(); }
+
+function applyWizardFilter() {
+  closeWizard();
+  // apply life filter
+  document.querySelectorAll('#filterRowLife .filter-btn').forEach(b=>{
+    b.classList.toggle('active', b.dataset.life===wizardQ1Val);
+  });
+  document.querySelectorAll('#filterRowType .filter-btn').forEach(b=>{
+    b.classList.toggle('active', b.dataset.cat===wizardQ2Val);
+  });
+  life=wizardQ1Val; cat=wizardQ2Val;
+  render();
+  window.scrollTo({top:document.getElementById('cardGrid').offsetTop-80, behavior:'smooth'});
+}
+
+document.getElementById('openWizardBtn').addEventListener('click', openWizard);
+document.getElementById('closeWizardBtn').addEventListener('click', closeWizard);
+document.getElementById('wizardOverlay').addEventListener('click',e=>{ if(e.target===e.currentTarget) closeWizard(); });
+
+/* ════════════════════════════════════════
+   LIVE DATA — API FETCH
+════════════════════════════════════════ */
+const TOOL_QUERIES = {
+  1:'ChatGPT', 2:'Midjourney', 3:'GitHub Copilot',
+  4:'Claude Anthropic', 5:'Cursor IDE', 6:'Sora OpenAI',
+  7:'Perplexity AI', 8:'Suno AI', 9:'Notion AI',
+  10:'Canva AI', 11:'Stable Diffusion', 12:'Ollama LLM',
+  13:'Motion AI', 14:'Grammarly', 15:'Julius AI',
+  16:'Figma AI', 17:'Otter AI', 18:'Jasper AI'
+};
+
+const LIVE_CACHE_KEY = 'airank-live-v2';
+const LIVE_CACHE_TTL = 4 * 60 * 60 * 1000; // 4시간
+
+async function apiFetchHN(query) {
+  const since = Math.floor(Date.now() / 1000) - 30 * 24 * 3600;
+  const r = await fetch(
+    `https://hn.algolia.com/api/v1/search?query=${encodeURIComponent(query)}&tags=story&numericFilters=created_at_i>${since}&hitsPerPage=0`
+  );
+  const d = await r.json();
+  return d.nbHits || 0;
+}
+
+async function apiFetchReddit(query) {
+  const r = await fetch(
+    `https://www.reddit.com/search.json?q=${encodeURIComponent(query)}&sort=top&t=month&limit=25&raw_json=1`,
+    { headers: { Accept: 'application/json' } }
+  );
+  const d = await r.json();
+  const posts = d?.data?.children || [];
+  const upvotes = posts.reduce((s, p) => s + (p.data.score || 0), 0);
+  return { count: posts.length, upvotes };
+}
+
+async function apiFetchGitHub(query) {
+  const r = await fetch(
+    `https://api.github.com/search/repositories?q=${encodeURIComponent(query)}&sort=stars&per_page=1`,
+    { headers: { Accept: 'application/vnd.github.v3+json' } }
+  );
+  if (r.status === 403) return 0; // rate limit
+  const d = await r.json();
+  return d.total_count || 0;
+}
+
+function logScale(val, refMax) {
+  if (val <= 0) return 0;
+  return Math.min(100, Math.round((Math.log1p(val) / Math.log1p(refMax)) * 100));
+}
+
+function setLiveBadge(loading) {
+  const badge = document.getElementById('liveBadge');
+  if (!badge) return;
+  badge.textContent = loading ? '⏳ 업데이트 중…' : '🔴 LIVE';
+  badge.style.background = loading ? 'rgba(251,191,36,0.15)' : '';
+  badge.style.color = loading ? '#fbbf24' : '';
+}
+
+async function fetchLiveData() {
+  // 캐시 확인
+  try {
+    const raw = sessionStorage.getItem(LIVE_CACHE_KEY);
+    if (raw) {
+      const { ts, payload } = JSON.parse(raw);
+      if (Date.now() - ts < LIVE_CACHE_TTL) {
+        applyLivePayload(payload);
+        return;
+      }
+    }
+  } catch(e) {}
+
+  setLiveBadge(true);
+
+  const ids = Object.keys(TOOL_QUERIES).map(Number);
+  const raw = {};
+
+  // 3개씩 배치로 요청 (API 부하 분산)
+  for (let i = 0; i < ids.length; i += 3) {
+    const batch = ids.slice(i, i + 3);
+    await Promise.all(batch.map(async id => {
+      const q = TOOL_QUERIES[id];
+      try {
+        const [hn, reddit, github] = await Promise.all([
+          apiFetchHN(q),
+          apiFetchReddit(q),
+          apiFetchGitHub(q),
+        ]);
+        raw[id] = { hn, redditCount: reddit.count, redditUp: reddit.upvotes, github };
+      } catch(e) {
+        console.warn(`[AIrank] ${q} fetch failed:`, e.message);
+        raw[id] = null;
+      }
+    }));
+    if (i + 3 < ids.length) await new Promise(r => setTimeout(r, 400));
+  }
+
+  // 정규화 기준값 (플랫폼별 최대 예상치)
+  const REF = { hn: 3000, redditUp: 150000, github: 800000 };
+
+  const payload = {};
+  ids.forEach(id => {
+    const d = raw[id];
+    if (!d) return;
+    const hnScore     = logScale(d.hn,        REF.hn);
+    const redditScore = logScale(d.redditUp,   REF.redditUp);
+    const githubScore = logScale(d.github,     REF.github);
+    // X 점수는 기존 하드코딩 값 유지
+    const tool = TOOLS.find(t => t.id === id);
+    const xScore = tool ? tool.sns.x : 50;
+    // 가중 합산: Reddit 30% + HN 25% + GitHub 30% + X 15%
+    const composite = Math.round(redditScore * 0.30 + hnScore * 0.25 + githubScore * 0.30 + xScore * 0.15);
+    payload[id] = { hn: hnScore, reddit: redditScore, github: githubScore, score: composite };
+  });
+
+  try {
+    sessionStorage.setItem(LIVE_CACHE_KEY, JSON.stringify({ ts: Date.now(), payload }));
+  } catch(e) {}
+
+  applyLivePayload(payload);
+  setLiveBadge(false);
+}
+
+function applyLivePayload(payload) {
+  TOOLS.forEach(tool => {
+    const d = payload[tool.id];
+    if (!d) return;
+    const prev = tool.score;
+    tool.sns.hn     = d.hn;
+    tool.sns.reddit = d.reddit;
+    tool.sns.github = d.github;
+    tool.score      = d.score;
+    tool.change     = parseFloat((d.score - prev).toFixed(1));
+    tool.isLive     = true;
+  });
+  render();
+}
+
+/* ════════════════════════════════════════
+   INIT
+════════════════════════════════════════ */
+render();
+fetchLiveData();
+</script>
+</body>
+</html>
