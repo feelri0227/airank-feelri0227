@@ -338,7 +338,7 @@ header {
 .sns-bar-fill { height:100%; border-radius:2px; }
 .sns-x      .sns-bar-fill { background:#1d9bf0; }
 .sns-reddit .sns-bar-fill { background:#ff4500; }
-.sns-hn     .sns-bar-fill { background:#f97316; }
+.sns-yt     .sns-bar-fill { background:#ff0000; }
 .sns-github .sns-bar-fill { background:#8b949e; }
 
 .card-action { display:flex; align-items:center; justify-content:space-between; }
@@ -589,7 +589,7 @@ footer span { color:var(--accent); }
 <div class="hero">
   <div class="hero-eyebrow">SNS 트렌드 기반 AI 도구 랭킹</div>
   <h1>AI 도구를<br><em>진짜 인기</em>로 평가하다</h1>
-  <p>X, Reddit, HackerNews, GitHub 데이터를 종합해<br>실시간 AI 도구 트렌드를 분석합니다</p>
+  <p>X, Reddit, YouTube, GitHub 데이터를 종합해<br>실시간 AI 도구 트렌드를 분석합니다</p>
 
   <!-- 2. WIZARD BUTTON -->
   <div class="wizard-btn-wrap">
@@ -706,7 +706,7 @@ footer span { color:var(--accent); }
 </div>
 
 <footer>
-  <p>데이터 출처: X API · Reddit API · HackerNews · GitHub Trending · <span>AIrank</span> 자체 분석</p>
+  <p>데이터 출처: X · Reddit API · YouTube Data API · GitHub API · <span>AIrank</span> 자체 분석</p>
   <p style="margin-top:.4rem;">© 2026 AIrank. 모든 SNS 점수는 참고용입니다.</p>
 </footer>
 
@@ -717,75 +717,75 @@ footer span { color:var(--accent); }
 const TOOLS = [
   {id:1,  cat:'text',       icon:'🤖', name:'ChatGPT',          url:'https://chatgpt.com',
    desc:'OpenAI의 대화형 AI. 보고서 작성, 이메일 초안, 브레인스토밍 등 일상 업무 전반에 활용되는 AI의 대명사.',
-   tags:['텍스트','무료','API'], score:99, change:+1.2, sns:{x:98,reddit:95,hn:88,github:70}, free:true,
+   tags:['텍스트','무료','API'], score:99, change:+1.2, sns:{x:98,reddit:95,youtube:95,github:70}, free:true,
    life:['office','student','freelancer','marketer','startup','creator']},
   {id:2,  cat:'image',      icon:'🎨', name:'Midjourney',        url:'https://www.midjourney.com',
    desc:'텍스트 프롬프트로 영화 같은 이미지를 만드는 AI. Discord 기반, 아티스트·디자이너 필수 도구.',
-   tags:['이미지 생성','유료','Discord'], score:98, change:+2.1, sns:{x:92,reddit:88,hn:45,github:30}, free:false,
+   tags:['이미지 생성','유료','Discord'], score:98, change:+2.1, sns:{x:92,reddit:88,youtube:88,github:30}, free:false,
    life:['creator','freelancer','marketer']},
   {id:3,  cat:'code',       icon:'💻', name:'GitHub Copilot',    url:'https://github.com/features/copilot',
    desc:'OpenAI와 GitHub이 만든 AI 코딩 어시스턴트. 코드 자동완성부터 함수 생성까지 개발 생산성 극대화.',
-   tags:['코딩','유료','API'], score:96, change:+0.8, sns:{x:78,reddit:95,hn:92,github:98}, free:false,
+   tags:['코딩','유료','API'], score:96, change:+0.8, sns:{x:78,reddit:95,youtube:80,github:98}, free:false,
    life:['office','freelancer','student','startup']},
   {id:4,  cat:'text',       icon:'🧠', name:'Claude',            url:'https://claude.ai',
    desc:'Anthropic의 AI 어시스턴트. 긴 문서 요약, 코드 작성, 창의적 글쓰기에서 뛰어난 성능. 200K 컨텍스트.',
-   tags:['텍스트','무료','API'], score:94, change:+5.3, sns:{x:88,reddit:82,hn:90,github:65}, free:true,
+   tags:['텍스트','무료','API'], score:94, change:+5.3, sns:{x:88,reddit:82,youtube:82,github:65}, free:true,
    life:['office','student','freelancer','startup']},
   {id:5,  cat:'code',       icon:'🔧', name:'Cursor',            url:'https://www.cursor.com',
    desc:'AI가 내장된 차세대 코드 에디터. 자연어로 코딩하고 코드베이스 전체를 AI와 리팩토링.',
-   tags:['코딩','무료','에디터'], score:89, change:+8.7, sns:{x:91,reddit:78,hn:88,github:82}, free:true,
+   tags:['코딩','무료','에디터'], score:89, change:+8.7, sns:{x:91,reddit:78,youtube:85,github:82}, free:true,
    life:['freelancer','startup','student']},
   {id:6,  cat:'video',      icon:'🎬', name:'Sora',              url:'https://sora.com',
    desc:'OpenAI의 텍스트-투-비디오 AI. 프롬프트 하나로 영화 수준의 고화질 영상을 자동 생성합니다.',
-   tags:['영상 생성','유료'], score:87, change:+12.4, sns:{x:95,reddit:70,hn:75,github:20}, free:false,
+   tags:['영상 생성','유료'], score:87, change:+12.4, sns:{x:95,reddit:70,youtube:90,github:20}, free:false,
    life:['creator','marketer']},
   {id:7,  cat:'search',     icon:'🔍', name:'Perplexity AI',     url:'https://www.perplexity.ai',
    desc:'실시간 웹 검색과 AI를 결합한 차세대 검색 엔진. 출처를 명시해 신뢰할 수 있는 답변을 제공합니다.',
-   tags:['검색','무료','API'], score:85, change:+3.6, sns:{x:80,reddit:75,hn:88,github:45}, free:true,
+   tags:['검색','무료','API'], score:85, change:+3.6, sns:{x:80,reddit:75,youtube:75,github:45}, free:true,
    life:['student','office','startup','freelancer']},
   {id:8,  cat:'audio',      icon:'🎵', name:'Suno AI',           url:'https://suno.com',
    desc:'텍스트로 완성된 음악을 만드는 AI. 장르·분위기·가사를 입력하면 몇 초 만에 노래 완성.',
-   tags:['오디오','무료'], score:83, change:+15.2, sns:{x:88,reddit:65,hn:40,github:15}, free:true,
+   tags:['오디오','무료'], score:83, change:+15.2, sns:{x:88,reddit:65,youtube:82,github:15}, free:true,
    life:['creator','freelancer']},
   {id:9,  cat:'productivity',icon:'⚡', name:'Notion AI',        url:'https://www.notion.com/product/ai',
    desc:'Notion에 통합된 AI. 회의록 요약, 프로젝트 플랜 작성, 액션 아이템 추출로 업무 효율 극대화.',
-   tags:['생산성','유료'], score:82, change:+1.0, sns:{x:72,reddit:68,hn:55,github:30}, free:false,
+   tags:['생산성','유료'], score:82, change:+1.0, sns:{x:72,reddit:68,youtube:73,github:30}, free:false,
    life:['office','startup','student']},
   {id:10, cat:'design',     icon:'🖌️', name:'Canva AI',         url:'https://www.canva.com/ai-image-generator',
    desc:'Magic Design, 배경 제거, 텍스트-투-이미지 등 비전문가도 쉽게 전문가급 디자인을 완성.',
-   tags:['디자인','무료'], score:81, change:+4.2, sns:{x:75,reddit:60,hn:35,github:10}, free:true,
+   tags:['디자인','무료'], score:81, change:+4.2, sns:{x:75,reddit:60,youtube:78,github:10}, free:true,
    life:['marketer','office','freelancer','student','creator']},
   {id:11, cat:'image',      icon:'🖼️', name:'Stable Diffusion', url:'https://stability.ai',
    desc:'오픈소스 이미지 생성 AI. 로컬에서 무료로 실행 가능, 커스터마이즈 자유로워 개발자에게 인기.',
-   tags:['이미지 생성','무료','API','오픈소스'], score:78, change:-0.5, sns:{x:65,reddit:82,hn:72,github:95}, free:true,
+   tags:['이미지 생성','무료','API','오픈소스'], score:78, change:-0.5, sns:{x:65,reddit:82,youtube:80,github:95}, free:true,
    life:['freelancer','creator','startup']},
   {id:12, cat:'code',       icon:'🦙', name:'Ollama',            url:'https://ollama.com',
    desc:'로컬에서 LLM을 실행하는 오픈소스 도구. Llama, Mistral 등 다양한 모델을 PC에서 무료 실행.',
-   tags:['코딩','무료','오픈소스','API'], score:76, change:+9.1, sns:{x:70,reddit:78,hn:85,github:98}, free:true,
+   tags:['코딩','무료','오픈소스','API'], score:76, change:+9.1, sns:{x:70,reddit:78,youtube:70,github:98}, free:true,
    life:['student','freelancer','startup']},
   {id:13, cat:'productivity',icon:'📅', name:'Motion AI',        url:'https://www.usemotion.com',
    desc:'AI가 하루 일정을 자동 최적화. 회의·업무·데드라인을 분석해 가장 효율적인 스케줄을 잡아줍니다.',
-   tags:['생산성','유료'], score:74, change:+6.8, sns:{x:68,reddit:62,hn:48,github:10}, free:false,
+   tags:['생산성','유료'], score:74, change:+6.8, sns:{x:68,reddit:62,youtube:52,github:10}, free:false,
    life:['office','startup','freelancer']},
   {id:14, cat:'text',       icon:'📝', name:'Grammarly AI',      url:'https://www.grammarly.com',
    desc:'AI 기반 영어 문법·교정 도구. 이메일, 보고서, 에세이의 어조와 명확성을 실시간으로 개선.',
-   tags:['텍스트','무료'], score:72, change:-0.3, sns:{x:62,reddit:58,hn:30,github:15}, free:true,
+   tags:['텍스트','무료'], score:72, change:-0.3, sns:{x:62,reddit:58,youtube:68,github:15}, free:true,
    life:['student','office','freelancer']},
   {id:15, cat:'data',       icon:'📊', name:'Julius AI',         url:'https://julius.ai',
    desc:'데이터 분석 특화 AI. CSV·Excel을 업로드하면 AI가 분석·시각화·인사이트 도출을 자동 수행.',
-   tags:['데이터','무료','API'], score:70, change:+11.3, sns:{x:60,reddit:55,hn:65,github:42}, free:true,
+   tags:['데이터','무료','API'], score:70, change:+11.3, sns:{x:60,reddit:55,youtube:62,github:42}, free:true,
    life:['office','startup','student','marketer']},
   {id:16, cat:'design',     icon:'✨', name:'Figma AI',          url:'https://www.figma.com/ai',
    desc:'Figma에 통합된 AI. 자동 레이아웃 제안, 디자인 생성, 프로토타입 강화로 UI/UX 속도 향상.',
-   tags:['디자인','유료'], score:68, change:+3.0, sns:{x:65,reddit:60,hn:52,github:35}, free:false,
+   tags:['디자인','유료'], score:68, change:+3.0, sns:{x:65,reddit:60,youtube:72,github:35}, free:false,
    life:['freelancer','startup','office']},
   {id:17, cat:'productivity',icon:'🎤', name:'Otter AI',         url:'https://otter.ai',
    desc:'회의 자동 녹취·요약·할 일 추출 AI. Zoom·Meet·Teams와 연동해 회의 내용을 자동 텍스트 변환.',
-   tags:['생산성','무료'], score:66, change:+2.4, sns:{x:58,reddit:52,hn:40,github:12}, free:true,
+   tags:['생산성','무료'], score:66, change:+2.4, sns:{x:58,reddit:52,youtube:58,github:12}, free:true,
    life:['office','startup']},
   {id:18, cat:'text',       icon:'📣', name:'Jasper AI',         url:'https://www.jasper.ai',
    desc:'마케팅·카피라이팅 특화 AI. 블로그, 광고 문구, SNS 포스팅 등 마케터를 위한 콘텐츠 빠르게 생성.',
-   tags:['텍스트','유료','마케팅'], score:64, change:-1.8, sns:{x:60,reddit:50,hn:35,github:18}, free:false,
+   tags:['텍스트','유료','마케팅'], score:64, change:-1.8, sns:{x:60,reddit:50,youtube:60,github:18}, free:false,
    life:['marketer','freelancer']},
 ];
 
@@ -914,7 +914,7 @@ function renderCard(tool, idx) {
   <div class="sns-row">
     ${snsR('X',tool.sns.x,'sns-x')}
     ${snsR('Reddit',tool.sns.reddit,'sns-reddit')}
-    ${snsR('HN',tool.sns.hn,'sns-hn')}
+    ${snsR('YouTube',tool.sns.youtube,'sns-yt')}
     ${snsR('GitHub',tool.sns.github,'sns-github')}
   </div>
   <div class="card-action" onclick="event.stopPropagation()">
@@ -1057,7 +1057,7 @@ function openCompareModal() {
   const platforms = [
     {key:'x',      label:'X (트위터)', color:'#1d9bf0'},
     {key:'reddit', label:'Reddit',     color:'#ff4500'},
-    {key:'hn',     label:'HackerNews', color:'#f97316'},
+    {key:'youtube',label:'YouTube',     color:'#ff0000'},
     {key:'github', label:'GitHub',     color:'#8b949e'},
   ];
 
@@ -1355,7 +1355,7 @@ function buildDetailContent(tool) {
   const snsPlatforms = [
     { label: 'X (Twitter)', key: 'x',      color: '#1d9bf0' },
     { label: 'Reddit',      key: 'reddit',  color: '#ff4500' },
-    { label: 'HackerNews',  key: 'hn',      color: '#ff6600' },
+    { label: 'YouTube',     key: 'youtube', color: '#ff0000' },
     { label: 'GitHub',      key: 'github',  color: '#22c55e' },
   ];
 
@@ -1448,16 +1448,21 @@ const TOOL_QUERIES = {
   16:'Figma AI', 17:'Otter AI', 18:'Jasper AI'
 };
 
-const LIVE_CACHE_KEY = 'airank-live-v2';
+// YouTube Data API v3 키 (https://console.cloud.google.com 에서 무료 발급)
+const YOUTUBE_API_KEY = '';
+
+const LIVE_CACHE_KEY = 'airank-live-v3';
 const LIVE_CACHE_TTL = 4 * 60 * 60 * 1000; // 4시간
 
-async function apiFetchHN(query) {
-  const since = Math.floor(Date.now() / 1000) - 30 * 24 * 3600;
+async function apiFetchYouTube(query) {
+  if (!YOUTUBE_API_KEY) return 0;
   const r = await fetch(
-    `https://hn.algolia.com/api/v1/search?query=${encodeURIComponent(query)}&tags=story&numericFilters=created_at_i>${since}&hitsPerPage=0`
+    `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&type=video&order=relevance&maxResults=1&key=${YOUTUBE_API_KEY}`
   );
+  if (!r.ok) return 0;
   const d = await r.json();
-  return d.nbHits || 0;
+  if (d.error) return 0;
+  return d.pageInfo?.totalResults || 0;
 }
 
 async function apiFetchReddit(query) {
@@ -1476,7 +1481,7 @@ async function apiFetchGitHub(query) {
     `https://api.github.com/search/repositories?q=${encodeURIComponent(query)}&sort=stars&per_page=1`,
     { headers: { Accept: 'application/vnd.github.v3+json' } }
   );
-  if (r.status === 403) return 0; // rate limit
+  if (r.status === 403) return 0;
   const d = await r.json();
   return d.total_count || 0;
 }
@@ -1495,15 +1500,11 @@ function setLiveBadge(loading) {
 }
 
 async function fetchLiveData() {
-  // 캐시 확인
   try {
     const raw = sessionStorage.getItem(LIVE_CACHE_KEY);
     if (raw) {
       const { ts, payload } = JSON.parse(raw);
-      if (Date.now() - ts < LIVE_CACHE_TTL) {
-        applyLivePayload(payload);
-        return;
-      }
+      if (Date.now() - ts < LIVE_CACHE_TTL) { applyLivePayload(payload); return; }
     }
   } catch(e) {}
 
@@ -1512,18 +1513,17 @@ async function fetchLiveData() {
   const ids = Object.keys(TOOL_QUERIES).map(Number);
   const raw = {};
 
-  // 3개씩 배치로 요청 (API 부하 분산)
   for (let i = 0; i < ids.length; i += 3) {
     const batch = ids.slice(i, i + 3);
     await Promise.all(batch.map(async id => {
       const q = TOOL_QUERIES[id];
       try {
-        const [hn, reddit, github] = await Promise.all([
-          apiFetchHN(q),
+        const [ytTotal, reddit, github] = await Promise.all([
+          apiFetchYouTube(q),
           apiFetchReddit(q),
           apiFetchGitHub(q),
         ]);
-        raw[id] = { hn, redditCount: reddit.count, redditUp: reddit.upvotes, github };
+        raw[id] = { ytTotal, redditUp: reddit.upvotes, github };
       } catch(e) {
         console.warn(`[AIrank] ${q} fetch failed:`, e.message);
         raw[id] = null;
@@ -1532,22 +1532,24 @@ async function fetchLiveData() {
     if (i + 3 < ids.length) await new Promise(r => setTimeout(r, 400));
   }
 
-  // 정규화 기준값 (플랫폼별 최대 예상치)
-  const REF = { hn: 3000, redditUp: 150000, github: 800000 };
+  // 정규화 기준값
+  const REF = { yt: 2000000, redditUp: 150000, github: 800000 };
 
   const payload = {};
   ids.forEach(id => {
     const d = raw[id];
     if (!d) return;
-    const hnScore     = logScale(d.hn,        REF.hn);
-    const redditScore = logScale(d.redditUp,   REF.redditUp);
-    const githubScore = logScale(d.github,     REF.github);
-    // X 점수는 기존 하드코딩 값 유지
-    const tool = TOOLS.find(t => t.id === id);
-    const xScore = tool ? tool.sns.x : 50;
-    // 가중 합산: Reddit 30% + HN 25% + GitHub 30% + X 15%
-    const composite = Math.round(redditScore * 0.30 + hnScore * 0.25 + githubScore * 0.30 + xScore * 0.15);
-    payload[id] = { hn: hnScore, reddit: redditScore, github: githubScore, score: composite };
+    const tool        = TOOLS.find(t => t.id === id);
+    const xScore      = tool ? tool.sns.x : 50;
+    // YouTube API 키 없으면 기존 하드코딩 값 유지
+    const ytScore     = YOUTUBE_API_KEY
+      ? logScale(d.ytTotal,  REF.yt)
+      : (tool ? tool.sns.youtube : 50);
+    const redditScore = logScale(d.redditUp,  REF.redditUp);
+    const githubScore = logScale(d.github,    REF.github);
+    // 가중 합산: Reddit 30% + YouTube 30% + GitHub 25% + X 15%
+    const composite = Math.round(redditScore * 0.30 + ytScore * 0.30 + githubScore * 0.25 + xScore * 0.15);
+    payload[id] = { youtube: ytScore, reddit: redditScore, github: githubScore, score: composite };
   });
 
   try {
@@ -1562,13 +1564,13 @@ function applyLivePayload(payload) {
   TOOLS.forEach(tool => {
     const d = payload[tool.id];
     if (!d) return;
-    const prev = tool.score;
-    tool.sns.hn     = d.hn;
-    tool.sns.reddit = d.reddit;
-    tool.sns.github = d.github;
-    tool.score      = d.score;
-    tool.change     = parseFloat((d.score - prev).toFixed(1));
-    tool.isLive     = true;
+    const prev          = tool.score;
+    tool.sns.youtube    = d.youtube;
+    tool.sns.reddit     = d.reddit;
+    tool.sns.github     = d.github;
+    tool.score          = d.score;
+    tool.change         = parseFloat((d.score - prev).toFixed(1));
+    tool.isLive         = true;
   });
   render();
 }
