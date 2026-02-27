@@ -298,19 +298,21 @@ header {
 .card-life-badges { display:flex; flex-wrap:wrap; gap:4px; margin-bottom:-2px; padding-right:70px; }
 .life-badge { font-size:.6rem; font-weight:600; letter-spacing:.05em; text-transform:uppercase; padding:2px 8px; border-radius:100px; border:1px solid var(--life-b); background:var(--life-bg); color:var(--life-c); white-space:nowrap; transition:background .35s, color .35s, border-color .35s; }
 
-.card-top { display:flex; align-items:flex-start; justify-content:space-between; gap:.8rem; }
-.card-left { display:flex; align-items:flex-start; gap:.85rem; flex:1; min-width:0; }
-.tool-icon { width:44px; height:44px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1.35rem; flex-shrink:0; border:1px solid var(--border); transition:background .35s, border-color .35s; }
-.card-name-row { display:flex; flex-direction:column; gap:1px; min-width:0; }
+.card-top { display:flex; align-items:flex-start; gap:.85rem; }
+.tool-icon { width:46px; height:46px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.35rem; flex-shrink:0; border:1px solid var(--border); transition:background .35s, border-color .35s; overflow:hidden; }
+.brand-img { width:26px; height:26px; object-fit:contain; display:block; }
+.brand-fav { width:30px; height:30px; }
+[data-theme="dark"]  .si-dark { filter:invert(1) brightness(1.1); }
+[data-theme="light"] .si-dark { filter:none; }
+.card-name-row { display:flex; flex-direction:column; gap:2px; min-width:0; flex:1; }
 .rank-num { font-size:.66rem; font-weight:500; letter-spacing:.08em; color:var(--text-muted); font-family:'Syne',sans-serif; display:flex; align-items:center; gap:6px; }
 .live-pip { font-size:.58rem; font-weight:700; color:var(--green); letter-spacing:.04em; animation:blink 1.4s infinite; }
 .rank-num span { color:var(--accent); }
 .tool-name { font-family:'Syne',sans-serif; font-size:.97rem; font-weight:700; color:var(--text); letter-spacing:-.02em; line-height:1.2; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-
-.score-box { text-align:right; flex-shrink:0; }
-.score-label { font-size:.58rem; text-transform:uppercase; letter-spacing:.1em; color:var(--text-muted); display:block; margin-bottom:1px; }
-.score-num { font-family:'Syne',sans-serif; font-size:1.55rem; font-weight:800; line-height:1; letter-spacing:-.03em; }
-.score-change { font-size:.67rem; font-weight:500; display:flex; align-items:center; justify-content:flex-end; gap:2px; margin-top:2px; }
+.score-inline { display:flex; align-items:baseline; gap:.4rem; margin-top:3px; }
+.score-num { font-family:'DM Sans',sans-serif; font-size:1.25rem; font-weight:700; line-height:1; letter-spacing:-.02em; }
+.score-unit { font-size:.62rem; font-weight:400; color:var(--text-muted); margin-left:1px; }
+.score-change { font-size:.67rem; font-weight:500; display:flex; align-items:center; gap:2px; }
 .score-change.up { color:var(--green); } .score-change.down { color:var(--red); }
 
 .score-bar-wrap { display:flex; align-items:center; gap:8px; }
@@ -793,6 +795,45 @@ function scoreColor(s){ for(const x of SC) if(s>=x.min) return x.c; return '#5a6
 
 const LIFE_LABELS = {office:'💼 직장인',freelancer:'🖥️ 프리랜서',student:'🎓 대학생',creator:'🎥 크리에이터',marketer:'📣 마케터',startup:'🚀 스타트업'};
 
+/* ════════════════════════════════════════
+   BRAND ICON SYSTEM
+════════════════════════════════════════ */
+// si: Simple Icons slug, dark:true = 아이콘이 검정색(다크모드에서 반전 필요)
+// fav: Google Favicon 도메인
+const TOOL_ICONS = {
+  1:  { si:'openai',          dark:true  },
+  2:  { fav:'midjourney.com'             },
+  3:  { si:'github',          dark:true  },
+  4:  { si:'anthropic',       dark:false },
+  5:  { fav:'cursor.com'                 },
+  6:  { si:'openai',          dark:true  },
+  7:  { si:'perplexity',      dark:true  },
+  8:  { fav:'suno.com'                   },
+  9:  { si:'notion',          dark:true  },
+  10: { si:'canva',           dark:false },
+  11: { fav:'stability.ai'               },
+  12: { fav:'ollama.com'                 },
+  13: { fav:'usemotion.com'              },
+  14: { si:'grammarly',       dark:false },
+  15: { fav:'julius.ai'                  },
+  16: { si:'figma',           dark:false },
+  17: { fav:'otter.ai'                   },
+  18: { fav:'jasper.ai'                  },
+};
+
+function getIconHtml(tool) {
+  const cfg = TOOL_ICONS[tool.id];
+  if (!cfg) return tool.icon;
+  if (cfg.si) {
+    const cls = 'brand-img' + (cfg.dark ? ' si-dark' : '');
+    return `<img class="${cls}" src="https://cdn.simpleicons.org/${cfg.si}" alt="${tool.name}" loading="lazy" onerror="this.parentNode.textContent=this.parentNode.dataset.emoji">`;
+  }
+  if (cfg.fav) {
+    return `<img class="brand-img brand-fav" src="https://www.google.com/s2/favicons?domain=${cfg.fav}&sz=64" alt="${tool.name}" loading="lazy" onerror="this.parentNode.textContent=this.parentNode.dataset.emoji">`;
+  }
+  return tool.icon;
+}
+
 function renderCard(tool, idx) {
   const c = scoreColor(tool.score);
   const changeHtml = tool.change>=0
@@ -818,22 +859,18 @@ function renderCard(tool, idx) {
   </label>
   ${lifeBadges?`<div class="card-life-badges">${lifeBadges}</div>`:''}
   <div class="card-top">
-    <div class="card-left">
-      <div class="tool-icon" style="background:${c}18;border-color:${c}28">${tool.icon}</div>
-      <div class="card-name-row">
-        <div class="rank-num">#${idx+1} <span>RANK</span>${livePip}</div>
-        <div class="tool-name">${tool.name}</div>
+    <div class="tool-icon" style="background:${c}18;border-color:${c}28" data-emoji="${tool.icon}">${getIconHtml(tool)}</div>
+    <div class="card-name-row">
+      <div class="rank-num">#${idx+1} <span>RANK</span>${livePip}</div>
+      <div class="tool-name">${tool.name}</div>
+      <div class="score-inline">
+        <div class="score-num" style="color:${c}">${tool.score}<span class="score-unit">/100</span></div>
+        ${changeHtml}
       </div>
-    </div>
-    <div class="score-box">
-      <span class="score-label">SNS 점수</span>
-      <div class="score-num" style="color:${c}">${tool.score}</div>
-      ${changeHtml}
     </div>
   </div>
   <div class="score-bar-wrap">
     <div class="score-bar-bg"><div class="score-bar-fill" style="width:${tool.score}%;background:linear-gradient(90deg,${c}70,${c})"></div></div>
-    <div class="score-pct">${tool.score}/100</div>
   </div>
   <div class="tool-desc">${tool.desc}</div>
   <div class="tags">${tagsHtml}</div>
