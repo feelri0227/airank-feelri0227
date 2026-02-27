@@ -254,6 +254,7 @@ header {
   transition:transform .3s cubic-bezier(.25,.8,.25,1), box-shadow .3s, border-color .3s, background .35s;
   position:relative; overflow:hidden;
   animation:cardIn .45s ease both;
+  cursor:pointer;
 }
 @keyframes cardIn { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
 .card:hover { border-color:rgba(0,180,220,.24); transform:translateY(-4px); box-shadow:var(--shadow), 0 0 0 1px rgba(0,180,220,.08); }
@@ -425,6 +426,34 @@ header {
 .modal-close { background:none; border:1px solid var(--border); color:var(--text-muted); width:32px; height:32px; border-radius:8px; cursor:pointer; font-size:1rem; display:flex; align-items:center; justify-content:center; transition:all .2s; flex-shrink:0; }
 .modal-close:hover { border-color:var(--border-hover); color:var(--text); }
 .modal-body { padding:1.4rem 1.6rem; }
+
+/* ════════════════════════════════════════
+   DETAIL MODAL
+════════════════════════════════════════ */
+.detail-hero { display:flex; align-items:flex-start; gap:1.2rem; padding:1.8rem 1.6rem 1.3rem; border-bottom:1px solid var(--border); transition:border-color .35s; }
+.detail-icon { width:64px; height:64px; border-radius:16px; display:flex; align-items:center; justify-content:center; font-size:2rem; flex-shrink:0; border:1px solid var(--border); overflow:hidden; transition:background .35s, border-color .35s; }
+.detail-name { font-family:'Syne',sans-serif; font-size:1.35rem; font-weight:800; color:var(--text); letter-spacing:-.02em; line-height:1.2; margin-top:2px; }
+.detail-score-row { display:flex; align-items:baseline; gap:.5rem; margin-top:5px; }
+.detail-score-num { font-family:'DM Sans',sans-serif; font-size:1.9rem; font-weight:700; line-height:1; letter-spacing:-.02em; }
+.detail-section { padding:1.1rem 1.6rem; border-bottom:1px solid var(--border); transition:border-color .35s; }
+.detail-section-title { font-size:.62rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--text-muted); margin-bottom:.9rem; }
+.detail-desc { font-size:.875rem; color:var(--text-dim); line-height:1.75; }
+.detail-sns-list { display:flex; flex-direction:column; gap:.75rem; }
+.detail-sns-row { display:grid; grid-template-columns:100px 1fr 38px; align-items:center; gap:.7rem; }
+.detail-sns-label { font-size:.75rem; font-weight:500; color:var(--text-dim); }
+.detail-sns-bar-bg { height:6px; background:var(--bar-bg); border-radius:3px; overflow:hidden; }
+.detail-sns-bar-fill { height:100%; border-radius:3px; transition:width .6s cubic-bezier(.25,.8,.25,1); }
+.detail-sns-val { font-size:.8rem; font-weight:700; text-align:right; }
+.detail-tags-wrap { display:flex; flex-wrap:wrap; gap:.4rem; }
+.detail-life-wrap { display:flex; flex-wrap:wrap; gap:.4rem; }
+.detail-footer { padding:1.2rem 1.6rem; display:flex; gap:.65rem; }
+.detail-visit-btn { flex:1; display:flex; align-items:center; justify-content:center; gap:.45rem; padding:.8rem 1rem; border-radius:10px; background:var(--accent); color:#000; font-weight:700; font-size:.85rem; text-decoration:none; transition:opacity .2s; font-family:inherit; }
+.detail-visit-btn:hover { opacity:.85; }
+.detail-cmp-btn { padding:.8rem 1.1rem; border-radius:10px; border:1px solid var(--border); color:var(--text-dim); font-size:.82rem; cursor:pointer; background:none; font-family:inherit; font-weight:500; transition:all .2s; white-space:nowrap; }
+.detail-cmp-btn:hover { border-color:var(--border-hover); color:var(--text); }
+.detail-cmp-btn.active { border-color:var(--accent); color:var(--accent); background:rgba(0,229,255,.08); }
+.detail-close-btn { position:absolute; top:.9rem; right:.9rem; z-index:2; background:var(--surface2); border:1px solid var(--border); color:var(--text-muted); width:32px; height:32px; border-radius:8px; cursor:pointer; font-size:1rem; display:flex; align-items:center; justify-content:center; transition:all .2s; }
+.detail-close-btn:hover { border-color:var(--border-hover); color:var(--text); }
 
 /* ════════════════════════════════════════
    2. WIZARD MODAL
@@ -668,6 +697,14 @@ footer span { color:var(--accent); }
   </div>
 </div>
 
+<!-- DETAIL MODAL -->
+<div class="modal-overlay" id="detailOverlay">
+  <div class="modal" style="max-width:500px;position:relative" id="detailModal">
+    <button class="detail-close-btn" id="closeDetailBtn">✕</button>
+    <div id="detailBody"></div>
+  </div>
+</div>
+
 <footer>
   <p>데이터 출처: X API · Reddit API · HackerNews · GitHub Trending · <span>AIrank</span> 자체 분석</p>
   <p style="margin-top:.4rem;">© 2026 AIrank. 모든 SNS 점수는 참고용입니다.</p>
@@ -849,8 +886,8 @@ function renderCard(tool, idx) {
   const snsR = (p,v,cls)=>`<div class="sns-item ${cls}"><div class="sns-val">${v}</div><div class="sns-platform">${p}</div><div class="sns-bar"><div class="sns-bar-fill" style="width:${v}%"></div></div></div>`;
   const isSelected = selectedIds.has(tool.id);
   return `
-<div class="card${isSelected?' selected':''}" style="animation-delay:${idx*0.05}s" data-id="${tool.id}">
-  <label class="compare-check-wrap" title="비교에 추가">
+<div class="card${isSelected?' selected':''}" style="animation-delay:${idx*0.05}s" data-id="${tool.id}" onclick="handleCardClick(event,${tool.id})">
+  <label class="compare-check-wrap" title="비교에 추가" onclick="event.stopPropagation()">
     <input type="checkbox" class="cc-input" data-id="${tool.id}" ${isSelected?'checked':''} onchange="toggleCompare(${tool.id},this.checked)">
     <div class="compare-check">
       <div class="cc-box">${isSelected?'✓':''}</div>
@@ -880,7 +917,7 @@ function renderCard(tool, idx) {
     ${snsR('HN',tool.sns.hn,'sns-hn')}
     ${snsR('GitHub',tool.sns.github,'sns-github')}
   </div>
-  <div class="card-action">
+  <div class="card-action" onclick="event.stopPropagation()">
     <a class="visit-btn" href="${tool.url}" target="_blank" rel="noopener noreferrer">방문하기 →</a>
     <button class="bookmark-btn" onclick="toggleBookmark(this)">🔖</button>
   </div>
@@ -1284,6 +1321,120 @@ function applyWizardFilter() {
 document.getElementById('openWizardBtn').addEventListener('click', openWizard);
 document.getElementById('closeWizardBtn').addEventListener('click', closeWizard);
 document.getElementById('wizardOverlay').addEventListener('click',e=>{ if(e.target===e.currentTarget) closeWizard(); });
+
+/* ════════════════════════════════════════
+   DETAIL MODAL
+════════════════════════════════════════ */
+function handleCardClick(e, id) {
+  if (e.target.closest('.compare-check-wrap') || e.target.closest('.card-action')) return;
+  openDetail(id);
+}
+
+function openDetail(id) {
+  const tool = TOOLS.find(t => t.id === id);
+  if (!tool) return;
+  document.getElementById('detailBody').innerHTML = buildDetailContent(tool);
+  document.getElementById('detailOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDetail() {
+  document.getElementById('detailOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function buildDetailContent(tool) {
+  const c = scoreColor(tool.score);
+  const rankInAll = [...TOOLS].sort((a,b) => b.score - a.score).findIndex(t => t.id === tool.id) + 1;
+  const changeHtml = tool.change >= 0
+    ? `<span style="color:var(--green);font-size:.8rem;font-weight:600">▲ ${tool.change.toFixed(1)}%</span>`
+    : `<span style="color:var(--red);font-size:.8rem;font-weight:600">▼ ${Math.abs(tool.change).toFixed(1)}%</span>`;
+  const livePip = tool.isLive ? `<span class="live-pip">● LIVE</span>` : '';
+  const isSelected = selectedIds.has(tool.id);
+
+  const snsPlatforms = [
+    { label: 'X (Twitter)', key: 'x',      color: '#1d9bf0' },
+    { label: 'Reddit',      key: 'reddit',  color: '#ff4500' },
+    { label: 'HackerNews',  key: 'hn',      color: '#ff6600' },
+    { label: 'GitHub',      key: 'github',  color: '#22c55e' },
+  ];
+
+  const snsHtml = snsPlatforms.map(p => `
+    <div class="detail-sns-row">
+      <div class="detail-sns-label">${p.label}</div>
+      <div class="detail-sns-bar-bg">
+        <div class="detail-sns-bar-fill" style="width:${tool.sns[p.key]}%;background:${p.color}99"></div>
+      </div>
+      <div class="detail-sns-val" style="color:${p.color}">${tool.sns[p.key]}</div>
+    </div>`).join('');
+
+  const tagsHtml = tool.tags.map(t => {
+    let cls = 'tag-cat';
+    if (t==='무료') cls='tag-free'; else if (t==='유료') cls='tag-paid'; else if (t==='API') cls='tag-api';
+    return `<span class="tag ${cls}">${t}</span>`;
+  }).join('');
+
+  const lifeHtml = tool.life.map(l => `<span class="life-badge">${LIFE_LABELS[l]}</span>`).join('');
+
+  return `
+    <div class="detail-hero">
+      <div class="detail-icon" style="background:${c}18;border-color:${c}30" data-emoji="${tool.icon}">${getIconHtml(tool)}</div>
+      <div style="flex:1;min-width:0">
+        <div class="rank-num" style="margin-bottom:2px">#${rankInAll} <span>RANK</span>${livePip}</div>
+        <div class="detail-name">${tool.name}</div>
+        <div class="detail-score-row">
+          <div class="detail-score-num" style="color:${c}">${tool.score}<span class="score-unit">/100</span></div>
+          ${changeHtml}
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-section">
+      <div class="detail-section-title">소개</div>
+      <div class="detail-desc">${tool.desc}</div>
+    </div>
+
+    <div class="detail-section">
+      <div class="detail-section-title">SNS 플랫폼별 점수</div>
+      <div class="detail-sns-list">${snsHtml}</div>
+    </div>
+
+    <div class="detail-section">
+      <div class="detail-section-title">태그</div>
+      <div class="detail-tags-wrap">${tagsHtml}</div>
+    </div>
+
+    <div class="detail-section">
+      <div class="detail-section-title">추천 대상</div>
+      <div class="detail-life-wrap">${lifeHtml}</div>
+    </div>
+
+    <div class="detail-footer">
+      <a class="detail-visit-btn" href="${tool.url}" target="_blank" rel="noopener noreferrer">🌐 사이트 방문하기</a>
+      <button class="detail-cmp-btn${isSelected?' active':''}" id="detailCmpBtn"
+        onclick="toggleDetailCompare(${tool.id})">
+        ${isSelected ? '✓ 비교 중' : '+ 비교 추가'}
+      </button>
+    </div>`;
+}
+
+function toggleDetailCompare(id) {
+  const isNowSelected = selectedIds.has(id);
+  toggleCompare(id, !isNowSelected);
+  const btn = document.getElementById('detailCmpBtn');
+  if (!btn) return;
+  const active = selectedIds.has(id);
+  btn.className = 'detail-cmp-btn' + (active ? ' active' : '');
+  btn.textContent = active ? '✓ 비교 중' : '+ 비교 추가';
+}
+
+document.getElementById('closeDetailBtn').addEventListener('click', closeDetail);
+document.getElementById('detailOverlay').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeDetail();
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeDetail();
+});
 
 /* ════════════════════════════════════════
    LIVE DATA — API FETCH
