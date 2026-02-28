@@ -213,10 +213,20 @@ header {
 /* ════════════════════════════════════════
    STATS BAR
 ════════════════════════════════════════ */
-.stats-bar { position:relative; z-index:5; display:flex; justify-content:center; gap:2.5rem; padding:1.4rem 2rem; border-top:1px solid var(--border); border-bottom:1px solid var(--border); background:rgba(128,128,128,.025); transition:border-color .35s; }
-.stat { text-align:center; }
-.stat-num { font-family:'Syne',sans-serif; font-size:1.45rem; font-weight:700; color:var(--text); display:block; }
-.stat-label { font-size:.67rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:.08em; }
+.score-info-bar { position:relative; z-index:5; display:flex; align-items:center; justify-content:center; gap:0; padding:.95rem 2rem; border-top:1px solid var(--border); border-bottom:1px solid var(--border); background:rgba(128,128,128,.025); flex-wrap:wrap; row-gap:.7rem; transition:border-color .35s; }
+.score-info-label { font-size:.6rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--text-muted); padding-right:1.6rem; border-right:1px solid var(--border); margin-right:1.6rem; white-space:nowrap; line-height:1; }
+.score-formula { display:flex; align-items:stretch; }
+.score-formula-item { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; padding:0 1.4rem; border-right:1px solid var(--border); }
+.score-formula-item:last-child { border-right:none; }
+.sfi-top { display:flex; align-items:baseline; gap:.3rem; }
+.sfi-platform { font-family:'Syne',sans-serif; font-size:.72rem; font-weight:700; letter-spacing:.02em; }
+.sfi-platform.reddit  { color:#ff5700; }
+.sfi-platform.youtube { color:#ff0000; }
+.sfi-platform.github  { color:#22c55e; }
+.sfi-platform.xtwit   { color:var(--text-dim); }
+.sfi-weight { font-family:'Syne',sans-serif; font-size:.95rem; font-weight:800; color:var(--text); }
+.sfi-desc { font-size:.58rem; color:var(--text-muted); white-space:nowrap; letter-spacing:.02em; }
+.score-info-meta { font-size:.59rem; color:var(--text-muted); padding-left:1.6rem; border-left:1px solid var(--border); margin-left:1.6rem; white-space:nowrap; line-height:1.7; letter-spacing:.01em; }
 
 /* FILTERS */
 .filters-wrap { position:relative; z-index:5; max-width:1200px; margin:0 auto; padding:2rem 2rem 0; }
@@ -366,6 +376,21 @@ header {
 
 .no-results { grid-column:1/-1; text-align:center; padding:4rem 2rem; color:var(--text-muted); }
 .no-results big { display:block; font-size:3rem; margin-bottom:1rem; }
+
+/* LOAD MORE */
+.load-more-wrap { display:flex; justify-content:center; padding:1.8rem 2rem 3rem; }
+.load-more-btn {
+  display:inline-flex; align-items:center; gap:.6rem;
+  font-family:'Syne',sans-serif; font-size:.85rem; font-weight:700; letter-spacing:.04em;
+  color:var(--text-dim);
+  background:var(--surface2); border:1px solid var(--border);
+  border-radius:100px; padding:11px 28px;
+  cursor:pointer; transition:all .2s;
+}
+.load-more-btn:hover { border-color:var(--border-hover); color:var(--text); transform:translateY(-1px); box-shadow:var(--shadow); }
+.lm-count { font-family:'DM Sans',sans-serif; font-size:.75rem; font-weight:400; background:var(--surface3); color:var(--text-muted); border-radius:100px; padding:2px 9px; }
+.lm-arrow { font-size:.8rem; opacity:.5; transition:transform .2s; }
+.load-more-btn:hover .lm-arrow { transform:translateY(2px); }
 
 /* ════════════════════════════════════════
    3. COMPARE FLOATING BAR
@@ -563,7 +588,10 @@ footer { position:relative; z-index:5; border-top:1px solid var(--border); paddi
 footer span { color:var(--accent); }
 
 @media(max-width:640px){
-  .stats-bar{gap:1.2rem}
+  .score-info-bar{padding:.8rem 1rem}
+  .score-info-label{padding-right:1rem;margin-right:1rem}
+  .score-info-meta{padding-left:1rem;margin-left:1rem}
+  .score-formula-item{padding:0 .9rem}
   .hero h1{font-size:2rem}
   .grid-wrap{grid-template-columns:1fr}
   .theme-label,.beta-tag{display:none}
@@ -617,12 +645,40 @@ footer span { color:var(--accent); }
   </div>
 </div>
 
-<!-- STATS BAR -->
-<div class="stats-bar">
-  <div class="stat"><span class="stat-num">2,847</span><span class="stat-label">등록 도구</span></div>
-  <div class="stat"><span class="stat-num">12M+</span><span class="stat-label">분석 게시글</span></div>
-  <div class="stat"><span class="stat-num">4h</span><span class="stat-label">업데이트 주기</span></div>
-  <div class="stat"><span class="stat-num">94%</span><span class="stat-label">정확도</span></div>
+<!-- SCORE INFO BAR -->
+<div class="score-info-bar">
+  <div class="score-info-label">점수 산정 방식</div>
+  <div class="score-formula">
+    <div class="score-formula-item">
+      <div class="sfi-top">
+        <span class="sfi-platform reddit">Reddit</span>
+        <span class="sfi-weight">30%</span>
+      </div>
+      <div class="sfi-desc">월간 업보트</div>
+    </div>
+    <div class="score-formula-item">
+      <div class="sfi-top">
+        <span class="sfi-platform youtube">YouTube</span>
+        <span class="sfi-weight">30%</span>
+      </div>
+      <div class="sfi-desc">검색 영상 수</div>
+    </div>
+    <div class="score-formula-item">
+      <div class="sfi-top">
+        <span class="sfi-platform github">GitHub</span>
+        <span class="sfi-weight">25%</span>
+      </div>
+      <div class="sfi-desc">연관 저장소</div>
+    </div>
+    <div class="score-formula-item">
+      <div class="sfi-top">
+        <span class="sfi-platform xtwit">X</span>
+        <span class="sfi-weight">15%</span>
+      </div>
+      <div class="sfi-desc">트렌드 지수</div>
+    </div>
+  </div>
+  <div class="score-info-meta">4h 업데이트<br>로그 정규화</div>
 </div>
 
 <!-- FILTERS -->
@@ -672,6 +728,15 @@ footer span { color:var(--accent); }
 
 <!-- CARD GRID -->
 <div class="grid-wrap" id="cardGrid"></div>
+
+<!-- LOAD MORE -->
+<div class="load-more-wrap" id="loadMoreWrap" style="display:none">
+  <button class="load-more-btn" id="loadMoreBtn">
+    <span id="loadMoreLabel">더보기</span>
+    <span class="lm-count" id="loadMoreCount"></span>
+    <span class="lm-arrow">↓</span>
+  </button>
+</div>
 
 <!-- 3. COMPARE FLOATING BAR -->
 <div class="compare-bar" id="compareBar">
@@ -803,6 +868,54 @@ const TOOLS = [
    desc:'마케팅·카피라이팅 특화 AI. 블로그, 광고 문구, SNS 포스팅 등 마케터를 위한 콘텐츠 빠르게 생성.',
    tags:['텍스트','유료','마케팅'], score:64, change:-1.8, sns:{x:60,reddit:50,youtube:60,github:18}, free:false,
    life:['marketer','freelancer']},
+  {id:19, cat:'audio',      icon:'🎙️', name:'ElevenLabs',        url:'https://elevenlabs.io',
+   desc:'업계 최고 수준의 AI 음성 합성. 감정·억양까지 살린 자연스러운 목소리 복제와 다국어 나레이션 생성.',
+   tags:['오디오','무료','API'], score:62, change:+8.5, sns:{x:72,reddit:68,youtube:70,github:40}, free:true,
+   life:['creator','marketer','freelancer']},
+  {id:20, cat:'video',      icon:'🎬', name:'Runway ML',          url:'https://runwayml.com',
+   desc:'텍스트·이미지로 고품질 영상을 생성하는 AI. Gen-3 Alpha 모델로 영화급 비디오 제작 가능.',
+   tags:['영상','유료','API'], score:60, change:+4.2, sns:{x:68,reddit:62,youtube:75,github:28}, free:false,
+   life:['creator','freelancer','startup']},
+  {id:21, cat:'text',       icon:'💬', name:'Character.AI',       url:'https://character.ai',
+   desc:'다양한 캐릭터와 대화하는 AI 플랫폼. 유명인·애니메이션·창작 캐릭터와 몰입감 있는 롤플레이 제공.',
+   tags:['텍스트','무료'], score:58, change:-1.2, sns:{x:78,reddit:72,youtube:65,github:12}, free:true,
+   life:['student','creator']},
+  {id:22, cat:'text',       icon:'♊', name:'Google Gemini',      url:'https://gemini.google.com',
+   desc:'구글의 멀티모달 AI. 텍스트·이미지·코드·음성을 동시에 처리하며 Google 서비스와 깊이 통합.',
+   tags:['텍스트','무료','API'], score:56, change:+6.8, sns:{x:70,reddit:55,youtube:72,github:35}, free:true,
+   life:['office','student','startup','freelancer']},
+  {id:23, cat:'productivity',icon:'🪟', name:'Microsoft Copilot',  url:'https://copilot.microsoft.com',
+   desc:'Microsoft 365에 내장된 AI. Word·Excel·Teams·Outlook에서 문서 요약, 데이터 분석, 회의 정리 자동화.',
+   tags:['생산성','유료'], score:54, change:+2.1, sns:{x:65,reddit:52,youtube:68,github:22}, free:false,
+   life:['office','startup']},
+  {id:24, cat:'image',      icon:'🔥', name:'Adobe Firefly',      url:'https://firefly.adobe.com',
+   desc:'Adobe 생태계에 통합된 생성형 AI. 상업적 사용이 안전한 이미지 생성·배경 교체·텍스트 효과 제공.',
+   tags:['이미지 생성','무료','API'], score:52, change:+1.5, sns:{x:62,reddit:48,youtube:65,github:18}, free:true,
+   life:['designer','marketer','freelancer','creator']},
+  {id:25, cat:'productivity',icon:'⚡', name:'Gamma',             url:'https://gamma.app',
+   desc:'AI가 프레젠테이션·문서·웹페이지를 자동 생성. 텍스트 입력만으로 수 초 만에 완성된 슬라이드 완성.',
+   tags:['생산성','무료'], score:51, change:+9.3, sns:{x:60,reddit:55,youtube:58,github:8}, free:true,
+   life:['student','office','startup','marketer']},
+  {id:26, cat:'video',      icon:'🎥', name:'Pika Labs',          url:'https://pika.art',
+   desc:'텍스트와 이미지를 영상으로 변환하는 AI. 직관적인 인터페이스로 누구나 쉽게 숏폼 비디오 제작 가능.',
+   tags:['영상','무료'], score:49, change:+3.7, sns:{x:65,reddit:55,youtube:62,github:15}, free:true,
+   life:['creator','marketer','freelancer']},
+  {id:27, cat:'video',      icon:'🌙', name:'Luma AI',            url:'https://lumalabs.ai',
+   desc:'Dream Machine으로 유명한 영상 생성 AI. 물리적으로 사실적인 움직임과 카메라 워크를 자동으로 구현.',
+   tags:['영상','무료','API'], score:47, change:+12.1, sns:{x:62,reddit:52,youtube:58,github:20}, free:true,
+   life:['creator','freelancer']},
+  {id:28, cat:'text',       icon:'🌐', name:'DeepL',              url:'https://www.deepl.com',
+   desc:'최고 품질의 AI 번역 서비스. 문맥을 파악해 자연스러운 번역을 제공하며 전문 분야 번역 정확도가 탁월.',
+   tags:['텍스트','무료','API'], score:45, change:-0.8, sns:{x:55,reddit:50,youtube:52,github:30}, free:true,
+   life:['office','student','freelancer']},
+  {id:29, cat:'code',       icon:'💨', name:'Windsurf',           url:'https://windsurf.com',
+   desc:'Codeium이 만든 AI 코드 에디터. Cascade AI 에이전트가 멀티파일 코드베이스를 이해하고 자율 수정.',
+   tags:['코딩','무료'], score:43, change:+15.6, sns:{x:68,reddit:60,youtube:55,github:72}, free:true,
+   life:['freelancer','startup','student']},
+  {id:30, cat:'video',      icon:'🎭', name:'HeyGen',             url:'https://www.heygen.com',
+   desc:'AI 아바타로 영상을 제작하는 플랫폼. 텍스트를 입력하면 실제 사람처럼 말하는 프레젠테이션 영상 자동 생성.',
+   tags:['영상','유료'], score:41, change:+7.2, sns:{x:58,reddit:45,youtube:62,github:10}, free:false,
+   life:['marketer','creator','startup']},
 ];
 
 /* ════════════════════════════════════════
@@ -872,6 +985,18 @@ const TOOL_ICONS = {
   16: { si:'figma',           dark:false },
   17: { fav:'otter.ai'                   },
   18: { fav:'jasper.ai'                  },
+  19: { fav:'elevenlabs.io'              },
+  20: { fav:'runwayml.com'               },
+  21: { fav:'character.ai'               },
+  22: { si:'googlegemini',  dark:false   },
+  23: { si:'microsoftcopilot', dark:false },
+  24: { si:'adobefirefly',  dark:false   },
+  25: { fav:'gamma.app'                  },
+  26: { fav:'pika.art'                   },
+  27: { fav:'lumalabs.ai'                },
+  28: { si:'deepl',         dark:false   },
+  29: { fav:'windsurf.com'               },
+  30: { fav:'heygen.com'                 },
 };
 
 function getIconHtml(tool) {
@@ -972,6 +1097,8 @@ function toggleBookmark(btn) {
    FILTER / RENDER STATE
 ════════════════════════════════════════ */
 let cat='all', life='all', sort='score', search='';
+let showAll = false;
+const PAGE_SIZE = 18;
 
 function render() {
   let data=[...TOOLS];
@@ -981,27 +1108,37 @@ function render() {
   if(sort==='score')  data.sort((a,b)=>b.score-a.score);
   else if(sort==='growth') data.sort((a,b)=>b.change-a.change);
   else data.sort((a,b)=>a.name.localeCompare(b.name,'ko'));
+
+  const hasMore = data.length > PAGE_SIZE && !showAll;
+  const displayData = showAll ? data : data.slice(0, PAGE_SIZE);
+
   const grid=document.getElementById('cardGrid');
   grid.innerHTML = data.length
-    ? data.map((t,i)=>renderCard(t,i)).join('')
+    ? displayData.map((t,i)=>renderCard(t,i)).join('')
     : `<div class="no-results"><big>🤖</big>검색 결과가 없습니다.<br><small style="margin-top:.5rem;display:block">다른 키워드로 검색해보세요</small></div>`;
+
+  const wrap = document.getElementById('loadMoreWrap');
+  const countEl = document.getElementById('loadMoreCount');
+  wrap.style.display = hasMore ? 'flex' : 'none';
+  if(hasMore) countEl.textContent = `+${data.length - PAGE_SIZE}`;
 }
 
 document.getElementById('filterRowType').addEventListener('click',e=>{
   const b=e.target.closest('.filter-btn'); if(!b) return;
   document.querySelectorAll('#filterRowType .filter-btn').forEach(x=>x.classList.remove('active'));
-  b.classList.add('active'); cat=b.dataset.cat; render();
+  b.classList.add('active'); cat=b.dataset.cat; showAll=false; render();
 });
 document.getElementById('filterRowLife').addEventListener('click',e=>{
   const b=e.target.closest('.filter-btn'); if(!b) return;
   document.querySelectorAll('#filterRowLife .filter-btn').forEach(x=>x.classList.remove('active'));
-  b.classList.add('active'); life=b.dataset.life; render();
+  b.classList.add('active'); life=b.dataset.life; showAll=false; render();
 });
 document.querySelectorAll('.sort-btn').forEach(b=>b.addEventListener('click',()=>{
   document.querySelectorAll('.sort-btn').forEach(x=>x.classList.remove('active'));
-  b.classList.add('active'); sort=b.dataset.sort; render();
+  b.classList.add('active'); sort=b.dataset.sort; showAll=false; render();
 }));
-document.getElementById('searchInput').addEventListener('input',e=>{ search=e.target.value; render(); });
+document.getElementById('searchInput').addEventListener('input',e=>{ search=e.target.value; showAll=e.target.value.length>0; render(); });
+document.getElementById('loadMoreBtn').addEventListener('click',()=>{ showAll=true; render(); });
 
 /* ════════════════════════════════════════
    THEME
@@ -1487,7 +1624,11 @@ const TOOL_QUERIES = {
   7:'Perplexity AI', 8:'Suno AI', 9:'Notion AI',
   10:'Canva AI', 11:'Stable Diffusion', 12:'Ollama LLM',
   13:'Motion AI', 14:'Grammarly', 15:'Julius AI',
-  16:'Figma AI', 17:'Otter AI', 18:'Jasper AI'
+  16:'Figma AI', 17:'Otter AI', 18:'Jasper AI',
+  19:'ElevenLabs', 20:'Runway ML', 21:'Character AI',
+  22:'Google Gemini', 23:'Microsoft Copilot', 24:'Adobe Firefly',
+  25:'Gamma AI', 26:'Pika Labs', 27:'Luma Dream Machine',
+  28:'DeepL translate', 29:'Windsurf Codeium', 30:'HeyGen AI avatar'
 };
 
 // YouTube Data API v3 키 (https://console.cloud.google.com 에서 무료 발급)
