@@ -10,50 +10,32 @@ import FilterBar from "./components/filters/FilterBar";
 import LeftSidebar from "./components/sidebar/LeftSidebar";
 import RightSidebar from "./components/sidebar/RightSidebar";
 import ToolCard from "./components/tools/ToolCard";
-import CompareModal from "./components/modals/CompareModal";
-import CompareFloatingBar from "./components/modals/CompareFloatingBar";
 import WizardModal from "./components/modals/WizardModal";
 
 import { TOOLS_DATA } from "./data/tools";
 
 export default function App() {
-  /* ── 전역 상태 ── */
   const [theme, setTheme] = useState("light");
   const [activeMenu, setActiveMenu] = useState("ranking");
   const [searchQuery, setSearchQuery] = useState("");
   const [category, setCategory] = useState("all");
   const [lifeFilter, setLifeFilter] = useState("all");
   const [sortBy, setSortBy] = useState("score");
-  const [compareIds, setCompareIds] = useState([]);
-  const [showCompare, setShowCompare] = useState(false);
   const [showWizard, setShowWizard] = useState(false);
 
-  /* ── 테마 토글 ── */
   const toggleTheme = useCallback(() => {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
   }, []);
 
-  /* ── 비교 체크박스 토글 (최대 4개) ── */
-  const toggleCompare = useCallback((id) => {
-    setCompareIds((prev) => {
-      if (prev.includes(id)) return prev.filter((x) => x !== id);
-      if (prev.length >= 4) return prev;
-      return [...prev, id];
-    });
-  }, []);
-
-  /* ── 필터링 & 정렬된 도구 목록 (메모이제이션) ── */
   const filteredTools = useMemo(() => {
     let data = [...TOOLS_DATA];
 
     if (category !== "all") {
       data = data.filter((t) => t.cat === category);
     }
-
     if (lifeFilter !== "all") {
       data = data.filter((t) => t.life.includes(lifeFilter));
     }
-
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
       data = data.filter(
@@ -68,7 +50,6 @@ export default function App() {
     return data;
   }, [category, lifeFilter, searchQuery, sortBy]);
 
-  /* ── data-theme 속성 동기화 ── */
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
@@ -109,7 +90,6 @@ export default function App() {
           onSortChange={setSortBy}
         />
 
-        {/* 메인 3단 레이아웃 (좌/중/우) */}
         <div className="main-grid">
           <LeftSidebar tools={filteredTools} />
 
@@ -135,8 +115,6 @@ export default function App() {
                     key={tool.id}
                     tool={tool}
                     rank={i + 1}
-                    isComparing={compareIds.includes(tool.id)}
-                    onToggleCompare={toggleCompare}
                   />
                 ))}
               </div>
@@ -147,21 +125,6 @@ export default function App() {
         </div>
 
         <Footer />
-
-        <CompareFloatingBar
-          tools={TOOLS_DATA}
-          compareIds={compareIds}
-          onClear={() => setCompareIds([])}
-          onCompare={() => setShowCompare(true)}
-        />
-
-        {showCompare && (
-          <CompareModal
-            tools={TOOLS_DATA}
-            compareIds={compareIds}
-            onClose={() => setShowCompare(false)}
-          />
-        )}
 
         <WizardModal
           isOpen={showWizard}

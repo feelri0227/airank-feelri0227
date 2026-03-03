@@ -1,56 +1,22 @@
 import { getScoreColor, getScoreTextColor, getRankBadge } from "../../utils";
 
-const ToolCard = ({ tool, rank, isComparing, onToggleCompare }) => (
+const ToolCard = ({ tool, rank }) => (
   <div style={{
     background: "var(--bg-card)",
-    border: `1px solid ${isComparing ? "var(--accent-indigo)" : "var(--border-primary)"}`,
+    border: "1px solid var(--border-primary)",
     borderRadius: "16px",
     padding: "1.2rem",
     transition: "all 0.25s ease",
-    boxShadow: isComparing ? "0 0 0 2px rgba(99,102,241,0.2)" : "var(--shadow-card)",
+    boxShadow: "var(--shadow-card)",
     animation: "fadeInUp 0.4s ease forwards",
     animationDelay: `${rank * 0.05}s`,
     opacity: 0,
     position: "relative",
     cursor: "pointer",
   }}>
-    {/* 상단: 랭킹 + 비교 체크 */}
-    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "10px" }}>
-      {/* 랭킹 번호 */}
-      <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-        <span style={{
-          fontSize: rank <= 3 ? "1.3rem" : "0.85rem",
-          fontWeight: 700,
-          fontFamily: "'Outfit', sans-serif",
-          color: rank <= 3 ? undefined : "var(--text-muted)",
-          minWidth: "28px",
-        }}>
-          {getRankBadge(rank)}
-        </span>
-        <span style={{ fontSize: "1.5rem" }}>{tool.icon}</span>
-      </div>
-
-      {/* 비교 체크박스 */}
-      <label style={{
-        display: "flex",
-        alignItems: "center",
-        gap: "4px",
-        fontSize: "0.7rem",
-        color: "var(--text-muted)",
-        cursor: "pointer",
-      }}>
-        <input
-          type="checkbox"
-          checked={isComparing}
-          onChange={() => onToggleCompare(tool.id)}
-          style={{ accentColor: "#6366f1" }}
-        />
-        비교
-      </label>
-    </div>
-
-    {/* 도구 이름 + 가격 배지 */}
-    <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "6px" }}>
+    {/* 도구 아이콘 + 이름 + 가격 배지 + 메달 */}
+    <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px" }}>
+      <span style={{ fontSize: "1.5rem" }}>{tool.icon}</span>
       <h3 style={{
         fontFamily: "'Outfit', sans-serif",
         fontSize: "1.1rem",
@@ -68,6 +34,15 @@ const ToolCard = ({ tool, rank, isComparing, onToggleCompare }) => (
         fontWeight: 600,
       }}>
         {tool.free ? "무료" : "유료"}
+      </span>
+      <span style={{
+        marginLeft: "auto",
+        fontSize: rank <= 3 ? "1.3rem" : "0.8rem",
+        fontWeight: 700,
+        fontFamily: "'Outfit', sans-serif",
+        color: "var(--text-muted)",
+      }}>
+        {getRankBadge(rank)}
       </span>
     </div>
 
@@ -103,12 +78,7 @@ const ToolCard = ({ tool, rank, isComparing, onToggleCompare }) => (
     </div>
 
     {/* SNS 종합 점수 */}
-    <div style={{
-      display: "flex",
-      alignItems: "center",
-      gap: "10px",
-      marginBottom: "4px",
-    }}>
+    <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "4px" }}>
       <div style={{
         fontSize: "1.5rem",
         fontFamily: "'Outfit', sans-serif",
@@ -132,7 +102,6 @@ const ToolCard = ({ tool, rank, isComparing, onToggleCompare }) => (
           transition: "width 0.8s ease",
         }} />
       </div>
-      {/* 주간 변동률 */}
       <span style={{
         fontSize: "0.72rem",
         fontWeight: 600,
