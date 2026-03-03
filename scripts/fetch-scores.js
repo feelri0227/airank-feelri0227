@@ -287,7 +287,7 @@ async function main() {
   console.log('🟣 GitHub 수집 중...');
   for (const tool of TOOLS) {
     raw.github[tool.id] = await fetchGitHub(tool);
-    await sleep(process.env.GITHUB_TOKEN ? 100 : 1200);
+    await sleep(process.env.GITHUB_TOKEN ? 2100 : 1200);
   }
   console.log('   ✅ GitHub 완료');
 
