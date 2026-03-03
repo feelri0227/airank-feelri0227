@@ -26,13 +26,30 @@ export default function App() {
   const [visibleCount, setVisibleCount] = useState(10);
   const [selectedTool, setSelectedTool] = useState(null);
   const [selectedRank, setSelectedRank] = useState(null);
+  const [tools, setTools] = useState(TOOLS_DATA);
+
+  // scores.json에서 실시간 점수 로드 (없으면 하드코딩 값 유지)
+  useEffect(() => {
+    fetch("/scores.json")
+      .then((r) => r.json())
+      .then((data) => {
+        if (!data?.tools) return;
+        setTools((prev) =>
+          prev.map((tool) => {
+            const live = data.tools[String(tool.id)];
+            return live ? { ...tool, ...live } : tool;
+          })
+        );
+      })
+      .catch(() => {});
+  }, []);
 
   const toggleTheme = useCallback(() => {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
   }, []);
 
   const filteredTools = useMemo(() => {
-    let data = [...TOOLS_DATA];
+    let data = [...tools];
 
     if (category !== "all") {
       data = data.filter((t) => t.cat === category);
@@ -52,7 +69,7 @@ export default function App() {
     else data.sort((a, b) => a.name.localeCompare(b.name, "ko"));
 
     return data;
-  }, [category, lifeFilter, searchQuery, sortBy]);
+  }, [tools, category, lifeFilter, searchQuery, sortBy]);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -161,7 +178,7 @@ export default function App() {
         <WizardModal
           isOpen={showWizard}
           onClose={() => setShowWizard(false)}
-          tools={TOOLS_DATA}
+          tools={tools}
         />
 
         <ToolDetailModal
