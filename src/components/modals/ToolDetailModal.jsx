@@ -1,12 +1,5 @@
 import { getScoreTextColor, getRankBadge } from "../../utils";
 
-const SNS_PLATFORMS = [
-  { key: "naver", label: "네이버", color: "#03c75a" },
-  { key: "youtube", label: "YouTube", color: "#ff0000" },
-  { key: "reddit", label: "Reddit", color: "#ff4500" },
-  { key: "github", label: "GitHub", color: "#8b5cf6" },
-];
-
 const ToolDetailModal = ({ tool, rank, onClose }) => {
   if (!tool) return null;
 
@@ -33,7 +26,7 @@ const ToolDetailModal = ({ tool, rank, onClose }) => {
           borderRadius: "20px",
           padding: "2rem",
           width: "100%",
-          maxWidth: "400px",
+          maxWidth: "340px",
           maxHeight: "90vh",
           overflowY: "auto",
           boxShadow: "0 24px 64px rgba(0,0,0,0.25)",
@@ -149,35 +142,6 @@ const ToolDetailModal = ({ tool, rank, onClose }) => {
               {tool.change >= 0 ? "▲" : "▼"} {Math.abs(tool.change)}%
             </div>
           </div>
-        </div>
-
-        {/* 플랫폼별 점수 바 */}
-        <div style={{ marginBottom: "20px" }}>
-          <div style={{ fontSize: "0.72rem", fontWeight: 600, color: "var(--text-muted)", marginBottom: "10px" }}>플랫폼별 언급 지수</div>
-          {SNS_PLATFORMS.map((p) => (
-            <div key={p.key} style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "8px" }}>
-              <span style={{ fontSize: "0.72rem", color: p.color, fontWeight: 600, width: "58px", flexShrink: 0 }}>{p.label}</span>
-              <div style={{
-                flex: 1,
-                height: "8px",
-                borderRadius: "4px",
-                background: "var(--border-primary)",
-                overflow: "hidden",
-              }}>
-                <div style={{
-                  width: `${tool.sns[p.key]}%`,
-                  height: "100%",
-                  borderRadius: "4px",
-                  background: p.color,
-                  opacity: 0.85,
-                  transition: "width 0.6s ease",
-                }} />
-              </div>
-              <span style={{ fontSize: "0.75rem", fontWeight: 700, color: p.color, width: "28px", textAlign: "right", flexShrink: 0 }}>
-                {tool.sns[p.key]}
-              </span>
-            </div>
-          ))}
         </div>
 
         {/* 핵심 기능 */}
