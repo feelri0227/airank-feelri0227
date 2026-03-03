@@ -1,6 +1,6 @@
 import { getScoreColor, getScoreTextColor, getRankBadge } from "../../utils";
 
-const ToolCard = ({ tool, rank, onClick }) => (
+const ToolCard = ({ tool, rank, onClick, isBookmarked, onBookmark }) => (
   <div onClick={onClick} style={{
     background: "var(--bg-card)",
     border: "1px solid var(--border-primary)",
@@ -14,6 +14,26 @@ const ToolCard = ({ tool, rank, onClick }) => (
     position: "relative",
     cursor: "pointer",
   }}>
+    {/* 북마크 버튼 */}
+    <button
+      onClick={(e) => {
+        e.stopPropagation();
+        onBookmark(tool.id);
+      }}
+      style={{
+        position: "absolute",
+        top: "12px",
+        right: "12px",
+        background: "transparent",
+        border: "none",
+        fontSize: "1.2rem",
+        cursor: "pointer",
+        color: isBookmarked ? "var(--color-yellow)" : "var(--text-muted)",
+      }}
+    >
+      {isBookmarked ? "★" : "☆"}
+    </button>
+
     {/* 도구 아이콘 + 이름 + 가격 배지 + 메달 */}
     <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px" }}>
       <span style={{ fontSize: "1.5rem" }}>{tool.icon}</span>
