@@ -23,7 +23,8 @@ export default function App() {
   const [lifeFilter, setLifeFilter] = useState("all");
   const [sortBy, setSortBy] = useState("score");
   const [showWizard, setShowWizard] = useState(false);
-  const [visibleCount, setVisibleCount] = useState(10);
+  const getInitialCount = () => window.innerWidth >= 768 ? 20 : 10;
+  const [visibleCount, setVisibleCount] = useState(getInitialCount);
   const [selectedTool, setSelectedTool] = useState(null);
   const [selectedRank, setSelectedRank] = useState(null);
   const [tools, setTools] = useState(TOOLS_DATA);
@@ -76,7 +77,7 @@ export default function App() {
   }, [theme]);
 
   useEffect(() => {
-    setVisibleCount(10);
+    setVisibleCount(getInitialCount());
   }, [category, lifeFilter, searchQuery, sortBy]);
 
   return (
