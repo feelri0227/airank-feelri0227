@@ -1,5 +1,4 @@
 import { getScoreColor, getScoreTextColor, getRankBadge } from "../../utils";
-import SnsScoreBars from "./SnsScoreBars";
 
 const ToolCard = ({ tool, rank, isComparing, onToggleCompare }) => (
   <div style={{
@@ -143,8 +142,20 @@ const ToolCard = ({ tool, rank, isComparing, onToggleCompare }) => (
       </span>
     </div>
 
-    {/* SNS 플랫폼별 점수 바 */}
-    <SnsScoreBars sns={tool.sns} />
+    {/* SNS 플랫폼별 점수 숫자 */}
+    <div style={{ display: "flex", gap: "10px", marginTop: "4px" }}>
+      {[
+        { label: "X", value: tool.sns.x, color: "#1da1f2" },
+        { label: "Reddit", value: tool.sns.reddit, color: "#ff4500" },
+        { label: "HN", value: tool.sns.hn, color: "#ff6600" },
+        { label: "GitHub", value: tool.sns.github, color: "#8b5cf6" },
+      ].map((p) => (
+        <div key={p.label} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "2px" }}>
+          <span style={{ fontSize: "0.75rem", fontWeight: 700, color: p.color }}>{p.value}</span>
+          <span style={{ fontSize: "0.6rem", color: "var(--text-muted)" }}>{p.label}</span>
+        </div>
+      ))}
+    </div>
   </div>
 );
 
