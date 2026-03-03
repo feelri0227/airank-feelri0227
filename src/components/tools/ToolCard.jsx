@@ -72,7 +72,7 @@ const ToolCard = ({ tool, rank }) => (
         {tool.score}
       </div>
       <div style={{ display: "flex", gap: "4px", flexWrap: "wrap", flex: 1 }}>
-        {tool.tags.map((tag) => (
+        {tool.tags.filter(tag => tag !== "무료" && tag !== "유료").map((tag) => (
           <span key={tag} style={{
             fontSize: "0.62rem",
             padding: "2px 7px",
