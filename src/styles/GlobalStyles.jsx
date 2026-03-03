@@ -35,7 +35,6 @@ const GlobalStyles = () => (
       --color-green: #22c55e;
       --color-red: #ef4444;
       --color-gold: #f59e0b;
-      --color-yellow: #fbbf24;
       --color-silver: #94a3b8;
       --color-bronze: #d97706;
 

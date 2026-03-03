@@ -1,10 +1,6 @@
 import Logo from "../ui/Logo";
 import ThemeToggle from "../ui/ThemeToggle";
-
-const NAV_ITEMS = [
-  { id: "ranking", icon: "🏆", label: "랭킹" },
-  { id: "bookmark", icon: "🔖", label: "북마크" },
-];
+import { NAV_ITEMS } from "../../constants";
 
 const Navbar = ({ theme, onToggleTheme, activeMenu, onMenuChange }) => (
   <header className="navbar-header" style={{

@@ -26,34 +26,13 @@ export default function App() {
   const [visibleCount, setVisibleCount] = useState(10);
   const [selectedTool, setSelectedTool] = useState(null);
   const [selectedRank, setSelectedRank] = useState(null);
-  const [bookmarks, setBookmarks] = useState(() => {
-    const saved = localStorage.getItem("bookmarks");
-    return saved ? JSON.parse(saved) : [];
-  });
 
   const toggleTheme = useCallback(() => {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
   }, []);
 
-  const toggleBookmark = (toolId) => {
-    setBookmarks((prev) =>
-      prev.includes(toolId)
-        ? prev.filter((id) => id !== toolId)
-        : [...prev, toolId]
-    );
-  };
-
-  useEffect(() => {
-    localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
-  }, [bookmarks]);
-
   const filteredTools = useMemo(() => {
-    let data;
-    if (activeMenu === "bookmark") {
-      data = TOOLS_DATA.filter((t) => bookmarks.includes(t.id));
-    } else {
-      data = [...TOOLS_DATA];
-    }
+    let data = [...TOOLS_DATA];
 
     if (category !== "all") {
       data = data.filter((t) => t.cat === category);
@@ -73,7 +52,7 @@ export default function App() {
     else data.sort((a, b) => a.name.localeCompare(b.name, "ko"));
 
     return data;
-  }, [category, lifeFilter, searchQuery, sortBy, activeMenu, bookmarks]);
+  }, [category, lifeFilter, searchQuery, sortBy]);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -146,8 +125,6 @@ export default function App() {
                       tool={tool}
                       rank={i + 1}
                       onClick={() => { setSelectedTool(tool); setSelectedRank(i + 1); }}
-                      isBookmarked={bookmarks.includes(tool.id)}
-                      onBookmark={toggleBookmark}
                     />
                   ))}
                 </div>
