@@ -1,4 +1,4 @@
-import { getScoreColor, getScoreTextColor, getRankBadge } from "../../utils";
+import { getScoreTextColor, getRankBadge } from "../../utils";
 
 const SNS_PLATFORMS = [
   { key: "naver", label: "네이버", color: "#03c75a" },
@@ -33,7 +33,7 @@ const ToolDetailModal = ({ tool, rank, onClose }) => {
           borderRadius: "20px",
           padding: "2rem",
           width: "100%",
-          maxWidth: "520px",
+          maxWidth: "400px",
           maxHeight: "90vh",
           overflowY: "auto",
           boxShadow: "0 24px 64px rgba(0,0,0,0.25)",
@@ -147,21 +147,6 @@ const ToolDetailModal = ({ tool, rank, onClose }) => {
               color: tool.change >= 0 ? "var(--color-green)" : "var(--color-red)",
             }}>
               {tool.change >= 0 ? "▲" : "▼"} {Math.abs(tool.change)}%
-            </div>
-          </div>
-          <div style={{ flex: 1 }}>
-            <div style={{
-              height: "6px",
-              borderRadius: "3px",
-              background: "var(--border-primary)",
-              overflow: "hidden",
-            }}>
-              <div style={{
-                width: `${tool.score}%`,
-                height: "100%",
-                borderRadius: "3px",
-                background: getScoreColor(tool.score),
-              }} />
             </div>
           </div>
         </div>
