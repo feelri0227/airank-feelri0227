@@ -46,17 +46,7 @@ const ToolCard = ({ tool, rank, onClick }) => {
       }}>
         {tool.name}
       </h3>
-      <span style={{
-        fontSize: "0.6rem",
-        padding: "2px 8px",
-        borderRadius: "100px",
-        background: tool.free ? "rgba(34,197,94,0.1)" : "rgba(245,158,11,0.1)",
-        color: tool.free ? "var(--color-green)" : "var(--color-gold)",
-        fontWeight: 600,
-      }}>
-        {tool.free ? "무료" : "유료"}
-      </span>
-      <span style={{
+<span style={{
         marginLeft: "auto",
         fontSize: rank <= 3 ? "1.3rem" : "0.8rem",
         fontWeight: 700,
