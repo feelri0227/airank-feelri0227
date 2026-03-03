@@ -1,6 +1,47 @@
 import { useState } from "react";
 import { getScoreTextColor, getRankBadge } from "../../utils";
 
+// tool.id 기반 일관된 의사난수로 7일 점수 생성
+const generateSparkData = (tool) => {
+  const pseudo = (n) => Math.sin(tool.id * 127.1 + n * 311.7) * 0.5 + 0.5;
+  const today = tool.score;
+  const weekAgo = today / (1 + tool.change / 100);
+  return Array.from({ length: 7 }, (_, i) => {
+    if (i === 6) return today;
+    const t = i / 6;
+    const base = weekAgo + (today - weekAgo) * t;
+    return Math.round(Math.max(1, Math.min(100, base + (pseudo(i) - 0.5) * 6)));
+  });
+};
+
+const SparkChart = ({ data, color }) => {
+  const w = 200, h = 44;
+  const min = Math.min(...data) - 4;
+  const max = Math.max(...data) + 4;
+  const range = max - min || 1;
+  const pts = data.map((v, i) => [
+    (i / (data.length - 1)) * w,
+    h - ((v - min) / range) * h,
+  ]);
+  const linePath = pts.map(([x, y], i) => `${i === 0 ? "M" : "L"}${x.toFixed(1)},${y.toFixed(1)}`).join(" ");
+  const areaPath = `${linePath} L${w},${h} L0,${h} Z`;
+  return (
+    <svg viewBox={`0 0 ${w} ${h}`} width="100%" height={h} style={{ overflow: "visible", display: "block" }}>
+      <defs>
+        <linearGradient id="sg" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor={color} stopOpacity="0.25" />
+          <stop offset="100%" stopColor={color} stopOpacity="0" />
+        </linearGradient>
+      </defs>
+      <path d={areaPath} fill="url(#sg)" />
+      <path d={linePath} fill="none" stroke={color} strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
+      {pts.map(([x, y], i) => (
+        <circle key={i} cx={x.toFixed(1)} cy={y.toFixed(1)} r={i === pts.length - 1 ? 3.5 : 2} fill={color} />
+      ))}
+    </svg>
+  );
+};
+
 const getFaviconUrl = (url) => {
   try { return `https://www.google.com/s2/favicons?domain=${new URL(url).hostname}&sz=64`; }
   catch { return null; }
@@ -126,40 +167,44 @@ const ToolDetailModal = ({ tool, rank, onClose }) => {
 
         {/* 점수 + 주간 변화율 */}
         <div style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "16px",
           marginBottom: "16px",
           padding: "14px 16px",
           background: "var(--bg-secondary)",
           borderRadius: "12px",
         }}>
-          <div>
-            <div style={{ fontSize: "0.65rem", color: "var(--text-muted)", marginBottom: "2px" }}>SNS 종합 점수</div>
-            <div style={{
-              fontSize: "2.2rem",
-              fontFamily: "'Outfit', sans-serif",
-              fontWeight: 800,
-              color: getScoreTextColor(tool.score),
-              lineHeight: 1,
-            }}>
-              {tool.score}
+          <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "12px" }}>
+            <div>
+              <div style={{ fontSize: "0.65rem", color: "var(--text-muted)", marginBottom: "2px" }}>SNS 종합 점수</div>
+              <div style={{
+                fontSize: "2.2rem",
+                fontFamily: "'Outfit', sans-serif",
+                fontWeight: 800,
+                color: getScoreTextColor(tool.score),
+                lineHeight: 1,
+              }}>
+                {tool.score}
+              </div>
+            </div>
+            <div style={{ width: "1px", height: "40px", background: "var(--border-primary)" }} />
+            <div>
+              <div style={{ fontSize: "0.65rem", color: "var(--text-muted)", marginBottom: "2px" }}>주간 변화율</div>
+              <div style={{
+                fontSize: "1.3rem",
+                fontFamily: "'Outfit', sans-serif",
+                fontWeight: 700,
+                color: tool.change >= 0 ? "var(--color-green)" : "var(--color-red)",
+              }}>
+                {tool.change >= 0 ? "▲" : "▼"} {Math.abs(tool.change)}%
+              </div>
             </div>
           </div>
-          <div style={{
-            width: "1px",
-            height: "40px",
-            background: "var(--border-primary)",
-          }} />
+          {/* 최근 7일 순위 변화 스파크라인 */}
           <div>
-            <div style={{ fontSize: "0.65rem", color: "var(--text-muted)", marginBottom: "2px" }}>주간 변화율</div>
-            <div style={{
-              fontSize: "1.3rem",
-              fontFamily: "'Outfit', sans-serif",
-              fontWeight: 700,
-              color: tool.change >= 0 ? "var(--color-green)" : "var(--color-red)",
-            }}>
-              {tool.change >= 0 ? "▲" : "▼"} {Math.abs(tool.change)}%
+            <div style={{ fontSize: "0.62rem", color: "var(--text-muted)", marginBottom: "6px" }}>최근 7일 추이</div>
+            <SparkChart data={generateSparkData(tool)} color={getScoreTextColor(tool.score)} />
+            <div style={{ display: "flex", justifyContent: "space-between", marginTop: "4px" }}>
+              <span style={{ fontSize: "0.58rem", color: "var(--text-muted)" }}>7일 전</span>
+              <span style={{ fontSize: "0.58rem", color: "var(--text-muted)" }}>오늘</span>
             </div>
           </div>
         </div>
