@@ -1,6 +1,16 @@
+import { useState } from "react";
 import { getScoreColor, getScoreTextColor, getRankBadge } from "../../utils";
 
-const ToolCard = ({ tool, rank, onClick }) => (
+const getFaviconUrl = (url) => {
+  try { return `https://www.google.com/s2/favicons?domain=${new URL(url).hostname}&sz=64`; }
+  catch { return null; }
+};
+
+const ToolCard = ({ tool, rank, onClick }) => {
+  const [iconError, setIconError] = useState(false);
+  const faviconUrl = getFaviconUrl(tool.url);
+
+  return (
   <div onClick={onClick} style={{
     background: "var(--bg-card)",
     border: "1px solid var(--border-primary)",
@@ -16,7 +26,18 @@ const ToolCard = ({ tool, rank, onClick }) => (
   }}>
     {/* 도구 아이콘 + 이름 + 가격 배지 + 메달 */}
     <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px" }}>
-      <span style={{ fontSize: "1.5rem" }}>{tool.icon}</span>
+      {!iconError && faviconUrl ? (
+        <img
+          src={faviconUrl}
+          alt={tool.name}
+          width={28}
+          height={28}
+          style={{ borderRadius: "6px", objectFit: "contain", flexShrink: 0 }}
+          onError={() => setIconError(true)}
+        />
+      ) : (
+        <span style={{ fontSize: "1.5rem" }}>{tool.icon}</span>
+      )}
       <h3 style={{
         fontFamily: "'Outfit', sans-serif",
         fontSize: "1.1rem",

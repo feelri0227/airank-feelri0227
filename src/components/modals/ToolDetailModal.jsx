@@ -1,6 +1,15 @@
+import { useState } from "react";
 import { getScoreTextColor, getRankBadge } from "../../utils";
 
+const getFaviconUrl = (url) => {
+  try { return `https://www.google.com/s2/favicons?domain=${new URL(url).hostname}&sz=64`; }
+  catch { return null; }
+};
+
 const ToolDetailModal = ({ tool, rank, onClose }) => {
+  const [iconError, setIconError] = useState(false);
+  const faviconUrl = tool ? getFaviconUrl(tool.url) : null;
+
   if (!tool) return null;
 
   return (
@@ -58,7 +67,18 @@ const ToolDetailModal = ({ tool, rank, onClose }) => {
 
         {/* 헤더: 아이콘 + 이름 + 랭크 + 무료/유료 */}
         <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "16px", paddingRight: "40px" }}>
-          <span style={{ fontSize: "2.2rem" }}>{tool.icon}</span>
+          {!iconError && faviconUrl ? (
+            <img
+              src={faviconUrl}
+              alt={tool.name}
+              width={40}
+              height={40}
+              style={{ borderRadius: "10px", objectFit: "contain", flexShrink: 0 }}
+              onError={() => setIconError(true)}
+            />
+          ) : (
+            <span style={{ fontSize: "2.2rem" }}>{tool.icon}</span>
+          )}
           <div style={{ flex: 1 }}>
             <div style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
               <h2 style={{
