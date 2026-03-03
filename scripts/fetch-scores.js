@@ -5,9 +5,8 @@
  *
  * 환경 변수:
  *   NAVER_CLIENT_ID, NAVER_CLIENT_SECRET  - 네이버 DataLab 검색어 트렌드
- *   YOUTUBE_API_KEY                        - YouTube Data API v3
  *   GITHUB_TOKEN                           - GitHub API (없으면 60req/h 제한)
- *   (Google Trends는 API 키 불필요)
+ *   (Google Trends / YouTube Trends는 API 키 불필요)
  *
  * 실행: node scripts/fetch-scores.js
  */
@@ -128,28 +127,35 @@ async function fetchNaver(chunk) {
   }
 }
 
-// ─── YouTube ──────────────────────────────────────────────────────────────────
-async function fetchYoutube(tool) {
-  const apiKey = process.env.YOUTUBE_API_KEY;
-  if (!apiKey) return 0;
-
-  const params = new URLSearchParams({
-    q: tool.yt,
-    key: apiKey,
-    type: 'video',
-    part: 'id',
-    publishedAfter: sevenDaysAgo.toISOString(),
-    maxResults: 1,
-  });
-
+// ─── YouTube Trends (Google Trends gprop=youtube, 5개씩 배치) ─────────────────
+async function fetchYoutubeTrends(chunk) {
   try {
-    const res = await fetch(`https://www.googleapis.com/youtube/v3/search?${params}`);
-    if (!res.ok) throw new Error(`YouTube HTTP ${res.status}`);
-    const json = await res.json();
-    return json.pageInfo?.totalResults ?? 0;
+    const keywords = chunk.map((t) => t.yt);
+    const raw = await googleTrends.interestOverTime({
+      keyword: keywords,
+      startTime: sevenDaysAgo,
+      endTime: today,
+      geo: '',
+      hl: 'en-US',
+      gprop: 'youtube',
+    });
+
+    const json = JSON.parse(raw);
+    const timelineData = json?.default?.timelineData ?? [];
+    const out = {};
+
+    chunk.forEach((tool, i) => {
+      const values = timelineData
+        .filter((d) => d.hasData?.[i])
+        .map((d) => d.value?.[i] ?? 0);
+      out[tool.id] = values.length
+        ? values.reduce((s, v) => s + v, 0) / values.length
+        : 0;
+    });
+    return out;
   } catch (e) {
-    console.warn(`YouTube error [${tool.id}]:`, e.message);
-    return 0;
+    console.warn('YouTube Trends error:', e.message);
+    return {};
   }
 }
 
@@ -241,10 +247,11 @@ async function main() {
     github: Object.fromEntries(TOOLS.map((t) => [t.id, 0])),
   };
 
+  const chunkSize = 5;
+
   // ── Naver DataLab (5개씩 배치) ──────────────────────────────────────────
   if (process.env.NAVER_CLIENT_ID) {
     console.log('🟢 Naver DataLab 수집 중...');
-    const chunkSize = 5;
     for (let i = 0; i < TOOLS.length; i += chunkSize) {
       const chunk = TOOLS.slice(i, i + chunkSize);
       const result = await fetchNaver(chunk);
@@ -256,22 +263,23 @@ async function main() {
     console.log('⏭️  NAVER_CLIENT_ID 없음 → 건너뜀');
   }
 
-  // ── YouTube ─────────────────────────────────────────────────────────────
-  if (process.env.YOUTUBE_API_KEY) {
-    console.log('🔴 YouTube 수집 중...');
-    for (const tool of TOOLS) {
-      raw.youtube[tool.id] = await fetchYoutube(tool);
-      await sleep(200);
+  // ── YouTube Trends (Google Trends gprop=youtube) ────────────────────────
+  console.log('🔴 YouTube Trends 수집 중...');
+  let ytSuccess = 0;
+  for (let i = 0; i < TOOLS.length; i += chunkSize) {
+    const chunk = TOOLS.slice(i, i + chunkSize);
+    const result = await fetchYoutubeTrends(chunk);
+    for (const [id, val] of Object.entries(result)) {
+      raw.youtube[id] = val;
+      if (val > 0) ytSuccess++;
     }
-    console.log('   ✅ YouTube 완료');
-  } else {
-    console.log('⏭️  YOUTUBE_API_KEY 없음 → 건너뜀');
+    await sleep(1500);
   }
+  console.log(`   ✅ YouTube Trends 완료 (${ytSuccess}개 데이터 수집)`);
 
   // ── Google Trends (5개씩 배치) ───────────────────────────────────────────
   console.log('📈 Google Trends 수집 중...');
   let gtSuccess = 0;
-  const chunkSize = 5;
   for (let i = 0; i < TOOLS.length; i += chunkSize) {
     const chunk = TOOLS.slice(i, i + chunkSize);
     const result = await fetchGoogleTrends(chunk);
@@ -300,11 +308,11 @@ async function main() {
   };
 
   // ── 활성 플랫폼 가중치 자동 조정 ────────────────────────────────────────
-  // score = 네이버×0.30 + YouTube×0.25 + Google Trends×0.20 + GitHub×0.25
+  // score = 네이버×0.30 + YouTube Trends×0.25 + Google Trends×0.20 + GitHub×0.25
   const baseWeights = { naver: 0.30, youtube: 0.25, gtrends: 0.20, github: 0.25 };
   const active = {
     naver:   !!process.env.NAVER_CLIENT_ID,
-    youtube: !!process.env.YOUTUBE_API_KEY,
+    youtube: ytSuccess > 0,
     gtrends: gtSuccess > 0,
     github:  true,
   };
