@@ -6,8 +6,8 @@
  * 환경 변수:
  *   NAVER_CLIENT_ID, NAVER_CLIENT_SECRET  - 네이버 DataLab 검색어 트렌드
  *   YOUTUBE_API_KEY                        - YouTube Data API v3
- *   REDDIT_CLIENT_ID, REDDIT_CLIENT_SECRET - Reddit API (OAuth)
  *   GITHUB_TOKEN                           - GitHub API (없으면 60req/h 제한)
+ *   (Google Trends는 API 키 불필요)
  *
  * 실행: node scripts/fetch-scores.js
  */
@@ -15,6 +15,10 @@
 import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { createRequire } from 'module';
+
+const require = createRequire(import.meta.url);
+const googleTrends = require('google-trends-api');
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dir, '..');
@@ -31,56 +35,56 @@ const endDate = fmtDate(today);
 
 // ─── 도구 목록 (id, 플랫폼별 검색어) ────────────────────────────────────────
 const TOOLS = [
-  { id:  1, naverKw:['ChatGPT','챗GPT','챗지피티'],               yt:'ChatGPT',                reddit:'ChatGPT',          github:'chatgpt' },
-  { id:  2, naverKw:['Claude AI','클로드 AI'],                    yt:'Claude AI Anthropic',    reddit:'ClaudeAI',         github:'claude' },
-  { id:  3, naverKw:['Gemini AI','구글 제미나이'],                 yt:'Google Gemini AI',       reddit:'Gemini',           github:'gemini' },
-  { id:  4, naverKw:['DeepSeek','딥시크'],                        yt:'DeepSeek AI',            reddit:'DeepSeek',         github:'deepseek' },
-  { id:  5, naverKw:['Grok AI','그록'],                           yt:'Grok xAI',               reddit:'Grok',             github:'grok' },
-  { id:  6, naverKw:['Llama Meta AI','메타 라마'],                yt:'Meta Llama',             reddit:'LocalLlama',       github:'llama' },
-  { id:  7, naverKw:['Mistral AI','미스트랄'],                    yt:'Mistral AI',             reddit:'MistralAI',        github:'mistral' },
-  { id:  8, naverKw:['Character AI','캐릭터 AI'],                 yt:'Character AI',           reddit:'CharacterAI',      github:'character-ai' },
-  { id:  9, naverKw:['Poe AI','포 AI'],                          yt:'Poe AI Quora',           reddit:'poe',              github:'poe' },
-  { id: 10, naverKw:['Midjourney','미드저니'],                    yt:'Midjourney AI',          reddit:'midjourney',       github:'midjourney' },
-  { id: 11, naverKw:['Stable Diffusion','스테이블 디퓨전'],       yt:'Stable Diffusion',       reddit:'StableDiffusion',  github:'stable-diffusion' },
-  { id: 12, naverKw:['DALL-E 3','달리 AI'],                      yt:'DALL-E 3 OpenAI',        reddit:'dalle',            github:'dall-e' },
-  { id: 13, naverKw:['Adobe Firefly','어도비 파이어플라이'],       yt:'Adobe Firefly',          reddit:'AdobeFirefly',     github:'adobe-firefly' },
-  { id: 14, naverKw:['Leonardo AI','레오나르도 AI'],              yt:'Leonardo AI art',        reddit:'LeonardoAI',       github:'leonardo-ai' },
-  { id: 15, naverKw:['Ideogram AI'],                              yt:'Ideogram AI',            reddit:'ideogram',         github:'ideogram' },
-  { id: 16, naverKw:['Flux AI','블랙포레스트 AI'],                yt:'Flux AI image',          reddit:'FluxAI',           github:'flux' },
-  { id: 17, naverKw:['Krea AI'],                                  yt:'Krea AI canvas',         reddit:'KreaAI',           github:'krea' },
-  { id: 18, naverKw:['GitHub Copilot','깃허브 코파일럿'],         yt:'GitHub Copilot',         reddit:'githubcopilot',    github:'copilot' },
-  { id: 19, naverKw:['Cursor editor','커서 AI'],                  yt:'Cursor AI editor',       reddit:'cursor',           github:'cursor' },
-  { id: 20, naverKw:['Bolt new','볼트 풀스택'],                   yt:'Bolt.new AI',            reddit:'boltnew',          github:'bolt' },
-  { id: 21, naverKw:['Windsurf Codeium','윈드서프'],              yt:'Windsurf Codeium',       reddit:'Windsurf_app',     github:'windsurf' },
-  { id: 22, naverKw:['v0 Vercel UI'],                             yt:'v0 Vercel AI UI',        reddit:'v0dev',            github:'v0' },
-  { id: 23, naverKw:['Replit AI','리플릿 AI'],                   yt:'Replit AI agent',        reddit:'replit',           github:'replit' },
-  { id: 24, naverKw:['Tabnine','탭나인'],                         yt:'Tabnine AI',             reddit:'tabnine',          github:'tabnine' },
-  { id: 25, naverKw:['Sora OpenAI','소라 AI'],                   yt:'OpenAI Sora video',      reddit:'sora',             github:'sora' },
-  { id: 26, naverKw:['Runway ML','런웨이'],                       yt:'Runway ML Gen-3',        reddit:'runwayml',         github:'runway' },
-  { id: 27, naverKw:['Kling AI','클링 AI'],                      yt:'Kling AI video',         reddit:'KlingAI',          github:'kling' },
-  { id: 28, naverKw:['Pika Labs AI','피카 AI'],                  yt:'Pika Labs AI video',     reddit:'Pika_Labs',        github:'pika' },
-  { id: 29, naverKw:['HeyGen AI','헤이젠'],                       yt:'HeyGen AI avatar',       reddit:'HeyGen',           github:'heygen' },
-  { id: 30, naverKw:['Luma AI Dream Machine'],                    yt:'Luma AI Dream Machine',  reddit:'LumaLabsAI',       github:'luma-ai' },
-  { id: 31, naverKw:['Synthesia AI'],                             yt:'Synthesia AI video',     reddit:'Synthesia',        github:'synthesia' },
-  { id: 32, naverKw:['Suno AI music','수노 AI'],                 yt:'Suno AI music',          reddit:'SunoAI',           github:'suno' },
-  { id: 33, naverKw:['ElevenLabs','일레븐랩스'],                  yt:'ElevenLabs voice clone', reddit:'ElevenLabs',       github:'elevenlabs' },
-  { id: 34, naverKw:['Udio AI music'],                            yt:'Udio AI music',          reddit:'UdioMusic',        github:'udio' },
-  { id: 35, naverKw:['Descript AI','데스크립트'],                 yt:'Descript AI editor',     reddit:'descript',         github:'descript' },
-  { id: 36, naverKw:['Perplexity AI','퍼플렉시티'],               yt:'Perplexity AI search',   reddit:'perplexity_ai',    github:'perplexity' },
-  { id: 37, naverKw:['You.com AI search'],                        yt:'You.com AI',             reddit:'YouDotCom',        github:'you-com' },
-  { id: 38, naverKw:['Elicit AI research'],                       yt:'Elicit AI research',     reddit:'elicit',           github:'elicit' },
-  { id: 39, naverKw:['Microsoft Copilot','마이크로소프트 코파일럿'], yt:'Microsoft Copilot',   reddit:'MicrosoftCopilot', github:'microsoft-copilot' },
-  { id: 40, naverKw:['Notion AI','노션 AI'],                     yt:'Notion AI features',     reddit:'Notion',           github:'notion-ai' },
-  { id: 41, naverKw:['Gamma AI presentation'],                    yt:'Gamma.app AI slides',    reddit:'gamma_app',        github:'gamma' },
-  { id: 42, naverKw:['Otter AI meeting'],                         yt:'Otter.ai meeting notes', reddit:'otter_ai',         github:'otter-ai' },
-  { id: 43, naverKw:['Fireflies AI meeting'],                     yt:'Fireflies.ai',           reddit:'fireflies_ai',     github:'fireflies' },
-  { id: 44, naverKw:['Beautiful AI slides'],                      yt:'Beautiful.ai slides',    reddit:'beautiful_ai',     github:'beautiful-ai' },
-  { id: 45, naverKw:['Make automation','메이크 자동화'],           yt:'Make.com automation',    reddit:'makercom',         github:'make-automation' },
-  { id: 46, naverKw:['Zapier AI automation','재피어'],            yt:'Zapier AI',              reddit:'zapier',           github:'zapier' },
-  { id: 47, naverKw:['n8n workflow automation'],                   yt:'n8n automation',         reddit:'n8n',              github:'n8n' },
-  { id: 48, naverKw:['Canva AI','캔바 AI'],                      yt:'Canva AI design',        reddit:'canva',            github:'canva' },
-  { id: 49, naverKw:['Figma AI','피그마 AI'],                    yt:'Figma AI features',      reddit:'FigmaDesign',      github:'figma' },
-  { id: 50, naverKw:['Uizard AI design'],                         yt:'Uizard AI',              reddit:'uizard',           github:'uizard' },
+  { id:  1, naverKw:['ChatGPT','챗GPT','챗지피티'],               yt:'ChatGPT',                gt:'ChatGPT',          github:'chatgpt' },
+  { id:  2, naverKw:['Claude AI','클로드 AI'],                    yt:'Claude AI Anthropic',    gt:'Claude AI',        github:'claude' },
+  { id:  3, naverKw:['Gemini AI','구글 제미나이'],                 yt:'Google Gemini AI',       gt:'Gemini AI',        github:'gemini' },
+  { id:  4, naverKw:['DeepSeek','딥시크'],                        yt:'DeepSeek AI',            gt:'DeepSeek',         github:'deepseek' },
+  { id:  5, naverKw:['Grok AI','그록'],                           yt:'Grok xAI',               gt:'Grok AI',          github:'grok' },
+  { id:  6, naverKw:['Llama Meta AI','메타 라마'],                yt:'Meta Llama',             gt:'Meta Llama',       github:'llama' },
+  { id:  7, naverKw:['Mistral AI','미스트랄'],                    yt:'Mistral AI',             gt:'Mistral AI',       github:'mistral' },
+  { id:  8, naverKw:['Character AI','캐릭터 AI'],                 yt:'Character AI',           gt:'Character AI',     github:'character-ai' },
+  { id:  9, naverKw:['Poe AI','포 AI'],                          yt:'Poe AI Quora',           gt:'Poe AI',           github:'poe' },
+  { id: 10, naverKw:['Midjourney','미드저니'],                    yt:'Midjourney AI',          gt:'Midjourney',       github:'midjourney' },
+  { id: 11, naverKw:['Stable Diffusion','스테이블 디퓨전'],       yt:'Stable Diffusion',       gt:'Stable Diffusion', github:'stable-diffusion' },
+  { id: 12, naverKw:['DALL-E 3','달리 AI'],                      yt:'DALL-E 3 OpenAI',        gt:'DALL-E',           github:'dall-e' },
+  { id: 13, naverKw:['Adobe Firefly','어도비 파이어플라이'],       yt:'Adobe Firefly',          gt:'Adobe Firefly',    github:'adobe-firefly' },
+  { id: 14, naverKw:['Leonardo AI','레오나르도 AI'],              yt:'Leonardo AI art',        gt:'Leonardo AI',      github:'leonardo-ai' },
+  { id: 15, naverKw:['Ideogram AI'],                              yt:'Ideogram AI',            gt:'Ideogram AI',      github:'ideogram' },
+  { id: 16, naverKw:['Flux AI','블랙포레스트 AI'],                yt:'Flux AI image',          gt:'Flux AI',          github:'flux' },
+  { id: 17, naverKw:['Krea AI'],                                  yt:'Krea AI canvas',         gt:'Krea AI',          github:'krea' },
+  { id: 18, naverKw:['GitHub Copilot','깃허브 코파일럿'],         yt:'GitHub Copilot',         gt:'GitHub Copilot',   github:'copilot' },
+  { id: 19, naverKw:['Cursor editor','커서 AI'],                  yt:'Cursor AI editor',       gt:'Cursor AI',        github:'cursor' },
+  { id: 20, naverKw:['Bolt new','볼트 풀스택'],                   yt:'Bolt.new AI',            gt:'Bolt.new',         github:'bolt' },
+  { id: 21, naverKw:['Windsurf Codeium','윈드서프'],              yt:'Windsurf Codeium',       gt:'Windsurf AI',      github:'windsurf' },
+  { id: 22, naverKw:['v0 Vercel UI'],                             yt:'v0 Vercel AI UI',        gt:'v0 Vercel',        github:'v0' },
+  { id: 23, naverKw:['Replit AI','리플릿 AI'],                   yt:'Replit AI agent',        gt:'Replit AI',        github:'replit' },
+  { id: 24, naverKw:['Tabnine','탭나인'],                         yt:'Tabnine AI',             gt:'Tabnine',          github:'tabnine' },
+  { id: 25, naverKw:['Sora OpenAI','소라 AI'],                   yt:'OpenAI Sora video',      gt:'OpenAI Sora',      github:'sora' },
+  { id: 26, naverKw:['Runway ML','런웨이'],                       yt:'Runway ML Gen-3',        gt:'Runway ML',        github:'runway' },
+  { id: 27, naverKw:['Kling AI','클링 AI'],                      yt:'Kling AI video',         gt:'Kling AI',         github:'kling' },
+  { id: 28, naverKw:['Pika Labs AI','피카 AI'],                  yt:'Pika Labs AI video',     gt:'Pika Labs',        github:'pika' },
+  { id: 29, naverKw:['HeyGen AI','헤이젠'],                       yt:'HeyGen AI avatar',       gt:'HeyGen',           github:'heygen' },
+  { id: 30, naverKw:['Luma AI Dream Machine'],                    yt:'Luma AI Dream Machine',  gt:'Luma AI',          github:'luma-ai' },
+  { id: 31, naverKw:['Synthesia AI'],                             yt:'Synthesia AI video',     gt:'Synthesia AI',     github:'synthesia' },
+  { id: 32, naverKw:['Suno AI music','수노 AI'],                 yt:'Suno AI music',          gt:'Suno AI',          github:'suno' },
+  { id: 33, naverKw:['ElevenLabs','일레븐랩스'],                  yt:'ElevenLabs voice clone', gt:'ElevenLabs',       github:'elevenlabs' },
+  { id: 34, naverKw:['Udio AI music'],                            yt:'Udio AI music',          gt:'Udio AI',          github:'udio' },
+  { id: 35, naverKw:['Descript AI','데스크립트'],                 yt:'Descript AI editor',     gt:'Descript AI',      github:'descript' },
+  { id: 36, naverKw:['Perplexity AI','퍼플렉시티'],               yt:'Perplexity AI search',   gt:'Perplexity AI',    github:'perplexity' },
+  { id: 37, naverKw:['You.com AI search'],                        yt:'You.com AI',             gt:'You.com AI',       github:'you-com' },
+  { id: 38, naverKw:['Elicit AI research'],                       yt:'Elicit AI research',     gt:'Elicit AI',        github:'elicit' },
+  { id: 39, naverKw:['Microsoft Copilot','마이크로소프트 코파일럿'], yt:'Microsoft Copilot',   gt:'Microsoft Copilot',github:'microsoft-copilot' },
+  { id: 40, naverKw:['Notion AI','노션 AI'],                     yt:'Notion AI features',     gt:'Notion AI',        github:'notion-ai' },
+  { id: 41, naverKw:['Gamma AI presentation'],                    yt:'Gamma.app AI slides',    gt:'Gamma AI',         github:'gamma' },
+  { id: 42, naverKw:['Otter AI meeting'],                         yt:'Otter.ai meeting notes', gt:'Otter AI',         github:'otter-ai' },
+  { id: 43, naverKw:['Fireflies AI meeting'],                     yt:'Fireflies.ai',           gt:'Fireflies AI',     github:'fireflies' },
+  { id: 44, naverKw:['Beautiful AI slides'],                      yt:'Beautiful.ai slides',    gt:'Beautiful AI',     github:'beautiful-ai' },
+  { id: 45, naverKw:['Make automation','메이크 자동화'],           yt:'Make.com automation',    gt:'Make automation',  github:'make-automation' },
+  { id: 46, naverKw:['Zapier AI automation','재피어'],            yt:'Zapier AI',              gt:'Zapier AI',        github:'zapier' },
+  { id: 47, naverKw:['n8n workflow automation'],                   yt:'n8n automation',         gt:'n8n automation',   github:'n8n' },
+  { id: 48, naverKw:['Canva AI','캔바 AI'],                      yt:'Canva AI design',        gt:'Canva AI',         github:'canva' },
+  { id: 49, naverKw:['Figma AI','피그마 AI'],                    yt:'Figma AI features',      gt:'Figma AI',         github:'figma' },
+  { id: 50, naverKw:['Uizard AI design'],                         yt:'Uizard AI',              gt:'Uizard AI',        github:'uizard' },
 ];
 
 // ─── Naver DataLab ────────────────────────────────────────────────────────────
@@ -149,59 +153,34 @@ async function fetchYoutube(tool) {
   }
 }
 
-// ─── Reddit ───────────────────────────────────────────────────────────────────
-let redditToken = null;
-
-async function getRedditToken() {
-  const clientId = process.env.REDDIT_CLIENT_ID;
-  const clientSecret = process.env.REDDIT_CLIENT_SECRET;
-  if (!clientId || !clientSecret) return null;
-
-  const credentials = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
+// ─── Google Trends (5개씩 배치) ───────────────────────────────────────────────
+async function fetchGoogleTrends(chunk) {
   try {
-    const res = await fetch('https://www.reddit.com/api/v1/access_token', {
-      method: 'POST',
-      headers: {
-        Authorization: `Basic ${credentials}`,
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'User-Agent': 'airank-score-bot/1.0',
-      },
-      body: 'grant_type=client_credentials',
+    const keywords = chunk.map((t) => t.gt);
+    const raw = await googleTrends.interestOverTime({
+      keyword: keywords,
+      startTime: sevenDaysAgo,
+      endTime: today,
+      geo: '',          // 전 세계
+      hl: 'en-US',
     });
-    if (!res.ok) throw new Error(`Reddit token HTTP ${res.status}`);
-    const json = await res.json();
-    return json.access_token ?? null;
-  } catch (e) {
-    console.warn('Reddit token error:', e.message);
-    return null;
-  }
-}
 
-async function fetchReddit(tool) {
-  if (!redditToken) return 0;
+    const json = JSON.parse(raw);
+    const timelineData = json?.default?.timelineData ?? [];
+    const out = {};
 
-  const params = new URLSearchParams({
-    q: tool.reddit,
-    t: 'week',
-    limit: '100',
-    sort: 'top',
-  });
-
-  try {
-    const res = await fetch(`https://oauth.reddit.com/search?${params}`, {
-      headers: {
-        Authorization: `Bearer ${redditToken}`,
-        'User-Agent': 'airank-score-bot/1.0',
-      },
+    chunk.forEach((tool, i) => {
+      const values = timelineData
+        .filter((d) => d.hasData?.[i])
+        .map((d) => d.value?.[i] ?? 0);
+      out[tool.id] = values.length
+        ? values.reduce((s, v) => s + v, 0) / values.length
+        : 0;
     });
-    if (!res.ok) throw new Error(`Reddit HTTP ${res.status}`);
-    const json = await res.json();
-    // sum of upvotes of top posts (relative engagement indicator)
-    const children = json.data?.children ?? [];
-    return children.reduce((sum, p) => sum + Math.max(0, p.data?.score ?? 0), 0);
+    return out;
   } catch (e) {
-    console.warn(`Reddit error [${tool.id}]:`, e.message);
-    return 0;
+    console.warn('Google Trends error:', e.message);
+    return {};
   }
 }
 
@@ -256,10 +235,10 @@ async function main() {
   }
 
   const raw = {
-    naver:   Object.fromEntries(TOOLS.map((t) => [t.id, 0])),
-    youtube: Object.fromEntries(TOOLS.map((t) => [t.id, 0])),
-    reddit:  Object.fromEntries(TOOLS.map((t) => [t.id, 0])),
-    github:  Object.fromEntries(TOOLS.map((t) => [t.id, 0])),
+    naver:  Object.fromEntries(TOOLS.map((t) => [t.id, 0])),
+    youtube:Object.fromEntries(TOOLS.map((t) => [t.id, 0])),
+    gtrends:Object.fromEntries(TOOLS.map((t) => [t.id, 0])),
+    github: Object.fromEntries(TOOLS.map((t) => [t.id, 0])),
   };
 
   // ── Naver DataLab (5개씩 배치) ──────────────────────────────────────────
@@ -289,22 +268,20 @@ async function main() {
     console.log('⏭️  YOUTUBE_API_KEY 없음 → 건너뜀');
   }
 
-  // ── Reddit ──────────────────────────────────────────────────────────────
-  if (process.env.REDDIT_CLIENT_ID) {
-    console.log('🟠 Reddit 수집 중...');
-    redditToken = await getRedditToken();
-    if (redditToken) {
-      for (const tool of TOOLS) {
-        raw.reddit[tool.id] = await fetchReddit(tool);
-        await sleep(300);
-      }
-      console.log('   ✅ Reddit 완료');
-    } else {
-      console.log('   ⚠️  Reddit 토큰 발급 실패 → 건너뜀');
+  // ── Google Trends (5개씩 배치) ───────────────────────────────────────────
+  console.log('📈 Google Trends 수집 중...');
+  let gtSuccess = 0;
+  const chunkSize = 5;
+  for (let i = 0; i < TOOLS.length; i += chunkSize) {
+    const chunk = TOOLS.slice(i, i + chunkSize);
+    const result = await fetchGoogleTrends(chunk);
+    for (const [id, val] of Object.entries(result)) {
+      raw.gtrends[id] = val;
+      if (val > 0) gtSuccess++;
     }
-  } else {
-    console.log('⏭️  REDDIT_CLIENT_ID 없음 → 건너뜀');
+    await sleep(1500); // Google Trends 요청 간 딜레이
   }
+  console.log(`   ✅ Google Trends 완료 (${gtSuccess}개 데이터 수집)`);
 
   // ── GitHub ──────────────────────────────────────────────────────────────
   console.log('🟣 GitHub 수집 중...');
@@ -318,26 +295,49 @@ async function main() {
   const norm = {
     naver:   normalize(raw.naver),
     youtube: normalize(raw.youtube),
-    reddit:  normalize(raw.reddit),
+    gtrends: normalize(raw.gtrends),
     github:  normalize(raw.github),
   };
+
+  // ── 활성 플랫폼 가중치 자동 조정 ────────────────────────────────────────
+  // score = 네이버×0.30 + YouTube×0.25 + Google Trends×0.20 + GitHub×0.25
+  const baseWeights = { naver: 0.30, youtube: 0.25, gtrends: 0.20, github: 0.25 };
+  const active = {
+    naver:   !!process.env.NAVER_CLIENT_ID,
+    youtube: !!process.env.YOUTUBE_API_KEY,
+    gtrends: gtSuccess > 0,
+    github:  true,
+  };
+  const totalWeight = Object.entries(baseWeights)
+    .filter(([p]) => active[p])
+    .reduce((s, [, w]) => s + w, 0);
+  const weights = Object.fromEntries(
+    Object.entries(baseWeights).map(([p, w]) => [p, active[p] ? w / totalWeight : 0])
+  );
+  console.log('\n   가중치:', Object.entries(weights).map(([p, w]) => `${p}=${(w * 100).toFixed(0)}%`).join(' | '));
 
   // ── 점수 계산 & 변화율 ──────────────────────────────────────────────────
   const tools = {};
   for (const tool of TOOLS) {
     const n = norm.naver[tool.id]   ?? 0;
     const y = norm.youtube[tool.id] ?? 0;
-    const r = norm.reddit[tool.id]  ?? 0;
+    const gt = norm.gtrends[tool.id] ?? 0;
     const g = norm.github[tool.id]  ?? 0;
 
-    const score = Math.round(n * 0.30 + y * 0.25 + r * 0.20 + g * 0.25);
+    const score = Math.round(
+      n * weights.naver + y * weights.youtube + gt * weights.gtrends + g * weights.github
+    );
 
     const prev = prevScores[String(tool.id)];
     const change = prev?.score
       ? Math.round(((score - prev.score) / prev.score) * 1000) / 10
       : 0;
 
-    tools[String(tool.id)] = { score, change, sns: { naver: n, youtube: y, reddit: r, github: g } };
+    tools[String(tool.id)] = {
+      score,
+      change,
+      sns: { naver: n, youtube: y, gtrends: gt, github: g },
+    };
   }
 
   // ── 저장 ────────────────────────────────────────────────────────────────
