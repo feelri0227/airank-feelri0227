@@ -51,7 +51,7 @@ const ToolCard = ({ tool, rank }) => (
       fontSize: "0.8rem",
       color: "var(--text-secondary)",
       lineHeight: 1.5,
-      marginBottom: "10px",
+      marginBottom: "8px",
       display: "-webkit-box",
       WebkitLineClamp: 2,
       WebkitBoxOrient: "vertical",
@@ -60,55 +60,57 @@ const ToolCard = ({ tool, rank }) => (
       {tool.desc}
     </p>
 
-    {/* 태그 */}
-    <div style={{ display: "flex", gap: "4px", flexWrap: "wrap", marginBottom: "10px" }}>
-      {tool.tags.map((tag) => (
-        <span key={tag} style={{
-          fontSize: "0.68rem",
-          padding: "3px 8px",
-          borderRadius: "6px",
-          background: "var(--tag-bg)",
-          color: "var(--tag-color)",
-          border: `1px solid var(--tag-border)`,
-          fontWeight: 500,
-        }}>
-          {tag}
-        </span>
-      ))}
-    </div>
-
-    {/* SNS 종합 점수 */}
-    <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "4px" }}>
+    {/* SNS 종합 점수 + 태그 한 줄 */}
+    <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "6px" }}>
       <div style={{
         fontSize: "1.5rem",
         fontFamily: "'Outfit', sans-serif",
         fontWeight: 800,
         color: getScoreTextColor(tool.score),
+        flexShrink: 0,
       }}>
         {tool.score}
       </div>
-      <div style={{
-        flex: 1,
-        height: "6px",
-        borderRadius: "3px",
-        background: "var(--border-primary)",
-        overflow: "hidden",
-      }}>
-        <div style={{
-          width: `${tool.score}%`,
-          height: "100%",
-          borderRadius: "3px",
-          background: getScoreColor(tool.score),
-          transition: "width 0.8s ease",
-        }} />
+      <div style={{ display: "flex", gap: "4px", flexWrap: "wrap", flex: 1 }}>
+        {tool.tags.map((tag) => (
+          <span key={tag} style={{
+            fontSize: "0.62rem",
+            padding: "2px 7px",
+            borderRadius: "6px",
+            background: "var(--tag-bg)",
+            color: "var(--tag-color)",
+            border: `1px solid var(--tag-border)`,
+            fontWeight: 500,
+          }}>
+            {tag}
+          </span>
+        ))}
       </div>
       <span style={{
         fontSize: "0.72rem",
         fontWeight: 600,
         color: tool.change >= 0 ? "var(--color-green)" : "var(--color-red)",
+        flexShrink: 0,
       }}>
         {tool.change >= 0 ? "▲" : "▼"} {Math.abs(tool.change)}%
       </span>
+    </div>
+
+    {/* 점수 바 */}
+    <div style={{
+      height: "5px",
+      borderRadius: "3px",
+      background: "var(--border-primary)",
+      overflow: "hidden",
+      marginBottom: "8px",
+    }}>
+      <div style={{
+        width: `${tool.score}%`,
+        height: "100%",
+        borderRadius: "3px",
+        background: getScoreColor(tool.score),
+        transition: "width 0.8s ease",
+      }} />
     </div>
 
     {/* SNS 플랫폼별 점수 숫자 */}
