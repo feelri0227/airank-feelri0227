@@ -119,14 +119,62 @@ const GlobalStyles = () => (
     .navbar-nav { display: flex; }
     .navbar-login { display: block; }
 
+    /* 가로 스크롤 필터 행 */
+    .filter-row {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .filter-scroll {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
     @media (max-width: 1100px) {
       .main-grid { grid-template-columns: 1fr !important; }
       .sidebar-left, .sidebar-right { display: none !important; }
     }
 
     @media (max-width: 768px) {
-      .navbar-nav { display: none !important; }
-      .navbar-login { display: none !important; }
+      /* 네비 메뉴: 헤더 아래 가로 스크롤 */
+      .navbar-header {
+        flex-wrap: wrap !important;
+        height: auto !important;
+        padding: 8px 1rem !important;
+        gap: 6px;
+      }
+      .navbar-nav {
+        position: static !important;
+        transform: none !important;
+        order: 3;
+        width: 100%;
+        overflow-x: auto;
+        flex-wrap: nowrap !important;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding-bottom: 2px;
+      }
+      .navbar-nav::-webkit-scrollbar { display: none; }
+
+      /* 필터 행 가로 스크롤 */
+      .filter-row {
+        overflow-x: auto;
+        flex-wrap: nowrap !important;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding-bottom: 4px;
+      }
+      .filter-row::-webkit-scrollbar { display: none; }
+      .filter-scroll {
+        overflow-x: auto;
+        flex-wrap: nowrap !important;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      .filter-scroll::-webkit-scrollbar { display: none; }
     }
 
     /* ── 키프레임 애니메이션 ── */

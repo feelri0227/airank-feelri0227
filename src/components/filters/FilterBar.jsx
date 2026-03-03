@@ -11,7 +11,7 @@ const FilterBar = ({ category, onCategoryChange, lifeFilter, onLifeFilterChange,
     margin: "0 auto 1.5rem",
   }}>
     {/* 카테고리 필터 행 */}
-    <div style={{
+    <div className="filter-row" style={{
       display: "flex",
       gap: "6px",
       flexWrap: "wrap",
@@ -56,7 +56,7 @@ const FilterBar = ({ category, onCategoryChange, lifeFilter, onLifeFilterChange,
       gap: "8px",
     }}>
       {/* 직업군 필터 */}
-      <div style={{ display: "flex", gap: "6px", flexWrap: "wrap", alignItems: "center" }}>
+      <div className="filter-scroll" style={{ display: "flex", gap: "6px", flexWrap: "wrap", alignItems: "center" }}>
         <span style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginRight: "4px", fontWeight: 500 }}>직업군</span>
         {LIFE_FILTERS.map((lf) => (
           <button

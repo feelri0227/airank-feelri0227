@@ -3,7 +3,7 @@ import ThemeToggle from "../ui/ThemeToggle";
 import { NAV_ITEMS } from "../../constants";
 
 const Navbar = ({ theme, onToggleTheme, activeMenu, onMenuChange }) => (
-  <header style={{
+  <header className="navbar-header" style={{
     position: "sticky",
     top: 0,
     zIndex: 100,
