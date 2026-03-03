@@ -149,6 +149,7 @@ const ToolCard = ({ tool, rank, onClick }) => {
       ))}
     </div>
   </div>
-);
+  );
+};
 
 export default ToolCard;
