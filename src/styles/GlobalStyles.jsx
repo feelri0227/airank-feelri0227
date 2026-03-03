@@ -135,7 +135,8 @@ const GlobalStyles = () => (
 
     @media (max-width: 1100px) {
       .main-grid { grid-template-columns: 1fr !important; }
-      .sidebar-left, .sidebar-right { display: none !important; }
+      .sidebar-left { display: none !important; }
+      .sidebar-right { min-width: unset !important; }
     }
 
     @media (max-width: 768px) {
