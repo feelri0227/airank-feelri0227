@@ -131,16 +131,6 @@ const ToolDetailModal = ({ tool, rank, onClose }) => {
               }}>
                 {tool.name}
               </h2>
-              <span style={{
-                fontSize: "0.65rem",
-                padding: "2px 8px",
-                borderRadius: "100px",
-                background: tool.free ? "rgba(34,197,94,0.1)" : "rgba(245,158,11,0.1)",
-                color: tool.free ? "var(--color-green)" : "var(--color-gold)",
-                fontWeight: 600,
-              }}>
-                {tool.free ? "무료" : "유료"}
-              </span>
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: "6px", marginTop: "4px" }}>
               <span style={{
