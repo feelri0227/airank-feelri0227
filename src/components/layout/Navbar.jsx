@@ -1,8 +1,11 @@
 import Logo from "../ui/Logo";
 import ThemeToggle from "../ui/ThemeToggle";
 import { NAV_ITEMS } from "../../constants";
+import { useAuth } from "../../context/AuthContext";
 
-const Navbar = ({ theme, onToggleTheme, activeMenu, onMenuChange }) => (
+const Navbar = ({ theme, onToggleTheme, activeMenu, onMenuChange }) => {
+  const { user, login, logout } = useAuth();
+  return (
   <header className="navbar-header" style={{
     position: "sticky",
     top: 0,
@@ -53,25 +56,74 @@ const Navbar = ({ theme, onToggleTheme, activeMenu, onMenuChange }) => (
       ))}
     </nav>
 
-    {/* 우측: 로그인 + 테마토글 */}
+    {/* 우측: 로그인/프로필 + 테마토글 */}
     <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-      <button className="navbar-login" style={{
-        padding: "7px 18px",
-        borderRadius: "8px",
-        border: "1px solid var(--border-primary)",
-        background: "transparent",
-        color: "var(--text-primary)",
-        fontFamily: "'Pretendard', sans-serif",
-        fontSize: "0.82rem",
-        fontWeight: 500,
-        cursor: "pointer",
-        transition: "all 0.2s ease",
-      }}>
-        로그인
-      </button>
+      {user ? (
+        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+          <img
+            src={user.photoURL}
+            alt={user.displayName}
+            width={30}
+            height={30}
+            style={{ borderRadius: "50%", flexShrink: 0 }}
+          />
+          <span style={{
+            fontSize: "0.78rem",
+            fontWeight: 500,
+            color: "var(--text-primary)",
+            maxWidth: "80px",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
+          }}>
+            {user.displayName?.split(" ")[0]}
+          </span>
+          <button
+            onClick={logout}
+            className="navbar-login"
+            style={{
+              padding: "5px 12px",
+              borderRadius: "8px",
+              border: "1px solid var(--border-primary)",
+              background: "transparent",
+              color: "var(--text-muted)",
+              fontFamily: "'Pretendard', sans-serif",
+              fontSize: "0.76rem",
+              fontWeight: 500,
+              cursor: "pointer",
+            }}
+          >
+            로그아웃
+          </button>
+        </div>
+      ) : (
+        <button
+          onClick={login}
+          className="navbar-login"
+          style={{
+            padding: "7px 18px",
+            borderRadius: "8px",
+            border: "1px solid var(--border-primary)",
+            background: "transparent",
+            color: "var(--text-primary)",
+            fontFamily: "'Pretendard', sans-serif",
+            fontSize: "0.82rem",
+            fontWeight: 500,
+            cursor: "pointer",
+            transition: "all 0.2s ease",
+            display: "flex",
+            alignItems: "center",
+            gap: "6px",
+          }}
+        >
+          <img src="https://www.google.com/favicon.ico" width={14} height={14} alt="Google" />
+          Google 로그인
+        </button>
+      )}
       <ThemeToggle theme={theme} onToggle={onToggleTheme} />
     </div>
   </header>
-);
+  );
+};
 
 export default Navbar;

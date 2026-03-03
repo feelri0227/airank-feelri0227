@@ -1,4 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { doc, setDoc, deleteDoc, getDoc } from "firebase/firestore";
+import { db } from "../../firebase";
+import { useAuth } from "../../context/AuthContext";
 import { getScoreTextColor, getRankBadge } from "../../utils";
 
 // tool.id 기반 일관된 의사난수로 7일 점수 생성
@@ -49,7 +52,27 @@ const getFaviconUrl = (url) => {
 
 const ToolDetailModal = ({ tool, rank, onClose }) => {
   const [iconError, setIconError] = useState(false);
+  const [bookmarked, setBookmarked] = useState(false);
+  const { user, login } = useAuth();
   const faviconUrl = tool ? getFaviconUrl(tool.url) : null;
+
+  useEffect(() => {
+    if (!user || !tool) { setBookmarked(false); return; }
+    const ref = doc(db, "bookmarks", `${user.uid}_${tool.id}`);
+    getDoc(ref).then((snap) => setBookmarked(snap.exists()));
+  }, [user, tool]);
+
+  const toggleBookmark = async () => {
+    if (!user) { login(); return; }
+    const ref = doc(db, "bookmarks", `${user.uid}_${tool.id}`);
+    if (bookmarked) {
+      await deleteDoc(ref);
+      setBookmarked(false);
+    } else {
+      await setDoc(ref, { uid: user.uid, toolId: tool.id, toolName: tool.name, savedAt: Date.now() });
+      setBookmarked(true);
+    }
+  };
 
   if (!tool) return null;
 
@@ -104,6 +127,30 @@ const ToolDetailModal = ({ tool, rank, onClose }) => {
           }}
         >
           ✕
+        </button>
+
+        {/* 북마크 버튼 */}
+        <button
+          onClick={toggleBookmark}
+          title={user ? (bookmarked ? "북마크 해제" : "북마크 저장") : "로그인 후 북마크 가능"}
+          style={{
+            position: "absolute",
+            top: "16px",
+            right: "56px",
+            background: bookmarked ? "rgba(99,102,241,0.12)" : "var(--bg-tertiary)",
+            border: bookmarked ? "1px solid var(--accent-indigo)" : "none",
+            borderRadius: "8px",
+            width: "32px",
+            height: "32px",
+            cursor: "pointer",
+            fontSize: "1rem",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            transition: "all 0.2s ease",
+          }}
+        >
+          {bookmarked ? "★" : "☆"}
         </button>
 
         {/* 헤더: 아이콘 + 이름 + 랭크 + 무료/유료 */}
