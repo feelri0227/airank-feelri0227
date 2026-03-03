@@ -22,6 +22,7 @@ export default function App() {
   const [lifeFilter, setLifeFilter] = useState("all");
   const [sortBy, setSortBy] = useState("score");
   const [showWizard, setShowWizard] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(10);
 
   const toggleTheme = useCallback(() => {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
@@ -53,6 +54,10 @@ export default function App() {
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
+
+  useEffect(() => {
+    setVisibleCount(10);
+  }, [category, lifeFilter, searchQuery, sortBy]);
 
   return (
     <>
@@ -105,19 +110,42 @@ export default function App() {
                 <p style={{ fontSize: "0.82rem", marginTop: "4px" }}>다른 키워드나 필터로 검색해보세요</p>
               </div>
             ) : (
-              <div style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-                gap: "16px",
-              }}>
-                {filteredTools.map((tool, i) => (
-                  <ToolCard
-                    key={tool.id}
-                    tool={tool}
-                    rank={i + 1}
-                  />
-                ))}
-              </div>
+              <>
+                <div style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
+                  gap: "16px",
+                }}>
+                  {filteredTools.slice(0, visibleCount).map((tool, i) => (
+                    <ToolCard
+                      key={tool.id}
+                      tool={tool}
+                      rank={i + 1}
+                    />
+                  ))}
+                </div>
+                {filteredTools.length > visibleCount && (
+                  <div style={{ textAlign: "center", marginTop: "24px" }}>
+                    <button
+                      onClick={() => setVisibleCount((prev) => prev + 10)}
+                      style={{
+                        padding: "10px 32px",
+                        borderRadius: "10px",
+                        border: "1px solid var(--border-primary)",
+                        background: "var(--bg-card)",
+                        color: "var(--text-primary)",
+                        fontFamily: "'Pretendard', sans-serif",
+                        fontSize: "0.88rem",
+                        fontWeight: 600,
+                        cursor: "pointer",
+                        transition: "all 0.2s ease",
+                      }}
+                    >
+                      더보기 ({filteredTools.length - visibleCount}개 더 있음)
+                    </button>
+                  </div>
+                )}
+              </>
             )}
           </main>
 
