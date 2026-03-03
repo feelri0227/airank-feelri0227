@@ -5,7 +5,7 @@ const CompareModal = ({ tools, compareIds, onClose }) => {
   const maxScore = Math.max(...compareTools.map((t) => t.score));
   const maxChange = Math.max(...compareTools.map((t) => t.change));
   const maxX = Math.max(...compareTools.map((t) => t.sns.x));
-  const maxReddit = Math.max(...compareTools.map((t) => t.sns.reddit));
+  const maxGoogle = Math.max(...compareTools.map((t) => t.sns.google));
   const maxHn = Math.max(...compareTools.map((t) => t.sns.hn));
   const maxGithub = Math.max(...compareTools.map((t) => t.sns.github));
 
@@ -13,7 +13,7 @@ const CompareModal = ({ tools, compareIds, onClose }) => {
     { label: "SNS 종합 점수", getValue: (t) => t.score, max: maxScore },
     { label: "주간 성장률", getValue: (t) => `${t.change >= 0 ? "+" : ""}${t.change}%`, max: null, rawGet: (t) => t.change, rawMax: maxChange },
     { label: "X (Twitter)", getValue: (t) => t.sns.x, max: maxX },
-    { label: "Reddit", getValue: (t) => t.sns.reddit, max: maxReddit },
+    { label: "Google", getValue: (t) => t.sns.google, max: maxGoogle },
     { label: "HackerNews", getValue: (t) => t.sns.hn, max: maxHn },
     { label: "GitHub", getValue: (t) => t.sns.github, max: maxGithub },
     { label: "가격", getValue: (t) => t.free ? "무료" : "유료", max: null },

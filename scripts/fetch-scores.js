@@ -336,7 +336,7 @@ async function main() {
     tools[String(tool.id)] = {
       score,
       change,
-      sns: { naver: n, youtube: y, gtrends: gt, github: g },
+      sns: { naver: n, youtube: y, google: gt, github: g },
     };
   }
 

@@ -1,7 +1,7 @@
 const SnsScoreBars = ({ sns }) => {
   const platforms = [
     { key: "x", label: "X", color: "#1da1f2" },
-    { key: "reddit", label: "Reddit", color: "#ff4500" },
+    { key: "google", label: "Google", color: "#4285f4" },
     { key: "hn", label: "HN", color: "#ff6600" },
     { key: "github", label: "GitHub", color: "#8b5cf6" },
   ];

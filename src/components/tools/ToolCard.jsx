@@ -118,7 +118,7 @@ const ToolCard = ({ tool, rank, onClick }) => (
       {[
         { label: "네이버", value: tool.sns.naver, color: "#03c75a" },
         { label: "YouTube", value: tool.sns.youtube, color: "#ff0000" },
-        { label: "Reddit", value: tool.sns.reddit, color: "#ff4500" },
+        { label: "Google", value: tool.sns.google, color: "#4285f4" },
         { label: "GitHub", value: tool.sns.github, color: "#8b5cf6" },
       ].map((p) => (
         <div key={p.label} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "2px" }}>

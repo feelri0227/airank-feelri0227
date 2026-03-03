@@ -6,7 +6,7 @@ const Footer = () => (
     marginTop: "3rem",
   }}>
     <p style={{ fontSize: "0.75rem", color: "var(--text-muted)", lineHeight: 1.6 }}>
-      데이터 출처: X API · Reddit API · HackerNews · GitHub Trending ·{" "}
+      데이터 출처: X API · Google Trends · HackerNews · GitHub Trending ·{" "}
       <span style={{ color: "var(--accent-indigo)", fontWeight: 600 }}>AI뭐써?</span> 자체 분석
     </p>
     <p style={{ fontSize: "0.7rem", color: "var(--text-muted)", marginTop: "4px" }}>
