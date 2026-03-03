@@ -1,7 +1,7 @@
 import { getScoreColor, getScoreTextColor, getRankBadge } from "../../utils";
 
-const ToolCard = ({ tool, rank }) => (
-  <div style={{
+const ToolCard = ({ tool, rank, onClick }) => (
+  <div onClick={onClick} style={{
     background: "var(--bg-card)",
     border: "1px solid var(--border-primary)",
     borderRadius: "16px",

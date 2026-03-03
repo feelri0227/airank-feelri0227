@@ -11,6 +11,7 @@ import LeftSidebar from "./components/sidebar/LeftSidebar";
 import RightSidebar from "./components/sidebar/RightSidebar";
 import ToolCard from "./components/tools/ToolCard";
 import WizardModal from "./components/modals/WizardModal";
+import ToolDetailModal from "./components/modals/ToolDetailModal";
 
 import { TOOLS_DATA } from "./data/tools";
 
@@ -23,6 +24,8 @@ export default function App() {
   const [sortBy, setSortBy] = useState("score");
   const [showWizard, setShowWizard] = useState(false);
   const [visibleCount, setVisibleCount] = useState(10);
+  const [selectedTool, setSelectedTool] = useState(null);
+  const [selectedRank, setSelectedRank] = useState(null);
 
   const toggleTheme = useCallback(() => {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
@@ -121,6 +124,7 @@ export default function App() {
                       key={tool.id}
                       tool={tool}
                       rank={i + 1}
+                      onClick={() => { setSelectedTool(tool); setSelectedRank(i + 1); }}
                     />
                   ))}
                 </div>
@@ -158,6 +162,12 @@ export default function App() {
           isOpen={showWizard}
           onClose={() => setShowWizard(false)}
           tools={TOOLS_DATA}
+        />
+
+        <ToolDetailModal
+          tool={selectedTool}
+          rank={selectedRank}
+          onClose={() => setSelectedTool(null)}
         />
       </div>
     </>
