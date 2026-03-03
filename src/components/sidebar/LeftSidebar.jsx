@@ -5,7 +5,7 @@ const LeftSidebar = ({ tools }) => {
   const trending = [...tools].sort((a, b) => b.change - a.change).slice(0, 3);
 
   return (
-    <aside style={{
+    <aside className="sidebar-left" style={{
       display: "flex",
       flexDirection: "column",
       gap: "16px",

@@ -107,6 +107,28 @@ const GlobalStyles = () => (
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: var(--text-muted); border-radius: 3px; }
 
+    /* ── 반응형 레이아웃 ── */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 240px 1fr 240px;
+      gap: 20px;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .navbar-nav { display: flex; }
+    .navbar-login { display: block; }
+
+    @media (max-width: 1100px) {
+      .main-grid { grid-template-columns: 1fr !important; }
+      .sidebar-left, .sidebar-right { display: none !important; }
+    }
+
+    @media (max-width: 768px) {
+      .navbar-nav { display: none !important; }
+      .navbar-login { display: none !important; }
+    }
+
     /* ── 키프레임 애니메이션 ── */
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(20px); }

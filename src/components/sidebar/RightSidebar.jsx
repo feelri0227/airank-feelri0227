@@ -10,7 +10,7 @@ const RightSidebar = () => {
   const popularTags = ["텍스트 생성", "이미지 생성", "코딩", "무료", "API", "오픈소스", "영상 생성", "생산성"];
 
   return (
-    <aside style={{
+    <aside className="sidebar-right" style={{
       display: "flex",
       flexDirection: "column",
       gap: "16px",

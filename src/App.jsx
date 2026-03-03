@@ -110,14 +110,7 @@ export default function App() {
         />
 
         {/* 메인 3단 레이아웃 (좌/중/우) */}
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "240px 1fr 240px",
-          gap: "20px",
-          maxWidth: "1280px",
-          margin: "0 auto",
-          padding: "0 1.5rem",
-        }}>
+        <div className="main-grid">
           <LeftSidebar tools={filteredTools} />
 
           <main>

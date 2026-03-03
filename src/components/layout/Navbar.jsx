@@ -21,7 +21,7 @@ const Navbar = ({ theme, onToggleTheme, activeMenu, onMenuChange }) => (
     <Logo theme={theme} />
 
     {/* 중앙: 네비게이션 메뉴 */}
-    <nav style={{
+    <nav className="navbar-nav" style={{
       display: "flex",
       gap: "0.25rem",
       position: "absolute",
@@ -55,7 +55,7 @@ const Navbar = ({ theme, onToggleTheme, activeMenu, onMenuChange }) => (
 
     {/* 우측: 로그인 + 테마토글 */}
     <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-      <button style={{
+      <button className="navbar-login" style={{
         padding: "7px 18px",
         borderRadius: "8px",
         border: "1px solid var(--border-primary)",
