@@ -116,9 +116,9 @@ const ToolCard = ({ tool, rank }) => (
     {/* SNS 플랫폼별 점수 숫자 */}
     <div style={{ display: "flex", gap: "10px", marginTop: "4px" }}>
       {[
-        { label: "X", value: tool.sns.x, color: "#1da1f2" },
+        { label: "네이버", value: tool.sns.naver, color: "#03c75a" },
+        { label: "YouTube", value: tool.sns.youtube, color: "#ff0000" },
         { label: "Reddit", value: tool.sns.reddit, color: "#ff4500" },
-        { label: "HN", value: tool.sns.hn, color: "#ff6600" },
         { label: "GitHub", value: tool.sns.github, color: "#8b5cf6" },
       ].map((p) => (
         <div key={p.label} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "2px" }}>
