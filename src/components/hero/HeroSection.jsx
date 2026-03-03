@@ -25,7 +25,7 @@ const HeroSection = ({ searchQuery, onSearchChange, onOpenWizard }) => (
     {/* 메인 타이틀 */}
     <h1 style={{
       fontFamily: "'Outfit', sans-serif",
-      fontSize: "clamp(2rem, 4.5vw, 3.5rem)",
+      fontSize: "clamp(1.4rem, 4.5vw, 3.5rem)",
       fontWeight: 800,
       lineHeight: 1.1,
       letterSpacing: "-0.04em",
