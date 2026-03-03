@@ -42,7 +42,7 @@ const FilterBar = ({ category, onCategoryChange, lifeFilter, onLifeFilterChange,
             whiteSpace: "nowrap",
           }}
         >
-          {cat.icon} {cat.label}
+          {cat.label}
         </button>
       ))}
     </div>
@@ -82,7 +82,7 @@ const FilterBar = ({ category, onCategoryChange, lifeFilter, onLifeFilterChange,
               whiteSpace: "nowrap",
             }}
           >
-            {lf.icon} {lf.label}
+            {lf.label}
           </button>
         ))}
       </div>

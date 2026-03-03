@@ -11,26 +11,26 @@ export const NAV_ITEMS = [
 
 /** 카테고리 필터 목록 */
 export const CATEGORIES = [
-  { id: "all", label: "전체", icon: "🔥" },
-  { id: "text", label: "텍스트", icon: "📝" },
-  { id: "image", label: "이미지", icon: "🎨" },
-  { id: "code", label: "코딩", icon: "💻" },
-  { id: "video", label: "영상", icon: "🎬" },
-  { id: "audio", label: "오디오", icon: "🎵" },
-  { id: "search", label: "검색", icon: "🔍" },
-  { id: "productivity", label: "생산성", icon: "⚡" },
-  { id: "design", label: "디자인", icon: "🖌️" },
+  { id: "all", label: "전체" },
+  { id: "text", label: "텍스트" },
+  { id: "image", label: "이미지" },
+  { id: "code", label: "코딩" },
+  { id: "video", label: "영상" },
+  { id: "audio", label: "오디오" },
+  { id: "search", label: "검색" },
+  { id: "productivity", label: "생산성" },
+  { id: "design", label: "디자인" },
 ];
 
 /** 직업군 필터 목록 */
 export const LIFE_FILTERS = [
-  { id: "all", label: "전체", icon: "👥" },
-  { id: "office", label: "직장인 필수", icon: "💼" },
-  { id: "freelancer", label: "프리랜서 필수", icon: "🏠" },
-  { id: "student", label: "대학생 필수", icon: "🎓" },
-  { id: "creator", label: "크리에이터", icon: "🎥" },
-  { id: "marketer", label: "마케터", icon: "📊" },
-  { id: "startup", label: "스타트업", icon: "🚀" },
+  { id: "all", label: "전체" },
+  { id: "office", label: "직장인 필수" },
+  { id: "freelancer", label: "프리랜서 필수" },
+  { id: "student", label: "대학생 필수" },
+  { id: "creator", label: "크리에이터" },
+  { id: "marketer", label: "마케터" },
+  { id: "startup", label: "스타트업" },
 ];
 
 /** 정렬 옵션 */
