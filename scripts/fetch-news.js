@@ -129,8 +129,8 @@ async function main() {
     .filter(i => !newLinks.has(i.link))
     .map(i => ({ ...i, relativeTime: relativeTime(i.pubDate) }));
 
-  // 새 항목(위) + 기존 항목(아래), 최대 50개 유지
-  const merged = [...newTop15, ...oldItems].slice(0, 50);
+  // 새 항목(위) + 기존 항목(아래)
+  const merged = [...newTop15, ...oldItems];
 
   // 상위 3개는 HOT 표시
   const newsItems = merged.map((item, i) => ({ ...item, hot: i < 3 }));
