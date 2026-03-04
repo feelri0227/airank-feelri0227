@@ -18,6 +18,10 @@ const MainContent = styled.main`
 `;
 
 const SidebarWrapper = styled.div`
+  position: sticky;
+  top: 80px;
+  align-self: start;
+
   @media (max-width: 768px) {
     display: none;
   }

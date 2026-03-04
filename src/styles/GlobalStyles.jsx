@@ -133,6 +133,12 @@ const GlobalStyles = () => (
       flex-wrap: wrap;
     }
 
+    .sidebar-left, .sidebar-right {
+      position: sticky;
+      top: 80px;
+      align-self: start;
+    }
+
     @media (max-width: 1100px) {
       .main-grid { grid-template-columns: 1fr !important; }
       .sidebar-left { display: none !important; }
