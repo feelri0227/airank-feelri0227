@@ -91,9 +91,8 @@ async function main() {
   for (const query of QUERIES) {
     const items = await fetchNaverNews(query);
     for (const item of items) {
-      // originallink가 있는 경우에만 처리
-      const link = item.originallink;
-      if (!link) continue; // originallink 없으면 건너뛰기
+      const link = item.originallink || item.link;
+      if (!link) continue;
 
       if (seen.has(link)) continue;
       seen.add(link);
