@@ -39,7 +39,8 @@ export const LIFE_FILTERS = [
 
 /** 정렬 옵션 */
 export const SORT_OPTIONS = [
-  { id: "score", label: "종합점수순" },
+  { id: "score_desc", label: "점수높은순" },
+  { id: "score_asc", label: "점수낮은순" },
   { id: "name", label: "이름순" },
   { id: "bookmark", label: "북마크순" },
   { id: "likes", label: "👍많은순" },

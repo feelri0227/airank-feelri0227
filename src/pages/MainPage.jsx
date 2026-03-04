@@ -13,7 +13,7 @@ export default function MainPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [category, setCategory] = useState("all");
   const [lifeFilter, setLifeFilter] = useState("all");
-  const [sortBy, setSortBy] = useState("score");
+  const [sortBy, setSortBy] = useState("score_desc");
   const [showWizard, setShowWizard] = useState(false);
   const getInitialCount = () => (window.innerWidth >= 768 ? 20 : 10);
   const [visibleCount, setVisibleCount] = useState(getInitialCount);
@@ -35,7 +35,8 @@ export default function MainPage() {
       );
     }
 
-    if (sortBy === "score") data.sort((a, b) => b.score - a.score);
+    if (sortBy === "score_desc") data.sort((a, b) => b.score - a.score);
+    else if (sortBy === "score_asc") data.sort((a, b) => a.score - b.score);
     else if (sortBy === "bookmark") data.sort((a, b) => (bookmarkCounts[b.id] || 0) - (bookmarkCounts[a.id] || 0));
     else if (sortBy === "likes") data.sort((a, b) => (reactionCounts[b.id]?.likes || 0) - (reactionCounts[a.id]?.likes || 0));
     else if (sortBy === "dislikes") data.sort((a, b) => (reactionCounts[b.id]?.dislikes || 0) - (reactionCounts[a.id]?.dislikes || 0));
