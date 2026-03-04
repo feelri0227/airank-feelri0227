@@ -92,6 +92,51 @@ const GlobalStyles = () => (
       --modal-overlay: rgba(0, 0, 0, 0.7);
     }
 
+    /* ══════════════════════════════════════
+       CSS 변수 - 마누스 테마
+       딥 다크 + 웜 앰버 액센트
+       ══════════════════════════════════════ */
+    [data-theme="manus"] {
+      --bg-primary: #0c0c0c;
+      --bg-secondary: #141414;
+      --bg-tertiary: #1c1c1c;
+      --bg-card: #141414;
+      --bg-card-hover: #1c1c1c;
+      --bg-nav: rgba(12, 12, 12, 0.94);
+
+      --text-primary: #fafaf9;
+      --text-secondary: #a8a29e;
+      --text-muted: #57534e;
+
+      --border-primary: rgba(255, 255, 255, 0.06);
+      --border-hover: rgba(245, 158, 11, 0.4);
+
+      --accent-indigo: #f59e0b;
+      --accent-cyan: #fb923c;
+      --accent-gradient: linear-gradient(135deg, #f59e0b, #fb923c);
+
+      --color-green: #4ade80;
+      --color-red: #f87171;
+      --color-gold: #fbbf24;
+      --color-silver: #a8a29e;
+      --color-bronze: #f97316;
+
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.5);
+      --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.6);
+      --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.4);
+
+      --blob-opacity: 0.08;
+      --noise-opacity: 0.25;
+
+      --ticker-bg: rgba(245, 158, 11, 0.05);
+      --ticker-border: rgba(245, 158, 11, 0.15);
+      --tag-bg: rgba(245, 158, 11, 0.1);
+      --tag-color: #fbbf24;
+      --tag-border: rgba(245, 158, 11, 0.25);
+      --modal-overlay: rgba(0, 0, 0, 0.8);
+    }
+
     /* ── 기본 리셋 & 글로벌 ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 

@@ -1,36 +1,54 @@
+const THEMES = ['light', 'dark', 'manus'];
+const THEME_ICONS = { light: '☀️', dark: '🌙', manus: '⚡' };
+const THEME_LABELS = { light: '라이트', dark: '다크', manus: '마누스' };
+const NEXT_LABEL = { light: '다크 모드로 전환', dark: '마누스 모드로 전환', manus: '라이트 모드로 전환' };
+
+const TRACK_COLORS = {
+  light: 'var(--bg-tertiary)',
+  dark: 'var(--bg-tertiary)',
+  manus: 'rgba(245, 158, 11, 0.15)',
+};
+
 const ThemeToggle = ({ theme, onToggle }) => (
   <button
     onClick={onToggle}
-    title={theme === "dark" ? "라이트 모드로 전환" : "다크 모드로 전환"}
+    title={NEXT_LABEL[theme]}
     style={{
-      width: "44px",
-      height: "26px",
+      display: "flex",
+      alignItems: "center",
+      gap: "5px",
+      height: "30px",
+      padding: "0 8px 0 5px",
       borderRadius: "100px",
       border: `1px solid var(--border-primary)`,
-      background: theme === "dark" ? "var(--bg-tertiary)" : "var(--bg-tertiary)",
+      background: TRACK_COLORS[theme],
       cursor: "pointer",
-      position: "relative",
       transition: "all 0.3s ease",
       flexShrink: 0,
     }}
   >
     <div style={{
-      position: "absolute",
-      top: "3px",
-      left: theme === "dark" ? "3px" : "19px",
-      width: "18px",
-      height: "18px",
+      width: "20px",
+      height: "20px",
       borderRadius: "50%",
       background: "var(--accent-gradient)",
-      transition: "left 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      fontSize: "10px",
-      boxShadow: "0 2px 6px rgba(0,0,0,0.2)",
+      fontSize: "11px",
+      boxShadow: "0 2px 6px rgba(0,0,0,0.25)",
+      flexShrink: 0,
     }}>
-      {theme === "dark" ? "🌙" : "☀️"}
+      {THEME_ICONS[theme]}
     </div>
+    <span style={{
+      fontSize: "11px",
+      fontWeight: 500,
+      color: "var(--text-secondary)",
+      lineHeight: 1,
+    }}>
+      {THEME_LABELS[theme]}
+    </span>
   </button>
 );
 
