@@ -97,6 +97,8 @@ export default function App() {
           onToggleTheme={toggleTheme}
           activeMenu={activeMenu}
           onMenuChange={setActiveMenu}
+          tools={tools}
+          onOpenTool={(tool, rank) => { setSelectedTool(tool); setSelectedRank(rank); }}
         />
 
         <TickerBar />

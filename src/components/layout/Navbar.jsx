@@ -1,10 +1,43 @@
+import { useState, useEffect, useRef } from "react";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { db } from "../../firebase";
 import Logo from "../ui/Logo";
 import ThemeToggle from "../ui/ThemeToggle";
 import { NAV_ITEMS } from "../../constants";
 import { useAuth } from "../../context/AuthContext";
 
-const Navbar = ({ theme, onToggleTheme, activeMenu, onMenuChange }) => {
+const Navbar = ({ theme, onToggleTheme, activeMenu, onMenuChange, tools, onOpenTool }) => {
   const { user, login, logout } = useAuth();
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [bookmarks, setBookmarks] = useState([]);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    if (!showDropdown || !user) return;
+    const q = query(collection(db, "bookmarks"), where("uid", "==", user.uid));
+    getDocs(q).then((snap) => setBookmarks(snap.docs.map((d) => d.data())));
+  }, [showDropdown, user]);
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setShowDropdown(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  const handleBookmarkClick = (toolId) => {
+    if (!tools) return;
+    const sorted = [...tools].sort((a, b) => b.score - a.score);
+    const idx = sorted.findIndex((t) => t.id === toolId);
+    if (idx !== -1) {
+      onOpenTool?.(sorted[idx], idx + 1);
+      setShowDropdown(false);
+    }
+  };
+
   return (
   <header className="navbar-header" style={{
     position: "sticky",
@@ -20,10 +53,8 @@ const Navbar = ({ theme, onToggleTheme, activeMenu, onMenuChange }) => {
     background: "var(--bg-nav)",
     transition: "all 0.35s ease",
   }}>
-    {/* 좌측: 로고 */}
     <Logo theme={theme} />
 
-    {/* 중앙: 네비게이션 메뉴 */}
     <nav className="navbar-nav" style={{
       display: "flex",
       gap: "0.25rem",
@@ -39,9 +70,7 @@ const Navbar = ({ theme, onToggleTheme, activeMenu, onMenuChange }) => {
             padding: "6px 14px",
             borderRadius: "8px",
             border: "none",
-            background: activeMenu === item.id
-              ? "var(--accent-gradient)"
-              : "transparent",
+            background: activeMenu === item.id ? "var(--accent-gradient)" : "transparent",
             color: activeMenu === item.id ? "#fff" : "var(--text-secondary)",
             fontFamily: "'Pretendard', sans-serif",
             fontSize: "0.82rem",
@@ -56,45 +85,103 @@ const Navbar = ({ theme, onToggleTheme, activeMenu, onMenuChange }) => {
       ))}
     </nav>
 
-    {/* 우측: 로그인/프로필 + 테마토글 */}
     <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
       {user ? (
-        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-          <img
-            src={user.photoURL}
-            alt={user.displayName}
-            width={30}
-            height={30}
-            style={{ borderRadius: "50%", flexShrink: 0 }}
-          />
-          <span style={{
-            fontSize: "0.78rem",
-            fontWeight: 500,
-            color: "var(--text-primary)",
-            maxWidth: "80px",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            whiteSpace: "nowrap",
-          }}>
-            {user.displayName?.split(" ")[0]}
-          </span>
-          <button
-            onClick={logout}
-            className="navbar-login"
-            style={{
-              padding: "5px 12px",
-              borderRadius: "8px",
-              border: "1px solid var(--border-primary)",
-              background: "transparent",
-              color: "var(--text-muted)",
-              fontFamily: "'Pretendard', sans-serif",
-              fontSize: "0.76rem",
-              fontWeight: 500,
-              cursor: "pointer",
-            }}
+        <div ref={dropdownRef} style={{ position: "relative" }}>
+          <div
+            onClick={() => setShowDropdown((prev) => !prev)}
+            style={{ display: "flex", alignItems: "center", gap: "8px", cursor: "pointer" }}
           >
-            로그아웃
-          </button>
+            <img
+              src={user.photoURL}
+              alt={user.displayName}
+              width={30}
+              height={30}
+              style={{ borderRadius: "50%", flexShrink: 0 }}
+            />
+            <span style={{
+              fontSize: "0.78rem",
+              fontWeight: 500,
+              color: "var(--text-primary)",
+              maxWidth: "80px",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+            }}>
+              {user.displayName?.split(" ")[0]}
+            </span>
+          </div>
+
+          {showDropdown && (
+            <div style={{
+              position: "absolute",
+              top: "calc(100% + 10px)",
+              right: 0,
+              background: "var(--bg-card)",
+              border: "1px solid var(--border-primary)",
+              borderRadius: "12px",
+              padding: "8px",
+              minWidth: "200px",
+              maxHeight: "320px",
+              overflowY: "auto",
+              boxShadow: "0 8px 32px rgba(0,0,0,0.15)",
+              zIndex: 200,
+            }}>
+              <div style={{ fontSize: "0.65rem", fontWeight: 600, color: "var(--text-muted)", padding: "4px 8px 6px" }}>
+                북마크 ({bookmarks.length})
+              </div>
+              {bookmarks.length === 0 ? (
+                <div style={{ fontSize: "0.78rem", color: "var(--text-muted)", padding: "8px", textAlign: "center" }}>
+                  북마크한 도구가 없어요
+                </div>
+              ) : (
+                bookmarks.map((b) => (
+                  <button
+                    key={b.toolId}
+                    onClick={() => handleBookmarkClick(b.toolId)}
+                    style={{
+                      display: "block",
+                      width: "100%",
+                      padding: "6px 8px",
+                      borderRadius: "8px",
+                      border: "none",
+                      background: "transparent",
+                      color: "var(--text-primary)",
+                      fontFamily: "'Pretendard', sans-serif",
+                      fontSize: "0.82rem",
+                      cursor: "pointer",
+                      textAlign: "left",
+                    }}
+                    onMouseEnter={(e) => e.currentTarget.style.background = "var(--bg-tertiary)"}
+                    onMouseLeave={(e) => e.currentTarget.style.background = "transparent"}
+                  >
+                    ★ {b.toolName}
+                  </button>
+                ))
+              )}
+              <div style={{ height: "1px", background: "var(--border-primary)", margin: "6px 0" }} />
+              <button
+                onClick={() => { logout(); setShowDropdown(false); }}
+                style={{
+                  display: "block",
+                  width: "100%",
+                  padding: "6px 8px",
+                  borderRadius: "8px",
+                  border: "none",
+                  background: "transparent",
+                  color: "var(--text-muted)",
+                  fontFamily: "'Pretendard', sans-serif",
+                  fontSize: "0.78rem",
+                  cursor: "pointer",
+                  textAlign: "left",
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.background = "var(--bg-tertiary)"}
+                onMouseLeave={(e) => e.currentTarget.style.background = "transparent"}
+              >
+                로그아웃
+              </button>
+            </div>
+          )}
         </div>
       ) : (
         <button
