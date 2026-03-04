@@ -50,6 +50,17 @@ const getFaviconUrl = (url) => {
   catch { return null; }
 };
 
+const CAT_LABEL = {
+  text: "💬 텍스트", image: "🎨 이미지", code: "💻 코딩",
+  video: "🎬 영상", audio: "🎵 오디오", search: "🔍 검색",
+  productivity: "⚡ 생산성", design: "✏️ 디자인",
+};
+
+const LIFE_LABEL = {
+  office: "직장인", student: "학생", freelancer: "프리랜서",
+  marketer: "마케터", startup: "스타트업", creator: "크리에이터",
+};
+
 const ToolDetailModal = ({ tool, rank, onClose }) => {
   const [iconError, setIconError] = useState(false);
   const [bookmarked, setBookmarked] = useState(false);
@@ -277,6 +288,45 @@ const ToolDetailModal = ({ tool, rank, onClose }) => {
               {tag}
             </span>
           ))}
+        </div>
+
+        {/* 카테고리 + 추천 직업군 */}
+        <div style={{ marginBottom: "20px", display: "flex", flexDirection: "column", gap: "10px" }}>
+          {tool.cat && (
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <span style={{ fontSize: "0.65rem", fontWeight: 600, color: "var(--text-muted)", flexShrink: 0 }}>카테고리</span>
+              <span style={{
+                fontSize: "0.68rem",
+                padding: "3px 10px",
+                borderRadius: "20px",
+                background: "var(--accent-gradient)",
+                color: "#fff",
+                fontWeight: 600,
+              }}>
+                {CAT_LABEL[tool.cat] ?? tool.cat}
+              </span>
+            </div>
+          )}
+          {tool.life?.length > 0 && (
+            <div style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
+              <span style={{ fontSize: "0.65rem", fontWeight: 600, color: "var(--text-muted)", flexShrink: 0 }}>추천 대상</span>
+              <div style={{ display: "flex", gap: "5px", flexWrap: "wrap" }}>
+                {tool.life.map((l) => (
+                  <span key={l} style={{
+                    fontSize: "0.65rem",
+                    padding: "3px 8px",
+                    borderRadius: "6px",
+                    background: "var(--bg-tertiary)",
+                    color: "var(--text-secondary)",
+                    border: "1px solid var(--border-primary)",
+                    fontWeight: 500,
+                  }}>
+                    {LIFE_LABEL[l] ?? l}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* 공식 사이트 바로가기 */}
