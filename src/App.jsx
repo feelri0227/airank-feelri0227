@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { collection, query, where, onSnapshot, addDoc, deleteDoc, doc } from "firebase/firestore";
 import { db } from "./firebase";
 import ToolContext from "./context/ToolContext";
-import { useAuth } from "./context/AuthContext";
+import { AuthProvider, useAuth } from "./context/AuthContext";
 
 import MainLayout from "./layouts/MainLayout";
 import MainPage from "./pages/MainPage";
@@ -26,22 +26,70 @@ function ToolProvider({ children }) {
   const [newsBookmarks, setNewsBookmarks] = useState([]);
 
   useEffect(() => {
-    // (기존 fetch 로직들)
+    fetch("/scores.json")
+      .then((r) => r.json())
+      .then((data) => {
+        if (!data?.tools) return;
+        setTools((prev) =>
+          prev.map((tool) => {
+            const live = data.tools[String(tool.id)];
+            return live ? { ...tool, ...live } : tool;
+          })
+        );
+      })
+      .catch(() => {});
 
+    fetch('/news.json')
+      .then((res) => res.json())
+      .then((data) => setNews(data));
+  }, []);
+
+  useEffect(() => {
     if (user) {
       const q = query(collection(db, "newsBookmarks"), where("uid", "==", user.uid));
       const unsub = onSnapshot(q, (snap) => {
         setNewsBookmarks(snap.docs.map(d => ({...d.data(), id: d.id})))
       });
       return unsub;
+    } else {
+      setNewsBookmarks([]);
     }
   }, [user]);
+
+  useEffect(() => {
+    localStorage.setItem('theme', theme);
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
+
+  useEffect(() => {
+    if (selectedArticle) {
+      localStorage.setItem('selectedArticle', JSON.stringify(selectedArticle));
+    } else {
+      localStorage.removeItem('selectedArticle');
+    }
+  }, [selectedArticle]);
+
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+  };
+
+  const openToolDetail = (tool, rank) => {
+    setSelectedTool(tool);
+    setSelectedRank(rank);
+  };
+
+  const closeToolDetail = () => {
+    setSelectedTool(null);
+  };
 
   const addNewsBookmark = useCallback(async (article) => {
     if (!user) return;
     await addDoc(collection(db, "newsBookmarks"), {
       uid: user.uid,
-      ...article
+      link: article.link,
+      title: article.title,
+      description: article.description,
+      relativeTime: article.relativeTime
     });
   }, [user]);
 
@@ -49,7 +97,6 @@ function ToolProvider({ children }) {
     if (!user) return;
     await deleteDoc(doc(db, "newsBookmarks", bookmarkId));
   }, [user]);
-
 
   const isNewsBookmarked = useCallback((articleLink) => {
     return newsBookmarks.some(b => b.link === articleLink);
@@ -90,5 +137,18 @@ function ToolProvider({ children }) {
 }
 
 export default function App() {
-  // ... (기존 App 컴포넌트)
+  return (
+    <AuthProvider>
+      <ToolProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<MainLayout />}>
+              <Route index element={<MainPage />} />
+              <Route path="news" element={<NewsPage />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </ToolProvider>
+    </AuthProvider>
+  );
 }
