@@ -1,4 +1,5 @@
 
+import { useState } from 'react';
 import styled from 'styled-components';
 import { useTools } from '../context/ToolContext';
 import { useAuth } from '../context/AuthContext';
@@ -74,6 +75,24 @@ const NewsMeta = styled.span`
   color: var(--text-muted);
 `;
 
+const LoadMoreButton = styled.button`
+  display: block;
+  margin: 2rem auto 0;
+  padding: 0.75rem 2.5rem;
+  background: transparent;
+  border: 1px solid var(--border-primary);
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    border-color: var(--accent-blue);
+    color: var(--accent-blue);
+  }
+`;
+
 const BookmarkButton = styled.button`
   position: absolute;
   top: 1.2rem;
@@ -93,9 +112,12 @@ const BookmarkButton = styled.button`
   }
 `;
 
+const PAGE_SIZE = 15;
+
 function NewsPage() {
   const { user } = useAuth();
   const { news, selectedArticle, setSelectedArticle, toggleNewsBookmark, isNewsBookmarked } = useTools();
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
   const handleItemClick = (item) => {
     setSelectedArticle(item);
@@ -106,13 +128,16 @@ function NewsPage() {
     toggleNewsBookmark(item);
   };
 
+  const visibleItems = news.items.slice(0, visibleCount);
+  const hasMore = visibleCount < news.items.length;
+
   return (
     <NewsPageContainer>
       <SidebarWrapper><ToolListSidebar /></SidebarWrapper>
       <MainContent>
         <PageTitle>📰 최신 AI 뉴스</PageTitle>
         <NewsList>
-          {news.items.map((item) => {
+          {visibleItems.map((item) => {
             const isBookmarked = isNewsBookmarked(item.link);
             return (
               <NewsItem 
@@ -140,6 +165,11 @@ function NewsPage() {
             );
           })}
         </NewsList>
+        {hasMore && (
+          <LoadMoreButton onClick={() => setVisibleCount(v => v + PAGE_SIZE)}>
+            더보기
+          </LoadMoreButton>
+        )}
       </MainContent>
     </NewsPageContainer>
   );
