@@ -18,7 +18,7 @@ const generateSparkData = (tool) => {
 };
 
 const SparkChart = ({ data, color }) => {
-  const w = 200, h = 44;
+  const w = 200, h = 34;
   const min = Math.min(...data) - 4;
   const max = Math.max(...data) + 4;
   const range = max - min || 1;
@@ -214,18 +214,18 @@ const ToolDetailModal = ({ tool, rank, onClose }) => {
           {tool.desc}
         </p>
 
-        {/* 점수 + 주간 변화율 */}
+        {/* 점수 + 주간 변화율 + 스파크라인 */}
         <div style={{
-          marginBottom: "16px",
-          padding: "14px 16px",
+          marginBottom: "14px",
+          padding: "10px 12px",
           background: "var(--bg-secondary)",
           borderRadius: "12px",
         }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "12px" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "8px" }}>
             <div>
-              <div style={{ fontSize: "0.65rem", color: "var(--text-muted)", marginBottom: "2px" }}>SNS 종합 점수</div>
+              <div style={{ fontSize: "0.6rem", color: "var(--text-muted)", marginBottom: "1px" }}>종합 점수</div>
               <div style={{
-                fontSize: "2.2rem",
+                fontSize: "1.6rem",
                 fontFamily: "'Outfit', sans-serif",
                 fontWeight: 800,
                 color: getScoreTextColor(tool.score),
@@ -234,11 +234,11 @@ const ToolDetailModal = ({ tool, rank, onClose }) => {
                 {tool.score}
               </div>
             </div>
-            <div style={{ width: "1px", height: "40px", background: "var(--border-primary)" }} />
+            <div style={{ width: "1px", height: "30px", background: "var(--border-primary)" }} />
             <div>
-              <div style={{ fontSize: "0.65rem", color: "var(--text-muted)", marginBottom: "2px" }}>주간 변화율</div>
+              <div style={{ fontSize: "0.6rem", color: "var(--text-muted)", marginBottom: "1px" }}>주간 변화율</div>
               <div style={{
-                fontSize: "1.3rem",
+                fontSize: "1rem",
                 fontFamily: "'Outfit', sans-serif",
                 fontWeight: 700,
                 color: tool.change >= 0 ? "var(--color-green)" : "var(--color-red)",
@@ -247,14 +247,10 @@ const ToolDetailModal = ({ tool, rank, onClose }) => {
               </div>
             </div>
           </div>
-          {/* 최근 7일 순위 변화 스파크라인 */}
-          <div>
-            <div style={{ fontSize: "0.62rem", color: "var(--text-muted)", marginBottom: "6px" }}>최근 7일 추이</div>
-            <SparkChart data={generateSparkData(tool)} color={getScoreTextColor(tool.score)} />
-            <div style={{ display: "flex", justifyContent: "space-between", marginTop: "4px" }}>
-              <span style={{ fontSize: "0.58rem", color: "var(--text-muted)" }}>7일 전</span>
-              <span style={{ fontSize: "0.58rem", color: "var(--text-muted)" }}>오늘</span>
-            </div>
+          <SparkChart data={generateSparkData(tool)} color={getScoreTextColor(tool.score)} />
+          <div style={{ display: "flex", justifyContent: "space-between", marginTop: "2px" }}>
+            <span style={{ fontSize: "0.55rem", color: "var(--text-muted)" }}>7일 전</span>
+            <span style={{ fontSize: "0.55rem", color: "var(--text-muted)" }}>오늘</span>
           </div>
         </div>
 
