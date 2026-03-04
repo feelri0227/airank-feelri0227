@@ -76,6 +76,8 @@ function ToolProvider({ children }) {
     setTheme((prev) => prev === 'light' ? 'dark' : prev === 'dark' ? 'manus' : prev === 'manus' ? 'mono' : 'light');
   };
 
+  const selectTheme = (newTheme) => setTheme(newTheme);
+
   const openToolDetail = (tool, rank) => {
     setSelectedTool(tool);
     setSelectedRank(rank);
@@ -114,11 +116,12 @@ function ToolProvider({ children }) {
     }
   }, [newsBookmarks, addNewsBookmark, removeNewsBookmark]);
 
-  const value = useMemo(() => ({ 
-    tools, 
+  const value = useMemo(() => ({
+    tools,
     openToolDetail,
     theme,
     toggleTheme,
+    selectTheme,
     selectedArticle,
     setSelectedArticle,
     news,

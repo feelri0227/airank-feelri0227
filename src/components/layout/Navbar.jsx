@@ -341,7 +341,7 @@ const Navbar = ({ theme, onToggleTheme }) => {
             Google 로그인
           </button>
         )}
-        <ThemeToggle theme={theme} onToggle={onToggleTheme} />
+        <ThemeToggle />
       </div>
     </header>
   );

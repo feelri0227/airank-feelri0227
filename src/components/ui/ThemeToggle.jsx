@@ -1,56 +1,125 @@
-const THEMES = ['light', 'dark', 'manus', 'mono'];
-const THEME_ICONS = { light: '☀️', dark: '🌙', manus: '⚡', mono: '◑' };
-const THEME_LABELS = { light: '라이트', dark: '다크', manus: '마누스', mono: '모노' };
-const NEXT_LABEL = { light: '다크 모드로 전환', dark: '마누스 모드로 전환', manus: '모노 모드로 전환', mono: '라이트 모드로 전환' };
+import { useState, useRef, useEffect } from "react";
+import { useTools } from "../../context/ToolContext";
+
+const THEMES = [
+  { id: 'light', icon: '☀️', label: '라이트' },
+  { id: 'dark',  icon: '🌙', label: '다크' },
+  { id: 'manus', icon: '⚡', label: '마누스' },
+  { id: 'mono',  icon: '◑',  label: '모노' },
+];
 
 const TRACK_COLORS = {
   light: 'var(--bg-tertiary)',
-  dark: 'var(--bg-tertiary)',
+  dark:  'var(--bg-tertiary)',
   manus: 'rgba(245, 158, 11, 0.15)',
-  mono: 'rgba(0, 0, 0, 0.08)',
+  mono:  'rgba(0, 0, 0, 0.08)',
 };
 
-const ThemeToggle = ({ theme, onToggle }) => (
-  <button
-    onClick={onToggle}
-    title={NEXT_LABEL[theme]}
-    style={{
-      display: "flex",
-      alignItems: "center",
-      gap: "5px",
-      height: "30px",
-      padding: "0 8px 0 5px",
-      borderRadius: "100px",
-      border: `1px solid var(--border-primary)`,
-      background: TRACK_COLORS[theme],
-      cursor: "pointer",
-      transition: "all 0.3s ease",
-      flexShrink: 0,
-    }}
-  >
-    <div style={{
-      width: "20px",
-      height: "20px",
-      borderRadius: "50%",
-      background: "var(--accent-gradient)",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      fontSize: "11px",
-      boxShadow: "0 2px 6px rgba(0,0,0,0.25)",
-      flexShrink: 0,
-    }}>
-      {THEME_ICONS[theme]}
+const ThemeToggle = () => {
+  const { theme, selectTheme } = useTools();
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+  const current = THEMES.find((t) => t.id === theme) || THEMES[1];
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  return (
+    <div ref={ref} style={{ position: "relative" }}>
+      <button
+        onClick={() => setOpen((prev) => !prev)}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "5px",
+          height: "30px",
+          padding: "0 8px 0 5px",
+          borderRadius: "100px",
+          border: "1px solid var(--border-primary)",
+          background: TRACK_COLORS[theme] || 'var(--bg-tertiary)',
+          cursor: "pointer",
+          transition: "all 0.3s ease",
+          flexShrink: 0,
+        }}
+      >
+        <div style={{
+          width: "20px",
+          height: "20px",
+          borderRadius: "50%",
+          background: "var(--accent-gradient)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontSize: "11px",
+          boxShadow: "0 2px 6px rgba(0,0,0,0.25)",
+          flexShrink: 0,
+        }}>
+          {current.icon}
+        </div>
+        <span style={{
+          fontSize: "11px",
+          fontWeight: 500,
+          color: "var(--text-secondary)",
+          lineHeight: 1,
+        }}>
+          {current.label}
+        </span>
+        <span style={{ fontSize: "8px", color: "var(--text-muted)", marginLeft: "1px" }}>▾</span>
+      </button>
+
+      {open && (
+        <div style={{
+          position: "absolute",
+          top: "calc(100% + 8px)",
+          right: 0,
+          background: "var(--bg-card)",
+          border: "1px solid var(--border-primary)",
+          borderRadius: "12px",
+          padding: "6px",
+          minWidth: "120px",
+          boxShadow: "0 8px 32px rgba(0,0,0,0.15)",
+          zIndex: 200,
+        }}>
+          {THEMES.map((t) => (
+            <button
+              key={t.id}
+              onClick={() => { selectTheme(t.id); setOpen(false); }}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+                width: "100%",
+                padding: "7px 10px",
+                borderRadius: "8px",
+                border: "none",
+                background: theme === t.id ? "var(--bg-tertiary)" : "transparent",
+                color: "var(--text-primary)",
+                fontFamily: "'Pretendard', sans-serif",
+                fontSize: "0.82rem",
+                cursor: "pointer",
+                textAlign: "left",
+                fontWeight: theme === t.id ? 600 : 400,
+              }}
+              onMouseEnter={(e) => {
+                if (theme !== t.id) e.currentTarget.style.background = "var(--bg-tertiary)";
+              }}
+              onMouseLeave={(e) => {
+                if (theme !== t.id) e.currentTarget.style.background = "transparent";
+              }}
+            >
+              <span>{t.icon}</span>
+              <span>{t.label}</span>
+            </button>
+          ))}
+        </div>
+      )}
     </div>
-    <span style={{
-      fontSize: "11px",
-      fontWeight: 500,
-      color: "var(--text-secondary)",
-      lineHeight: 1,
-    }}>
-      {THEME_LABELS[theme]}
-    </span>
-  </button>
-);
+  );
+};
 
 export default ThemeToggle;
