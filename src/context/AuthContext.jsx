@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
+import { signInWithRedirect, getRedirectResult, signOut, onAuthStateChanged } from "firebase/auth";
 import { auth, provider } from "../firebase";
 
 const AuthContext = createContext(null);
@@ -9,6 +9,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    getRedirectResult(auth).catch(() => {});
     const unsub = onAuthStateChanged(auth, (u) => {
       setUser(u);
       setLoading(false);
@@ -16,7 +17,7 @@ export const AuthProvider = ({ children }) => {
     return unsub;
   }, []);
 
-  const login = () => signInWithPopup(auth, provider);
+  const login = () => signInWithRedirect(auth, provider);
   const logout = () => signOut(auth);
 
   return (
