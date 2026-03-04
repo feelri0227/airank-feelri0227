@@ -1,19 +1,24 @@
 
-import { useEffect } from 'react';
 import styled from 'styled-components';
 import { useTools } from '../context/ToolContext';
 import { useAuth } from '../context/AuthContext';
+import ToolListSidebar from '../components/layout/ToolListSidebar';
 
 const NewsPageContainer = styled.div`
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
+  display: flex;
+  gap: 2.5rem;
+`;
+
+const MainContent = styled.main`
+  flex-grow: 1;
 `;
 
 const PageTitle = styled.h1`
   font-size: 2rem;
   margin-bottom: 2rem;
-  text-align: center;
   color: var(--text-primary);
 `;
 
@@ -97,36 +102,39 @@ function NewsPage() {
 
   return (
     <NewsPageContainer>
-      <PageTitle>최신 AI 뉴스</PageTitle>
-      <NewsList>
-        {news.items.map((item) => {
-          const isBookmarked = isNewsBookmarked(item.link);
-          return (
-            <NewsItem 
-              key={item.link} 
-              onClick={() => handleItemClick(item)} 
-              style={{backgroundColor: selectedArticle?.link === item.link ? 'var(--bg-secondary-accent)' : 'transparent'}}
-            >
-              <NewsContent>
-                <NewsLink href={item.link} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
-                  <NewsTitle>{item.title}</NewsTitle>
-                  <NewsDescription>{item.description}</NewsDescription>
-                  <NewsMeta>{item.relativeTime}</NewsMeta>
-                </NewsLink>
-              </NewsContent>
-              {user && (
-                <BookmarkButton 
-                  bookmarked={isBookmarked}
-                  onClick={(e) => handleBookmarkClick(e, item)}
-                  title={isBookmarked ? "북마크 제거" : "북마크 추가"}
-                >
-                  {isBookmarked ? '★' : '☆'}
-                </BookmarkButton>
-              )}
-            </NewsItem>
-          );
-        })}
-      </NewsList>
+      <ToolListSidebar />
+      <MainContent>
+        <PageTitle>📰 최신 AI 뉴스</PageTitle>
+        <NewsList>
+          {news.items.map((item) => {
+            const isBookmarked = isNewsBookmarked(item.link);
+            return (
+              <NewsItem 
+                key={item.link} 
+                onClick={() => handleItemClick(item)} 
+                style={{backgroundColor: selectedArticle?.link === item.link ? 'var(--bg-secondary-accent)' : 'transparent'}}
+              >
+                <NewsContent>
+                  <NewsLink href={item.link} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
+                    <NewsTitle>{item.title}</NewsTitle>
+                    <NewsDescription>{item.description}</NewsDescription>
+                    <NewsMeta>{item.relativeTime}</NewsMeta>
+                  </NewsLink>
+                </NewsContent>
+                {user && (
+                  <BookmarkButton 
+                    bookmarked={isBookmarked}
+                    onClick={(e) => handleBookmarkClick(e, item)}
+                    title={isBookmarked ? "북마크 제거" : "북마크 추가"}
+                  >
+                    {isBookmarked ? '★' : '☆'}
+                  </BookmarkButton>
+                )}
+              </NewsItem>
+            );
+          })}
+        </NewsList>
+      </MainContent>
     </NewsPageContainer>
   );
 }
