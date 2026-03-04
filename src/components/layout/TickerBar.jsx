@@ -10,8 +10,11 @@ const TickerBar = () => {
       .then((r) => r.json())
       .then((data) => {
         if (data.items?.length) {
-          // 뉴스 제목을 티커 형식으로 변환
-          setItems(data.items.map((n) => `📰 ${n.title}`));
+          // 뉴스 제목과 링크를 함께 저장
+          setItems(data.items.map((n) => ({
+            title: `📰 ${n.title}`,
+            link: n.link,
+          })));
         }
       })
       .catch(() => {}); // 폴백: 하드코딩 TICKER_ITEMS 유지
@@ -55,13 +58,20 @@ const TickerBar = () => {
         animationPlayState: isPaused ? "paused" : "running",
       }}>
         {doubled.map((item, i) => (
-          <span key={i} style={{
-            fontSize: "0.78rem",
-            color: "var(--text-secondary)",
-            fontWeight: 400,
-          }}>
-            {item}
-          </span>
+          <a // <a> 태그로 변경
+            key={i}
+            href={item.link} // 링크 주소 설정
+            target="_blank" // 새 탭에서 열기
+            rel="noopener noreferrer" // 보안 속성
+            style={{
+              fontSize: "0.78rem",
+              color: "var(--text-secondary)",
+              fontWeight: 400,
+              textDecoration: "none", // 밑줄 제거
+            }}
+          >
+            {typeof item === 'string' ? item : item.title}
+          </a>
         ))}
       </div>
 

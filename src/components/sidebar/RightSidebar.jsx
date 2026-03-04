@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 
 const FALLBACK_NEWS = [
-  { title: "OpenAI, GPT-5 출시 임박 소문", link: "#", relativeTime: "2시간 전", hot: true },
-  { title: "Anthropic Claude 4 벤치마크 공개", link: "#", relativeTime: "5시간 전", hot: true },
-  { title: "Midjourney 웹앱 정식 출시", link: "#", relativeTime: "8시간 전", hot: true },
-  { title: "Google Gemini 2.0 Flash 업데이트", link: "#", relativeTime: "12시간 전", hot: false },
-  { title: "Cursor IDE, 월 사용자 100만 돌파", link: "#", relativeTime: "1일 전", hot: false },
+  { title: "OpenAI, GPT-5 출시 임박 소문", link: "https://search.naver.com/search.naver?where=news&query=GPT-5", relativeTime: "2시간 전", hot: true },
+  { title: "Anthropic Claude 4 벤치마크 공개", link: "https://search.naver.com/search.naver?where=news&query=Claude+AI", relativeTime: "5시간 전", hot: true },
+  { title: "Midjourney 웹앱 정식 출시", link: "https://search.naver.com/search.naver?where=news&query=Midjourney", relativeTime: "8시간 전", hot: true },
+  { title: "Google Gemini 2.0 Flash 업데이트", link: "https://search.naver.com/search.naver?where=news&query=Gemini+AI", relativeTime: "12시간 전", hot: false },
+  { title: "Cursor IDE, 월 사용자 100만 돌파", link: "https://search.naver.com/search.naver?where=news&query=Cursor+IDE", relativeTime: "1일 전", hot: false },
 ];
 
 const popularTags = ["텍스트 생성", "이미지 생성", "코딩", "무료", "API", "오픈소스", "영상 생성", "생산성"];
