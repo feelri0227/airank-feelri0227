@@ -6,9 +6,10 @@ import RightSidebar from "../components/sidebar/RightSidebar";
 import ToolCard from "../components/tools/ToolCard";
 import WizardModal from "../components/modals/WizardModal";
 import HeroSection from "../components/hero/HeroSection";
+import { SORT_OPTIONS } from "../constants";
 
 export default function MainPage() {
-  const { tools, openToolDetail } = useTools();
+  const { tools, openToolDetail, bookmarkCounts } = useTools();
   const [searchQuery, setSearchQuery] = useState("");
   const [category, setCategory] = useState("all");
   const [lifeFilter, setLifeFilter] = useState("all");
@@ -35,11 +36,11 @@ export default function MainPage() {
     }
 
     if (sortBy === "score") data.sort((a, b) => b.score - a.score);
-    else if (sortBy === "growth") data.sort((a, b) => b.change - a.change);
+    else if (sortBy === "bookmark") data.sort((a, b) => (bookmarkCounts[b.id] || 0) - (bookmarkCounts[a.id] || 0));
     else data.sort((a, b) => a.name.localeCompare(b.name, "ko"));
 
     return data;
-  }, [tools, category, lifeFilter, searchQuery, sortBy]);
+  }, [tools, category, lifeFilter, searchQuery, sortBy, bookmarkCounts]);
 
   useEffect(() => {
     setVisibleCount(getInitialCount());
@@ -58,12 +59,34 @@ export default function MainPage() {
         onCategoryChange={setCategory}
         lifeFilter={lifeFilter}
         onLifeFilterChange={setLifeFilter}
-        sortBy={sortBy}
-        onSortChange={setSortBy}
       />
 
       <div className="main-grid">
         <main>
+          {/* 정렬 버튼 - 우측 정렬 */}
+          <div style={{ display: "flex", justifyContent: "flex-end", gap: "2px", marginBottom: "12px" }}>
+            {SORT_OPTIONS.map((opt) => (
+              <button
+                key={opt.id}
+                onClick={() => setSortBy(opt.id)}
+                style={{
+                  padding: "4px 10px",
+                  borderRadius: "6px",
+                  border: "none",
+                  background: sortBy === opt.id ? "var(--bg-tertiary)" : "transparent",
+                  color: sortBy === opt.id ? "var(--text-primary)" : "var(--text-muted)",
+                  fontSize: "0.75rem",
+                  fontFamily: "'Pretendard', sans-serif",
+                  fontWeight: sortBy === opt.id ? 600 : 400,
+                  cursor: "pointer",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                {opt.label}
+              </button>
+            ))}
+          </div>
+
           {filteredTools.length === 0 ? (
             <div
               style={{

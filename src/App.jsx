@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { collection, query, where, onSnapshot, addDoc, deleteDoc, doc } from "firebase/firestore";
+import { collection, query, where, onSnapshot, addDoc, deleteDoc, doc, getDocs } from "firebase/firestore";
 import { db } from "./firebase";
 import ToolContext from "./context/ToolContext";
 import { AuthProvider, useAuth } from "./context/AuthContext";
@@ -27,6 +27,7 @@ function ToolProvider({ children }) {
   });
   const [news, setNews] = useState({ items: [], lastUpdated: '' });
   const [newsBookmarks, setNewsBookmarks] = useState([]);
+  const [bookmarkCounts, setBookmarkCounts] = useState({});
 
   useEffect(() => {
     fetch("/scores.json")
@@ -45,6 +46,19 @@ function ToolProvider({ children }) {
     fetch('/news.json')
       .then((res) => res.json())
       .then((data) => setNews(data));
+  }, []);
+
+  useEffect(() => {
+    getDocs(collection(db, "bookmarks"))
+      .then((snap) => {
+        const counts = {};
+        snap.docs.forEach((d) => {
+          const { toolId } = d.data();
+          if (toolId) counts[toolId] = (counts[toolId] || 0) + 1;
+        });
+        setBookmarkCounts(counts);
+      })
+      .catch(() => {});
   }, []);
 
   useEffect(() => {
@@ -127,8 +141,9 @@ function ToolProvider({ children }) {
     news,
     newsBookmarks,
     toggleNewsBookmark,
-    isNewsBookmarked
-  }), [tools, theme, selectedArticle, news, newsBookmarks, toggleNewsBookmark, isNewsBookmarked]);
+    isNewsBookmarked,
+    bookmarkCounts,
+  }), [tools, theme, selectedArticle, news, newsBookmarks, toggleNewsBookmark, isNewsBookmarked, bookmarkCounts]);
 
   return (
     <ToolContext.Provider value={value}>

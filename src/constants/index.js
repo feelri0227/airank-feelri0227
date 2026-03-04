@@ -39,9 +39,9 @@ export const LIFE_FILTERS = [
 
 /** 정렬 옵션 */
 export const SORT_OPTIONS = [
-  { id: "score", label: "SNS 점수순" },
-  { id: "growth", label: "성장률순" },
+  { id: "score", label: "종합점수순" },
   { id: "name", label: "이름순" },
+  { id: "bookmark", label: "북마크순" },
 ];
 
 /** 커뮤니티 카테고리 */
