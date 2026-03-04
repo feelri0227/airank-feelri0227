@@ -142,44 +142,44 @@ const GlobalStyles = () => (
        순수 그레이스케일 + 흑백 느낌
        ══════════════════════════════════════ */
     [data-theme="mono"] {
-      --bg-primary: #f0f0f0;
-      --bg-secondary: #ffffff;
-      --bg-tertiary: #e4e4e4;
-      --bg-card: #ffffff;
-      --bg-card-hover: #f7f7f7;
-      --bg-nav: rgba(240, 240, 240, 0.94);
+      --bg-primary: #1c1c1c;
+      --bg-secondary: #242424;
+      --bg-tertiary: #2e2e2e;
+      --bg-card: #242424;
+      --bg-card-hover: #2e2e2e;
+      --bg-nav: rgba(28, 28, 28, 0.94);
 
-      --text-primary: #111111;
-      --text-secondary: #555555;
-      --text-muted: #999999;
+      --text-primary: #efefef;
+      --text-secondary: #a0a0a0;
+      --text-muted: #606060;
 
-      --border-primary: rgba(0, 0, 0, 0.1);
-      --border-hover: rgba(0, 0, 0, 0.35);
+      --border-primary: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(255, 255, 255, 0.3);
 
-      --accent-indigo: #222222;
-      --accent-cyan: #666666;
-      --accent-gradient: linear-gradient(135deg, #111111, #666666);
+      --accent-indigo: #cccccc;
+      --accent-cyan: #888888;
+      --accent-gradient: linear-gradient(135deg, #efefef, #888888);
 
-      --color-green: #444444;
-      --color-red: #222222;
-      --color-gold: #555555;
+      --color-green: #aaaaaa;
+      --color-red: #dddddd;
+      --color-gold: #bbbbbb;
       --color-silver: #888888;
-      --color-bronze: #666666;
+      --color-bronze: #999999;
 
-      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.07);
-      --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.1);
-      --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.14);
-      --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.07);
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.5);
+      --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.3);
 
-      --blob-opacity: 0.04;
-      --noise-opacity: 0.02;
+      --blob-opacity: 0.07;
+      --noise-opacity: 0.2;
 
-      --ticker-bg: rgba(0, 0, 0, 0.03);
-      --ticker-border: rgba(0, 0, 0, 0.1);
-      --tag-bg: rgba(0, 0, 0, 0.07);
-      --tag-color: #333333;
-      --tag-border: rgba(0, 0, 0, 0.15);
-      --modal-overlay: rgba(0, 0, 0, 0.5);
+      --ticker-bg: rgba(255, 255, 255, 0.03);
+      --ticker-border: rgba(255, 255, 255, 0.08);
+      --tag-bg: rgba(255, 255, 255, 0.08);
+      --tag-color: #cccccc;
+      --tag-border: rgba(255, 255, 255, 0.15);
+      --modal-overlay: rgba(0, 0, 0, 0.7);
     }
 
     /* 모노 테마: 모든 이미지 흑백 */
