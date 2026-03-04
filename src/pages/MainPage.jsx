@@ -9,7 +9,7 @@ import HeroSection from "../components/hero/HeroSection";
 import { SORT_OPTIONS } from "../constants";
 
 export default function MainPage() {
-  const { tools, openToolDetail, bookmarkCounts } = useTools();
+  const { tools, openToolDetail, bookmarkCounts, reactionCounts } = useTools();
   const [searchQuery, setSearchQuery] = useState("");
   const [category, setCategory] = useState("all");
   const [lifeFilter, setLifeFilter] = useState("all");
@@ -37,10 +37,12 @@ export default function MainPage() {
 
     if (sortBy === "score") data.sort((a, b) => b.score - a.score);
     else if (sortBy === "bookmark") data.sort((a, b) => (bookmarkCounts[b.id] || 0) - (bookmarkCounts[a.id] || 0));
+    else if (sortBy === "likes") data.sort((a, b) => (reactionCounts[b.id]?.likes || 0) - (reactionCounts[a.id]?.likes || 0));
+    else if (sortBy === "dislikes") data.sort((a, b) => (reactionCounts[b.id]?.dislikes || 0) - (reactionCounts[a.id]?.dislikes || 0));
     else data.sort((a, b) => a.name.localeCompare(b.name, "ko"));
 
     return data;
-  }, [tools, category, lifeFilter, searchQuery, sortBy, bookmarkCounts]);
+  }, [tools, category, lifeFilter, searchQuery, sortBy, bookmarkCounts, reactionCounts]);
 
   useEffect(() => {
     setVisibleCount(getInitialCount());

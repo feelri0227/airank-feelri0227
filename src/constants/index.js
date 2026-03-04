@@ -42,6 +42,8 @@ export const SORT_OPTIONS = [
   { id: "score", label: "종합점수순" },
   { id: "name", label: "이름순" },
   { id: "bookmark", label: "북마크순" },
+  { id: "likes", label: "👍많은순" },
+  { id: "dislikes", label: "👎많은순" },
 ];
 
 /** 커뮤니티 카테고리 */
