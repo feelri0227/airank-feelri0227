@@ -29,6 +29,7 @@ function ToolProvider({ children }) {
   const [newsBookmarks, setNewsBookmarks] = useState([]);
   const [bookmarkCounts, setBookmarkCounts] = useState({});
   const [toolReactions, setToolReactions] = useState([]);
+  const [reactionCounts, setReactionCounts] = useState({});
 
   useEffect(() => {
     fetch("/scores.json")
@@ -58,6 +59,20 @@ function ToolProvider({ children }) {
           if (toolId) counts[toolId] = (counts[toolId] || 0) + 1;
         });
         setBookmarkCounts(counts);
+      })
+      .catch(() => {});
+
+    getDocs(collection(db, "toolReactions"))
+      .then((snap) => {
+        const counts = {};
+        snap.docs.forEach((d) => {
+          const { toolId, type } = d.data();
+          if (!toolId) return;
+          if (!counts[toolId]) counts[toolId] = { likes: 0, dislikes: 0 };
+          if (type === "like") counts[toolId].likes++;
+          else if (type === "dislike") counts[toolId].dislikes++;
+        });
+        setReactionCounts(counts);
       })
       .catch(() => {});
   }, []);
@@ -145,8 +160,19 @@ function ToolProvider({ children }) {
     const existing = toolReactions.find(r => r.toolId === toolId);
     if (existing?.type === type) {
       await deleteDoc(docRef);
+      setReactionCounts(prev => {
+        const c = prev[toolId] || { likes: 0, dislikes: 0 };
+        return { ...prev, [toolId]: { likes: c.likes - (type === "like" ? 1 : 0), dislikes: c.dislikes - (type === "dislike" ? 1 : 0) } };
+      });
     } else {
       await setDoc(docRef, { uid: user.uid, toolId, type });
+      setReactionCounts(prev => {
+        const c = prev[toolId] || { likes: 0, dislikes: 0 };
+        return { ...prev, [toolId]: {
+          likes: c.likes + (type === "like" ? 1 : 0) - (existing?.type === "like" ? 1 : 0),
+          dislikes: c.dislikes + (type === "dislike" ? 1 : 0) - (existing?.type === "dislike" ? 1 : 0),
+        }};
+      });
     }
   }, [user, toolReactions]);
 
@@ -175,7 +201,8 @@ function ToolProvider({ children }) {
     toolReactions,
     toggleToolReaction,
     getToolReaction,
-  }), [tools, theme, selectedArticle, news, newsBookmarks, toggleNewsBookmark, isNewsBookmarked, bookmarkCounts, toolReactions, toggleToolReaction, getToolReaction]);
+    reactionCounts,
+  }), [tools, theme, selectedArticle, news, newsBookmarks, toggleNewsBookmark, isNewsBookmarked, bookmarkCounts, toolReactions, toggleToolReaction, getToolReaction, reactionCounts]);
 
   return (
     <ToolContext.Provider value={value}>

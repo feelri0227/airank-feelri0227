@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { getScoreColor, getScoreTextColor, getRankBadge } from "../../utils";
 import { useTools } from "../../context/ToolContext";
+import { useAuth } from "../../context/AuthContext";
 
 const getFaviconUrl = (url) => {
   try { return `https://www.google.com/s2/favicons?domain=${new URL(url).hostname}&sz=64`; }
@@ -10,11 +11,14 @@ const getFaviconUrl = (url) => {
 const ToolCard = ({ tool, rank, onClick }) => {
   const [iconError, setIconError] = useState(false);
   const faviconUrl = getFaviconUrl(tool.url);
-  const { getToolReaction, toggleToolReaction } = useTools();
+  const { getToolReaction, toggleToolReaction, reactionCounts } = useTools();
+  const { user } = useAuth();
   const reaction = getToolReaction(tool.id);
+  const counts = reactionCounts[tool.id] || { likes: 0, dislikes: 0 };
 
   const handleReaction = (e, type) => {
     e.stopPropagation();
+    if (!user) return;
     toggleToolReaction(tool.id, type);
   };
 
@@ -149,44 +153,50 @@ const ToolCard = ({ tool, rank, onClick }) => {
       </div>
 
       {/* 좋아요 / 싫어요 */}
-      <div style={{ display: "flex", gap: "4px", flexShrink: 0 }}>
+      <div style={{ display: "flex", gap: "6px", flexShrink: 0, alignItems: "center" }}>
         <button
           onClick={(e) => handleReaction(e, "like")}
-          title="좋아요"
+          title={user ? "좋아요" : "로그인 후 이용 가능"}
           style={{
             display: "flex",
             alignItems: "center",
             gap: "3px",
-            padding: "3px 7px",
-            borderRadius: "6px",
-            border: reaction === "like" ? "1px solid var(--color-green)" : "1px solid var(--border-primary)",
-            background: reaction === "like" ? "rgba(34,197,94,0.12)" : "transparent",
-            color: reaction === "like" ? "var(--color-green)" : "var(--text-muted)",
-            fontSize: "0.72rem",
-            cursor: "pointer",
-            transition: "all 0.15s ease",
+            padding: "2px 4px",
+            background: "transparent",
+            border: "none",
+            cursor: user ? "pointer" : "default",
+            opacity: user ? 1 : 0.45,
+            transition: "transform 0.1s ease",
           }}
+          onMouseEnter={(e) => { if (user) e.currentTarget.style.transform = "scale(1.2)"; }}
+          onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }}
         >
-          👍
+          <span style={{ fontSize: "1.15rem", filter: reaction === "like" ? "none" : "grayscale(1)" }}>👍</span>
+          <span style={{ fontSize: "0.7rem", fontWeight: 600, color: reaction === "like" ? "var(--color-green)" : "var(--text-muted)" }}>
+            {counts.likes > 0 ? counts.likes : ""}
+          </span>
         </button>
         <button
           onClick={(e) => handleReaction(e, "dislike")}
-          title="싫어요"
+          title={user ? "싫어요" : "로그인 후 이용 가능"}
           style={{
             display: "flex",
             alignItems: "center",
             gap: "3px",
-            padding: "3px 7px",
-            borderRadius: "6px",
-            border: reaction === "dislike" ? "1px solid var(--color-red)" : "1px solid var(--border-primary)",
-            background: reaction === "dislike" ? "rgba(239,68,68,0.12)" : "transparent",
-            color: reaction === "dislike" ? "var(--color-red)" : "var(--text-muted)",
-            fontSize: "0.72rem",
-            cursor: "pointer",
-            transition: "all 0.15s ease",
+            padding: "2px 4px",
+            background: "transparent",
+            border: "none",
+            cursor: user ? "pointer" : "default",
+            opacity: user ? 1 : 0.45,
+            transition: "transform 0.1s ease",
           }}
+          onMouseEnter={(e) => { if (user) e.currentTarget.style.transform = "scale(1.2)"; }}
+          onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }}
         >
-          👎
+          <span style={{ fontSize: "1.15rem", filter: reaction === "dislike" ? "none" : "grayscale(1)" }}>👎</span>
+          <span style={{ fontSize: "0.7rem", fontWeight: 600, color: reaction === "dislike" ? "var(--color-red)" : "var(--text-muted)" }}>
+            {counts.dislikes > 0 ? counts.dislikes : ""}
+          </span>
         </button>
       </div>
     </div>
