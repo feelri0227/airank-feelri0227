@@ -19,7 +19,7 @@ export const getRankBadge = (rank) => {
   if (rank === 1) return "🥇";
   if (rank === 2) return "🥈";
   if (rank === 3) return "🥉";
-  return `${rank}`;
+  return `${rank}위`;
 };
 
 /** Firestore Timestamp 또는 Date → 상대 시간 문자열 */

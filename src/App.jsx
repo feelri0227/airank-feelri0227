@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { collection, query, where, onSnapshot, addDoc, deleteDoc, doc, getDocs } from "firebase/firestore";
+import { collection, query, where, onSnapshot, addDoc, deleteDoc, doc, getDocs, setDoc } from "firebase/firestore";
 import { db } from "./firebase";
 import ToolContext from "./context/ToolContext";
 import { AuthProvider, useAuth } from "./context/AuthContext";
@@ -28,6 +28,7 @@ function ToolProvider({ children }) {
   const [news, setNews] = useState({ items: [], lastUpdated: '' });
   const [newsBookmarks, setNewsBookmarks] = useState([]);
   const [bookmarkCounts, setBookmarkCounts] = useState({});
+  const [toolReactions, setToolReactions] = useState([]);
 
   useEffect(() => {
     fetch("/scores.json")
@@ -70,6 +71,18 @@ function ToolProvider({ children }) {
       return unsub;
     } else {
       setNewsBookmarks([]);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (user) {
+      const q = query(collection(db, "toolReactions"), where("uid", "==", user.uid));
+      const unsub = onSnapshot(q, (snap) => {
+        setToolReactions(snap.docs.map(d => d.data()));
+      });
+      return unsub;
+    } else {
+      setToolReactions([]);
     }
   }, [user]);
 
@@ -121,6 +134,22 @@ function ToolProvider({ children }) {
     return newsBookmarks.some(b => b.link === articleLink);
   }, [newsBookmarks]);
 
+  const getToolReaction = useCallback((toolId) => {
+    const r = toolReactions.find(r => r.toolId === toolId);
+    return r ? r.type : null;
+  }, [toolReactions]);
+
+  const toggleToolReaction = useCallback(async (toolId, type) => {
+    if (!user) return;
+    const docRef = doc(db, "toolReactions", `${user.uid}_${toolId}`);
+    const existing = toolReactions.find(r => r.toolId === toolId);
+    if (existing?.type === type) {
+      await deleteDoc(docRef);
+    } else {
+      await setDoc(docRef, { uid: user.uid, toolId, type });
+    }
+  }, [user, toolReactions]);
+
   const toggleNewsBookmark = useCallback((article) => {
     const existing = newsBookmarks.find(b => b.link === article.link);
     if (existing) {
@@ -143,7 +172,10 @@ function ToolProvider({ children }) {
     toggleNewsBookmark,
     isNewsBookmarked,
     bookmarkCounts,
-  }), [tools, theme, selectedArticle, news, newsBookmarks, toggleNewsBookmark, isNewsBookmarked, bookmarkCounts]);
+    toolReactions,
+    toggleToolReaction,
+    getToolReaction,
+  }), [tools, theme, selectedArticle, news, newsBookmarks, toggleNewsBookmark, isNewsBookmarked, bookmarkCounts, toolReactions, toggleToolReaction, getToolReaction]);
 
   return (
     <ToolContext.Provider value={value}>

@@ -198,7 +198,7 @@ const ToolDetailModal = ({ tool, rank, onClose }) => {
                 fontFamily: "'Outfit', sans-serif",
                 color: "var(--text-muted)",
               }}>
-                {getRankBadge(rank)} {rank <= 3 ? "" : `${rank}위`}
+                {getRankBadge(rank)}
               </span>
             </div>
           </div>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { getScoreColor, getScoreTextColor, getRankBadge } from "../../utils";
+import { useTools } from "../../context/ToolContext";
 
 const getFaviconUrl = (url) => {
   try { return `https://www.google.com/s2/favicons?domain=${new URL(url).hostname}&sz=64`; }
@@ -9,6 +10,13 @@ const getFaviconUrl = (url) => {
 const ToolCard = ({ tool, rank, onClick }) => {
   const [iconError, setIconError] = useState(false);
   const faviconUrl = getFaviconUrl(tool.url);
+  const { getToolReaction, toggleToolReaction } = useTools();
+  const reaction = getToolReaction(tool.id);
+
+  const handleReaction = (e, type) => {
+    e.stopPropagation();
+    toggleToolReaction(tool.id, type);
+  };
 
   return (
   <div onClick={onClick} style={{
@@ -24,7 +32,7 @@ const ToolCard = ({ tool, rank, onClick }) => {
     position: "relative",
     cursor: "pointer",
   }}>
-    {/* 도구 아이콘 + 이름 + 가격 배지 + 메달 */}
+    {/* 도구 아이콘 + 이름 + 메달 */}
     <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px" }}>
       {!iconError && faviconUrl ? (
         <img
@@ -46,7 +54,7 @@ const ToolCard = ({ tool, rank, onClick }) => {
       }}>
         {tool.name}
       </h3>
-<span style={{
+      <span style={{
         marginLeft: "auto",
         fontSize: rank <= 3 ? "1.3rem" : "0.8rem",
         fontWeight: 700,
@@ -124,19 +132,63 @@ const ToolCard = ({ tool, rank, onClick }) => {
       }} />
     </div>
 
-    {/* SNS 플랫폼별 점수 숫자 */}
-    <div style={{ display: "flex", gap: "10px", marginTop: "4px" }}>
-      {[
-        { label: "네이버", value: tool.sns.naver, color: "#03c75a" },
-        { label: "YouTube", value: tool.sns.youtube, color: "#ff0000" },
-        { label: "Google", value: tool.sns.google, color: "#4285f4" },
-        { label: "GitHub", value: tool.sns.github, color: "#8b5cf6" },
-      ].map((p) => (
-        <div key={p.label} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "2px" }}>
-          <span style={{ fontSize: "0.75rem", fontWeight: 700, color: p.color }}>{p.value}</span>
-          <span style={{ fontSize: "0.6rem", color: "var(--text-muted)" }}>{p.label}</span>
-        </div>
-      ))}
+    {/* SNS 플랫폼별 점수 + 좋아요/싫어요 */}
+    <div style={{ display: "flex", alignItems: "center", gap: "10px", marginTop: "4px" }}>
+      <div style={{ display: "flex", gap: "10px", flex: 1 }}>
+        {[
+          { label: "네이버", value: tool.sns.naver, color: "#03c75a" },
+          { label: "YouTube", value: tool.sns.youtube, color: "#ff0000" },
+          { label: "Google", value: tool.sns.google, color: "#4285f4" },
+          { label: "GitHub", value: tool.sns.github, color: "#8b5cf6" },
+        ].map((p) => (
+          <div key={p.label} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "2px" }}>
+            <span style={{ fontSize: "0.75rem", fontWeight: 700, color: p.color }}>{p.value}</span>
+            <span style={{ fontSize: "0.6rem", color: "var(--text-muted)" }}>{p.label}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* 좋아요 / 싫어요 */}
+      <div style={{ display: "flex", gap: "4px", flexShrink: 0 }}>
+        <button
+          onClick={(e) => handleReaction(e, "like")}
+          title="좋아요"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "3px",
+            padding: "3px 7px",
+            borderRadius: "6px",
+            border: reaction === "like" ? "1px solid var(--color-green)" : "1px solid var(--border-primary)",
+            background: reaction === "like" ? "rgba(34,197,94,0.12)" : "transparent",
+            color: reaction === "like" ? "var(--color-green)" : "var(--text-muted)",
+            fontSize: "0.72rem",
+            cursor: "pointer",
+            transition: "all 0.15s ease",
+          }}
+        >
+          👍
+        </button>
+        <button
+          onClick={(e) => handleReaction(e, "dislike")}
+          title="싫어요"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "3px",
+            padding: "3px 7px",
+            borderRadius: "6px",
+            border: reaction === "dislike" ? "1px solid var(--color-red)" : "1px solid var(--border-primary)",
+            background: reaction === "dislike" ? "rgba(239,68,68,0.12)" : "transparent",
+            color: reaction === "dislike" ? "var(--color-red)" : "var(--text-muted)",
+            fontSize: "0.72rem",
+            cursor: "pointer",
+            transition: "all 0.15s ease",
+          }}
+        >
+          👎
+        </button>
+      </div>
     </div>
   </div>
   );
