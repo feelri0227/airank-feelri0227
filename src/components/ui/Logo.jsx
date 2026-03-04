@@ -1,5 +1,17 @@
 const Logo = ({ theme }) => {
-  const textColor = theme === "dark" ? "#ffffff" : "#0f172a";
+  const isDark = theme === "dark" || theme === "manus" || theme === "mono";
+  const textColor = isDark ? "#ffffff" : "#0f172a";
+
+  const aiGradient =
+    theme === "manus" ? "linear-gradient(135deg, #f59e0b, #fb923c)" :
+    theme === "mono"  ? "linear-gradient(135deg, #e0e0e0, #707070)" :
+    "linear-gradient(135deg, #6366f1, #06b6d4)";
+
+  const binaryColor =
+    theme === "manus" ? "#fbbf24" :
+    theme === "mono"  ? "#a0a0a0" :
+    theme === "dark"  ? "#a5b4fc" :
+    "#6366f1";
 
   return (
     <div style={{ display: "flex", alignItems: "center", gap: "8px", cursor: "pointer" }}>
@@ -10,7 +22,7 @@ const Logo = ({ theme }) => {
           fontWeight: 900,
           fontSize: "1.6rem",
           letterSpacing: "-0.03em",
-          background: "linear-gradient(135deg, #6366f1, #06b6d4)",
+          background: aiGradient,
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
           position: "relative",
@@ -26,7 +38,7 @@ const Logo = ({ theme }) => {
             fontWeight: 400,
             opacity: 0.25,
             lineHeight: 1,
-            WebkitTextFillColor: theme === "dark" ? "#a5b4fc" : "#6366f1",
+            WebkitTextFillColor: binaryColor,
             pointerEvents: "none",
             letterSpacing: "0.05em",
           }}>
@@ -40,7 +52,7 @@ const Logo = ({ theme }) => {
         fontFamily: "'Outfit', sans-serif",
         fontWeight: 700,
         fontSize: "1.4rem",
-        color: textColor,
+        color: theme === "mono" ? "#c0c0c0" : textColor,
         letterSpacing: "-0.02em",
       }}>
         뭐써?
