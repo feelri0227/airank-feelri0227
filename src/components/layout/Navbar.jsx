@@ -68,7 +68,7 @@ const Navbar = ({ theme, onToggleTheme }) => {
         transition: "all 0.35s ease",
       }}
     >
-      <Logo theme={theme} />
+      <Logo />
 
       <nav
         className="navbar-nav"

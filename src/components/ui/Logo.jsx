@@ -1,18 +1,4 @@
-const Logo = ({ theme }) => {
-  const isDark = theme === "dark" || theme === "manus" || theme === "mono";
-  const textColor = isDark ? "#ffffff" : "#0f172a";
-
-  const aiGradient =
-    theme === "manus" ? "linear-gradient(135deg, #f59e0b, #fb923c)" :
-    theme === "mono"  ? "linear-gradient(135deg, #e0e0e0, #707070)" :
-    "linear-gradient(135deg, #6366f1, #06b6d4)";
-
-  const binaryColor =
-    theme === "manus" ? "#fbbf24" :
-    theme === "mono"  ? "#a0a0a0" :
-    theme === "dark"  ? "#a5b4fc" :
-    "#6366f1";
-
+const Logo = () => {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: "8px", cursor: "pointer" }}>
       {/* AI 텍스트 + 2진법 패턴 */}
@@ -22,9 +8,11 @@ const Logo = ({ theme }) => {
           fontWeight: 900,
           fontSize: "1.6rem",
           letterSpacing: "-0.03em",
-          background: aiGradient,
+          background: "var(--accent-gradient)",
           WebkitBackgroundClip: "text",
+          backgroundClip: "text",
           WebkitTextFillColor: "transparent",
+          color: "transparent",
           position: "relative",
         }}>
           AI
@@ -38,7 +26,8 @@ const Logo = ({ theme }) => {
             fontWeight: 400,
             opacity: 0.25,
             lineHeight: 1,
-            WebkitTextFillColor: binaryColor,
+            WebkitTextFillColor: "var(--accent-indigo)",
+            color: "var(--accent-indigo)",
             pointerEvents: "none",
             letterSpacing: "0.05em",
           }}>
@@ -52,7 +41,7 @@ const Logo = ({ theme }) => {
         fontFamily: "'Outfit', sans-serif",
         fontWeight: 700,
         fontSize: "1.4rem",
-        color: theme === "mono" ? "#c0c0c0" : textColor,
+        color: "var(--text-primary)",
         letterSpacing: "-0.02em",
       }}>
         뭐써?
