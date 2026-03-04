@@ -85,7 +85,7 @@ function ToolListSidebar() {
         <ToolList>
             {sortedTools.slice(0, 20).map(tool => (
                 <ToolItem key={tool.id} onClick={() => handleToolClick(tool.id)} title={`자세히 보기: ${tool.name}`}>
-                    <ToolLogo src={tool.logo} alt={`${tool.name} logo`} />
+                    <ToolLogo src={`/${tool.logo}`} alt={`${tool.name} logo`} />
                     <ToolInfo>
                         <ToolName>{tool.name}</ToolName>
                         <ToolDescription>{tool.description}</ToolDescription>
