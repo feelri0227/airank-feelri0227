@@ -9,7 +9,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getRedirectResult(auth).catch(() => {});
+    getRedirectResult(auth).catch((err) => console.error("🔴 Redirect error:", err));
     const unsub = onAuthStateChanged(auth, (u) => {
       setUser(u);
       setLoading(false);
