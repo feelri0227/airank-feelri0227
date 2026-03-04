@@ -8,6 +8,9 @@ import { AuthProvider, useAuth } from "./context/AuthContext";
 import MainLayout from "./layouts/MainLayout";
 import MainPage from "./pages/MainPage";
 import NewsPage from "./pages/News";
+import Community from "./pages/Community";
+import CommunityPost from "./pages/CommunityPost";
+import CommunityWrite from "./pages/CommunityWrite";
 import ToolDetailModal from "./components/modals/ToolDetailModal";
 
 import { TOOLS_DATA } from "./data/tools";
@@ -145,6 +148,10 @@ export default function App() {
             <Route path="/" element={<MainLayout />}>
               <Route index element={<MainPage />} />
               <Route path="news" element={<NewsPage />} />
+              <Route path="community" element={<Community />} />
+              <Route path="community/write" element={<CommunityWrite />} />
+              <Route path="community/:postId" element={<CommunityPost />} />
+              <Route path="community/:postId/edit" element={<CommunityWrite />} />
             </Route>
           </Routes>
         </BrowserRouter>

@@ -40,6 +40,15 @@ export const SORT_OPTIONS = [
   { id: "name", label: "이름순" },
 ];
 
+/** 커뮤니티 카테고리 */
+export const COMMUNITY_CATEGORIES = [
+  { id: "all", label: "전체" },
+  { id: "review", label: "후기" },
+  { id: "question", label: "질문" },
+  { id: "tips", label: "팁&노하우" },
+  { id: "free", label: "자유" },
+];
+
 /** 트렌드 티커 뉴스 */
 export const TICKER_ITEMS = [
   "🔥 ChatGPT 언급량 15% 상승 중!",

@@ -43,6 +43,7 @@ const Navbar = ({ theme, onToggleTheme }) => {
   };
 
   const getActiveMenu = () => {
+    if (location.pathname.startsWith("/community")) return "community";
     if (location.pathname === "/news") return "news";
     return "ranking";
   };
@@ -81,7 +82,10 @@ const Navbar = ({ theme, onToggleTheme }) => {
       >
         {NAV_ITEMS.map((item) => {
           const isActive = activeMenu === item.id;
-          const path = item.id === "news" ? "/news" : "/";
+          const path =
+            item.id === "news" ? "/news" :
+            item.id === "community" ? "/community" :
+            item.id === "ranking" ? "/" : "/";
 
           return (
             <Link
