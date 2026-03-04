@@ -155,7 +155,7 @@ const GlobalStyles = () => (
     /* ── 반응형 레이아웃 ── */
     .main-grid {
       display: grid;
-      grid-template-columns: 1fr 300px;
+      grid-template-columns: 1fr 380px;
       gap: 20px;
       max-width: 1280px;
       margin: 0 auto;

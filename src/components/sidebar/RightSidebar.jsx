@@ -17,7 +17,7 @@ const RightSidebar = () => {
     fetch("/news.json")
       .then((r) => r.json())
       .then((data) => {
-        if (data.items?.length) setNews(data.items.slice(0, 5));
+        if (data.items?.length) setNews(data.items.slice(0, 8));
       })
       .catch(() => {}); // 폴백 유지
   }, []);
@@ -27,7 +27,7 @@ const RightSidebar = () => {
       display: "flex",
       flexDirection: "column",
       gap: "16px",
-      minWidth: "280px",
+      minWidth: "360px",
     }}>
       {/* 뉴스 피드 */}
       <div style={{
