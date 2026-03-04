@@ -53,8 +53,8 @@ const HeroSection = ({ searchQuery, onSearchChange, onOpenWizard }) => (
       marginLeft: "auto",
       marginRight: "auto",
     }}>
-      실제 검색량과 트래픽 기반으로
-      <br />AI 도구의 진짜 순위를 확인하세요
+      네이버 · YouTube · Google · GitHub 트렌드를
+      <br />균등 반영한 AI 도구 종합 인기 순위
     </p>
 
     {/* 검색 바 + 마법사 버튼 */}
