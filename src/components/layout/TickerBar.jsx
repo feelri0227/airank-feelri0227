@@ -20,39 +20,38 @@ const TickerContainer = styled.div`
 
 const TickerWrapper = styled.div`
   display: flex;
-  animation: ${ticker} 80s linear infinite;
+  animation: ${ticker} 60s linear infinite;
 `;
 
-const TickerItem = styled.div`
+const TickerItem = styled.a`
   flex-shrink: 0;
   padding: 10px 20px;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   color: var(--text-secondary);
   white-space: nowrap;
+  text-decoration: none;
+
+  &:hover {
+    color: var(--accent-blue);
+  }
 `;
 
 const TickerBar = () => {
-  const { tools } = useTools();
+  const { news } = useTools();
 
-  // "Live" and updated tools
-  const liveTools = tools
-    .filter((tool) => tool.live)
-    .sort((a, b) => b.score - a.score);
+  if (!news || !news.items || news.items.length === 0) {
+    return null;
+  }
 
-  // Non-"Live" and non-updated tools
-  const otherTools = tools
-    .filter((tool) => !tool.live)
-    .sort((a, b) => b.score - a.score);
-
-  const allTools = [...liveTools, ...otherTools, ...liveTools, ...otherTools];
+  // To make the ticker loop seamlessly, we duplicate the news items.
+  const tickerItems = [...news.items, ...news.items];
 
   return (
     <TickerContainer>
       <TickerWrapper>
-        {allTools.map((tool, index) => (
-          <TickerItem key={`${tool.id}-${index}`}>
-            {tool.live ? "[LIVE] " : ""}
-            <strong>{tool.name}</strong> - {tool.description} - Score: {tool.score}
+        {tickerItems.map((item, index) => (
+          <TickerItem href={item.link} key={`${item.link}-${index}`} target="_blank" rel="noopener noreferrer">
+            <strong>[NEWS]</strong> {item.title}
           </TickerItem>
         ))}
       </TickerWrapper>
