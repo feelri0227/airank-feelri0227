@@ -34,13 +34,38 @@ const FilterBar = ({ category, onCategoryChange, lifeFilter, onLifeFilterChange,
     maxWidth: "1200px",
     margin: "0 auto 1.5rem",
   }}>
-    {/* 카테고리 */}
-    <div style={rowStyle}>
-      {CATEGORIES.map((cat) => (
-        <button key={cat.id} onClick={() => onCategoryChange(cat.id)} style={pillStyle(category === cat.id)}>
-          {cat.label}
-        </button>
-      ))}
+    {/* 카테고리 + 정렬 */}
+    <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+      <div style={{ ...rowStyle, flex: 1 }}>
+        {CATEGORIES.map((cat) => (
+          <button key={cat.id} onClick={() => onCategoryChange(cat.id)} style={pillStyle(category === cat.id)}>
+            {cat.label}
+          </button>
+        ))}
+      </div>
+      <div style={{ display: "flex", gap: "2px", flexShrink: 0 }}>
+        {SORT_OPTIONS.map((opt) => (
+          <button
+            key={opt.id}
+            onClick={() => onSortChange(opt.id)}
+            style={{
+              padding: "4px 10px",
+              borderRadius: "6px",
+              border: "none",
+              background: sortBy === opt.id ? "var(--bg-tertiary)" : "transparent",
+              color: sortBy === opt.id ? "var(--text-primary)" : "var(--text-muted)",
+              fontSize: "0.75rem",
+              fontFamily: "'Pretendard', sans-serif",
+              fontWeight: sortBy === opt.id ? 600 : 400,
+              cursor: "pointer",
+              whiteSpace: "nowrap",
+              flexShrink: 0,
+            }}
+          >
+            {opt.label}
+          </button>
+        ))}
+      </div>
     </div>
 
     {/* 직업군 */}
@@ -52,31 +77,6 @@ const FilterBar = ({ category, onCategoryChange, lifeFilter, onLifeFilterChange,
           style={pillStyle(lifeFilter === lf.id, "var(--color-gold)", "rgba(245,158,11,0.1)")}
         >
           {lf.label}
-        </button>
-      ))}
-    </div>
-
-    {/* 정렬 */}
-    <div style={{ display: "flex", gap: "2px" }}>
-      {SORT_OPTIONS.map((opt) => (
-        <button
-          key={opt.id}
-          onClick={() => onSortChange(opt.id)}
-          style={{
-            padding: "4px 10px",
-            borderRadius: "6px",
-            border: "none",
-            background: sortBy === opt.id ? "var(--bg-tertiary)" : "transparent",
-            color: sortBy === opt.id ? "var(--text-primary)" : "var(--text-muted)",
-            fontSize: "0.75rem",
-            fontFamily: "'Pretendard', sans-serif",
-            fontWeight: sortBy === opt.id ? 600 : 400,
-            cursor: "pointer",
-            whiteSpace: "nowrap",
-            flexShrink: 0,
-          }}
-        >
-          {opt.label}
         </button>
       ))}
     </div>
