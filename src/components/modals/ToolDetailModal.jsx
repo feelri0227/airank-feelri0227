@@ -137,20 +137,21 @@ const ToolDetailModal = ({ tool, rank, onClose }) => {
             position: "absolute",
             top: "16px",
             right: "56px",
-            background: bookmarked ? "rgba(99,102,241,0.12)" : "var(--bg-tertiary)",
-            border: bookmarked ? "1px solid var(--accent-indigo)" : "none",
+            background: bookmarked ? "rgba(239,68,68,0.1)" : "var(--bg-tertiary)",
+            border: bookmarked ? "1px solid #ef4444" : "none",
             borderRadius: "8px",
             width: "32px",
             height: "32px",
             cursor: "pointer",
-            fontSize: "1rem",
+            fontSize: "1.1rem",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             transition: "all 0.2s ease",
+            color: bookmarked ? "#ef4444" : "var(--text-muted)",
           }}
         >
-          {bookmarked ? "★" : "☆"}
+          {bookmarked ? "♥" : "♡"}
         </button>
 
         {/* 헤더: 아이콘 + 이름 + 랭크 + 무료/유료 */}

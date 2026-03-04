@@ -121,7 +121,7 @@ const Navbar = ({ theme, onToggleTheme, activeMenu, onMenuChange, tools, onOpenT
               border: "1px solid var(--border-primary)",
               borderRadius: "12px",
               padding: "8px",
-              minWidth: "200px",
+              minWidth: "240px",
               maxHeight: "320px",
               overflowY: "auto",
               boxShadow: "0 8px 32px rgba(0,0,0,0.15)",
@@ -155,7 +155,7 @@ const Navbar = ({ theme, onToggleTheme, activeMenu, onMenuChange, tools, onOpenT
                     onMouseEnter={(e) => e.currentTarget.style.background = "var(--bg-tertiary)"}
                     onMouseLeave={(e) => e.currentTarget.style.background = "transparent"}
                   >
-                    ★ {b.toolName}
+                    ♥ {b.toolName}
                   </button>
                 ))
               )}
