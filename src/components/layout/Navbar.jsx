@@ -10,7 +10,7 @@ import { useTools } from "../../context/ToolContext";
 
 const Navbar = ({ theme, onToggleTheme }) => {
   const { user, login, logout } = useAuth();
-  const { tools, openToolDetail } = useTools();
+  const { tools, openToolDetail, newsBookmarks } = useTools();
   const [showDropdown, setShowDropdown] = useState(false);
   const [bookmarks, setBookmarks] = useState([]);
   const dropdownRef = useRef(null);
@@ -167,7 +167,68 @@ const Navbar = ({ theme, onToggleTheme }) => {
                     padding: "4px 8px 6px",
                   }}
                 >
-                  북마크 ({bookmarks.length})
+                  뉴스 북마크 ({newsBookmarks.length})
+                </div>
+                {newsBookmarks.length === 0 ? (
+                  <div
+                    style={{
+                      fontSize: "0.78rem",
+                      color: "var(--text-muted)",
+                      padding: "8px",
+                      textAlign: "center",
+                    }}
+                  >
+                    북마크한 뉴스가 없어요
+                  </div>
+                ) : (
+                  newsBookmarks.map((b) => (
+                    <a
+                      key={b.id}
+                      href={b.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        display: "block",
+                        width: "100%",
+                        padding: "6px 8px",
+                        borderRadius: "8px",
+                        border: "none",
+                        background: "transparent",
+                        color: "var(--text-primary)",
+                        fontFamily: "'Pretendard', sans-serif",
+                        fontSize: "0.82rem",
+                        cursor: "pointer",
+                        textAlign: "left",
+                        textDecoration: 'none'
+                      }}
+                      onMouseEnter={(e) =>
+                        (e.currentTarget.style.background =
+                          "var(--bg-tertiary)")
+                      }
+                      onMouseLeave={(e) =>
+                        (e.currentTarget.style.background = "transparent")
+                      }
+                    >
+                      {b.title}
+                    </a>
+                  ))
+                )}
+                <div
+                  style={{
+                    height: "1px",
+                    background: "var(--border-primary)",
+                    margin: "6px 0",
+                  }}
+                />
+                <div
+                  style={{
+                    fontSize: "0.65rem",
+                    fontWeight: 600,
+                    color: "var(--text-muted)",
+                    padding: "4px 8px 6px",
+                  }}
+                >
+                  도구 북마크 ({bookmarks.length})
                 </div>
                 {bookmarks.length === 0 ? (
                   <div

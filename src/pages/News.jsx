@@ -23,6 +23,9 @@ const NewsList = styled.ul`
 const NewsItem = styled.li`
   border-bottom: 1px solid #eee;
   padding: 1.5rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
   &:last-child {
     border-bottom: none;
@@ -54,8 +57,17 @@ const NewsMeta = styled.span`
   color: #999;
 `;
 
+const BookmarkButton = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  color: ${props => (props.bookmarked ? '#ffc107' : '#ccc')};
+`;
+
 function NewsPage() {
-  const { news, selectedArticle, setSelectedArticle } = useTools();
+  const { news, selectedArticle, setSelectedArticle, toggleNewsBookmark, isNewsBookmarked } = useTools();
 
   return (
     <NewsPageContainer>
@@ -63,11 +75,22 @@ function NewsPage() {
       <NewsList>
         {news.items.map((item) => (
           <NewsItem key={item.link} onClick={() => setSelectedArticle(item)} style={{backgroundColor: selectedArticle?.link === item.link ? '#f0f0f0' : 'transparent'}}>
-            <NewsLink href={item.link} target="_blank" rel="noopener noreferrer">
-              <NewsTitle>{item.title}</NewsTitle>
-              <NewsDescription>{item.description}</NewsDescription>
-              <NewsMeta>{item.relativeTime}</NewsMeta>
-            </NewsLink>
+            <div>
+              <NewsLink href={item.link} target="_blank" rel="noopener noreferrer">
+                <NewsTitle>{item.title}</NewsTitle>
+                <NewsDescription>{item.description}</NewsDescription>
+                <NewsMeta>{item.relativeTime}</NewsMeta>
+              </NewsLink>
+            </div>
+            <BookmarkButton 
+              bookmarked={isNewsBookmarked(item.link)}
+              onClick={(e) => {
+                e.stopPropagation(); // Stop the event from bubbling up to the NewsItem
+                toggleNewsBookmark(item);
+              }}
+            >
+              {isNewsBookmarked(item.link) ? '★' : '☆'}
+            </BookmarkButton>
           </NewsItem>
         ))}
       </NewsList>
@@ -76,4 +99,3 @@ function NewsPage() {
 }
 
 export default NewsPage;
-
