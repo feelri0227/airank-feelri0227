@@ -84,6 +84,65 @@ const TOOLS = [
   { id: 48, naverKw:['Canva AI','캔바 AI'],                         yt:'Canva AI design',        ytKo:'캔바 AI',            gt:'Canva AI',         gtKo:'캔바 AI',            github:'canva' },
   { id: 49, naverKw:['Figma AI','피그마 AI'],                       yt:'Figma AI features',      ytKo:'피그마 AI',          gt:'Figma AI',         gtKo:'피그마 AI',          github:'figma' },
   { id: 50, naverKw:['Uizard AI design'],                           yt:'Uizard AI',              ytKo:'유아이자드',         gt:'Uizard AI',        gtKo:'유아이자드',         github:'uizard' },
+  // ── 코딩 추가 (151-158) ──
+  { id: 151, naverKw:['Devin AI','데빈 AI'],                        yt:'Devin AI software engineer', ytKo:'데빈 AI',          gt:'Devin AI',         gtKo:'데빈 AI',            github:'devin' },
+  { id: 152, naverKw:['Lovable AI','러버블 AI'],                    yt:'Lovable AI app builder',     ytKo:'러버블 AI',         gt:'Lovable AI',       gtKo:'러버블 AI',           github:'lovable' },
+  { id: 153, naverKw:['Amazon Q Developer','아마존 Q'],             yt:'Amazon Q Developer',         ytKo:'아마존 Q 개발자',   gt:'Amazon Q Developer', gtKo:'아마존 Q',          github:'amazon-q' },
+  { id: 154, naverKw:['JetBrains AI','젯브레인 AI'],               yt:'JetBrains AI Assistant',     ytKo:'젯브레인 AI',       gt:'JetBrains AI',     gtKo:'젯브레인 AI',         github:'jetbrains-ai' },
+  { id: 155, naverKw:['Continue dev AI coding'],                    yt:'Continue dev AI',            ytKo:'컨티뉴 AI',         gt:'Continue.dev AI',  gtKo:'컨티뉴 AI',           github:'continuedev' },
+  { id: 156, naverKw:['Aider AI coding'],                           yt:'Aider AI pair programmer',   ytKo:'에이더 AI',         gt:'Aider AI coding',  gtKo:'에이더 AI',           github:'aider' },
+  { id: 157, naverKw:['Zed editor AI'],                             yt:'Zed editor AI',              ytKo:'제드 에디터',       gt:'Zed editor',       gtKo:'제드 AI 에디터',      github:'zed-industries' },
+  { id: 158, naverKw:['Cline AI agent','클라인 AI'],               yt:'Cline AI coding agent',      ytKo:'클라인 AI',         gt:'Cline AI agent',   gtKo:'클라인 AI',           github:'cline' },
+  // ── 텍스트 추가 (159-163) ──
+  { id: 159, naverKw:['뤼튼 AI','WRTN AI'],                         yt:'뤼튼 AI',                    ytKo:'뤼튼 AI',           gt:'WRTN AI',          gtKo:'뤼튼 AI',             github:'wrtn' },
+  { id: 160, naverKw:['Gemma Google AI','젬마 AI'],                 yt:'Google Gemma AI',            ytKo:'구글 젬마 AI',      gt:'Google Gemma',     gtKo:'구글 젬마',           github:'google-gemma' },
+  { id: 161, naverKw:['EXAONE LG AI','엑사원'],                     yt:'EXAONE LG AI',               ytKo:'엑사원 AI',         gt:'EXAONE AI',        gtKo:'엑사원',              github:'exaone' },
+  { id: 162, naverKw:['Solar AI Upstage','솔라 AI'],                yt:'Solar AI Upstage',           ytKo:'솔라 AI 업스테이지', gt:'Upstage Solar AI', gtKo:'솔라 AI',            github:'upstage-solar' },
+  { id: 163, naverKw:['InternLM AI'],                               yt:'InternLM AI model',          ytKo:'인턴LM AI',         gt:'InternLM',         gtKo:'인턴LM',              github:'internlm' },
+  // ── 검색 추가 (164-167) ──
+  { id: 164, naverKw:['Consensus AI research'],                     yt:'Consensus AI search',        ytKo:'컨센서스 AI',       gt:'Consensus AI',     gtKo:'컨센서스 AI',         github:'consensus' },
+  { id: 165, naverKw:['SciSpace AI paper'],                         yt:'SciSpace AI research',       ytKo:'사이스페이스 AI',   gt:'SciSpace AI',      gtKo:'사이스페이스 AI',     github:'scispace' },
+  { id: 166, naverKw:['Semantic Scholar AI'],                       yt:'Semantic Scholar AI',        ytKo:'시맨틱 스칼라',     gt:'Semantic Scholar', gtKo:'시맨틱 스칼라',       github:'semantic-scholar' },
+  { id: 167, naverKw:['Research Rabbit AI'],                        yt:'Research Rabbit paper',      ytKo:'리서치 래빗',       gt:'Research Rabbit',  gtKo:'리서치 래빗',         github:'research-rabbit' },
+  // ── 이미지 추가 (168-174) ──
+  { id: 168, naverKw:['Imagen 3 Google','이마젠 3'],                yt:'Google Imagen 3',            ytKo:'구글 이마젠 3',     gt:'Imagen 3 Google',  gtKo:'구글 이마젠',         github:'imagen' },
+  { id: 169, naverKw:['Recraft AI design'],                         yt:'Recraft AI image',           ytKo:'리크래프트 AI',     gt:'Recraft AI',       gtKo:'리크래프트 AI',       github:'recraft' },
+  { id: 170, naverKw:['Flair AI product photo'],                    yt:'Flair AI product',           ytKo:'플레어 AI',         gt:'Flair AI',         gtKo:'플레어 AI',           github:'flair-ai' },
+  { id: 171, naverKw:['Clipdrop AI','클립드롭'],                    yt:'Clipdrop Stability AI',      ytKo:'클립드롭 AI',       gt:'Clipdrop AI',      gtKo:'클립드롭',            github:'clipdrop' },
+  { id: 172, naverKw:['Magnific AI upscale'],                       yt:'Magnific AI upscale',        ytKo:'매그니픽 AI',       gt:'Magnific AI',      gtKo:'매그니픽 AI',         github:'magnific' },
+  { id: 173, naverKw:['ComfyUI Stable Diffusion','컴피UI'],         yt:'ComfyUI tutorial',           ytKo:'컴피UI',            gt:'ComfyUI',          gtKo:'컴피UI',              github:'comfyanonymous' },
+  { id: 174, naverKw:['InvokeAI image generation'],                 yt:'InvokeAI image AI',          ytKo:'인보크 AI',         gt:'InvokeAI',         gtKo:'인보크 AI',           github:'invoke-ai' },
+  // ── 영상 추가 (175-181) ──
+  { id: 175, naverKw:['Veo 2 Google video','베오 AI'],              yt:'Google Veo 2 video',         ytKo:'구글 베오 2',       gt:'Google Veo 2',     gtKo:'구글 베오',           github:'veo' },
+  { id: 176, naverKw:['Hailuo AI video','하이루오 AI'],             yt:'Hailuo AI video',            ytKo:'하이루오 AI',       gt:'Hailuo AI',        gtKo:'하이루오 AI',         github:'hailuo' },
+  { id: 177, naverKw:['Wan AI video','완 AI 영상'],                 yt:'Wan AI video generation',    ytKo:'완 AI',             gt:'Wan AI video',     gtKo:'완 AI',               github:'wanvideo' },
+  { id: 178, naverKw:['Opus Clip video','오퍼스 클립'],             yt:'Opus Clip AI shorts',        ytKo:'오퍼스 클립',       gt:'Opus Clip',        gtKo:'오퍼스 클립',         github:'opus-clip' },
+  { id: 179, naverKw:['Veed.io AI video','비드 AI'],               yt:'Veed.io AI editor',          ytKo:'비드 AI',           gt:'Veed.io AI',       gtKo:'비드 AI',             github:'veed-io' },
+  { id: 180, naverKw:['Kapwing AI video'],                          yt:'Kapwing AI editor',          ytKo:'캡윙 AI',           gt:'Kapwing AI',       gtKo:'캡윙 AI',             github:'kapwing' },
+  { id: 181, naverKw:['InVideo AI video'],                          yt:'InVideo AI',                 ytKo:'인비디오 AI',       gt:'InVideo AI',       gtKo:'인비디오 AI',         github:'invideo' },
+  // ── 오디오 추가 (182-186) ──
+  { id: 182, naverKw:['Murf AI voice','머프 AI'],                   yt:'Murf AI voiceover',          ytKo:'머프 AI',           gt:'Murf AI',          gtKo:'머프 AI',             github:'murf-ai' },
+  { id: 183, naverKw:['AIVA AI music','아이바 음악'],               yt:'AIVA AI music composer',     ytKo:'아이바 AI',         gt:'AIVA AI music',    gtKo:'아이바 AI',           github:'aiva' },
+  { id: 184, naverKw:['Soundraw AI music'],                         yt:'Soundraw AI music',          ytKo:'사운드로우 AI',     gt:'Soundraw AI',      gtKo:'사운드로우',          github:'soundraw' },
+  { id: 185, naverKw:['Whisper OpenAI','위스퍼 AI'],               yt:'OpenAI Whisper speech',      ytKo:'위스퍼 AI',         gt:'OpenAI Whisper',   gtKo:'위스퍼',              github:'openai-whisper' },
+  { id: 186, naverKw:['Adobe Podcast AI','어도비 팟캐스트'],        yt:'Adobe Podcast enhance',      ytKo:'어도비 팟캐스트',   gt:'Adobe Podcast AI', gtKo:'어도비 팟캐스트',     github:'adobe-podcast' },
+  // ── 생산성 추가 (187-193) ──
+  { id: 187, naverKw:['Coda AI docs'],                              yt:'Coda AI features',           ytKo:'코다 AI',           gt:'Coda AI',          gtKo:'코다 AI',             github:'coda' },
+  { id: 188, naverKw:['ClickUp AI','클릭업 AI'],                   yt:'ClickUp AI features',        ytKo:'클릭업 AI',         gt:'ClickUp AI',       gtKo:'클릭업 AI',           github:'clickup' },
+  { id: 189, naverKw:['Tana AI notes'],                             yt:'Tana AI notes',              ytKo:'타나 AI',           gt:'Tana AI',          gtKo:'타나 AI',             github:'tana' },
+  { id: 190, naverKw:['Reflect notes AI'],                          yt:'Reflect notes AI',           ytKo:'리플렉트 노트',     gt:'Reflect notes AI', gtKo:'리플렉트 AI',         github:'reflect' },
+  { id: 191, naverKw:['CLOVA Note','클로바 노트'],                  yt:'CLOVA Note 네이버',          ytKo:'클로바 노트',       gt:'Clova Note Naver', gtKo:'클로바 노트',         github:'clova-note' },
+  { id: 192, naverKw:['Napkin AI diagram'],                         yt:'Napkin AI visual',           ytKo:'냅킨 AI',           gt:'Napkin AI',        gtKo:'냅킨 AI',             github:'napkin-ai' },
+  { id: 193, naverKw:['Granola AI meeting','그래놀라 AI'],          yt:'Granola AI notes',           ytKo:'그래놀라 AI',       gt:'Granola AI',       gtKo:'그래놀라 AI',         github:'granola' },
+  // ── 디자인·사진 추가 (194-197) ──
+  { id: 194, naverKw:['Kittl design AI','키틀 디자인'],             yt:'Kittl AI design',            ytKo:'키틀 AI',           gt:'Kittl AI',         gtKo:'키틀 AI',             github:'kittl' },
+  { id: 195, naverKw:['Topaz Photo AI','토파즈 AI'],               yt:'Topaz Photo AI enhance',     ytKo:'토파즈 AI',         gt:'Topaz Photo AI',   gtKo:'토파즈 AI',           github:'topazlabs' },
+  { id: 196, naverKw:['Upscayl AI upscale','업스케일 AI'],          yt:'Upscayl AI upscale',         ytKo:'업스케일 AI',       gt:'Upscayl AI',       gtKo:'업스케일 AI',         github:'upscayl' },
+  { id: 197, naverKw:['Pixlr AI editor','픽슬러 AI'],              yt:'Pixlr AI photo editor',      ytKo:'픽슬러 AI',         gt:'Pixlr AI',         gtKo:'픽슬러 AI',           github:'pixlr' },
+  // ── 자동화·에이전트 추가 (198-200) ──
+  { id: 198, naverKw:['AutoGPT AI agent','오토GPT'],               yt:'AutoGPT AI agent',           ytKo:'오토GPT',           gt:'AutoGPT',          gtKo:'오토GPT',             github:'significant-gravitas' },
+  { id: 199, naverKw:['Dify AI platform','다이파이'],               yt:'Dify AI LLM platform',       ytKo:'다이파이 AI',       gt:'Dify AI',          gtKo:'다이파이 AI',         github:'langgenius' },
+  { id: 200, naverKw:['Flowise AI workflow','플로와이즈'],          yt:'Flowise AI builder',         ytKo:'플로와이즈 AI',     gt:'Flowise AI',       gtKo:'플로와이즈 AI',       github:'flowiseai' },
 ];
 
 // ─── Naver DataLab ────────────────────────────────────────────────────────────
