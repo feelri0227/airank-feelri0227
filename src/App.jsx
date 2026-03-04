@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ToolContext from "./context/ToolContext";
 
@@ -13,6 +13,12 @@ function ToolProvider({ children }) {
   const [tools, setTools] = useState(TOOLS_DATA);
   const [selectedTool, setSelectedTool] = useState(null);
   const [selectedRank, setSelectedRank] = useState(null);
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
+  const [selectedArticle, setSelectedArticle] = useState(() => {
+    const savedArticle = localStorage.getItem('selectedArticle');
+    return savedArticle ? JSON.parse(savedArticle) : null;
+  });
+  const [news, setNews] = useState({ items: [], lastUpdated: '' });
 
   useEffect(() => {
     fetch("/scores.json")
@@ -27,7 +33,28 @@ function ToolProvider({ children }) {
         );
       })
       .catch(() => {});
+
+    fetch('/news.json')
+      .then((res) => res.json())
+      .then((data) => setNews(data));
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem('theme', theme);
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
+
+  useEffect(() => {
+    if (selectedArticle) {
+      localStorage.setItem('selectedArticle', JSON.stringify(selectedArticle));
+    } else {
+      localStorage.removeItem('selectedArticle');
+    }
+  }, [selectedArticle]);
+
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+  };
 
   const openToolDetail = (tool, rank) => {
     setSelectedTool(tool);
@@ -40,8 +67,13 @@ function ToolProvider({ children }) {
 
   const value = useMemo(() => ({ 
     tools, 
-    openToolDetail 
-  }), [tools]);
+    openToolDetail,
+    theme,
+    toggleTheme,
+    selectedArticle,
+    setSelectedArticle,
+    news,
+  }), [tools, theme, selectedArticle, news]);
 
   return (
     <ToolContext.Provider value={value}>

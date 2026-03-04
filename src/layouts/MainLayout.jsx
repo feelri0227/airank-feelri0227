@@ -1,5 +1,5 @@
-import { useState, useEffect, useCallback } from "react";
 import { Outlet } from "react-router-dom";
+import { useTools } from "../context/ToolContext";
 
 import GlobalStyles from "../styles/GlobalStyles";
 import BackgroundEffects from "../components/layout/BackgroundEffects";
@@ -8,15 +8,7 @@ import TickerBar from "../components/layout/TickerBar";
 import Footer from "../components/layout/Footer";
 
 export default function MainLayout() {
-  const [theme, setTheme] = useState("light");
-
-  const toggleTheme = useCallback(() => {
-    setTheme((prev) => (prev === "light" ? "dark" : "light"));
-  }, []);
-
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-  }, [theme]);
+  const { theme, toggleTheme } = useTools();
 
   return (
     <>

@@ -1,7 +1,7 @@
 
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { useTools } from '../context/ToolContext';
 
 const NewsPageContainer = styled.div`
   max-width: 800px;
@@ -55,20 +55,14 @@ const NewsMeta = styled.span`
 `;
 
 function NewsPage() {
-  const [news, setNews] = useState({ items: [], lastUpdated: '' });
-
-  useEffect(() => {
-    fetch('/news.json')
-      .then((res) => res.json())
-      .then((data) => setNews(data));
-  }, []);
+  const { news, selectedArticle, setSelectedArticle } = useTools();
 
   return (
     <NewsPageContainer>
       <PageTitle>최신 AI 뉴스</PageTitle>
       <NewsList>
         {news.items.map((item) => (
-          <NewsItem key={item.link}>
+          <NewsItem key={item.link} onClick={() => setSelectedArticle(item)} style={{backgroundColor: selectedArticle?.link === item.link ? '#f0f0f0' : 'transparent'}}>
             <NewsLink href={item.link} target="_blank" rel="noopener noreferrer">
               <NewsTitle>{item.title}</NewsTitle>
               <NewsDescription>{item.description}</NewsDescription>
