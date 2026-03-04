@@ -16,6 +16,12 @@ const MainContent = styled.main`
   flex-grow: 1;
 `;
 
+const SidebarWrapper = styled.div`
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
 const PageTitle = styled.h1`
   font-size: 2rem;
   margin-bottom: 2rem;
@@ -102,7 +108,7 @@ function NewsPage() {
 
   return (
     <NewsPageContainer>
-      <ToolListSidebar />
+      <SidebarWrapper><ToolListSidebar /></SidebarWrapper>
       <MainContent>
         <PageTitle>📰 최신 AI 뉴스</PageTitle>
         <NewsList>
