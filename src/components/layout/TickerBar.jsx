@@ -5,7 +5,7 @@ const TickerBar = () => {
   const [isPaused, setIsPaused] = useState(false);
   const [items, setItems] = useState(TICKER_ITEMS);
 
-  useEffect(() => {
+  const fetchNews = () => {
     fetch("/news.json")
       .then((r) => r.json())
       .then((data) => {
@@ -18,6 +18,13 @@ const TickerBar = () => {
         }
       })
       .catch(() => {}); // 폴백: 하드코딩 TICKER_ITEMS 유지
+  };
+
+  useEffect(() => {
+    fetchNews(); // 초기 뉴스 로드
+    const intervalId = setInterval(fetchNews, 21600000); // 6시간마다 뉴스 갱신
+
+    return () => clearInterval(intervalId); // 컴포넌트 언마운트 시 인터벌 정리
   }, []);
 
   const doubled = [...items, ...items]; // 무한 스크롤용 2배 복제

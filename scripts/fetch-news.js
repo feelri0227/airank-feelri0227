@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import 'dotenv/config';
+
 /**
  * scripts/fetch-news.js
  * 네이버 뉴스 검색 API로 AI 관련 최신 뉴스를 수집하고 public/news.json 생성
@@ -38,7 +40,7 @@ async function fetchNaverNews(query) {
     return [];
   }
 
-  const url = `https://openapi.naver.com/v1/search/news.json?query=${encodeURIComponent(query)}&display=5&sort=date`;
+  const url = `https://openapi.naver.com/v1/search/news.json?query=${encodeURIComponent(query)}&display=10&sort=date`; // display=10으로 늘려 더 많은 결과 확인
   try {
     const res = await fetch(url, {
       headers: {
@@ -89,13 +91,16 @@ async function main() {
   for (const query of QUERIES) {
     const items = await fetchNaverNews(query);
     for (const item of items) {
-      const link = item.originallink || item.link;
+      // originallink가 있는 경우에만 처리
+      const link = item.originallink;
+      if (!link) continue; // originallink 없으면 건너뛰기
+
       if (seen.has(link)) continue;
       seen.add(link);
 
       allItems.push({
         title: cleanHtml(item.title),
-        link,
+        link, // originallink만 사용
         description: cleanHtml(item.description),
         pubDate: item.pubDate,
         relativeTime: relativeTime(item.pubDate),
