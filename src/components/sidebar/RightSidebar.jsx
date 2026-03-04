@@ -68,7 +68,6 @@ const RightSidebar = () => {
               gap: "4px",
               alignItems: "flex-start",
             }}>
-              {item.hot && <span style={{ color: "var(--color-red)", fontSize: "0.7rem", flexShrink: 0 }}>HOT</span>}
               {item.title}
             </div>
             <div style={{ fontSize: "0.68rem", color: "var(--text-muted)", marginTop: "2px" }}>
