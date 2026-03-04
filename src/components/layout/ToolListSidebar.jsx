@@ -1,5 +1,11 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import { useTools } from '../../context/ToolContext';
+
+const getFaviconUrl = (url) => {
+  try { return `https://www.google.com/s2/favicons?domain=${new URL(url).hostname}&sz=64`; }
+  catch { return null; }
+};
 
 const SidebarContainer = styled.aside`
   width: 250px;
@@ -21,7 +27,7 @@ const ToolList = styled.ul`
   margin: 0;
 `;
 
-const ToolItem = styled.li`
+const ToolItemStyled = styled.li`
   display: flex;
   align-items: center;
   margin-bottom: 1.25rem;
@@ -69,30 +75,43 @@ const ToolDescription = styled.p`
 `;
 
 
+function ToolItem_({ tool, rank, onClick }) {
+  const [iconError, setIconError] = useState(false);
+  const faviconUrl = getFaviconUrl(tool.url);
+
+  return (
+    <ToolItemStyled onClick={onClick} title={`자세히 보기: ${tool.name}`}>
+      {!iconError && faviconUrl ? (
+        <ToolLogo src={faviconUrl} alt={`${tool.name} logo`} onError={() => setIconError(true)} />
+      ) : (
+        <div style={{ width: 36, height: 36, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.4rem', marginRight: '0.8rem', flexShrink: 0 }}>
+          {tool.icon}
+        </div>
+      )}
+      <ToolInfo>
+        <ToolName>{tool.name}</ToolName>
+        <ToolDescription>{tool.desc}</ToolDescription>
+      </ToolInfo>
+    </ToolItemStyled>
+  );
+}
+
 function ToolListSidebar() {
-  const { tools, setSelectedToolById } = useTools();
+  const { tools, openToolDetail } = useTools();
 
-  // Find the tool object from the tools array based on the id from sortedTools
-  const handleToolClick = (id) => {
-    setSelectedToolById(id);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  // Sort tools by score and take the top 20
   const sortedTools = [...tools].sort((a, b) => b.score - a.score).slice(0, 20);
 
   return (
     <SidebarContainer>
         <SidebarTitle>🔥 주간 AI 랭킹</SidebarTitle>
         <ToolList>
-            {sortedTools.map(tool => (
-                <ToolItem key={tool.id} onClick={() => handleToolClick(tool.id)} title={`자세히 보기: ${tool.name}`}>
-                    <ToolLogo src={tool.logo} alt={`${tool.name} logo`} />
-                    <ToolInfo>
-                        <ToolName>{tool.name}</ToolName>
-                        <ToolDescription>{tool.description}</ToolDescription>
-                    </ToolInfo>
-                </ToolItem>
+            {sortedTools.map((tool, i) => (
+                <ToolItem_
+                  key={tool.id}
+                  tool={tool}
+                  rank={i + 1}
+                  onClick={() => openToolDetail(tool, i + 1)}
+                />
             ))}
         </ToolList>
     </SidebarContainer>
