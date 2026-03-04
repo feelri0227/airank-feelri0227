@@ -43,42 +43,42 @@ const FilterBar = ({ category, onCategoryChange, lifeFilter, onLifeFilterChange,
       ))}
     </div>
 
-    {/* 직업군 + 정렬 */}
-    <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-      <div style={{ ...rowStyle, flex: 1 }}>
-        {LIFE_FILTERS.map((lf) => (
-          <button
-            key={lf.id}
-            onClick={() => onLifeFilterChange(lf.id)}
-            style={pillStyle(lifeFilter === lf.id, "var(--color-gold)", "rgba(245,158,11,0.1)")}
-          >
-            {lf.label}
-          </button>
-        ))}
-      </div>
-      <div style={{ display: "flex", gap: "2px", flexShrink: 0 }}>
-        {SORT_OPTIONS.map((opt) => (
-          <button
-            key={opt.id}
-            onClick={() => onSortChange(opt.id)}
-            style={{
-              padding: "4px 10px",
-              borderRadius: "6px",
-              border: "none",
-              background: sortBy === opt.id ? "var(--bg-tertiary)" : "transparent",
-              color: sortBy === opt.id ? "var(--text-primary)" : "var(--text-muted)",
-              fontSize: "0.75rem",
-              fontFamily: "'Pretendard', sans-serif",
-              fontWeight: sortBy === opt.id ? 600 : 400,
-              cursor: "pointer",
-              whiteSpace: "nowrap",
-              flexShrink: 0,
-            }}
-          >
-            {opt.label}
-          </button>
-        ))}
-      </div>
+    {/* 직업군 */}
+    <div style={rowStyle}>
+      {LIFE_FILTERS.map((lf) => (
+        <button
+          key={lf.id}
+          onClick={() => onLifeFilterChange(lf.id)}
+          style={pillStyle(lifeFilter === lf.id, "var(--color-gold)", "rgba(245,158,11,0.1)")}
+        >
+          {lf.label}
+        </button>
+      ))}
+    </div>
+
+    {/* 정렬 */}
+    <div style={{ display: "flex", gap: "2px" }}>
+      {SORT_OPTIONS.map((opt) => (
+        <button
+          key={opt.id}
+          onClick={() => onSortChange(opt.id)}
+          style={{
+            padding: "4px 10px",
+            borderRadius: "6px",
+            border: "none",
+            background: sortBy === opt.id ? "var(--bg-tertiary)" : "transparent",
+            color: sortBy === opt.id ? "var(--text-primary)" : "var(--text-muted)",
+            fontSize: "0.75rem",
+            fontFamily: "'Pretendard', sans-serif",
+            fontWeight: sortBy === opt.id ? 600 : 400,
+            cursor: "pointer",
+            whiteSpace: "nowrap",
+            flexShrink: 0,
+          }}
+        >
+          {opt.label}
+        </button>
+      ))}
     </div>
   </div>
 );
