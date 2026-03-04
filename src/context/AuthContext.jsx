@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { signInWithRedirect, getRedirectResult, signOut, onAuthStateChanged } from "firebase/auth";
+import { signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
 import { auth, provider } from "../firebase";
 
 const AuthContext = createContext(null);
@@ -9,7 +9,6 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getRedirectResult(auth).catch((err) => console.error("🔴 Redirect error:", err));
     const unsub = onAuthStateChanged(auth, (u) => {
       setUser(u);
       setLoading(false);
@@ -17,7 +16,7 @@ export const AuthProvider = ({ children }) => {
     return unsub;
   }, []);
 
-  const login = () => signInWithRedirect(auth, provider);
+  const login = () => signInWithPopup(auth, provider).catch((err) => console.error("🔴 Popup error:", err));
   const logout = () => signOut(auth);
 
   return (
