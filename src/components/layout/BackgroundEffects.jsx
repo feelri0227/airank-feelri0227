@@ -4,6 +4,7 @@ const BLOB_COLORS = {
   light:  { a: '#6366f1', b: '#06b6d4' },
   dark:   { a: '#6366f1', b: '#06b6d4' },
   manus:  { a: '#f59e0b', b: '#fb923c' },
+  mono:   { a: '#333333', b: '#888888' },
 };
 
 const BackgroundEffects = () => {

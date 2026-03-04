@@ -1,12 +1,13 @@
-const THEMES = ['light', 'dark', 'manus'];
-const THEME_ICONS = { light: '☀️', dark: '🌙', manus: '⚡' };
-const THEME_LABELS = { light: '라이트', dark: '다크', manus: '마누스' };
-const NEXT_LABEL = { light: '다크 모드로 전환', dark: '마누스 모드로 전환', manus: '라이트 모드로 전환' };
+const THEMES = ['light', 'dark', 'manus', 'mono'];
+const THEME_ICONS = { light: '☀️', dark: '🌙', manus: '⚡', mono: '◑' };
+const THEME_LABELS = { light: '라이트', dark: '다크', manus: '마누스', mono: '모노' };
+const NEXT_LABEL = { light: '다크 모드로 전환', dark: '마누스 모드로 전환', manus: '모노 모드로 전환', mono: '라이트 모드로 전환' };
 
 const TRACK_COLORS = {
   light: 'var(--bg-tertiary)',
   dark: 'var(--bg-tertiary)',
   manus: 'rgba(245, 158, 11, 0.15)',
+  mono: 'rgba(0, 0, 0, 0.08)',
 };
 
 const ThemeToggle = ({ theme, onToggle }) => (

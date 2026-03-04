@@ -137,6 +137,57 @@ const GlobalStyles = () => (
       --modal-overlay: rgba(0, 0, 0, 0.8);
     }
 
+    /* ══════════════════════════════════════
+       CSS 변수 - 모노 테마
+       순수 그레이스케일 + 흑백 느낌
+       ══════════════════════════════════════ */
+    [data-theme="mono"] {
+      --bg-primary: #f0f0f0;
+      --bg-secondary: #ffffff;
+      --bg-tertiary: #e4e4e4;
+      --bg-card: #ffffff;
+      --bg-card-hover: #f7f7f7;
+      --bg-nav: rgba(240, 240, 240, 0.94);
+
+      --text-primary: #111111;
+      --text-secondary: #555555;
+      --text-muted: #999999;
+
+      --border-primary: rgba(0, 0, 0, 0.1);
+      --border-hover: rgba(0, 0, 0, 0.35);
+
+      --accent-indigo: #222222;
+      --accent-cyan: #666666;
+      --accent-gradient: linear-gradient(135deg, #111111, #666666);
+
+      --color-green: #444444;
+      --color-red: #222222;
+      --color-gold: #555555;
+      --color-silver: #888888;
+      --color-bronze: #666666;
+
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.07);
+      --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.14);
+      --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.07);
+
+      --blob-opacity: 0.04;
+      --noise-opacity: 0.02;
+
+      --ticker-bg: rgba(0, 0, 0, 0.03);
+      --ticker-border: rgba(0, 0, 0, 0.1);
+      --tag-bg: rgba(0, 0, 0, 0.07);
+      --tag-color: #333333;
+      --tag-border: rgba(0, 0, 0, 0.15);
+      --modal-overlay: rgba(0, 0, 0, 0.5);
+    }
+
+    /* 모노 테마: 모든 이미지 흑백 */
+    [data-theme="mono"] img {
+      filter: grayscale(100%);
+      transition: filter 0.3s ease;
+    }
+
     /* ── 기본 리셋 & 글로벌 ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 

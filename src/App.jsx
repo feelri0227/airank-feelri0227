@@ -73,7 +73,7 @@ function ToolProvider({ children }) {
   }, [selectedArticle]);
 
   const toggleTheme = () => {
-    setTheme((prev) => prev === 'light' ? 'dark' : prev === 'dark' ? 'manus' : 'light');
+    setTheme((prev) => prev === 'light' ? 'dark' : prev === 'dark' ? 'manus' : prev === 'manus' ? 'mono' : 'light');
   };
 
   const openToolDetail = (tool, rank) => {
