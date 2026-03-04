@@ -1,4 +1,3 @@
-
 import styled from 'styled-components';
 import { useTools } from '../../context/ToolContext';
 
@@ -42,9 +41,11 @@ const ToolLogo = styled.img`
   border-radius: 6px;
   margin-right: 0.8rem;
   object-fit: cover;
+  border: 1px solid var(--border-primary);
 `;
 
 const ToolInfo = styled.div`
+  flex: 1;
   overflow: hidden;
 `;
 
@@ -82,9 +83,9 @@ function ToolListSidebar() {
     <SidebarContainer>
         <SidebarTitle>🔥 주간 AI 랭킹</SidebarTitle>
         <ToolList>
-            {sortedTools.map(tool => (
+            {sortedTools.slice(0, 20).map(tool => (
                 <ToolItem key={tool.id} onClick={() => handleToolClick(tool.id)} title={`자세히 보기: ${tool.name}`}>
-                    <ToolLogo src={tool.logo} alt={`${tool.name} logo`} />
+                    <ToolLogo src={`/${tool.logo}`} alt={`${tool.name} logo`} />
                     <ToolInfo>
                         <ToolName>{tool.name}</ToolName>
                         <ToolDescription>{tool.description}</ToolDescription>
