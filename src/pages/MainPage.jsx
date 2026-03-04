@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { useTools } from "../context/ToolContext";
 
 import FilterBar from "../components/filters/FilterBar";
-import LeftSidebar from "../components/sidebar/LeftSidebar";
+import LeftNewsSidebar from "../components/sidebar/LeftNewsSidebar";
 import RightSidebar from "../components/sidebar/RightSidebar";
 import ToolCard from "../components/tools/ToolCard";
 import WizardModal from "../components/modals/WizardModal";
@@ -64,7 +64,7 @@ export default function MainPage() {
       />
 
       <div className="main-grid">
-        <LeftSidebar tools={filteredTools} />
+        <LeftNewsSidebar />
 
         <main>
           {filteredTools.length === 0 ? (
