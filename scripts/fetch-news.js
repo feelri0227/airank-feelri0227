@@ -11,7 +11,7 @@ import 'dotenv/config';
  * 실행: node scripts/fetch-news.js
  */
 
-import { writeFileSync } from 'fs';
+import { writeFileSync, readFileSync, existsSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -110,10 +110,30 @@ async function main() {
 
   // 날짜 최신순 정렬 후 상위 15개
   allItems.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
-  const top15 = allItems.slice(0, 15);
+  const newTop15 = allItems.slice(0, 15);
+
+  // 기존 news.json 불러오기
+  let existingItems = [];
+  if (existsSync(OUTPUT)) {
+    try {
+      const prev = JSON.parse(readFileSync(OUTPUT, 'utf-8'));
+      existingItems = prev.items || [];
+    } catch {}
+  }
+
+  // 새 항목 링크 Set
+  const newLinks = new Set(newTop15.map(i => i.link));
+
+  // 기존 항목 중 새 항목과 중복되지 않는 것만 유지, relativeTime 갱신
+  const oldItems = existingItems
+    .filter(i => !newLinks.has(i.link))
+    .map(i => ({ ...i, relativeTime: relativeTime(i.pubDate) }));
+
+  // 새 항목(위) + 기존 항목(아래), 최대 50개 유지
+  const merged = [...newTop15, ...oldItems].slice(0, 50);
 
   // 상위 3개는 HOT 표시
-  const newsItems = top15.map((item, i) => ({ ...item, hot: i < 3 }));
+  const newsItems = merged.map((item, i) => ({ ...item, hot: i < 3 }));
 
   const output = {
     lastUpdated: new Date().toISOString(),
