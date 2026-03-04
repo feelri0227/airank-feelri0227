@@ -155,7 +155,7 @@ const GlobalStyles = () => (
     /* ── 반응형 레이아웃 ── */
     .main-grid {
       display: grid;
-      grid-template-columns: 240px 1fr 240px;
+      grid-template-columns: 1fr 300px;
       gap: 20px;
       max-width: 1280px;
       margin: 0 auto;
@@ -186,8 +186,7 @@ const GlobalStyles = () => (
 
     @media (max-width: 1100px) {
       .main-grid { grid-template-columns: 1fr !important; }
-      .sidebar-left { display: none !important; }
-      .sidebar-right { min-width: unset !important; }
+      .sidebar-right { display: none !important; }
     }
 
     @media (max-width: 768px) {

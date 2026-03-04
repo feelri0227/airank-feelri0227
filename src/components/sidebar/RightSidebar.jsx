@@ -27,7 +27,7 @@ const RightSidebar = () => {
       display: "flex",
       flexDirection: "column",
       gap: "16px",
-      minWidth: "220px",
+      minWidth: "280px",
     }}>
       {/* 뉴스 피드 */}
       <div style={{
