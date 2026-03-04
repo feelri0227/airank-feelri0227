@@ -72,20 +72,22 @@ const ToolDescription = styled.p`
 function ToolListSidebar() {
   const { tools, setSelectedToolById } = useTools();
 
-  const sortedTools = [...tools].sort((a, b) => b.score - a.score);
-
+  // Find the tool object from the tools array based on the id from sortedTools
   const handleToolClick = (id) => {
     setSelectedToolById(id);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
+  // Sort tools by score and take the top 20
+  const sortedTools = [...tools].sort((a, b) => b.score - a.score).slice(0, 20);
+
   return (
     <SidebarContainer>
         <SidebarTitle>🔥 주간 AI 랭킹</SidebarTitle>
         <ToolList>
-            {sortedTools.slice(0, 20).map(tool => (
+            {sortedTools.map(tool => (
                 <ToolItem key={tool.id} onClick={() => handleToolClick(tool.id)} title={`자세히 보기: ${tool.name}`}>
-                    <ToolLogo src={`/${tool.logo}`} alt={`${tool.name} logo`} />
+                    <ToolLogo src={tool.logo} alt={`${tool.name} logo`} />
                     <ToolInfo>
                         <ToolName>{tool.name}</ToolName>
                         <ToolDescription>{tool.description}</ToolDescription>
