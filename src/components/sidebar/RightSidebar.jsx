@@ -1,13 +1,26 @@
-const RightSidebar = () => {
-  const news = [
-    { title: "OpenAI, GPT-5 출시 임박 소문", time: "2시간 전", hot: true },
-    { title: "Anthropic Claude 4 벤치마크 공개", time: "5시간 전", hot: true },
-    { title: "Midjourney 웹앱 정식 출시", time: "8시간 전", hot: false },
-    { title: "Google Gemini 2.0 Flash 업데이트", time: "12시간 전", hot: false },
-    { title: "Cursor IDE, 월 사용자 100만 돌파", time: "1일 전", hot: false },
-  ];
+import { useState, useEffect } from "react";
 
-  const popularTags = ["텍스트 생성", "이미지 생성", "코딩", "무료", "API", "오픈소스", "영상 생성", "생산성"];
+const FALLBACK_NEWS = [
+  { title: "OpenAI, GPT-5 출시 임박 소문", link: "#", relativeTime: "2시간 전", hot: true },
+  { title: "Anthropic Claude 4 벤치마크 공개", link: "#", relativeTime: "5시간 전", hot: true },
+  { title: "Midjourney 웹앱 정식 출시", link: "#", relativeTime: "8시간 전", hot: true },
+  { title: "Google Gemini 2.0 Flash 업데이트", link: "#", relativeTime: "12시간 전", hot: false },
+  { title: "Cursor IDE, 월 사용자 100만 돌파", link: "#", relativeTime: "1일 전", hot: false },
+];
+
+const popularTags = ["텍스트 생성", "이미지 생성", "코딩", "무료", "API", "오픈소스", "영상 생성", "생산성"];
+
+const RightSidebar = () => {
+  const [news, setNews] = useState(FALLBACK_NEWS);
+
+  useEffect(() => {
+    fetch("/news.json")
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.items?.length) setNews(data.items.slice(0, 5));
+      })
+      .catch(() => {}); // 폴백 유지
+  }, []);
 
   return (
     <aside className="sidebar-right" style={{
@@ -34,11 +47,18 @@ const RightSidebar = () => {
           📰 최신 뉴스
         </h3>
         {news.map((item, i) => (
-          <div key={i} style={{
-            padding: "8px 0",
-            borderBottom: i < news.length - 1 ? "1px solid var(--border-primary)" : "none",
-            cursor: "pointer",
-          }}>
+          <a
+            key={i}
+            href={item.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: "block",
+              padding: "8px 0",
+              borderBottom: i < news.length - 1 ? "1px solid var(--border-primary)" : "none",
+              textDecoration: "none",
+            }}
+          >
             <div style={{
               fontSize: "0.8rem",
               fontWeight: 500,
@@ -48,13 +68,13 @@ const RightSidebar = () => {
               gap: "4px",
               alignItems: "flex-start",
             }}>
-              {item.hot && <span style={{ color: "var(--color-red)", fontSize: "0.7rem" }}>HOT</span>}
+              {item.hot && <span style={{ color: "var(--color-red)", fontSize: "0.7rem", flexShrink: 0 }}>HOT</span>}
               {item.title}
             </div>
             <div style={{ fontSize: "0.68rem", color: "var(--text-muted)", marginTop: "2px" }}>
-              {item.time}
+              {item.relativeTime}
             </div>
-          </div>
+          </a>
         ))}
       </div>
 

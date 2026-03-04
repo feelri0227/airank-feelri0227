@@ -1,9 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { TICKER_ITEMS } from "../../constants";
 
 const TickerBar = () => {
   const [isPaused, setIsPaused] = useState(false);
-  const doubled = [...TICKER_ITEMS, ...TICKER_ITEMS]; // 무한 스크롤용 2배 복제
+  const [items, setItems] = useState(TICKER_ITEMS);
+
+  useEffect(() => {
+    fetch("/news.json")
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.items?.length) {
+          // 뉴스 제목을 티커 형식으로 변환
+          setItems(data.items.map((n) => `📰 ${n.title}`));
+        }
+      })
+      .catch(() => {}); // 폴백: 하드코딩 TICKER_ITEMS 유지
+  }, []);
+
+  const doubled = [...items, ...items]; // 무한 스크롤용 2배 복제
 
   return (
     <div
