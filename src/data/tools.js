@@ -423,3 +423,52 @@ export const TOOLS_DATA = [
         life: ["student"]
       }
 ];
+
+export const WIZARD_Q1 = {
+  question: "어떤 일을 하고 계신가요? (직업)",
+  opts: [
+    { value: "student", icon: "🎓", label: "학생", sub: "과제, 리서치, 공부 효율을 높이고 싶어요." },
+    { value: "developer", icon: "💻", label: "개발자", sub: "코딩, 디버깅, 개발 생산성을 올리고 싶어요." },
+    { value: "creator", icon: "🎨", label: "크리에이터", sub: "콘텐츠 제작, 디자인, 영감이 필요해요." },
+    { value: "office", icon: "💼", label: "직장인", sub: "보고서 작성, 업무 자동화, 생산성을 높이고 싶어요." },
+  ],
+};
+
+export const WIZARD_Q2 = {
+  student: {
+    question: "주로 어떤 작업을 하시나요?",
+    opts: [
+      { value: "text", icon: "✍️", label: "글쓰기", sub: "리포트, 에세이, 논문 작성" },
+      { value: "data", icon: "📊", label: "자료 조사/정리", sub: "리서치, 데이터 분석, 아이디어 정리" },
+      { value: "code", icon: "⌨️", label: "코딩/개발", sub: "프로그래밍 과제, 코딩 공부" },
+      { value: "media", icon: "🎬", label: "미디어", sub: "발표 자료, 영상/이미지 제작" },
+    ],
+  },
+  developer: {
+    question: "주로 어떤 작업을 하시나요?",
+    opts: [
+      { value: "code", icon: "⌨️", label: "코딩/개발", sub: "코드 자동 완성, 디버깅, 테스트" },
+      { value: "search", icon: "🔍", label: "기술 검색/학습", sub: "에러 해결, 기술 문서 검색, 새 기술 공부" },
+      { value: "text", icon: "✍️", label: "기술 문서 작성", sub: "코드 주석, 커밋 메시지, 기술 블로그 작성" },
+      { value: "data", icon: "📊", label: "프로젝트 관리", sub: "이슈 추적, 작업 관리, 생산성 분석" },
+    ],
+  },
+  creator: {
+    question: "주로 어떤 작업을 하시나요?",
+    opts: [
+      { value: "image", icon: "🖼️", label: "이미지 생성/편집", sub: "썸네일, 삽화, 아트워크 제작" },
+      { value: "video", icon: "🎥", label: "영상 제작/편집", sub: "자동 편집, 자막 생성, 영상 효과" },
+      { value: "audio", icon: "🎵", label: "오디오/음악 작업", sub: "배경 음악, 효과음, 목소리 생성" },
+      { value: "text", icon: "✍️", label: "콘텐츠 글쓰기", sub: "대본, 블로그 포스트, SNS 게시물 작성" },
+    ],
+  },
+  office: {
+    question: "주로 어떤 작업을 하시나요?",
+    opts: [
+        { value: "text", icon: "✍️", label: "문서 작업", sub: "보고서, 이메일, 기획서 작성 및 요약" },
+        { value: "data", icon: "📊", label: "자료 정리/분석", sub: "회의록 요약, 데이터 시각화, 시장 조사" },
+        { value: "design", icon: "🎨", label: "디자인/기획", sub: "발표자료, 제안서, 마케팅 자료 제작" },
+        { value: "search", icon: "🔍", label: "정보 검색", sub: "경쟁사 분석, 시장 동향 파악" },
+    ],
+  },
+};
