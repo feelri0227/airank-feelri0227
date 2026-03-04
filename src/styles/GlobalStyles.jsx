@@ -6,21 +6,21 @@ const GlobalStyles = () => (
 
     /* ══════════════════════════════════════
        CSS 변수 - 라이트 테마 (기본)
-       Sky Fresh 계열 (#f0f9ff)
+       순수 화이트 계열
        ══════════════════════════════════════ */
     :root {
       /* 배경 */
-      --bg-primary: #f0f9ff;
+      --bg-primary: #fafafa;
       --bg-secondary: #ffffff;
-      --bg-tertiary: #e0f2fe;
+      --bg-tertiary: #f0f0f0;
       --bg-card: #ffffff;
-      --bg-card-hover: #f8fafc;
-      --bg-nav: rgba(240, 249, 255, 0.92);
+      --bg-card-hover: #f7f7f7;
+      --bg-nav: rgba(250, 250, 250, 0.94);
 
       /* 텍스트 */
-      --text-primary: #0f172a;
-      --text-secondary: #475569;
-      --text-muted: #94a3b8;
+      --text-primary: #111111;
+      --text-secondary: #555555;
+      --text-muted: #999999;
 
       /* 보더 */
       --border-primary: rgba(0, 0, 0, 0.08);
@@ -42,11 +42,11 @@ const GlobalStyles = () => (
       --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
       --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
       --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.12);
-      --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.06);
+      --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.06);
 
       /* 블러/글로우 */
-      --blob-opacity: 0.06;
-      --noise-opacity: 0.04;
+      --blob-opacity: 0.05;
+      --noise-opacity: 0.03;
 
       /* 기타 */
       --ticker-bg: rgba(99, 102, 241, 0.04);
@@ -54,34 +54,34 @@ const GlobalStyles = () => (
       --tag-bg: rgba(99, 102, 241, 0.08);
       --tag-color: #6366f1;
       --tag-border: rgba(99, 102, 241, 0.2);
-      --modal-overlay: rgba(15, 23, 42, 0.5);
+      --modal-overlay: rgba(0, 0, 0, 0.4);
     }
 
     /* ══════════════════════════════════════
        CSS 변수 - 다크 테마
-       #0f1420 기반
+       순수 블랙 계열
        ══════════════════════════════════════ */
     [data-theme="dark"] {
-      --bg-primary: #0f1420;
-      --bg-secondary: #151c2c;
-      --bg-tertiary: #1a2235;
-      --bg-card: #151c2c;
-      --bg-card-hover: #1a2235;
-      --bg-nav: rgba(15, 20, 32, 0.92);
+      --bg-primary: #0a0a0a;
+      --bg-secondary: #111111;
+      --bg-tertiary: #1a1a1a;
+      --bg-card: #111111;
+      --bg-card-hover: #1a1a1a;
+      --bg-nav: rgba(10, 10, 10, 0.94);
 
-      --text-primary: #e8ecf3;
-      --text-secondary: #8492a6;
-      --text-muted: #5a6478;
+      --text-primary: #f0f0f0;
+      --text-secondary: #888888;
+      --text-muted: #505050;
 
-      --border-primary: rgba(255, 255, 255, 0.06);
+      --border-primary: rgba(255, 255, 255, 0.07);
       --border-hover: rgba(99, 102, 241, 0.4);
 
-      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2);
-      --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.3);
-      --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.4);
-      --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.2);
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.5);
+      --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.6);
+      --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.4);
 
-      --blob-opacity: 0.1;
+      --blob-opacity: 0.12;
       --noise-opacity: 0.3;
 
       --ticker-bg: rgba(6, 182, 212, 0.04);
@@ -89,7 +89,7 @@ const GlobalStyles = () => (
       --tag-bg: rgba(99, 102, 241, 0.15);
       --tag-color: #818cf8;
       --tag-border: rgba(99, 102, 241, 0.3);
-      --modal-overlay: rgba(0, 0, 0, 0.7);
+      --modal-overlay: rgba(0, 0, 0, 0.8);
     }
 
     /* ══════════════════════════════════════
@@ -154,31 +154,31 @@ const GlobalStyles = () => (
       --text-muted: #606060;
 
       --border-primary: rgba(255, 255, 255, 0.08);
-      --border-hover: rgba(255, 255, 255, 0.3);
+      --border-hover: rgba(255, 255, 255, 0.25);
 
-      --accent-indigo: #cccccc;
-      --accent-cyan: #888888;
-      --accent-gradient: linear-gradient(135deg, #efefef, #888888);
+      --accent-indigo: #c0c0c0;
+      --accent-cyan: #808080;
+      --accent-gradient: linear-gradient(135deg, #e0e0e0, #707070);
 
-      --color-green: #aaaaaa;
-      --color-red: #dddddd;
-      --color-gold: #bbbbbb;
-      --color-silver: #888888;
-      --color-bronze: #999999;
+      --color-green: #9a9a9a;
+      --color-red: #c0c0c0;
+      --color-gold: #b0b0b0;
+      --color-silver: #787878;
+      --color-bronze: #909090;
 
       --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
       --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.4);
       --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.5);
       --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.3);
 
-      --blob-opacity: 0.07;
+      --blob-opacity: 0.06;
       --noise-opacity: 0.2;
 
       --ticker-bg: rgba(255, 255, 255, 0.03);
       --ticker-border: rgba(255, 255, 255, 0.08);
       --tag-bg: rgba(255, 255, 255, 0.08);
-      --tag-color: #cccccc;
-      --tag-border: rgba(255, 255, 255, 0.15);
+      --tag-color: #b0b0b0;
+      --tag-border: rgba(255, 255, 255, 0.12);
       --modal-overlay: rgba(0, 0, 0, 0.7);
     }
 
