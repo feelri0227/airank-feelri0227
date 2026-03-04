@@ -1,109 +1,62 @@
-import { useState, useEffect } from "react";
-import { TICKER_ITEMS } from "../../constants";
+import { useTools } from "../../context/ToolContext";
+import styled, { keyframes } from "styled-components";
+
+const ticker = keyframes`
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+`;
+
+const TickerContainer = styled.div`
+  width: 100%;
+  overflow: hidden;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-primary);
+  border-bottom: 1px solid var(--border-primary);
+`;
+
+const TickerWrapper = styled.div`
+  display: flex;
+  animation: ${ticker} 80s linear infinite;
+`;
+
+const TickerItem = styled.div`
+  flex-shrink: 0;
+  padding: 10px 20px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+`;
 
 const TickerBar = () => {
-  const [isPaused, setIsPaused] = useState(false);
-  const [items, setItems] = useState(TICKER_ITEMS);
+  const { tools } = useTools();
 
-  const fetchNews = () => {
-    fetch("/news.json")
-      .then((r) => r.json())
-      .then((data) => {
-        if (data.items?.length) {
-          // 뉴스 제목과 링크를 함께 저장
-          setItems(data.items.map((n) => ({
-            title: `📰 ${n.title}`,
-            link: n.link,
-          })));
-        }
-      })
-      .catch(() => {}); // 폴백: 하드코딩 TICKER_ITEMS 유지
-  };
+  // "Live" and updated tools
+  const liveTools = tools
+    .filter((tool) => tool.live)
+    .sort((a, b) => b.score - a.score);
 
-  useEffect(() => {
-    fetchNews(); // 초기 뉴스 로드
-    const intervalId = setInterval(fetchNews, 21600000); // 6시간마다 뉴스 갱신
+  // Non-"Live" and non-updated tools
+  const otherTools = tools
+    .filter((tool) => !tool.live)
+    .sort((a, b) => b.score - a.score);
 
-    return () => clearInterval(intervalId); // 컴포넌트 언마운트 시 인터벌 정리
-  }, []);
-
-  const doubled = [...items, ...items]; // 무한 스크롤용 2배 복제
+  const allTools = [...liveTools, ...otherTools, ...liveTools, ...otherTools];
 
   return (
-    <div
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-      style={{
-        background: "var(--ticker-bg)",
-        borderBottom: "1px solid var(--ticker-border)",
-        overflow: "hidden",
-        height: "36px",
-        display: "flex",
-        alignItems: "center",
-        position: "relative",
-      }}
-    >
-      {/* 좌측 라벨 */}
-      <div style={{
-        padding: "0 12px",
-        fontSize: "0.7rem",
-        fontWeight: 600,
-        color: "var(--accent-indigo)",
-        whiteSpace: "nowrap",
-        zIndex: 2,
-        background: "var(--ticker-bg)",
-      }}>
-        📡 LIVE
-      </div>
-
-      {/* 스크롤 트랙 */}
-      <div style={{
-        display: "flex",
-        gap: "3rem",
-        whiteSpace: "nowrap",
-        animation: "tickerScroll 40s linear infinite",
-        animationPlayState: isPaused ? "paused" : "running",
-      }}>
-        {doubled.map((item, i) => (
-          <a // <a> 태그로 변경
-            key={i}
-            href={item.link} // 링크 주소 설정
-            target="_blank" // 새 탭에서 열기
-            rel="noopener noreferrer" // 보안 속성
-            style={{
-              fontSize: "0.78rem",
-              color: "var(--text-secondary)",
-              fontWeight: 400,
-              textDecoration: "none", // 밑줄 제거
-            }}
-          >
-            {typeof item === 'string' ? item : item.title}
-          </a>
+    <TickerContainer>
+      <TickerWrapper>
+        {allTools.map((tool, index) => (
+          <TickerItem key={`${tool.id}-${index}`}>
+            {tool.live ? "[LIVE] " : ""}
+            <strong>{tool.name}</strong> - {tool.description} - Score: {tool.score}
+          </TickerItem>
         ))}
-      </div>
-
-      {/* 양쪽 페이드 효과 */}
-      <div style={{
-        position: "absolute",
-        left: 0,
-        top: 0,
-        bottom: 0,
-        width: "60px",
-        background: `linear-gradient(to right, var(--bg-primary), transparent)`,
-        zIndex: 1,
-        pointerEvents: "none",
-      }} />
-      <div style={{
-        position: "absolute",
-        right: 0,
-        top: 0,
-        bottom: 0,
-        width: "60px",
-        background: `linear-gradient(to left, var(--bg-primary), transparent)`,
-        zIndex: 1,
-        pointerEvents: "none",
-      }} />
-    </div>
+      </TickerWrapper>
+    </TickerContainer>
   );
 };
 

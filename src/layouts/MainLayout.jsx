@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { useTools } from "../context/ToolContext";
 
 import GlobalStyles from "../styles/GlobalStyles";
@@ -9,6 +9,7 @@ import Footer from "../components/layout/Footer";
 
 export default function MainLayout() {
   const { theme, toggleTheme } = useTools();
+  const location = useLocation();
 
   return (
     <>
@@ -26,7 +27,7 @@ export default function MainLayout() {
           theme={theme}
           onToggleTheme={toggleTheme}
         />
-        <TickerBar />
+        {location.pathname === '/' && <TickerBar />}
         <Outlet /> 
         <Footer />
       </div>
