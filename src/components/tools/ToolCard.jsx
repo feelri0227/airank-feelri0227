@@ -120,7 +120,7 @@ const ToolCard = ({ tool, rank, onClick }) => {
         height: "100%",
         borderRadius: "3px",
         background: getScoreColor(tool.score),
-        transition: "width 0.8s ease",
+        transition: "width 1.5s ease",
       }} />
     </div>
 
