@@ -61,7 +61,7 @@ export const TOOLS_DATA = [
     life: ["startup", "freelancer"],
   },
   {
-    id: 8, cat: "text", icon: "💬", name: "Character.AI", free: true,
+    id: 8, cat: "chatbot", icon: "💬", name: "Character.AI", free: true,
     desc: "다양한 캐릭터와 대화하는 AI 플랫폼. 셀럽·애니 캐릭터부터 직접 만든 AI 페르소나까지 무한 대화.",
     url: "https://character.ai",
     features: ["수천 가지 AI 캐릭터와 대화", "직접 AI 페르소나 커스텀 생성", "셀럽·애니메이션 캐릭터 제공", "멀티 캐릭터 그룹 채팅", "언어 학습 AI 캐릭터 활용"],
@@ -69,7 +69,7 @@ export const TOOLS_DATA = [
     life: ["student", "creator"],
   },
   {
-    id: 9, cat: "text", icon: "📚", name: "Poe", free: true,
+    id: 9, cat: "chatbot", icon: "📚", name: "Poe", free: true,
     desc: "Claude, GPT-4, Gemini 등 다양한 AI를 한 곳에서 이용하는 Quora의 AI 허브 플랫폼.",
     url: "https://poe.com",
     features: ["GPT-4·Claude·Gemini 한 곳에서", "사용량 초과 없는 다모델 전환", "커스텀 봇 생성 및 공유", "이미지 생성 모델도 지원", "웹·iOS·Android 지원"],
@@ -363,7 +363,7 @@ export const TOOLS_DATA = [
     life: ["office", "startup", "marketer"],
   },
   {
-    id: 45, cat: "productivity", icon: "⚙️", name: "Make", free: true,
+    id: 45, cat: "automation", icon: "⚙️", name: "Make", free: true,
     desc: "노코드 자동화 플랫폼. 수천 개 앱을 시각적 플로우로 연결해 반복 업무를 완전 자동화.",
     url: "https://make.com",
     features: ["수천 개 앱 시각적 플로우 연결", "노코드 드래그앤드롭 자동화", "복잡한 조건 분기 처리 가능", "데이터 변환 및 필터링", "무료 1,000 ops/월 제공"],
@@ -371,7 +371,7 @@ export const TOOLS_DATA = [
     life: ["startup", "freelancer", "office"],
   },
   {
-    id: 46, cat: "productivity", icon: "🔌", name: "Zapier AI", free: false,
+    id: 46, cat: "automation", icon: "🔌", name: "Zapier AI", free: false,
     desc: "5,000개 이상 앱을 연결하는 AI 자동화 플랫폼. 자연어만으로 자동화 플로우를 생성하고 실행.",
     url: "https://zapier.com",
     features: ["5,000개 이상 앱 연결 지원", "자연어로 자동화 생성", "AI Actions로 AI 워크플로우", "트리거-액션 조합 무한 설정", "비개발자도 쉬운 자동화 구축"],
@@ -379,7 +379,7 @@ export const TOOLS_DATA = [
     life: ["startup", "office", "freelancer"],
   },
   {
-    id: 47, cat: "productivity", icon: "🔗", name: "n8n", free: true,
+    id: 47, cat: "automation", icon: "🔗", name: "n8n", free: true,
     desc: "오픈소스 자동화 플랫폼. 자체 서버에 설치해 무제한 사용 가능, 개발자 친화적 AI 워크플로우 구축.",
     url: "https://n8n.io",
     features: ["오픈소스 자체 서버 배포", "AI 에이전트 워크플로우 구축", "400개 이상 앱 연동 노드", "코드 노드로 커스텀 로직 추가", "무제한 실행 자체 호스팅"],
@@ -832,7 +832,7 @@ export const TOOLS_DATA = [
 
   // 텍스트·대화형
   {
-    id: 101, cat: "text", icon: "🤗", name: "Replika", free: true,
+    id: 101, cat: "chatbot", icon: "🤗", name: "Replika", free: true,
     desc: "AI 감성 동반자 앱. 일상 대화·감정 공유·롤플레이를 통해 정서적 지지를 제공하는 앱스토어 최다 다운로드 AI 챗봇.",
     url: "https://replika.com",
     features: ["감정 인식 공감형 대화", "일상·고민 상담 AI 친구", "롤플레이·페르소나 커스텀", "감정 일기·메모리 기록", "음성 대화 지원"],
@@ -840,7 +840,7 @@ export const TOOLS_DATA = [
     life: ["student", "creator", "freelancer"],
   },
   {
-    id: 102, cat: "text", icon: "🥧", name: "Pi AI", free: true,
+    id: 102, cat: "chatbot", icon: "🥧", name: "Pi AI", free: true,
     desc: "Inflection AI의 개인 AI 어시스턴트. 친근하고 공감 능력이 뛰어난 대화 스타일로 일상·고민·학습 전반을 도와줌.",
     url: "https://pi.ai",
     features: ["공감형 자연스러운 대화", "일상 고민·조언 상담", "음성 대화 모드 지원", "맥락 기억 장기 대화", "iOS·Android 앱 제공"],
@@ -848,7 +848,7 @@ export const TOOLS_DATA = [
     life: ["office", "student", "freelancer"],
   },
   {
-    id: 103, cat: "text", icon: "🌐", name: "Meta AI", free: true,
+    id: 103, cat: "chatbot", icon: "🌐", name: "Meta AI", free: true,
     desc: "Meta의 AI 어시스턴트. WhatsApp·Instagram·Facebook에 내장되어 있으며 Llama 기반 멀티모달 AI를 무료로 제공.",
     url: "https://www.meta.ai",
     features: ["WhatsApp·Instagram 내 AI 대화", "이미지 생성(Imagine) 기능", "실시간 웹 검색 연동", "그룹챗에서 @Meta AI 호출", "Llama 3 기반 고성능 대화"],
@@ -856,7 +856,7 @@ export const TOOLS_DATA = [
     life: ["office", "student", "marketer", "creator"],
   },
   {
-    id: 104, cat: "text", icon: "🎭", name: "Talkie AI", free: true,
+    id: 104, cat: "chatbot", icon: "🎭", name: "Talkie AI", free: true,
     desc: "AI 캐릭터와 대화·롤플레이를 즐기는 앱. 애니·게임·셀럽 스타일 캐릭터와 몰입감 있는 스토리를 만들어 가는 플랫폼.",
     url: "https://www.talkie-ai.com",
     features: ["수천 가지 AI 캐릭터 선택", "몰입형 롤플레이·스토리텔링", "목소리 커스텀 음성 대화", "나만의 캐릭터 생성", "10대·20대 인기 앱"],
@@ -864,7 +864,7 @@ export const TOOLS_DATA = [
     life: ["student", "creator"],
   },
   {
-    id: 105, cat: "text", icon: "🤖", name: "Kindroid", free: true,
+    id: 105, cat: "chatbot", icon: "🤖", name: "Kindroid", free: true,
     desc: "나만의 AI 동반자를 직접 설계하는 앱. 외모·성격·기억·음성을 자유롭게 설정하고 깊은 관계를 형성하는 AI 친구.",
     url: "https://kindroid.ai",
     features: ["AI 페르소나 외모·성격 커스텀", "장기 기억 유지 대화", "음성 통화 모드 지원", "이미지 생성으로 AI 모습 시각화", "개인화된 친밀 관계 형성"],
@@ -872,7 +872,7 @@ export const TOOLS_DATA = [
     life: ["student", "creator"],
   },
   {
-    id: 106, cat: "text", icon: "🍵", name: "Chai AI", free: true,
+    id: 106, cat: "chatbot", icon: "🍵", name: "Chai AI", free: true,
     desc: "다양한 AI 캐릭터와 자유롭게 대화하는 플랫폼. 크리에이터가 직접 봇을 만들고 공유하는 AI 챗봇 앱 마켓플레이스.",
     url: "https://chai.ml",
     features: ["수천 가지 커뮤니티 AI 봇", "나만의 AI 봇 제작·공유", "무료 메시지 일정량 제공", "다양한 장르·스타일 캐릭터", "iOS·Android 전용 앱"],
@@ -880,7 +880,7 @@ export const TOOLS_DATA = [
     life: ["student", "creator"],
   },
   {
-    id: 107, cat: "text", icon: "💙", name: "Anima AI", free: true,
+    id: 107, cat: "chatbot", icon: "💙", name: "Anima AI", free: true,
     desc: "AI 친구·파트너 역할을 하는 감성 대화 앱. 공감·격려·일상 대화로 외로움을 달래고 자기 계발을 돕는 AI 동반자.",
     url: "https://myanima.ai",
     features: ["공감·격려 감성 대화", "친구·멘토·파트너 관계 설정", "매일 활동·챌린지 제안", "감정 체크인·웰빙 지원", "아바타 커스텀 외모 설정"],
@@ -888,7 +888,7 @@ export const TOOLS_DATA = [
     life: ["student", "creator"],
   },
   {
-    id: 108, cat: "text", icon: "🎯", name: "Hume AI", free: false,
+    id: 108, cat: "chatbot", icon: "🎯", name: "Hume AI", free: false,
     desc: "감정 인식 특화 AI 음성 어시스턴트. 목소리 톤·억양으로 감정을 분석해 공감하며 응답하는 차세대 감성 AI.",
     url: "https://www.hume.ai",
     features: ["음성 감정 실시간 분석", "공감형 자연스러운 음성 응답", "감정 표현 TTS 출력", "EVI API 개발자 지원", "멀티모달 감정 인식"],
@@ -898,7 +898,7 @@ export const TOOLS_DATA = [
 
   // 이미지
   {
-    id: 109, cat: "image", icon: "🪄", name: "Lensa AI", free: false,
+    id: 109, cat: "photo", icon: "🪄", name: "Lensa AI", free: false,
     desc: "셀카로 AI 매직 아바타를 만드는 앱. 수십 장의 사진으로 아티스틱·판타지·우주인 스타일 아바타를 즉시 생성.",
     url: "https://prisma-ai.com/lensa",
     features: ["셀카→AI 매직 아바타 생성", "50가지 이상 예술 스타일", "배경 자동 제거·편집", "초상화·바디 슬리밍 필터", "Prisma Labs 최신 AI 모델"],
@@ -906,7 +906,7 @@ export const TOOLS_DATA = [
     life: ["creator", "marketer", "freelancer"],
   },
   {
-    id: 110, cat: "image", icon: "📸", name: "Photoroom", free: true,
+    id: 110, cat: "photo", icon: "📸", name: "Photoroom", free: true,
     desc: "AI 배경 제거·교체로 제품 사진을 즉시 완성하는 앱. 쇼핑몰·마케터 필수, 수백만 셀러가 사용하는 AI 사진 편집 툴.",
     url: "https://www.photoroom.com",
     features: ["AI 배경 자동 제거 1초 완성", "전문 제품 사진 배경 수백 가지", "AI 그림자·반사 자동 추가", "배치 편집으로 대량 처리", "Shopify·Amazon 최적화 크기"],
@@ -914,7 +914,7 @@ export const TOOLS_DATA = [
     life: ["marketer", "freelancer", "startup", "creator"],
   },
   {
-    id: 111, cat: "image", icon: "✨", name: "Remini", free: true,
+    id: 111, cat: "photo", icon: "✨", name: "Remini", free: true,
     desc: "흐릿하거나 오래된 사진을 AI로 선명하게 복원하는 앱. 저화질 사진을 HD로 업스케일, AI 프로필 사진 생성 기능 인기.",
     url: "https://remini.ai",
     features: ["흐릿한 사진 AI 선명화·복원", "저화질→HD 업스케일", "AI 프로필 사진 생성", "오래된 가족사진 복원", "얼굴 디테일 정밀 향상"],
@@ -922,7 +922,7 @@ export const TOOLS_DATA = [
     life: ["creator", "marketer", "office"],
   },
   {
-    id: 112, cat: "image", icon: "💄", name: "Facetune", free: false,
+    id: 112, cat: "photo", icon: "💄", name: "Facetune", free: false,
     desc: "AI 기반 셀카·인물 사진 편집 전문 앱. 피부 보정·치아 미백·배경 교체 등 SNS 프로필 사진을 전문가 수준으로 완성.",
     url: "https://www.facetuneapp.com",
     features: ["AI 피부 잡티·주름 자동 보정", "치아 미백·눈 선명도 강화", "배경 AI 교체 및 블러", "메이크업·헤어 컬러 가상 적용", "전문가급 리터칭 자동화"],
@@ -930,7 +930,7 @@ export const TOOLS_DATA = [
     life: ["creator", "marketer"],
   },
   {
-    id: 113, cat: "image", icon: "🎨", name: "Prisma", free: true,
+    id: 113, cat: "photo", icon: "🎨", name: "Prisma", free: true,
     desc: "사진을 명화·아트 스타일로 변환하는 AI 필터 앱. 피카소·뭉크·반 고흐 등 수백 가지 예술 스타일을 즉시 적용.",
     url: "https://prisma-ai.com",
     features: ["수백 가지 명화 스타일 필터", "AI 신경망 예술 스타일 변환", "동영상에도 아트 필터 적용", "고해상도 출력 지원", "오프라인 모드 일부 지원"],
@@ -938,7 +938,7 @@ export const TOOLS_DATA = [
     life: ["creator", "student"],
   },
   {
-    id: 114, cat: "image", icon: "✂️", name: "Pixelcut", free: true,
+    id: 114, cat: "photo", icon: "✂️", name: "Pixelcut", free: true,
     desc: "제품·음식 사진을 AI로 즉시 전문화하는 모바일 앱. 배경 제거·AI 생성 배경·텍스트 추가로 쇼핑몰 이미지를 빠르게 완성.",
     url: "https://www.pixelcut.ai",
     features: ["AI 배경 제거 및 교체", "제품 사진 전문 배경 생성", "텍스트·스티커·로고 추가", "배치 편집 대량 처리", "스마트폰에서 원터치 완성"],
@@ -946,7 +946,7 @@ export const TOOLS_DATA = [
     life: ["marketer", "startup", "creator", "freelancer"],
   },
   {
-    id: 115, cat: "image", icon: "🌀", name: "Wombo Dream", free: true,
+    id: 115, cat: "photo", icon: "🌀", name: "Wombo Dream", free: true,
     desc: "텍스트 프롬프트로 AI 아트를 즉시 생성하는 모바일 앱. 판타지·애니·수채화 등 다양한 스타일을 스마트폰에서 무료 생성.",
     url: "https://www.wombo.ai",
     features: ["텍스트로 AI 아트 즉시 생성", "60가지 이상 아트 스타일", "입력 이미지 기반 스타일 변환", "NFT 민팅 연동 기능", "iOS·Android 무료 앱"],
@@ -962,7 +962,7 @@ export const TOOLS_DATA = [
     life: ["creator", "student"],
   },
   {
-    id: 117, cat: "image", icon: "🌸", name: "Meitu", free: true,
+    id: 117, cat: "photo", icon: "🌸", name: "Meitu", free: true,
     desc: "아시아 최대 AI 뷰티·사진 편집 앱. AI 메이크업·피부 보정·아바타 생성 기능으로 동아시아 수억 명이 사용하는 앱.",
     url: "https://www.meitu.com",
     features: ["AI 메이크업·뷰티 자동 보정", "AI 아바타·캐릭터 생성", "AR 메이크업 가상 체험", "배경 AI 교체·포트레이트 모드", "한국·중국·일본 트렌드 필터"],
@@ -970,7 +970,7 @@ export const TOOLS_DATA = [
     life: ["creator", "marketer", "student"],
   },
   {
-    id: 118, cat: "image", icon: "🖌️", name: "PicsArt AI", free: true,
+    id: 118, cat: "photo", icon: "🖌️", name: "PicsArt AI", free: true,
     desc: "10억 다운로드 AI 사진·영상 편집 앱. AI 배경 제거·이미지 생성·스타일 변환을 모바일에서 손쉽게 활용.",
     url: "https://picsart.com",
     features: ["AI 배경 제거 및 생성", "텍스트→AI 이미지 생성", "AI 스타일 변환·필터", "비디오 편집 및 슬라이드쇼", "크리에이터 템플릿 수백만 개"],
@@ -978,7 +978,7 @@ export const TOOLS_DATA = [
     life: ["creator", "marketer", "student", "freelancer"],
   },
   {
-    id: 119, cat: "image", icon: "🔄", name: "Reface", free: true,
+    id: 119, cat: "photo", icon: "🔄", name: "Reface", free: true,
     desc: "AI 얼굴 교체·합성 앱. 셀카 한 장으로 영화·밈·GIF에 내 얼굴을 합성, 바이럴 콘텐츠를 즉시 만드는 재미있는 AI 앱.",
     url: "https://hey.reface.ai",
     features: ["영화·GIF에 얼굴 AI 합성", "셀카 한 장으로 즉시 적용", "AI 아바타·캐릭터 생성", "밈·스티커 얼굴 교체", "동영상 페이스스왑 지원"],
@@ -986,7 +986,7 @@ export const TOOLS_DATA = [
     life: ["creator", "student"],
   },
   {
-    id: 120, cat: "image", icon: "😊", name: "FaceApp", free: true,
+    id: 120, cat: "photo", icon: "😊", name: "FaceApp", free: true,
     desc: "AI로 얼굴을 변환하는 글로벌 히트 앱. 노화·성별 변환·스타일 변경 등 수십 가지 AI 필터로 소셜 미디어를 강타.",
     url: "https://www.faceapp.com",
     features: ["AI 노화·젊어지기 변환", "성별 변환 필터", "헤어스타일·수염 가상 체험", "배경 교체 및 보정", "프로 리터칭 AI 자동화"],
@@ -994,7 +994,7 @@ export const TOOLS_DATA = [
     life: ["creator", "student"],
   },
   {
-    id: 121, cat: "image", icon: "🌈", name: "Photoleap", free: true,
+    id: 121, cat: "photo", icon: "🌈", name: "Photoleap", free: true,
     desc: "Lightricks의 AI 사진 편집 앱. 텍스트로 이미지를 생성·변환하고 전문 편집 도구까지 갖춘 올인원 AI 크리에이티브 툴.",
     url: "https://www.lightricks.com/photoleap",
     features: ["텍스트→이미지 AI 생성", "AI 스타일 변환·페인팅 효과", "레이어 기반 전문 편집", "AI 배경 교체·오브젝트 제거", "Facetune 제작사 Lightricks 출시"],
@@ -1002,7 +1002,7 @@ export const TOOLS_DATA = [
     life: ["creator", "marketer", "freelancer"],
   },
   {
-    id: 122, cat: "image", icon: "📷", name: "Deep Nostalgia", free: true,
+    id: 122, cat: "photo", icon: "📷", name: "Deep Nostalgia", free: true,
     desc: "MyHeritage의 AI 사진 애니메이션 서비스. 오래된 가족사진 속 인물을 살아 움직이는 영상으로 변환하는 감동적인 AI.",
     url: "https://www.myheritage.com/deep-nostalgia",
     features: ["정지 사진→움직이는 영상 변환", "여러 인물 동시 애니메이션화", "자연스러운 눈·입·고개 움직임", "가족사진·오래된 흑백사진 특화", "MyHeritage 앱에서 바로 사용"],
@@ -1128,7 +1128,7 @@ export const TOOLS_DATA = [
     life: ["office", "startup", "freelancer"],
   },
   {
-    id: 137, cat: "productivity", icon: "🔗", name: "Lindy AI", free: true,
+    id: 137, cat: "automation", icon: "🔗", name: "Lindy AI", free: true,
     desc: "코딩 없이 AI 에이전트를 만들어 반복 업무를 자동화하는 플랫폼. 이메일 처리·CRM 업데이트·미팅 요약을 AI가 대행.",
     url: "https://www.lindy.ai",
     features: ["노코드 AI 에이전트 생성", "이메일·캘린더 자동 처리", "CRM 데이터 자동 업데이트", "회의 녹취·요약·액션아이템 추출", "2,000개 이상 앱 연동"],
@@ -1136,7 +1136,7 @@ export const TOOLS_DATA = [
     life: ["office", "startup", "freelancer"],
   },
   {
-    id: 138, cat: "productivity", icon: "🦉", name: "Duolingo Max", free: true,
+    id: 138, cat: "education", icon: "🦉", name: "Duolingo Max", free: true,
     desc: "GPT-4 기반 AI 튜터가 탑재된 언어학습 앱. 실수 분석·롤플레이 대화·설명 요청 등 개인 맞춤 AI 외국어 학습.",
     url: "https://www.duolingo.com",
     features: ["GPT-4 AI 튜터 '릴로' 대화 연습", "실수 자동 분석·설명", "AI 롤플레이 상황 대화 연습", "게임형 학습으로 동기 유지", "40개 이상 언어 지원"],
@@ -1144,7 +1144,7 @@ export const TOOLS_DATA = [
     life: ["student", "office", "freelancer", "creator"],
   },
   {
-    id: 139, cat: "productivity", icon: "🗣️", name: "Elsa Speak", free: true,
+    id: 139, cat: "education", icon: "🗣️", name: "Elsa Speak", free: true,
     desc: "AI 영어 발음 교정 코치 앱. 딥러닝 음성 인식으로 발음을 분석하고 원어민 수준 발음을 만드는 맞춤 훈련 제공.",
     url: "https://elsaspeak.com",
     features: ["AI 실시간 발음 정확도 분석", "음소 단위 세밀한 피드백", "비즈니스 영어·IELTS 특화 코스", "22개 영어 억양 선택", "발음 진도·통계 대시보드"],
@@ -1152,7 +1152,7 @@ export const TOOLS_DATA = [
     life: ["student", "office"],
   },
   {
-    id: 140, cat: "productivity", icon: "💬", name: "Speak", free: false,
+    id: 140, cat: "education", icon: "💬", name: "Speak", free: false,
     desc: "AI 튜터와 실제 회화 연습을 하는 언어학습 앱. 원어민 AI와 실시간 대화, 즉각 피드백으로 말하기 실력을 빠르게 향상.",
     url: "https://www.speak.com",
     features: ["AI 원어민과 실시간 회화 연습", "즉각 발음·문법 피드백", "일상·비즈니스·여행 상황 대화", "AI 레슨 맞춤 커리큘럼", "말하기 중심 학습 방법론"],
@@ -1170,7 +1170,7 @@ export const TOOLS_DATA = [
 
   // 검색·학습
   {
-    id: 142, cat: "search", icon: "📐", name: "Photomath", free: true,
+    id: 142, cat: "education", icon: "📐", name: "Photomath", free: true,
     desc: "카메라로 수학 문제를 찍으면 AI가 풀이 과정을 단계별로 설명하는 앱. 초등 산수부터 미적분까지 전 범위 지원.",
     url: "https://photomath.com",
     features: ["카메라로 수식 인식·즉시 풀이", "단계별 상세 풀이 과정 설명", "손으로 쓴 수식도 인식", "수학 개념 애니메이션 강의", "그래프·함수 시각화"],
@@ -1178,7 +1178,7 @@ export const TOOLS_DATA = [
     life: ["student"],
   },
   {
-    id: 143, cat: "search", icon: "🎓", name: "Socratic", free: true,
+    id: 143, cat: "education", icon: "🎓", name: "Socratic", free: true,
     desc: "Google의 AI 학습 도우미 앱. 사진으로 문제를 찍으면 AI가 관련 개념·영상·풀이를 모아 이해를 돕는 학생용 AI 검색.",
     url: "https://socratic.org",
     features: ["문제 사진→AI 개념 설명", "수학·과학·영어·역사 전 과목", "관련 유튜브 강의 자동 연결", "단계별 풀이 가이드", "구글 AI 기반 학습 최적화"],
@@ -1230,7 +1230,7 @@ export const TOOLS_DATA = [
 
   // 텍스트 추가
   {
-    id: 149, cat: "text", icon: "🤝", name: "Woebot", free: true,
+    id: 149, cat: "chatbot", icon: "🤝", name: "Woebot", free: true,
     desc: "인지행동치료(CBT) 기반 AI 멘탈헬스 챗봇. 스트레스·불안·우울감을 다루는 심리 기법을 일상 대화로 친근하게 제공.",
     url: "https://woebothealth.com",
     features: ["인지행동치료 CBT 기반 대화", "스트레스·불안·우울 관리", "일일 감정 체크인", "심리 기법 게임화 학습", "24/7 익명 비밀 상담"],
@@ -1238,7 +1238,7 @@ export const TOOLS_DATA = [
     life: ["student", "office", "freelancer"],
   },
   {
-    id: 150, cat: "text", icon: "👾", name: "Kuki AI", free: true,
+    id: 150, cat: "chatbot", icon: "👾", name: "Kuki AI", free: true,
     desc: "5번 로에브너상 수상 경력의 AI 챗봇. 수억 건의 대화 데이터로 훈련된 자연스러운 소셜 챗봇으로 브랜드 고객 응대에도 활용.",
     url: "https://www.kuki.ai",
     features: ["수상 경력 AI 소셜 챗봇", "자연스러운 잡담·유머 대화", "브랜드 커스텀 챗봇 구축", "메타버스·가상 인플루언서 연동", "다국어 대화 지원"],

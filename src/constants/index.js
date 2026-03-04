@@ -13,13 +13,17 @@ export const NAV_ITEMS = [
 export const CATEGORIES = [
   { id: "all", label: "전체" },
   { id: "text", label: "텍스트" },
+  { id: "chatbot", label: "챗봇" },
   { id: "image", label: "이미지" },
+  { id: "photo", label: "사진편집" },
   { id: "code", label: "코딩" },
   { id: "video", label: "영상" },
   { id: "audio", label: "오디오" },
   { id: "search", label: "검색" },
   { id: "productivity", label: "생산성" },
+  { id: "automation", label: "자동화" },
   { id: "design", label: "디자인" },
+  { id: "education", label: "교육" },
 ];
 
 /** 직업군 필터 목록 */
