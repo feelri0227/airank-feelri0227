@@ -2,6 +2,7 @@
 import { useEffect } from 'react';
 import styled from 'styled-components';
 import { useTools } from '../context/ToolContext';
+import { useAuth } from '../context/AuthContext';
 
 const NewsPageContainer = styled.div`
   max-width: 800px;
@@ -13,6 +14,7 @@ const PageTitle = styled.h1`
   font-size: 2rem;
   margin-bottom: 2rem;
   text-align: center;
+  color: var(--text-primary);
 `;
 
 const NewsList = styled.ul`
@@ -21,15 +23,18 @@ const NewsList = styled.ul`
 `;
 
 const NewsItem = styled.li`
-  border-bottom: 1px solid #eee;
+  position: relative;
+  border-bottom: 1px solid var(--border-primary);
   padding: 1.5rem 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  transition: background-color 0.2s;
 
   &:last-child {
     border-bottom: none;
   }
+`;
+
+const NewsContent = styled.div`
+  padding-right: 2.5rem; // Space for the bookmark button
 `;
 
 const NewsLink = styled.a`
@@ -37,62 +42,90 @@ const NewsLink = styled.a`
   color: inherit;
 
   &:hover h2 {
-    color: #007bff;
+    color: var(--accent-blue);
   }
 `;
 
 const NewsTitle = styled.h2`
   font-size: 1.3rem;
   margin: 0 0 0.5rem 0;
+  color: var(--text-primary);
   transition: color 0.2s;
 `;
 
 const NewsDescription = styled.p`
-  color: #555;
+  color: var(--text-secondary);
   margin: 0 0 0.5rem 0;
 `;
 
 const NewsMeta = styled.span`
   font-size: 0.9rem;
-  color: #999;
+  color: var(--text-muted);
 `;
 
 const BookmarkButton = styled.button`
-  background: none;
+  position: absolute;
+  top: 1.2rem;
+  right: 0;
+  background: transparent;
   border: none;
   cursor: pointer;
-  font-size: 1.5rem;
   padding: 0.5rem;
-  color: ${props => (props.bookmarked ? '#ffc107' : '#ccc')};
+  font-size: 1.3rem;
+  color: ${props => (props.bookmarked ? '#ffc107' : 'var(--text-muted)')};
+  transition: all 0.2s ease;
+  z-index: 5;
+
+  &:hover {
+    transform: scale(1.2);
+    color: #ffc107;
+  }
 `;
 
 function NewsPage() {
+  const { user } = useAuth();
   const { news, selectedArticle, setSelectedArticle, toggleNewsBookmark, isNewsBookmarked } = useTools();
+
+  const handleItemClick = (item) => {
+    setSelectedArticle(item);
+  };
+
+  const handleBookmarkClick = (e, item) => {
+    e.stopPropagation();
+    toggleNewsBookmark(item);
+  };
 
   return (
     <NewsPageContainer>
       <PageTitle>최신 AI 뉴스</PageTitle>
       <NewsList>
-        {news.items.map((item) => (
-          <NewsItem key={item.link} onClick={() => setSelectedArticle(item)} style={{backgroundColor: selectedArticle?.link === item.link ? '#f0f0f0' : 'transparent'}}>
-            <div>
-              <NewsLink href={item.link} target="_blank" rel="noopener noreferrer">
-                <NewsTitle>{item.title}</NewsTitle>
-                <NewsDescription>{item.description}</NewsDescription>
-                <NewsMeta>{item.relativeTime}</NewsMeta>
-              </NewsLink>
-            </div>
-            <BookmarkButton 
-              bookmarked={isNewsBookmarked(item.link)}
-              onClick={(e) => {
-                e.stopPropagation(); // Stop the event from bubbling up to the NewsItem
-                toggleNewsBookmark(item);
-              }}
+        {news.items.map((item) => {
+          const isBookmarked = isNewsBookmarked(item.link);
+          return (
+            <NewsItem 
+              key={item.link} 
+              onClick={() => handleItemClick(item)} 
+              style={{backgroundColor: selectedArticle?.link === item.link ? 'var(--bg-secondary-accent)' : 'transparent'}}
             >
-              {isNewsBookmarked(item.link) ? '★' : '☆'}
-            </BookmarkButton>
-          </NewsItem>
-        ))}
+              <NewsContent>
+                <NewsLink href={item.link} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
+                  <NewsTitle>{item.title}</NewsTitle>
+                  <NewsDescription>{item.description}</NewsDescription>
+                  <NewsMeta>{item.relativeTime}</NewsMeta>
+                </NewsLink>
+              </NewsContent>
+              {user && (
+                <BookmarkButton 
+                  bookmarked={isBookmarked}
+                  onClick={(e) => handleBookmarkClick(e, item)}
+                  title={isBookmarked ? "북마크 제거" : "북마크 추가"}
+                >
+                  {isBookmarked ? '★' : '☆'}
+                </BookmarkButton>
+              )}
+            </NewsItem>
+          );
+        })}
       </NewsList>
     </NewsPageContainer>
   );
