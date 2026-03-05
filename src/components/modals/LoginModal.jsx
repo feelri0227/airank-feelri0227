@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 
 const LoginModal = ({ onClose }) => {
-  const { loginWithGoogle, loginWithEmail, registerWithEmail } = useAuth();
+  const { loginWithEmail, registerWithEmail } = useAuth();
   const [isRegister, setIsRegister] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -52,30 +52,8 @@ const LoginModal = ({ onClose }) => {
         }}>✕</button>
 
         <h2 style={{ textAlign: "center", marginBottom: "1.5rem", fontWeight: 800 }}>
-          {isRegister ? "회원가입" : "로그인"}
+          {isRegister ? "개인 이메일 가입" : "개인 이메일 로그인"}
         </h2>
-
-        {/* 구글 로그인 버튼 */}
-        {!isRegister && (
-          <button
-            onClick={async () => { await loginWithGoogle(); onClose(); }}
-            style={{
-              width: "100%", padding: "12px", borderRadius: "12px",
-              background: "#fff", color: "#000", border: "1px solid #ddd",
-              display: "flex", alignItems: "center", justifyContent: "center", gap: "10px",
-              fontWeight: 600, cursor: "pointer", marginBottom: "1.5rem"
-            }}
-          >
-            <img src="https://www.google.com/favicon.ico" width={18} height={18} alt="Google" />
-            구글로 계속하기
-          </button>
-        )}
-
-        <div style={{ display: "flex", alignItems: "center", gap: "10px", margin: "1rem 0", color: "var(--text-muted)", fontSize: "0.85rem" }}>
-          <div style={{ flex: 1, height: "1px", background: "var(--border-primary)" }} />
-          또는
-          <div style={{ flex: 1, height: "1px", background: "var(--border-primary)" }} />
-        </div>
 
         <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
           {isRegister && (
@@ -109,7 +87,7 @@ const LoginModal = ({ onClose }) => {
               color: "#fff", border: "none", fontWeight: 700, cursor: "pointer"
             }}
           >
-            {isRegister ? "회원가입 완료" : "로그인"}
+            {isRegister ? "가입하기" : "로그인"}
           </button>
         </form>
 
