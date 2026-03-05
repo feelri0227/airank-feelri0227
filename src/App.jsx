@@ -10,17 +10,31 @@ import Community from "./pages/Community";
 import CommunityPost from "./pages/CommunityPost";
 import CommunityWrite from "./pages/CommunityWrite";
 import ToolDetailModal from "./components/modals/ToolDetailModal";
+import ToolAnalysisModal from "./components/modals/ToolAnalysisModal"; // 추가
 
-// ToolModalWrapper: Context를 사용하여 모달 상태를 제어하는 컴포넌트
-const ToolModalWrapper = () => {
-  const { selectedTool, selectedRank, closeToolDetail } = useTools();
+const ModalWrapper = () => {
+  const { 
+    selectedTool, selectedRank, closeToolDetail,
+    analysisTool, analysisRank, closeAnalysis 
+  } = useTools();
 
   return (
-    <ToolDetailModal
-      tool={selectedTool}
-      rank={selectedRank}
-      onClose={closeToolDetail}
-    />
+    <>
+      {selectedTool && (
+        <ToolDetailModal
+          tool={selectedTool}
+          rank={selectedRank}
+          onClose={closeToolDetail}
+        />
+      )}
+      {analysisTool && (
+        <ToolAnalysisModal
+          tool={analysisTool}
+          rank={analysisRank}
+          onClose={closeAnalysis}
+        />
+      )}
+    </>
   );
 };
 
@@ -39,7 +53,7 @@ export default function App() {
               <Route path="community/:postId/edit" element={<CommunityWrite />} />
             </Route>
           </Routes>
-          <ToolModalWrapper />
+          <ModalWrapper />
         </BrowserRouter>
       </ToolProvider>
     </AuthProvider>

@@ -8,8 +8,15 @@ import { TOOLS_DATA } from "../data/tools";
 export function ToolProvider({ children }) {
   const { user } = useAuth();
   const [tools, setTools] = useState(TOOLS_DATA);
+  
+  // 기존 상세 모달 상태
   const [selectedTool, setSelectedTool] = useState(null);
   const [selectedRank, setSelectedRank] = useState(null);
+
+  // ★ 신규: 심층 분석 모달 상태 추가
+  const [analysisTool, setAnalysisTool] = useState(null);
+  const [analysisRank, setAnalysisRank] = useState(null);
+
   const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
   const [selectedArticle, setSelectedArticle] = useState(() => {
     const savedArticle = localStorage.getItem('selectedArticle');
@@ -119,6 +126,16 @@ export function ToolProvider({ children }) {
     setSelectedTool(null);
   };
 
+  // ★ 신규: 심층 분석 모달 열기/닫기 함수
+  const openAnalysis = (tool, rank) => {
+    setAnalysisTool(tool);
+    setAnalysisRank(rank);
+  };
+
+  const closeAnalysis = () => {
+    setAnalysisTool(null);
+  };
+
   const addNewsBookmark = useCallback(async (article) => {
     if (!user) return;
     await addDoc(collection(db, "newsBookmarks"), {
@@ -178,9 +195,14 @@ export function ToolProvider({ children }) {
   const value = useMemo(() => ({
     tools,
     openToolDetail,
-    closeToolDetail, // 추가됨: Context value에 포함
-    selectedTool,    // 추가됨: Context value에 포함
-    selectedRank,    // 추가됨: Context value에 포함
+    closeToolDetail,
+    selectedTool,
+    selectedRank,
+    // ★ 신규 상태 및 함수 전달
+    analysisTool,
+    analysisRank,
+    openAnalysis,
+    closeAnalysis,
     theme,
     toggleTheme,
     selectTheme,
@@ -195,7 +217,7 @@ export function ToolProvider({ children }) {
     toggleToolReaction,
     getToolReaction,
     reactionCounts,
-  }), [tools, selectedTool, selectedRank, theme, selectedArticle, news, newsBookmarks, toggleNewsBookmark, isNewsBookmarked, bookmarkCounts, toolReactions, toggleToolReaction, getToolReaction, reactionCounts]);
+  }), [tools, selectedTool, selectedRank, analysisTool, analysisRank, theme, selectedArticle, news, newsBookmarks, toggleNewsBookmark, isNewsBookmarked, bookmarkCounts, toolReactions, toggleToolReaction, getToolReaction, reactionCounts]);
 
   return (
     <ToolContext.Provider value={value}>
