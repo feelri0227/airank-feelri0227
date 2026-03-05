@@ -6,7 +6,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
-  sendEmailVerification // 추가됨
+  sendEmailVerification
 } from "firebase/auth";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { auth, db, googleProvider } from "../firebase";
@@ -24,8 +24,15 @@ export const AuthProvider = ({ children }) => {
         return;
       }
 
-      // 이메일 로그인 유저인데 인증을 받지 않았다면 로그아웃 처리하거나 정보를 제한할 수 있음
-      // 여기서는 일단 상태 업데이트만 진행 (UI에서 제어)
+      // 이메일 인증 여부 확인 (소셜 로그인은 제외하고 이메일/비밀번호 로그인인 경우만 체크)
+      const isEmailUser = u.providerData.some(p => p.providerId === "password");
+      
+      if (isEmailUser && !u.emailVerified) {
+        // 인증되지 않은 유저는 즉시 로그아웃 처리하여 세션을 종료합니다.
+        setUser(null);
+        await signOut(auth);
+        return;
+      }
       
       const userRef = doc(db, "users", u.uid);
       const userSnap = await getDoc(userRef);
@@ -41,6 +48,7 @@ export const AuthProvider = ({ children }) => {
       setUser(u);
     } catch (error) {
       console.error("🔴 Error handling user:", error);
+      setUser(null);
     }
   };
 
@@ -73,7 +81,10 @@ export const AuthProvider = ({ children }) => {
       // 이메일 인증 메일 발송
       await sendEmailVerification(res.user);
       
-      await handleUser(res.user);
+      // 가입 직후 자동 로그인되는 것을 방지하기 위해 즉시 로그아웃
+      await signOut(auth);
+      setUser(null);
+      
       return res.user;
     } catch (error) {
       console.error("🔴 Registration error:", error);
@@ -85,12 +96,14 @@ export const AuthProvider = ({ children }) => {
     try {
       const res = await signInWithEmailAndPassword(auth, email, password);
       
-      // 이메일 인증 여부 확인
+      // 로그인 시점에 이메일 인증 여부 재확인
       if (!res.user.emailVerified) {
-        // 인증되지 않은 경우 에러를 던져서 UI에서 처리하게 함
+        await signOut(auth);
+        setUser(null);
         throw new Error("unverified-email");
       }
       
+      await handleUser(res.user);
       return res.user;
     } catch (error) {
       console.error("🔴 Email Login error:", error);
@@ -98,7 +111,10 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const logout = () => signOut(auth);
+  const logout = () => {
+    setUser(null);
+    return signOut(auth);
+  };
 
   return (
     <AuthContext.Provider value={{ user, loading, loginWithGoogle, loginWithEmail, registerWithEmail, logout }}>
