@@ -3,6 +3,7 @@ const GlobalStyles = () => (
     /* ── Google Fonts 로드 ── */
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
     @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+    @import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&display=swap');
 
     :root {
       --bg-primary: #fafafa;
@@ -36,6 +37,8 @@ const GlobalStyles = () => (
       --tag-color: #6366f1;
       --tag-border: rgba(99, 102, 241, 0.2);
       --modal-overlay: rgba(0, 0, 0, 0.4);
+      --font-main: 'Pretendard', -apple-system, sans-serif;
+      --font-title: 'Outfit', sans-serif;
     }
 
     [data-theme="dark"] {
@@ -132,12 +135,57 @@ const GlobalStyles = () => (
       --modal-overlay: rgba(0, 0, 0, 0.7);
     }
 
+    /* ── 조선 머슴 테마 (chosun) ── */
+    [data-theme="chosun"] {
+      --bg-primary: #f4f1ea;       /* 한지색 */
+      --bg-secondary: #fff8e7;     /* 연한 미색 */
+      --bg-tertiary: #e8e4d8;
+      --bg-card: #fff8e7;
+      --bg-card-hover: #fcf4dd;
+      --bg-nav: rgba(244, 241, 234, 0.94);
+      
+      --text-primary: #2c2c2c;     /* 먹색 */
+      --text-secondary: #4e342e;   /* 진한 나무색 */
+      --text-muted: #8d6e63;
+      
+      --border-primary: rgba(78, 52, 46, 0.15);
+      --border-hover: #a1887f;
+      
+      --accent-indigo: #8d6e63;    /* 엽전색 계열로 대체 */
+      --accent-cyan: #bcaaa4;
+      --accent-gradient: linear-gradient(135deg, #a1887f, #d7ccc8);
+      
+      --color-gold: #d4af37;
+      --color-silver: #a8a8a8;
+      --color-bronze: #cd7f32;
+      
+      --shadow-sm: 0 1px 3px rgba(78, 52, 46, 0.1);
+      --shadow-md: 0 4px 20px rgba(78, 52, 46, 0.12);
+      --shadow-lg: 0 12px 40px rgba(78, 52, 46, 0.15);
+      --shadow-card: 0 2px 8px rgba(78, 52, 46, 0.08);
+      
+      --tag-bg: rgba(188, 170, 164, 0.2);
+      --tag-color: #5d4037;
+      --tag-border: rgba(141, 110, 99, 0.3);
+      
+      --font-main: 'Nanum Myeongjo', serif; /* 선비 스타일 명조체 */
+      --font-title: 'Nanum Myeongjo', serif;
+      --ticker-bg: rgba(188, 170, 164, 0.1);
+      --ticker-border: rgba(188, 170, 164, 0.2);
+    }
+
+    /* 조선 테마에서 제목 굵기 조정 및 가로 흔들림 방지 */
+    [data-theme="chosun"] h1, [data-theme="chosun"] h2, [data-theme="chosun"] h3 {
+      font-weight: 800;
+      letter-spacing: -0.05em;
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
       width: 100%; overflow-x: hidden; position: relative;
     }
     body {
-      font-family: 'Pretendard', -apple-system, sans-serif;
+      font-family: var(--font-main);
       background: var(--bg-primary);
       color: var(--text-primary);
       transition: background 0.35s ease, color 0.35s ease;
@@ -178,17 +226,19 @@ const GlobalStyles = () => (
         -webkit-overflow-scrolling: touch;
       }
       .navbar-nav::-webkit-scrollbar { display: none; }
+      .navbar-top-row { height: 60px; padding: 0 1rem; }
     }
 
     .nav-link {
       padding: 6px 14px; border-radius: 8px; text-decoration: none;
       color: var(--text-secondary); font-size: 0.82rem; transition: all 0.2s ease; white-space: nowrap;
+      font-family: var(--font-main);
     }
     .nav-link.active { background: var(--accent-gradient); color: #fff !important; font-weight: 600; }
 
     /* ── 모바일 뉴스 박스 ── */
     .mobile-news-box {
-      display: none; /* PC에서는 숨김 */
+      display: none;
       background: var(--bg-card);
       border: 1px solid var(--border-primary);
       border-radius: 16px;
@@ -210,7 +260,7 @@ const GlobalStyles = () => (
     .mobile-news-item:hover .title { text-decoration: underline; }
 
     @media (max-width: 1100px) {
-      .mobile-news-box { display: block; } /* 사이드바가 사라지는 태블릿/모바일에서 노출 */
+      .mobile-news-box { display: block; }
     }
 
     /* ── 정렬 및 그리드 ── */
@@ -224,6 +274,7 @@ const GlobalStyles = () => (
     .sort-btn {
       padding: 6px 12px; border-radius: 8px; border: none; background: transparent;
       color: var(--text-muted); font-size: 0.75rem; cursor: pointer; white-space: nowrap;
+      font-family: var(--font-main);
     }
     .sort-btn.active { background: var(--bg-tertiary); color: var(--text-primary); font-weight: 600; }
 
@@ -241,6 +292,18 @@ const GlobalStyles = () => (
       .main-grid { padding: 0 1rem; }
       .tools-grid { grid-template-columns: 1fr !important; gap: 12px; }
     }
+
+    /* 드롭다운 등 기타 스타일 유지 */
+    .navbar-dropdown {
+      position: absolute; top: calc(100% + 10px); right: 0;
+      background: var(--bg-card); border: 1px solid var(--border-primary);
+      border-radius: 12px; padding: 8px; min-width: 240px; z-index: 200;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    }
+    .dropdown-item { display: block; width: 100%; padding: 6px 8px; border-radius: 8px; color: var(--text-primary); font-size: 0.82rem; text-decoration: none; text-align: left; background: transparent; border: none; cursor: pointer; }
+    .dropdown-item:hover { background: var(--bg-tertiary); }
+    .dropdown-divider { height: 1px; background: var(--border-primary); margin: 6px 0; }
+    .dropdown-label { font-size: 0.65rem; font-weight: 600; color: var(--text-muted); padding: 4px 8px 6px; }
 
     @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   `}</style>

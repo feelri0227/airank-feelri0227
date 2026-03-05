@@ -6,6 +6,7 @@ const THEMES = [
   { id: 'dark',  icon: '🌙', label: '다크' },
   { id: 'manus', icon: '⚡', label: '마누스' },
   { id: 'mono',  icon: '◑',  label: '모노' },
+  { id: 'chosun', icon: '🌾', label: '조선' },
 ];
 
 const TRACK_COLORS = {
@@ -13,6 +14,7 @@ const TRACK_COLORS = {
   dark:  'var(--bg-tertiary)',
   manus: 'rgba(245, 158, 11, 0.15)',
   mono:  'rgba(0, 0, 0, 0.08)',
+  chosun: 'rgba(141, 110, 99, 0.15)',
 };
 
 const ThemeToggle = () => {
