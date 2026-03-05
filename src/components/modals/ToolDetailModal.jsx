@@ -50,17 +50,19 @@ const LIFE_LABEL = {
   marketer: "마케터", startup: "스타트업", creator: "크리에이터",
 };
 
-// [오른쪽] 새로 추가되는 심층 분석 카드
+// [오른쪽] 새로 추가되는 심층 분석 카드 (디자인 개선됨)
 const ToolAnalysisCard = ({ tool }) => {
-  // SNS 차트 컴포넌트 (내부용)
+  // SNS 차트 컴포넌트 (Thin Line 스타일)
   const SnsBar = ({ label, value, color, icon }) => (
-    <div style={{ marginBottom: "14px" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "5px", fontSize: "0.8rem" }}>
-        <span style={{ fontWeight: 600, color: "var(--text-primary)", display: "flex", alignItems: "center", gap: "6px" }}>{icon} {label}</span>
-        <span style={{ fontWeight: 700, color: color }}>{value}%</span>
+    <div style={{ marginBottom: "10px", display: "flex", alignItems: "center", gap: "10px", fontSize: "0.8rem" }}>
+      <div style={{ width: "100px", fontWeight: 600, color: "var(--text-secondary)", display: "flex", alignItems: "center", gap: "6px", flexShrink: 0 }}>
+        {icon} {label}
       </div>
-      <div style={{ width: "100%", height: "8px", background: "var(--bg-tertiary)", borderRadius: "4px", overflow: "hidden" }}>
-        <div style={{ width: `${value}%`, height: "100%", background: color, borderRadius: "4px" }} />
+      <div style={{ flex: 1, height: "6px", background: "var(--bg-tertiary)", borderRadius: "3px", overflow: "hidden" }}>
+        <div style={{ width: `${value}%`, height: "100%", background: color, borderRadius: "3px" }} />
+      </div>
+      <div style={{ width: "32px", textAlign: "right", fontWeight: 700, color: color, fontSize: "0.75rem" }}>
+        {value}%
       </div>
     </div>
   );
@@ -74,25 +76,25 @@ const ToolAnalysisCard = ({ tool }) => {
       width: "100%", maxWidth: "340px",
       display: "flex", flexDirection: "column",
       boxShadow: "0 24px 64px rgba(0,0,0,0.25)",
-      maxHeight: "85vh", overflowY: "auto"
+      height: "fit-content" // 내용만큼만 높이 차지
     }}>
-      <h3 style={{ fontSize: "1.1rem", fontWeight: 800, marginBottom: "1.2rem", display: "flex", alignItems: "center", gap: "8px" }}>
-        📊 실시간 트렌드 분석
+      <h3 style={{ fontSize: "1rem", fontWeight: 800, marginBottom: "1rem", display: "flex", alignItems: "center", gap: "6px", color: "var(--text-primary)" }}>
+        📊 실시간 트렌드
       </h3>
 
-      <div style={{ padding: "14px", background: "var(--bg-secondary)", borderRadius: "16px", marginBottom: "1.2rem" }}>
-        <SnsBar label="Naver 검색" value={tool.sns?.naver || 0} color="#03C75A" icon="🇳" />
-        <SnsBar label="YouTube 관심도" value={tool.sns?.youtube || 0} color="#FF0000" icon="▶" />
-        <SnsBar label="Google 트렌드" value={tool.sns?.google || 0} color="#4285F4" icon="🇬" />
-        <SnsBar label="GitHub 활동" value={tool.sns?.github || 0} color="#181717" icon="🐙" />
+      <div style={{ marginBottom: "1.2rem" }}>
+        <SnsBar label="Naver" value={tool.sns?.naver || 0} color="#03C75A" icon="🇳" />
+        <SnsBar label="YouTube" value={tool.sns?.youtube || 0} color="#FF0000" icon="▶" />
+        <SnsBar label="Google" value={tool.sns?.google || 0} color="#4285F4" icon="🇬" />
+        <SnsBar label="GitHub" value={tool.sns?.github || 0} color="#181717" icon="🐙" />
       </div>
       
-      <div style={{ padding: "12px", background: "var(--bg-tertiary)", borderRadius: "12px", marginBottom: "1.2rem" }}>
-         <p style={{ fontSize: "0.8rem", color: "var(--text-secondary)", lineHeight: 1.5, margin: 0 }}>
+      <div style={{ padding: "12px", background: "var(--bg-tertiary)", borderRadius: "12px" }}>
+         <p style={{ fontSize: "0.78rem", color: "var(--text-secondary)", lineHeight: 1.5, margin: 0 }}>
            <strong>💡 AI 인사이트:</strong><br/>
            {tool.sns?.github > 50 
-             ? "이 도구는 개발자 커뮤니티에서 특히 인기가 높습니다. 기술적인 활용도가 높은 도구입니다." 
-             : "대중적인 관심도가 높은 도구입니다. 검색량과 영상 조회수가 꾸준히 상승하고 있습니다."}
+             ? "개발자 커뮤니티에서 기술적 관심도가 매우 높습니다." 
+             : "대중적인 검색량과 영상 조회수가 상승세입니다."}
          </p>
       </div>
 
@@ -109,7 +111,7 @@ const ToolDetailModal = ({ tool, rank, onClose }) => {
   const faviconUrl = tool ? getFaviconUrl(tool.url) : null;
 
   useEffect(() => {
-    const checkIsMobile = () => setIsMobile(window.innerWidth < 900); // 900px 미만은 모바일 (세로 배치)
+    const checkIsMobile = () => setIsMobile(window.innerWidth < 900);
     checkIsMobile();
     window.addEventListener('resize', checkIsMobile);
     return () => window.removeEventListener('resize', checkIsMobile);
@@ -117,13 +119,13 @@ const ToolDetailModal = ({ tool, rank, onClose }) => {
 
   useEffect(() => {
     if (!user || !tool) { setBookmarked(false); return; }
-    const ref = doc(db, "bookmarks", `${user.uid}_${tool.id}`);
+    const ref = doc(db, "bookmarks", `${user.uid}_${tool.id}\`);
     getDoc(ref).then((snap) => setBookmarked(snap.exists()));
   }, [user, tool]);
 
   const toggleBookmark = async () => {
     if (!user) { login(); return; }
-    const ref = doc(db, "bookmarks", `${user.uid}_${tool.id}`);
+    const ref = doc(db, "bookmarks", `${user.uid}_${tool.id}\`);
     if (bookmarked) { await deleteDoc(ref); setBookmarked(false); }
     else { await setDoc(ref, { uid: user.uid, toolId: tool.id, toolName: tool.name, savedAt: Date.now() }); setBookmarked(true); }
   };
@@ -136,32 +138,36 @@ const ToolDetailModal = ({ tool, rank, onClose }) => {
       style={{
         position: "fixed", inset: 0, zIndex: 1000,
         background: "rgba(0,0,0,0.55)",
-        display: "flex", alignItems: "center", justifyContent: "center",
-        padding: "16px", backdropFilter: "blur(4px)",
-        overflowY: "auto"
+        backdropFilter: "blur(4px)",
+        overflowY: "auto", // ★ 전체 화면 스크롤 허용
+        display: "flex",
+        alignItems: "flex-start", // ★ 상단 정렬 (스크롤 시 자연스럽게)
+        justifyContent: "center",
+        padding: "40px 16px", // 상하 여백을 주어 스크롤 공간 확보
       }}
     >
       <div
         onClick={(e) => e.stopPropagation()}
         style={{
           display: "flex",
-          flexDirection: isMobile ? "column" : "row", // 모바일 세로, PC 가로
-          alignItems: "stretch", // 높이 맞춤
+          flexDirection: isMobile ? "column" : "row",
+          alignItems: "flex-start", // ★ 카드들도 상단 정렬 (높이 달라도 됨)
           gap: "16px",
-          maxHeight: "90vh",
-          overflowY: isMobile ? "auto" : "visible"
+          width: "auto",
+          maxWidth: "100%",
+          margin: "auto", // 중앙 정렬 보정
         }}
       >
-        {/* [왼쪽] 기존 상세 정보 카드 (원본 디자인 유지) */}
+        {/* [왼쪽] 기존 상세 정보 카드 */}
         <div style={{
           background: "var(--bg-card)",
           border: "1px solid var(--border-primary)",
           borderRadius: "20px",
           padding: isMobile ? "1rem" : "1.25rem",
-          width: "100%", maxWidth: "340px",
-          maxHeight: "85vh", overflowY: "auto",
+          width: "100%", maxWidth: "340px", minWidth: "300px",
           boxShadow: "0 24px 64px rgba(0,0,0,0.25)",
           position: "relative",
+          height: "fit-content" // ★ 내용만큼만 높이 차지
         }}>
           <button onClick={onClose} style={{ position: "absolute", top: isMobile ? "12px" : "16px", right: isMobile ? "12px" : "16px", background: "var(--bg-tertiary)", border: "none", borderRadius: "8px", width: "32px", height: "32px", cursor: "pointer", fontSize: "1rem", color: "var(--text-muted)", display: "flex", alignItems: "center", justifyContent: "center" }}>✕</button>
           <button onClick={toggleBookmark} title={user ? (bookmarked ? "북마크 해제" : "북마크 저장") : "로그인 후 북마크 가능"} style={{ position: "absolute", top: isMobile ? "12px" : "16px", right: isMobile ? "52px" : "56px", background: bookmarked ? "rgba(239,68,68,0.1)" : "var(--bg-tertiary)", border: bookmarked ? "1px solid #ef4444" : "none", borderRadius: "8px", width: "32px", height: "32px", cursor: "pointer", fontSize: "1.1rem", display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.2s ease", color: bookmarked ? "#ef4444" : "var(--text-muted)" }}>{bookmarked ? "♥" : "♡"}</button>
@@ -198,7 +204,7 @@ const ToolDetailModal = ({ tool, rank, onClose }) => {
           {tool.url && ( <a href={tool.url} target="_blank" rel="noopener noreferrer" style={{ display: "block", textAlign: "center", padding: isMobile ? "11px" : "12px", borderRadius: "12px", background: "linear-gradient(135deg, var(--accent-indigo), var(--accent-cyan))", color: "#fff", fontFamily: "'Outfit', sans-serif", fontWeight: 700, fontSize: isMobile ? "0.85rem" : "0.9rem", textDecoration: "none", transition: "opacity 0.2s ease" }} onMouseEnter={(e) => e.currentTarget.style.opacity = "0.85"} onMouseLeave={(e) => e.currentTarget.style.opacity = "1"}>공식 사이트 바로가기 →</a>)}
         </div>
 
-        {/* [오른쪽] 새로 추가된 카드 (SNS 분석) */}
+        {/* [오른쪽] 새로 추가된 심층 분석 카드 (디자인 개선됨) */}
         <ToolAnalysisCard tool={tool} />
 
       </div>
