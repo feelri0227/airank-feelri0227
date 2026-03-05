@@ -4,10 +4,8 @@ const GlobalStyles = () => (
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
     @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
-    /* ══════════════════════════════════════
-       CSS 변수 - 라이트 테마 (기본)
-       순수 화이트 계열
-       ══════════════════════════════════════ */
+    /* ... (기존 테마 변수들은 동일) ... */
+
     :root {
       /* 배경 */
       --bg-primary: #fafafa;
@@ -57,10 +55,6 @@ const GlobalStyles = () => (
       --modal-overlay: rgba(0, 0, 0, 0.4);
     }
 
-    /* ══════════════════════════════════════
-       CSS 변수 - 다크 테마
-       순수 블랙 계열
-       ══════════════════════════════════════ */
     [data-theme="dark"] {
       --bg-primary: #0a0a0a;
       --bg-secondary: #111111;
@@ -92,10 +86,6 @@ const GlobalStyles = () => (
       --modal-overlay: rgba(0, 0, 0, 0.8);
     }
 
-    /* ══════════════════════════════════════
-       CSS 변수 - 마누스 테마
-       딥 다크 + 웜 앰버 액센트
-       ══════════════════════════════════════ */
     [data-theme="manus"] {
       --bg-primary: #0c0c0c;
       --bg-secondary: #141414;
@@ -136,11 +126,6 @@ const GlobalStyles = () => (
       --tag-border: rgba(245, 158, 11, 0.25);
       --modal-overlay: rgba(0, 0, 0, 0.8);
     }
-
-    /* ══════════════════════════════════════
-       CSS 변수 - 모노 테마
-       순수 그레이스케일 + 흑백 느낌
-       ══════════════════════════════════════ */
     [data-theme="mono"] {
       --bg-primary: #1c1c1c;
       --bg-secondary: #242424;
@@ -182,7 +167,6 @@ const GlobalStyles = () => (
       --modal-overlay: rgba(0, 0, 0, 0.7);
     }
 
-    /* 모노 테마: 모든 이미지 흑백 */
     [data-theme="mono"] img {
       filter: grayscale(100%);
       transition: filter 0.3s ease;
@@ -198,7 +182,6 @@ const GlobalStyles = () => (
       transition: background 0.35s ease, color 0.35s ease;
     }
 
-    /* 스크롤바 스타일링 */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: var(--text-muted); border-radius: 3px; }
@@ -215,14 +198,7 @@ const GlobalStyles = () => (
     .navbar-nav { display: flex; }
     .navbar-login { display: block; }
 
-    /* 가로 스크롤 필터 행 */
-    .filter-row {
-      display: flex;
-      gap: 6px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    .filter-scroll {
+    .filter-row, .filter-scroll {
       display: flex;
       gap: 6px;
       align-items: center;
@@ -241,45 +217,36 @@ const GlobalStyles = () => (
     }
 
     @media (max-width: 768px) {
-      /* 네비 메뉴: 헤더 아래 가로 스크롤 */
+      /* 네비게이션 바 모바일 최적화 */
       .navbar-header {
-        flex-wrap: wrap !important;
-        height: auto !important;
-        padding: 8px 1rem !important;
-        gap: 6px;
+        flex-wrap: nowrap !important; /* 줄바꿈 방지 */
+        overflow-x: auto !important; /* 가로 스크롤 허용 */
+        height: 64px !important; /* 높이 고정 */
+        padding: 0 1rem !important;
       }
+      .navbar-header::-webkit-scrollbar { display: none; } /* 스크롤바 숨김 */
+
       .navbar-nav {
         position: static !important;
         transform: none !important;
-        order: 3;
-        width: 100%;
-        overflow-x: auto;
-        flex-wrap: nowrap !important;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        padding-bottom: 2px;
+        order: 2; /* 로고 다음에 바로 오도록 순서 조정 */
+        width: auto;
+        flex-shrink: 0; /* 메뉴 너비가 줄어들지 않도록 설정 */
       }
-      .navbar-nav::-webkit-scrollbar { display: none; }
 
       /* 필터 행 가로 스크롤 */
-      .filter-row {
+      .filter-row, .filter-scroll {
         overflow-x: auto;
         flex-wrap: nowrap !important;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
         padding-bottom: 4px;
       }
-      .filter-row::-webkit-scrollbar { display: none; }
-      .filter-scroll {
-        overflow-x: auto;
-        flex-wrap: nowrap !important;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-      }
-      .filter-scroll::-webkit-scrollbar { display: none; }
+      .filter-row::-webkit-scrollbar, .filter-scroll::-webkit-scrollbar { display: none; }
     }
 
     /* ── 키프레임 애니메이션 ── */
+    /* ... (애니메이션은 동일) ... */
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
