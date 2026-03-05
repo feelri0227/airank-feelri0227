@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
-import { auth, googleProvider, githubProvider, twitterProvider } from "../firebase";
+import { doc, setDoc, getDoc } from "firebase/firestore";
+import { auth, db, googleProvider, githubProvider, twitterProvider } from "../firebase";
 
 const AuthContext = createContext(null);
 
@@ -8,17 +9,44 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const handleUser = async (u) => {
+    if (!u) {
+      setUser(null);
+      return;
+    }
+    const userRef = doc(db, "users", u.uid);
+    const userSnap = await getDoc(userRef);
+    if (!userSnap.exists()) {
+      // 새로운 사용자라면 Firestore에 사용자 정보 저장
+      await setDoc(userRef, {
+        uid: u.uid,
+        displayName: u.displayName,
+        email: u.email,
+        photoURL: u.photoURL,
+        createdAt: new Date(),
+      });
+    }
+    setUser(u);
+  };
+
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (u) => {
-      setUser(u);
-      setLoading(false);
+      handleUser(u).finally(() => setLoading(false));
     });
     return unsub;
   }, []);
 
-  const loginWithGoogle = () => signInWithPopup(auth, googleProvider).catch((err) => console.error("🔴 Google Popup error:", err));
-  const loginWithGithub = () => signInWithPopup(auth, githubProvider).catch((err) => console.error("🔴 Github Popup error:", err));
-  const loginWithTwitter = () => signInWithPopup(auth, twitterProvider).catch((err) => console.error("🔴 Twitter Popup error:", err));
+  const loginWithProvider = async (provider) => {
+    try {
+      await signInWithPopup(auth, provider);
+    } catch (error) {
+      console.error("🔴 Popup error:", error);
+    }
+  };
+
+  const loginWithGoogle = () => loginWithProvider(googleProvider);
+  const loginWithGithub = () => loginWithProvider(githubProvider);
+  const loginWithTwitter = () => loginWithProvider(twitterProvider);
   const logout = () => signOut(auth);
 
   return (
