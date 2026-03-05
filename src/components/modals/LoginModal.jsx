@@ -32,70 +32,177 @@ const LoginModal = ({ onClose }) => {
     <div
       onClick={onClose}
       style={{
-        position: "fixed", inset: 0, zIndex: 1100,
-        background: "rgba(0,0,0,0.65)", display: "flex",
-        alignItems: "center", justifyContent: "center", padding: "16px",
-        backdropFilter: "blur(6px)",
+        position: "fixed",
+        inset: 0,
+        zIndex: 1100,
+        background: "rgba(0,0,0,0.65)",
+        display: "flex",
+        alignItems: "center", // 세로 중앙 정렬
+        justifyContent: "center", // 가로 중앙 정렬
+        padding: "20px",
+        backdropFilter: "blur(8px)",
+        overflowY: "auto", // 내용이 많을 경우 스크롤 가능하게
       }}
     >
       <div
         onClick={(e) => e.stopPropagation()}
         style={{
-          background: "var(--bg-card)", border: "1px solid var(--border-primary)",
-          borderRadius: "24px", padding: "2rem", width: "100%", maxWidth: "400px",
-          boxShadow: "0 24px 64px rgba(0,0,0,0.4)", position: "relative",
+          background: "var(--bg-card)",
+          border: "1px solid var(--border-primary)",
+          borderRadius: "28px",
+          padding: "2.5rem 2rem 2rem",
+          width: "100%",
+          maxWidth: "380px",
+          boxShadow: "0 24px 64px rgba(0,0,0,0.5)",
+          position: "relative",
+          margin: "auto", // 추가적인 중앙 정렬 보정
         }}
       >
-        <button onClick={onClose} style={{
-          position: "absolute", top: "16px", right: "16px",
-          background: "none", border: "none", fontSize: "1.2rem", cursor: "pointer", color: "var(--text-muted)"
-        }}>✕</button>
+        {/* 상단 우측 X 버튼 */}
+        <button
+          onClick={onClose}
+          style={{
+            position: "absolute",
+            top: "20px",
+            right: "20px",
+            background: "var(--bg-tertiary)",
+            border: "none",
+            borderRadius: "50%",
+            width: "32px",
+            height: "32px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: "1rem",
+            cursor: "pointer",
+            color: "var(--text-muted)",
+            transition: "all 0.2s",
+          }}
+          onMouseEnter={(e) => e.currentTarget.style.background = "var(--border-primary)"}
+          onMouseLeave={(e) => e.currentTarget.style.background = "var(--bg-tertiary)"}
+        >
+          ✕
+        </button>
 
-        <h2 style={{ textAlign: "center", marginBottom: "1.5rem", fontWeight: 800 }}>
-          {isRegister ? "개인 이메일 가입" : "개인 이메일 로그인"}
+        <h2 style={{
+          textAlign: "center",
+          marginBottom: "2rem",
+          fontWeight: 800,
+          fontSize: "1.5rem",
+          color: "var(--text-primary)"
+        }}>
+          {isRegister ? "이메일 회원가입" : "이메일 로그인"}
         </h2>
 
-        <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+        <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
           {isRegister && (
-            <input
-              type="text" placeholder="이름" value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-              style={{ padding: "12px", borderRadius: "10px", border: "1px solid var(--border-primary)", background: "var(--bg-secondary)", color: "var(--text-primary)" }}
-            />
+            <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+              <label style={{ fontSize: "0.85rem", fontWeight: 600, color: "var(--text-secondary)", marginLeft: "4px" }}>이름</label>
+              <input
+                type="text"
+                placeholder="홍길동"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+                style={{
+                  padding: "14px",
+                  borderRadius: "12px",
+                  border: "1px solid var(--border-primary)",
+                  background: "var(--bg-secondary)",
+                  color: "var(--text-primary)",
+                  fontSize: "1rem"
+                }}
+              />
+            </div>
           )}
-          <input
-            type="email" placeholder="이메일 주소" value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            style={{ padding: "12px", borderRadius: "10px", border: "1px solid var(--border-primary)", background: "var(--bg-secondary)", color: "var(--text-primary)" }}
-          />
-          <input
-            type="password" placeholder="비밀번호" value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            style={{ padding: "12px", borderRadius: "10px", border: "1px solid var(--border-primary)", background: "var(--bg-secondary)", color: "var(--text-primary)" }}
-          />
+          <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+            <label style={{ fontSize: "0.85rem", fontWeight: 600, color: "var(--text-secondary)", marginLeft: "4px" }}>이메일</label>
+            <input
+              type="email"
+              placeholder="example@email.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              style={{
+                padding: "14px",
+                borderRadius: "12px",
+                border: "1px solid var(--border-primary)",
+                background: "var(--bg-secondary)",
+                color: "var(--text-primary)",
+                fontSize: "1rem"
+              }}
+            />
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+            <label style={{ fontSize: "0.85rem", fontWeight: 600, color: "var(--text-secondary)", marginLeft: "4px" }}>비밀번호</label>
+            <input
+              type="password"
+              placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              style={{
+                padding: "14px",
+                borderRadius: "12px",
+                border: "1px solid var(--border-primary)",
+                background: "var(--bg-secondary)",
+                color: "var(--text-primary)",
+                fontSize: "1rem"
+              }}
+            />
+          </div>
           
-          {error && <p style={{ color: "#ef4444", fontSize: "0.85rem", margin: "4px 0" }}>{error}</p>}
+          {error && <p style={{ color: "#ef4444", fontSize: "0.85rem", margin: "4px 0", textAlign: "center" }}>{error}</p>}
 
-          <button
-            type="submit"
-            style={{
-              marginTop: "8px", padding: "14px", borderRadius: "12px",
-              background: "linear-gradient(135deg, var(--accent-indigo), var(--accent-cyan))",
-              color: "#fff", border: "none", fontWeight: 700, cursor: "pointer"
-            }}
-          >
-            {isRegister ? "가입하기" : "로그인"}
-          </button>
+          <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginTop: "10px" }}>
+            <button
+              type="submit"
+              style={{
+                padding: "16px",
+                borderRadius: "14px",
+                background: "linear-gradient(135deg, var(--accent-indigo), var(--accent-cyan))",
+                color: "#fff",
+                border: "none",
+                fontWeight: 700,
+                fontSize: "1.05rem",
+                cursor: "pointer",
+                boxShadow: "0 8px 20px rgba(79, 70, 229, 0.25)",
+              }}
+            >
+              {isRegister ? "회원가입 완료" : "로그인"}
+            </button>
+            
+            {/* 하단 취소 버튼 */}
+            <button
+              type="button"
+              onClick={onClose}
+              style={{
+                padding: "14px",
+                borderRadius: "14px",
+                background: "var(--bg-tertiary)",
+                color: "var(--text-secondary)",
+                border: "1px solid var(--border-primary)",
+                fontWeight: 600,
+                fontSize: "0.95rem",
+                cursor: "pointer",
+              }}
+            >
+              취소
+            </button>
+          </div>
         </form>
 
-        <p style={{ textAlign: "center", marginTop: "1.5rem", fontSize: "0.9rem", color: "var(--text-muted)" }}>
+        <p style={{ textAlign: "center", marginTop: "2rem", fontSize: "0.95rem", color: "var(--text-muted)" }}>
           {isRegister ? "이미 계정이 있으신가요?" : "처음이신가요?"} {" "}
           <span
             onClick={() => setIsRegister(!isRegister)}
-            style={{ color: "var(--accent-indigo)", fontWeight: 600, cursor: "pointer", textDecoration: "underline" }}
+            style={{
+              color: "var(--accent-indigo)",
+              fontWeight: 700,
+              cursor: "pointer",
+              textDecoration: "underline",
+              marginLeft: "4px"
+            }}
           >
             {isRegister ? "로그인하기" : "회원가입하기"}
           </span>
