@@ -7,11 +7,13 @@ import ThemeToggle from "../ui/ThemeToggle";
 import { NAV_ITEMS } from "../../constants";
 import { useAuth } from "../../context/AuthContext";
 import { useTools } from "../../context/ToolContext";
+import LoginModal from "../modals/LoginModal"; // 추가됨
 
 const Navbar = ({ theme, onToggleTheme }) => {
-  const { user, loginWithGoogle, logout } = useAuth();
+  const { user, logout } = useAuth();
   const { tools, openToolDetail, newsBookmarks } = useTools();
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false); // 로그인 모달 상태 추가
   const [bookmarks, setBookmarks] = useState([]);
   const dropdownRef = useRef(null);
   const location = useLocation();
@@ -64,14 +66,14 @@ const Navbar = ({ theme, onToggleTheme }) => {
                 style={{ display: "flex", alignItems: "center", gap: "8px", cursor: "pointer" }}
               >
                 <img
-                  src={user.photoURL}
+                  src={user.photoURL || `https://ui-avatars.com/api/?name=${user.displayName}&background=random`}
                   alt={user.displayName}
                   width={30}
                   height={30}
                   style={{ borderRadius: "50%", flexShrink: 0 }}
                 />
                 <span className="user-name">
-                  {user.displayName?.split(" ")[0]}
+                  {user.displayName?.split(" ")[0] || "사용자"}
                 </span>
               </div>
 
@@ -107,9 +109,8 @@ const Navbar = ({ theme, onToggleTheme }) => {
             </div>
           ) : (
             <div style={{ display: 'flex', gap: '8px' }}>
-              <button onClick={loginWithGoogle} className="navbar-login-btn">
-                <img src="https://www.google.com/favicon.ico" width={14} height={14} alt="Google" />
-                <span>Google</span>
+              <button onClick={() => setShowLoginModal(true)} className="navbar-login-btn">
+                <span>로그인</span>
               </button>
             </div>
           )}
@@ -117,7 +118,7 @@ const Navbar = ({ theme, onToggleTheme }) => {
         </div>
       </div>
 
-      {/* 하단 라인: 네비게이션 메뉴 (모바일/태블릿에서 2단으로 내려감) */}
+      {/* 하단 라인: 네비게이션 메뉴 */}
       <nav className="navbar-nav">
         {NAV_ITEMS.map((item) => {
           const isActive = activeMenu === item.id;
@@ -137,6 +138,9 @@ const Navbar = ({ theme, onToggleTheme }) => {
           );
         })}
       </nav>
+
+      {/* 로그인 모달 렌더링 */}
+      {showLoginModal && <LoginModal onClose={() => setShowLoginModal(false)} />}
     </header>
   );
 };

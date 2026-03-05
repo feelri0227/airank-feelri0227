@@ -1,5 +1,12 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
+import { 
+  signInWithPopup, 
+  signOut, 
+  onAuthStateChanged,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile
+} from "firebase/auth";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { auth, db, googleProvider } from "../firebase";
 
@@ -18,20 +25,17 @@ export const AuthProvider = ({ children }) => {
       const userRef = doc(db, "users", u.uid);
       const userSnap = await getDoc(userRef);
       if (!userSnap.exists()) {
-        // 새로운 사용자라면 Firestore에 사용자 정보 저장
         await setDoc(userRef, {
           uid: u.uid,
-          displayName: u.displayName,
+          displayName: u.displayName || u.email?.split('@')[0],
           email: u.email,
-          photoURL: u.photoURL,
+          photoURL: u.photoURL || `https://ui-avatars.com/api/?name=${u.email?.split('@')[0]}&background=random`,
           createdAt: new Date(),
         });
       }
       setUser(u);
     } catch (error) {
       console.error("🔴 Error handling user:", error);
-      // 에러가 발생하더라도 UI는 계속 진행되어야 합니다.
-      // 필요하다면 여기에 에러 처리 로직을 추가할 수 있습니다.
     }
   };
 
@@ -47,13 +51,37 @@ export const AuthProvider = ({ children }) => {
       await signInWithPopup(auth, googleProvider);
     } catch (error) {
       console.error("🔴 Google Popup error:", error);
+      throw error;
+    }
+  };
+
+  const registerWithEmail = async (email, password, name) => {
+    try {
+      const res = await createUserWithEmailAndPassword(auth, email, password);
+      await updateProfile(res.user, {
+        displayName: name,
+        photoURL: `https://ui-avatars.com/api/?name=${name}&background=random`
+      });
+      await handleUser(res.user);
+    } catch (error) {
+      console.error("🔴 Registration error:", error);
+      throw error;
+    }
+  };
+
+  const loginWithEmail = async (email, password) => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+    } catch (error) {
+      console.error("🔴 Email Login error:", error);
+      throw error;
     }
   };
 
   const logout = () => signOut(auth);
 
   return (
-    <AuthContext.Provider value={{ user, loading, loginWithGoogle, logout }}>
+    <AuthContext.Provider value={{ user, loading, loginWithGoogle, loginWithEmail, registerWithEmail, logout }}>
       {!loading && children}
     </AuthContext.Provider>
   );
