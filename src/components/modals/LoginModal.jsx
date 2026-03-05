@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { createPortal } from "react-dom"; // Portal 사용을 위해 추가
 import { useAuth } from "../../context/AuthContext";
 
 const LoginModal = ({ onClose }) => {
@@ -28,20 +29,25 @@ const LoginModal = ({ onClose }) => {
     }
   };
 
-  return (
+  // Portal을 사용하여 body 바로 아래에 렌더링함으로써 레이아웃 짤림 방지
+  return createPortal(
     <div
       onClick={onClose}
       style={{
         position: "fixed",
-        inset: 0,
-        zIndex: 1100,
-        background: "rgba(0,0,0,0.65)",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        width: "100vw",
+        height: "100vh",
+        zIndex: 9999, // 매우 높은 z-index 부여
+        background: "rgba(0,0,0,0.7)", // 배경을 좀 더 어둡게 하여 집중도 향상
         display: "flex",
-        alignItems: "center", // 세로 중앙 정렬
-        justifyContent: "center", // 가로 중앙 정렬
+        alignItems: "center",
+        justifyContent: "center",
         padding: "20px",
-        backdropFilter: "blur(8px)",
-        overflowY: "auto", // 내용이 많을 경우 스크롤 가능하게
+        backdropFilter: "blur(10px)",
       }}
     >
       <div
@@ -49,18 +55,21 @@ const LoginModal = ({ onClose }) => {
         style={{
           background: "var(--bg-card)",
           border: "1px solid var(--border-primary)",
-          borderRadius: "28px",
+          borderRadius: "32px",
           padding: "2.5rem 2rem 2rem",
           width: "100%",
           maxWidth: "380px",
-          boxShadow: "0 24px 64px rgba(0,0,0,0.5)",
+          boxShadow: "0 32px 80px rgba(0,0,0,0.6)",
           position: "relative",
-          margin: "auto", // 추가적인 중앙 정렬 보정
+          display: "flex",
+          flexDirection: "column",
+          gap: "1.5rem",
         }}
       >
         {/* 상단 우측 X 버튼 */}
         <button
           onClick={onClose}
+          aria-label="닫기"
           style={{
             position: "absolute",
             top: "20px",
@@ -68,89 +77,88 @@ const LoginModal = ({ onClose }) => {
             background: "var(--bg-tertiary)",
             border: "none",
             borderRadius: "50%",
-            width: "32px",
-            height: "32px",
+            width: "36px",
+            height: "36px",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            fontSize: "1rem",
+            fontSize: "1.2rem",
             cursor: "pointer",
             color: "var(--text-muted)",
-            transition: "all 0.2s",
+            zIndex: 10,
           }}
-          onMouseEnter={(e) => e.currentTarget.style.background = "var(--border-primary)"}
-          onMouseLeave={(e) => e.currentTarget.style.background = "var(--bg-tertiary)"}
         >
           ✕
         </button>
 
-        <h2 style={{
-          textAlign: "center",
-          marginBottom: "2rem",
-          fontWeight: 800,
-          fontSize: "1.5rem",
-          color: "var(--text-primary)"
-        }}>
-          {isRegister ? "이메일 회원가입" : "이메일 로그인"}
-        </h2>
+        <div style={{ textAlign: "center" }}>
+          <h2 style={{
+            fontWeight: 800,
+            fontSize: "1.6rem",
+            color: "var(--text-primary)",
+            margin: "0 0 0.5rem 0"
+          }}>
+            {isRegister ? "회원가입" : "이메일 로그인"}
+          </h2>
+          <p style={{ fontSize: "0.9rem", color: "var(--text-muted)" }}>
+            {isRegister ? "정보를 입력하여 가입하세요" : "계정 정보를 입력하세요"}
+          </p>
+        </div>
 
-        <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+        <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
           {isRegister && (
-            <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-              <label style={{ fontSize: "0.85rem", fontWeight: 600, color: "var(--text-secondary)", marginLeft: "4px" }}>이름</label>
-              <input
-                type="text"
-                placeholder="홍길동"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-                style={{
-                  padding: "14px",
-                  borderRadius: "12px",
-                  border: "1px solid var(--border-primary)",
-                  background: "var(--bg-secondary)",
-                  color: "var(--text-primary)",
-                  fontSize: "1rem"
-                }}
-              />
-            </div>
+            <input
+              type="text"
+              placeholder="이름"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              style={{
+                padding: "15px",
+                borderRadius: "14px",
+                border: "1px solid var(--border-primary)",
+                background: "var(--bg-secondary)",
+                color: "var(--text-primary)",
+                fontSize: "1rem",
+                width: "100%",
+                boxSizing: "border-box"
+              }}
+            />
           )}
-          <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-            <label style={{ fontSize: "0.85rem", fontWeight: 600, color: "var(--text-secondary)", marginLeft: "4px" }}>이메일</label>
-            <input
-              type="email"
-              placeholder="example@email.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              style={{
-                padding: "14px",
-                borderRadius: "12px",
-                border: "1px solid var(--border-primary)",
-                background: "var(--bg-secondary)",
-                color: "var(--text-primary)",
-                fontSize: "1rem"
-              }}
-            />
-          </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-            <label style={{ fontSize: "0.85rem", fontWeight: 600, color: "var(--text-secondary)", marginLeft: "4px" }}>비밀번호</label>
-            <input
-              type="password"
-              placeholder="••••••••"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              style={{
-                padding: "14px",
-                borderRadius: "12px",
-                border: "1px solid var(--border-primary)",
-                background: "var(--bg-secondary)",
-                color: "var(--text-primary)",
-                fontSize: "1rem"
-              }}
-            />
-          </div>
+          <input
+            type="email"
+            placeholder="이메일 주소"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            style={{
+              padding: "15px",
+              borderRadius: "14px",
+              border: "1px solid var(--border-primary)",
+              background: "var(--bg-secondary)",
+              color: "var(--text-primary)",
+              fontSize: "1rem",
+              width: "100%",
+              boxSizing: "border-box"
+            }}
+          />
+          <input
+            type="password"
+            placeholder="비밀번호"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            style={{
+              padding: "15px",
+              borderRadius: "14px",
+              border: "1px solid var(--border-primary)",
+              background: "var(--bg-secondary)",
+              color: "var(--text-primary)",
+              fontSize: "1rem",
+              width: "100%",
+              boxSizing: "border-box"
+            }}
+          />
           
           {error && <p style={{ color: "#ef4444", fontSize: "0.85rem", margin: "4px 0", textAlign: "center" }}>{error}</p>}
 
@@ -159,31 +167,30 @@ const LoginModal = ({ onClose }) => {
               type="submit"
               style={{
                 padding: "16px",
-                borderRadius: "14px",
+                borderRadius: "16px",
                 background: "linear-gradient(135deg, var(--accent-indigo), var(--accent-cyan))",
                 color: "#fff",
                 border: "none",
                 fontWeight: 700,
-                fontSize: "1.05rem",
+                fontSize: "1.1rem",
                 cursor: "pointer",
-                boxShadow: "0 8px 20px rgba(79, 70, 229, 0.25)",
+                boxShadow: "0 8px 20px rgba(79, 70, 229, 0.3)",
               }}
             >
-              {isRegister ? "회원가입 완료" : "로그인"}
+              {isRegister ? "가입 완료" : "로그인"}
             </button>
             
-            {/* 하단 취소 버튼 */}
             <button
               type="button"
               onClick={onClose}
               style={{
-                padding: "14px",
-                borderRadius: "14px",
+                padding: "15px",
+                borderRadius: "16px",
                 background: "var(--bg-tertiary)",
                 color: "var(--text-secondary)",
                 border: "1px solid var(--border-primary)",
                 fontWeight: 600,
-                fontSize: "0.95rem",
+                fontSize: "1rem",
                 cursor: "pointer",
               }}
             >
@@ -192,7 +199,7 @@ const LoginModal = ({ onClose }) => {
           </div>
         </form>
 
-        <p style={{ textAlign: "center", marginTop: "2rem", fontSize: "0.95rem", color: "var(--text-muted)" }}>
+        <p style={{ textAlign: "center", margin: 0, fontSize: "0.95rem", color: "var(--text-muted)" }}>
           {isRegister ? "이미 계정이 있으신가요?" : "처음이신가요?"} {" "}
           <span
             onClick={() => setIsRegister(!isRegister)}
@@ -208,7 +215,8 @@ const LoginModal = ({ onClose }) => {
           </span>
         </p>
       </div>
-    </div>
+    </div>,
+    document.body // body에 직접 렌더링하여 네비게이션바 짤림 방지
   );
 };
 
