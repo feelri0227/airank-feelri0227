@@ -65,34 +65,14 @@ export default function MainPage() {
       />
 
       <div className="main-grid">
-        <main style={{ minWidth: 0 }}> {/* minWidth: 0 prevents grid blowout */}
-          {/* 정렬 버튼 - 우측 정렬 */}
-          <div style={{ 
-            display: "flex", 
-            justifyContent: "flex-end", 
-            gap: "4px", 
-            marginBottom: "16px",
-            overflowX: "auto",
-            scrollbarWidth: "none",
-            paddingBottom: "4px"
-          }}>
+        <main style={{ minWidth: 0 }}>
+          {/* 정렬 버튼 - GlobalStyles의 .sort-container 클래스 사용 */}
+          <div className="sort-container">
             {SORT_OPTIONS.map((opt) => (
               <button
                 key={opt.id}
                 onClick={() => setSortBy(opt.id)}
-                style={{
-                  padding: "6px 12px",
-                  borderRadius: "8px",
-                  border: "none",
-                  background: sortBy === opt.id ? "var(--bg-tertiary)" : "transparent",
-                  color: sortBy === opt.id ? "var(--text-primary)" : "var(--text-muted)",
-                  fontSize: "0.75rem",
-                  fontFamily: "'Pretendard', sans-serif",
-                  fontWeight: sortBy === opt.id ? 600 : 400,
-                  cursor: "pointer",
-                  whiteSpace: "nowrap",
-                  transition: "all 0.2s ease",
-                }}
+                className={`sort-btn ${sortBy === opt.id ? "active" : ""}`}
               >
                 {opt.label}
               </button>
