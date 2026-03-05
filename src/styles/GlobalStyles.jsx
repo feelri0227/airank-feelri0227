@@ -157,27 +157,11 @@ const GlobalStyles = () => (
     }
     .navbar-actions { display: flex; align-items: center; gap: 10px; }
     
-    /* 로그인 버튼 스타일 보강 */
     .navbar-login-btn {
-      padding: 7px 16px;
-      border-radius: 8px;
-      border: 1px solid var(--border-primary);
-      background: var(--bg-secondary);
-      color: var(--text-primary);
-      font-family: 'Pretendard', sans-serif;
-      font-size: 0.82rem;
-      font-weight: 500;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      white-space: nowrap;
-      transition: all 0.2s ease;
-      box-shadow: var(--shadow-sm);
-    }
-    .navbar-login-btn:hover {
-      background: var(--bg-tertiary);
-      border-color: var(--accent-indigo);
+      padding: 7px 16px; border-radius: 8px; border: 1px solid var(--border-primary);
+      background: var(--bg-secondary); color: var(--text-primary); font-size: 0.82rem;
+      font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 8px;
+      white-space: nowrap; transition: all 0.2s ease; box-shadow: var(--shadow-sm);
     }
 
     .navbar-nav {
@@ -194,7 +178,6 @@ const GlobalStyles = () => (
         -webkit-overflow-scrolling: touch;
       }
       .navbar-nav::-webkit-scrollbar { display: none; }
-      .navbar-top-row { height: 60px; padding: 0 1rem; }
     }
 
     .nav-link {
@@ -202,6 +185,33 @@ const GlobalStyles = () => (
       color: var(--text-secondary); font-size: 0.82rem; transition: all 0.2s ease; white-space: nowrap;
     }
     .nav-link.active { background: var(--accent-gradient); color: #fff !important; font-weight: 600; }
+
+    /* ── 모바일 뉴스 박스 ── */
+    .mobile-news-box {
+      display: none; /* PC에서는 숨김 */
+      background: var(--bg-card);
+      border: 1px solid var(--border-primary);
+      border-radius: 16px;
+      padding: 1.2rem;
+      margin-top: 24px;
+      margin-bottom: 40px;
+      box-shadow: var(--shadow-card);
+    }
+    .mobile-news-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 12px;
+    }
+    .mobile-news-list { display: flex; flex-direction: column; gap: 10px; }
+    .mobile-news-item {
+      display: flex; gap: 8px; text-decoration: none; color: var(--text-primary);
+      font-size: 0.85rem; line-height: 1.4; padding: 4px 0;
+    }
+    .mobile-news-item .dot { color: var(--accent-indigo); font-weight: bold; }
+    .mobile-news-item:hover .title { text-decoration: underline; }
+
+    @media (max-width: 1100px) {
+      .mobile-news-box { display: block; } /* 사이드바가 사라지는 태블릿/모바일에서 노출 */
+    }
 
     /* ── 정렬 및 그리드 ── */
     .sort-container {
@@ -231,18 +241,6 @@ const GlobalStyles = () => (
       .main-grid { padding: 0 1rem; }
       .tools-grid { grid-template-columns: 1fr !important; gap: 12px; }
     }
-
-    /* 드롭다운 등 기타 스타일 유지 */
-    .navbar-dropdown {
-      position: absolute; top: calc(100% + 10px); right: 0;
-      background: var(--bg-card); border: 1px solid var(--border-primary);
-      border-radius: 12px; padding: 8px; min-width: 240px; z-index: 200;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-    }
-    .dropdown-item { display: block; width: 100%; padding: 6px 8px; border-radius: 8px; color: var(--text-primary); font-size: 0.82rem; text-decoration: none; text-align: left; background: transparent; border: none; cursor: pointer; }
-    .dropdown-item:hover { background: var(--bg-tertiary); }
-    .dropdown-divider { height: 1px; background: var(--border-primary); margin: 6px 0; }
-    .dropdown-label { font-size: 0.65rem; font-weight: 600; color: var(--text-muted); padding: 4px 8px 6px; }
 
     @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   `}</style>
