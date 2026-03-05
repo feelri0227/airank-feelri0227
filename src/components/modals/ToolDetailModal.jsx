@@ -76,7 +76,7 @@ const ToolAnalysisCard = ({ tool }) => {
       width: "100%", maxWidth: "340px",
       display: "flex", flexDirection: "column",
       boxShadow: "0 24px 64px rgba(0,0,0,0.25)",
-      height: "fit-content" // 내용만큼만 높이 차지
+      height: "fit-content"
     }}>
       <h3 style={{ fontSize: "1rem", fontWeight: 800, marginBottom: "1rem", display: "flex", alignItems: "center", gap: "6px", color: "var(--text-primary)" }}>
         📊 실시간 트렌드
@@ -119,13 +119,13 @@ const ToolDetailModal = ({ tool, rank, onClose }) => {
 
   useEffect(() => {
     if (!user || !tool) { setBookmarked(false); return; }
-    const ref = doc(db, "bookmarks", `${user.uid}_${tool.id}\`);
+    const ref = doc(db, "bookmarks", `${user.uid}_${tool.id}`);
     getDoc(ref).then((snap) => setBookmarked(snap.exists()));
   }, [user, tool]);
 
   const toggleBookmark = async () => {
     if (!user) { login(); return; }
-    const ref = doc(db, "bookmarks", `${user.uid}_${tool.id}\`);
+    const ref = doc(db, "bookmarks", `${user.uid}_${tool.id}`);
     if (bookmarked) { await deleteDoc(ref); setBookmarked(false); }
     else { await setDoc(ref, { uid: user.uid, toolId: tool.id, toolName: tool.name, savedAt: Date.now() }); setBookmarked(true); }
   };
@@ -139,11 +139,11 @@ const ToolDetailModal = ({ tool, rank, onClose }) => {
         position: "fixed", inset: 0, zIndex: 1000,
         background: "rgba(0,0,0,0.55)",
         backdropFilter: "blur(4px)",
-        overflowY: "auto", // ★ 전체 화면 스크롤 허용
+        overflowY: "auto",
         display: "flex",
-        alignItems: "flex-start", // ★ 상단 정렬 (스크롤 시 자연스럽게)
+        alignItems: "flex-start",
         justifyContent: "center",
-        padding: "40px 16px", // 상하 여백을 주어 스크롤 공간 확보
+        padding: "40px 16px",
       }}
     >
       <div
@@ -151,11 +151,11 @@ const ToolDetailModal = ({ tool, rank, onClose }) => {
         style={{
           display: "flex",
           flexDirection: isMobile ? "column" : "row",
-          alignItems: "flex-start", // ★ 카드들도 상단 정렬 (높이 달라도 됨)
+          alignItems: "flex-start",
           gap: "16px",
           width: "auto",
           maxWidth: "100%",
-          margin: "auto", // 중앙 정렬 보정
+          margin: "auto",
         }}
       >
         {/* [왼쪽] 기존 상세 정보 카드 */}
@@ -167,7 +167,7 @@ const ToolDetailModal = ({ tool, rank, onClose }) => {
           width: "100%", maxWidth: "340px", minWidth: "300px",
           boxShadow: "0 24px 64px rgba(0,0,0,0.25)",
           position: "relative",
-          height: "fit-content" // ★ 내용만큼만 높이 차지
+          height: "fit-content"
         }}>
           <button onClick={onClose} style={{ position: "absolute", top: isMobile ? "12px" : "16px", right: isMobile ? "12px" : "16px", background: "var(--bg-tertiary)", border: "none", borderRadius: "8px", width: "32px", height: "32px", cursor: "pointer", fontSize: "1rem", color: "var(--text-muted)", display: "flex", alignItems: "center", justifyContent: "center" }}>✕</button>
           <button onClick={toggleBookmark} title={user ? (bookmarked ? "북마크 해제" : "북마크 저장") : "로그인 후 북마크 가능"} style={{ position: "absolute", top: isMobile ? "12px" : "16px", right: isMobile ? "52px" : "56px", background: bookmarked ? "rgba(239,68,68,0.1)" : "var(--bg-tertiary)", border: bookmarked ? "1px solid #ef4444" : "none", borderRadius: "8px", width: "32px", height: "32px", cursor: "pointer", fontSize: "1.1rem", display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.2s ease", color: bookmarked ? "#ef4444" : "var(--text-muted)" }}>{bookmarked ? "♥" : "♡"}</button>
