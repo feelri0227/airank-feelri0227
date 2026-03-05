@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
 import { doc, setDoc, getDoc } from "firebase/firestore";
-import { auth, db, googleProvider, githubProvider, twitterProvider } from "../firebase";
+import { auth, db, googleProvider } from "../firebase";
 
 const AuthContext = createContext(null);
 
@@ -36,21 +36,18 @@ export const AuthProvider = ({ children }) => {
     return unsub;
   }, []);
 
-  const loginWithProvider = async (provider) => {
+  const loginWithGoogle = async () => {
     try {
-      await signInWithPopup(auth, provider);
+      await signInWithPopup(auth, googleProvider);
     } catch (error) {
-      console.error("🔴 Popup error:", error);
+      console.error("🔴 Google Popup error:", error);
     }
   };
 
-  const loginWithGoogle = () => loginWithProvider(googleProvider);
-  const loginWithGithub = () => loginWithProvider(githubProvider);
-  const loginWithTwitter = () => loginWithProvider(twitterProvider);
   const logout = () => signOut(auth);
 
   return (
-    <AuthContext.Provider value={{ user, loading, loginWithGoogle, loginWithGithub, loginWithTwitter, logout }}>
+    <AuthContext.Provider value={{ user, loading, loginWithGoogle, logout }}>
       {!loading && children}
     </AuthContext.Provider>
   );
