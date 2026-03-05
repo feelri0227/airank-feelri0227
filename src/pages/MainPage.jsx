@@ -17,6 +17,16 @@ export default function MainPage() {
   const [showWizard, setShowWizard] = useState(false);
   const getInitialCount = () => (window.innerWidth >= 768 ? 20 : 10);
   const [visibleCount, setVisibleCount] = useState(getInitialCount);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const filteredTools = useMemo(() => {
     let data = [...tools];
@@ -49,6 +59,8 @@ export default function MainPage() {
     setVisibleCount(getInitialCount());
   }, [category, lifeFilter, searchQuery, sortBy]);
 
+  const mobilePadding = isMobile ? { padding: '0 2rem' } : {};
+
   return (
     <>
       <HeroSection
@@ -57,99 +69,101 @@ export default function MainPage() {
         onOpenWizard={() => setShowWizard(true)}
       />
 
-      <FilterBar
-        category={category}
-        onCategoryChange={setCategory}
-        lifeFilter={lifeFilter}
-        onLifeFilterChange={setLifeFilter}
-      />
+      <div style={mobilePadding}>
+        <FilterBar
+          category={category}
+          onCategoryChange={setCategory}
+          lifeFilter={lifeFilter}
+          onLifeFilterChange={setLifeFilter}
+        />
 
-      <div className="main-grid">
-        <main>
-          {/* 정렬 버튼 - 우측 정렬 */}
-          <div style={{ display: "flex", justifyContent: "flex-end", gap: "2px", marginBottom: "12px" }}>
-            {SORT_OPTIONS.map((opt) => (
-              <button
-                key={opt.id}
-                onClick={() => setSortBy(opt.id)}
-                style={{
-                  padding: "4px 10px",
-                  borderRadius: "6px",
-                  border: "none",
-                  background: sortBy === opt.id ? "var(--bg-tertiary)" : "transparent",
-                  color: sortBy === opt.id ? "var(--text-primary)" : "var(--text-muted)",
-                  fontSize: "0.75rem",
-                  fontFamily: "'Pretendard', sans-serif",
-                  fontWeight: sortBy === opt.id ? 600 : 400,
-                  cursor: "pointer",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                {opt.label}
-              </button>
-            ))}
-          </div>
-
-          {filteredTools.length === 0 ? (
-            <div
-              style={{
-                textAlign: "center",
-                padding: "4rem 2rem",
-                color: "var(--text-muted)",
-              }}
-            >
-              <div style={{ fontSize: "2.5rem", marginBottom: "12px" }}>🤖</div>
-              <p style={{ fontSize: "1rem", fontWeight: 500 }}>
-                검색 결과가 없습니다
-              </p>
-              <p style={{ fontSize: "0.82rem", marginTop: "4px" }}>
-                다른 키워드나 필터로 검색해보세요
-              </p>
+        <div className="main-grid">
+          <main>
+            {/* 정렬 버튼 - 우측 정렬 */}
+            <div style={{ display: "flex", justifyContent: "flex-end", gap: "2px", marginBottom: "12px" }}>
+              {SORT_OPTIONS.map((opt) => (
+                <button
+                  key={opt.id}
+                  onClick={() => setSortBy(opt.id)}
+                  style={{
+                    padding: "4px 10px",
+                    borderRadius: "6px",
+                    border: "none",
+                    background: sortBy === opt.id ? "var(--bg-tertiary)" : "transparent",
+                    color: sortBy === opt.id ? "var(--text-primary)" : "var(--text-muted)",
+                    fontSize: "0.75rem",
+                    fontFamily: "'Pretendard', sans-serif",
+                    fontWeight: sortBy === opt.id ? 600 : 400,
+                    cursor: "pointer",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  {opt.label}
+                </button>
+              ))}
             </div>
-          ) : (
-            <>
+
+            {filteredTools.length === 0 ? (
               <div
                 style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-                  gap: "16px",
+                  textAlign: "center",
+                  padding: "4rem 2rem",
+                  color: "var(--text-muted)",
                 }}
               >
-                {filteredTools.slice(0, visibleCount).map((tool, i) => (
-                  <ToolCard
-                    key={tool.id}
-                    tool={tool}
-                    rank={i + 1}
-                    onClick={() => openToolDetail(tool, i + 1)}
-                  />
-                ))}
+                <div style={{ fontSize: "2.5rem", marginBottom: "12px" }}>🤖</div>
+                <p style={{ fontSize: "1rem", fontWeight: 500 }}>
+                  검색 결과가 없습니다
+                </p>
+                <p style={{ fontSize: "0.82rem", marginTop: "4px" }}>
+                  다른 키워드나 필터로 검색해보세요
+                </p>
               </div>
-              {filteredTools.length > visibleCount && (
-                <div style={{ textAlign: "center", marginTop: "24px" }}>
-                  <button
-                    onClick={() => setVisibleCount((prev) => prev + 10)}
-                    style={{
-                      padding: "10px 32px",
-                      borderRadius: "10px",
-                      border: "1px solid var(--border-primary)",
-                      background: "var(--bg-card)",
-                      color: "var(--text-primary)",
-                      fontFamily: "'Pretendard', sans-serif",
-                      fontSize: "0.88rem",
-                      fontWeight: 600,
-                      cursor: "pointer",
-                      transition: "all 0.2s ease",
-                    }}
-                  >
-                    더보기 ({filteredTools.length - visibleCount}개 더 있음)
-                  </button>
+            ) : (
+              <>
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
+                    gap: "16px",
+                  }}
+                >
+                  {filteredTools.slice(0, visibleCount).map((tool, i) => (
+                    <ToolCard
+                      key={tool.id}
+                      tool={tool}
+                      rank={i + 1}
+                      onClick={() => openToolDetail(tool, i + 1)}
+                    />
+                  ))}
                 </div>
-              )}
-            </>
-          )}
-        </main>
+                {filteredTools.length > visibleCount && (
+                  <div style={{ textAlign: "center", marginTop: "24px" }}>
+                    <button
+                      onClick={() => setVisibleCount((prev) => prev + 10)}
+                      style={{
+                        padding: "10px 32px",
+                        borderRadius: "10px",
+                        border: "1px solid var(--border-primary)",
+                        background: "var(--bg-card)",
+                        color: "var(--text-primary)",
+                        fontFamily: "'Pretendard', sans-serif",
+                        fontSize: "0.88rem",
+                        fontWeight: 600,
+                        cursor: "pointer",
+                        transition: "all 0.2s ease",
+                      }}
+                    >
+                      더보기 ({filteredTools.length - visibleCount}개 더 있음)
+                    </button>
+                  </div>
+                )}
+              </>
+            )}
+          </main>
 
-        <RightSidebar />
+          <RightSidebar />
+        </div>
       </div>
 
       <WizardModal
