@@ -131,7 +131,6 @@ const GlobalStyles = () => (
       --modal-overlay: rgba(0, 0, 0, 0.7);
     }
 
-    /* 리셋 & 글로벌 */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Pretendard', -apple-system, sans-serif;
@@ -139,9 +138,9 @@ const GlobalStyles = () => (
       color: var(--text-primary);
       transition: background 0.35s ease, color 0.35s ease;
       overflow-x: hidden;
+      width: 100%;
     }
 
-    /* 반응형 레이아웃 */
     .main-grid {
       display: grid;
       grid-template-columns: 1fr 380px;
@@ -149,11 +148,13 @@ const GlobalStyles = () => (
       max-width: 1280px;
       margin: 0 auto;
       padding: 0 1.5rem;
+      width: 100%;
     }
     .tools-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 16px;
+      width: 100%;
     }
 
     @media (max-width: 1100px) {
@@ -161,31 +162,35 @@ const GlobalStyles = () => (
       .sidebar-right { display: none !important; }
     }
 
-    @media (max-width: 768px) {
-      /* 네비게이션 모바일 대응 */
-      .navbar-header { padding: 0 0.75rem !important; gap: 4px !important; }
-      .nav-link { padding: 6px 8px !important; }
-      .nav-text { display: none; } /* 모바일에서는 메뉴 아이콘만 노출 (텍스트 숨김) */
-      .nav-icon { font-size: 1.2rem; }
-      .user-name { display: none; } /* 사용자 이름 숨김 */
-      .login-text { display: none; } /* 로그인 텍스트 숨김 */
-      
-      .main-grid { padding: 0 1rem; }
-      .tools-grid { grid-template-columns: 1fr !important; gap: 12px; }
-      .filter-row, .filter-scroll {
+    @media (max-width: 850px) {
+      /* 네비게이션바 원래 디자인을 유지하되, 요소가 너무 많으면 가로 스크롤 허용 */
+      .navbar-header {
+        justify-content: flex-start !important;
+        gap: 20px !important;
         overflow-x: auto;
-        flex-wrap: nowrap !important;
-        -webkit-overflow-scrolling: touch;
+        white-space: nowrap;
         scrollbar-width: none;
+      }
+      .navbar-header::-webkit-scrollbar { display: none; }
+      
+      .navbar-nav {
+        position: static !important;
+        transform: none !important;
+        flex: 0 0 auto !important;
       }
     }
 
-    @media (max-width: 480px) {
-       .navbar-header { padding: 0 0.5rem !important; }
-       .nav-link { padding: 4px 6px !important; }
+    @media (max-width: 768px) {
+      .main-grid { padding: 0 1rem; }
+      .tools-grid { grid-template-columns: 1fr !important; gap: 12px; }
+      
+      /* 전체 페이지 좌우 흔들림 방지 */
+      html, body {
+        position: relative;
+        overflow-x: hidden;
+      }
     }
 
-    /* 키프레임 */
     @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes tickerScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
   `}</style>
