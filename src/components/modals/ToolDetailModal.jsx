@@ -53,7 +53,7 @@ const LIFE_LABEL = {
 // [오른쪽] 심층 분석 카드
 const ToolAnalysisCard = ({ tool }) => {
   const SnsBar = ({ label, value, color, icon }) => (
-    <div style={{ marginBottom: "10px", display: "flex", alignItems: "center", gap: "10px", fontSize: "0.8rem" }}>
+    <div style={{ marginBottom: "12px", display: "flex", alignItems: "center", gap: "10px", fontSize: "0.8rem" }}>
       <div style={{ width: "80px", fontWeight: 600, color: "var(--text-secondary)", display: "flex", alignItems: "center", gap: "6px", flexShrink: 0 }}>
         {icon} {label}
       </div>
@@ -70,38 +70,38 @@ const ToolAnalysisCard = ({ tool }) => {
     <div style={{
       background: "var(--bg-card)",
       border: "1px solid var(--border-primary)",
-      borderRadius: "20px",
-      padding: "1.25rem",
+      borderRadius: "24px",
+      padding: "1.5rem",
       width: "100%", maxWidth: "340px", minWidth: "300px",
       display: "flex", flexDirection: "column",
       boxShadow: "0 24px 64px rgba(0,0,0,0.25)",
       height: "fit-content"
     }}>
-      <h3 style={{ fontSize: "1rem", fontWeight: 800, marginBottom: "1rem", display: "flex", alignItems: "center", gap: "6px", color: "var(--text-primary)" }}>
-        📊 실시간 트렌드
+      <h3 style={{ fontSize: "1.1rem", fontWeight: 800, marginBottom: "1.25rem", display: "flex", alignItems: "center", gap: "8px", color: "var(--text-primary)" }}>
+        📊 실시간 트렌드 지표
       </h3>
 
-      <div style={{ marginBottom: "1.2rem" }}>
+      <div style={{ marginBottom: "1.5rem" }}>
         <SnsBar label="Naver" value={tool.sns?.naver || 0} color="#03C75A" icon="🇳" />
         <SnsBar label="YouTube" value={tool.sns?.youtube || 0} color="#FF0000" icon="▶" />
         <SnsBar label="Google" value={tool.sns?.google || 0} color="#4285F4" icon="🇬" />
-        <SnsBar label="GitHub" value={tool.sns?.github || 0} color="#181717" icon="🐙" />
+        <SnsBar label="GitHub" value={tool.sns?.github || 0} color="#555" icon="🐙" />
       </div>
       
-      <div style={{ padding: "12px", background: "var(--bg-tertiary)", borderRadius: "12px", marginBottom: "1.5rem" }}>
-         <p style={{ fontSize: "0.78rem", color: "var(--text-secondary)", lineHeight: 1.5, margin: 0 }}>
-           <strong>💡 AI 인사이트:</strong><br/>
+      <div style={{ padding: "14px", background: "var(--bg-secondary)", borderRadius: "16px", marginBottom: "2rem", border: "1px solid var(--border-primary)" }}>
+         <p style={{ fontSize: "0.82rem", color: "var(--text-secondary)", lineHeight: 1.6, margin: 0 }}>
+           <span style={{ color: "var(--accent-indigo)", fontWeight: 700 }}>💡 분석결과:</span><br/>
            {tool.sns?.github > 50 
-             ? "개발자 커뮤니티에서 기술적 관심도가 매우 높습니다." 
-             : "대중적인 검색량과 영상 조회수가 상승세입니다."}
+             ? "개발자 중심의 강력한 커뮤니티 지지를 받고 있습니다." 
+             : "현재 영상 플랫폼을 중심으로 대중적 인지도가 급상승 중입니다."}
          </p>
       </div>
 
-      <h3 style={{ fontSize: "1rem", fontWeight: 800, marginBottom: "1rem", color: "var(--text-primary)" }}>
-        🎬 관련 유튜브 영상
+      <h3 style={{ fontSize: "1.1rem", fontWeight: 800, marginBottom: "1rem", color: "var(--text-primary)", display: "flex", alignItems: "center", gap: "8px" }}>
+        🎥 튜토리얼 & 리뷰
       </h3>
       
-      <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
         {[1, 2, 3].map((i) => (
           <a 
             key={i}
@@ -109,33 +109,53 @@ const ToolAnalysisCard = ({ tool }) => {
             target="_blank"
             rel="noopener noreferrer"
             style={{ 
-              display: "flex", gap: "10px", textDecoration: "none", 
-              padding: "8px", borderRadius: "10px", background: "var(--bg-secondary)",
-              transition: "transform 0.2s"
+              display: "flex", gap: "12px", textDecoration: "none", 
+              padding: "10px", borderRadius: "16px", background: "var(--bg-secondary)",
+              border: "1px solid var(--border-primary)",
+              transition: "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)"
             }}
-            onMouseEnter={(e) => e.currentTarget.style.transform = "translateX(4px)"}
-            onMouseLeave={(e) => e.currentTarget.style.transform = "translateX(0)"}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "translateY(-2px)";
+              e.currentTarget.style.borderColor = "var(--accent-indigo)";
+              e.currentTarget.style.background = "var(--bg-tertiary)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "translateY(0)";
+              e.currentTarget.style.borderColor = "var(--border-primary)";
+              e.currentTarget.style.background = "var(--bg-secondary)";
+            }}
           >
             <div style={{ 
-              width: "80px", height: "45px", background: "#333", borderRadius: "6px", 
+              width: "90px", height: "50px", background: "#000", borderRadius: "10px", 
               overflow: "hidden", flexShrink: 0, position: "relative"
             }}>
               <img 
-                src={`https://img.youtube.com/vi_webp/dQw4w9WgXcQ/mqdefault.webp`} // 임시 썸네일
+                src={`https://img.youtube.com/vi/dQw4w9WgXcQ/mqdefault.jpg`} 
                 alt="Youtube"
-                style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.8 }}
+                style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.7 }}
               />
-              <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <div style={{ width: "16px", height: "16px", background: "rgba(255,0,0,0.8)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                   <div style={{ width: 0, height: 0, borderTop: "4px solid transparent", borderBottom: "4px solid transparent", borderLeft: "6px solid white", marginLeft: "2px" }} />
+              <div style={{ 
+                position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center",
+                background: "rgba(0,0,0,0.2)"
+              }}>
+                <div style={{ 
+                  width: "20px", height: "20px", background: "#FF0000", borderRadius: "50%", 
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  boxShadow: "0 4px 8px rgba(255,0,0,0.3)"
+                }}>
+                   <div style={{ width: 0, height: 0, borderTop: "4px solid transparent", borderBottom: "4px solid transparent", borderLeft: "6px solid white", marginLeft: "1.5px" }} />
                 </div>
               </div>
             </div>
-            <div style={{ flex: 1 }}>
-              <div style={{ fontSize: "0.75rem", fontWeight: 600, color: "var(--text-primary)", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
-                {tool.name} 완벽 가이드 #{i}
+            <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+              <div style={{ 
+                fontSize: "0.8rem", fontWeight: 700, color: "var(--text-primary)", 
+                display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", 
+                overflow: "hidden", lineHeight: 1.3
+              }}>
+                {tool.name} 핵심 활용법 마스터하기 #{i}
               </div>
-              <div style={{ fontSize: "0.65rem", color: "var(--text-muted)", marginTop: "2px" }}>YouTube Search</div>
+              <div style={{ fontSize: "0.65rem", color: "var(--text-muted)", marginTop: "4px" }}>YouTube 최신 영상</div>
             </div>
           </a>
         ))}
@@ -161,13 +181,13 @@ const ToolDetailModal = ({ tool, rank, onClose }) => {
 
   useEffect(() => {
     if (!user || !tool) { setBookmarked(false); return; }
-    const ref = doc(db, "bookmarks", `${user.uid}_${tool.id}`); // 오타 수정됨!
+    const ref = doc(db, "bookmarks", `${user.uid}_${tool.id}`);
     getDoc(ref).then((snap) => setBookmarked(snap.exists()));
   }, [user, tool]);
 
   const toggleBookmark = async () => {
     if (!user) { login(); return; }
-    const ref = doc(db, "bookmarks", `${user.uid}_${tool.id}`); // 오타 수정됨!
+    const ref = doc(db, "bookmarks", `${user.uid}_${tool.id}`);
     if (bookmarked) { await deleteDoc(ref); setBookmarked(false); }
     else { await setDoc(ref, { uid: user.uid, toolId: tool.id, toolName: tool.name, savedAt: Date.now() }); setBookmarked(true); }
   };
@@ -204,49 +224,49 @@ const ToolDetailModal = ({ tool, rank, onClose }) => {
         <div style={{
           background: "var(--bg-card)",
           border: "1px solid var(--border-primary)",
-          borderRadius: "20px",
-          padding: isMobile ? "1rem" : "1.25rem",
+          borderRadius: "24px",
+          padding: isMobile ? "1.25rem" : "1.5rem",
           width: "100%", maxWidth: "340px", minWidth: "300px",
           boxShadow: "0 24px 64px rgba(0,0,0,0.25)",
           position: "relative",
           height: "fit-content"
         }}>
-          <button onClick={onClose} style={{ position: "absolute", top: isMobile ? "12px" : "16px", right: isMobile ? "12px" : "16px", background: "var(--bg-tertiary)", border: "none", borderRadius: "8px", width: "32px", height: "32px", cursor: "pointer", fontSize: "1rem", color: "var(--text-muted)", display: "flex", alignItems: "center", justifyContent: "center" }}>✕</button>
-          <button onClick={toggleBookmark} title={user ? (bookmarked ? "북마크 해제" : "북마크 저장") : "로그인 후 북마크 가능"} style={{ position: "absolute", top: isMobile ? "12px" : "16px", right: isMobile ? "52px" : "56px", background: bookmarked ? "rgba(239,68,68,0.1)" : "var(--bg-tertiary)", border: bookmarked ? "1px solid #ef4444" : "none", borderRadius: "8px", width: "32px", height: "32px", cursor: "pointer", fontSize: "1.1rem", display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.2s ease", color: bookmarked ? "#ef4444" : "var(--text-muted)" }}>{bookmarked ? "♥" : "♡"}</button>
+          <button onClick={onClose} style={{ position: "absolute", top: isMobile ? "12px" : "16px", right: isMobile ? "12px" : "16px", background: "var(--bg-tertiary)", border: "none", borderRadius: "50%", width: "32px", height: "32px", cursor: "pointer", fontSize: "1rem", color: "var(--text-muted)", display: "flex", alignItems: "center", justifyContent: "center" }}>✕</button>
+          <button onClick={toggleBookmark} title={user ? (bookmarked ? "북마크 해제" : "북마크 저장") : "로그인 후 북마크 가능"} style={{ position: "absolute", top: isMobile ? "12px" : "16px", right: isMobile ? "52px" : "56px", background: bookmarked ? "rgba(239,68,68,0.1)" : "var(--bg-tertiary)", border: bookmarked ? "1px solid #ef4444" : "none", borderRadius: "50%", width: "32px", height: "32px", cursor: "pointer", fontSize: "1.1rem", display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.2s ease", color: bookmarked ? "#ef4444" : "var(--text-muted)" }}>{bookmarked ? "♥" : "♡"}</button>
 
-          <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "10px" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "14px" }}>
             {!iconError && faviconUrl ? ( <img src={faviconUrl} alt={tool.name} width={isMobile ? 36 : 40} height={isMobile ? 36 : 40} style={{ borderRadius: "10px", objectFit: "contain", flexShrink: 0 }} onError={() => setIconError(true)} /> ) : ( <span style={{ fontSize: isMobile ? "2rem" : "2.2rem" }}>{tool.icon}</span> )}
             <div style={{ flex: 1 }}>
-              <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: isMobile ? "1.25rem" : "1.4rem", fontWeight: 800, color: "var(--text-primary)", margin: 0 }}>{tool.name}</h2>
+              <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: isMobile ? "1.3rem" : "1.5rem", fontWeight: 800, color: "var(--text-primary)", margin: 0 }}>{tool.name}</h2>
               <div style={{ display: "flex", alignItems: "center", gap: "6px", marginTop: "4px" }}><span style={{ fontSize: "0.78rem", fontWeight: 700, fontFamily: "'Outfit', sans-serif", color: "var(--text-muted)" }}>{getRankBadge(rank)}</span></div>
             </div>
           </div>
 
-          <p style={{ fontSize: isMobile ? "0.82rem" : "0.88rem", color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: isMobile ? "16px" : "20px" }}>{tool.desc}</p>
+          <p style={{ fontSize: isMobile ? "0.85rem" : "0.9rem", color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: isMobile ? "20px" : "24px" }}>{tool.desc}</p>
 
-          <div style={{ marginBottom: isMobile ? "16px" : "14px", padding: isMobile ? "8px 10px" : "10px 12px", background: "var(--bg-secondary)", borderRadius: "12px" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "8px" }}>
-              <div><div style={{ fontSize: "0.6rem", color: "var(--text-muted)", marginBottom: "1px" }}>종합 점수</div><div style={{ fontSize: isMobile ? "1.4rem" : "1.6rem", fontFamily: "'Outfit', sans-serif", fontWeight: 800, color: getScoreTextColor(tool.score), lineHeight: 1 }}>{tool.score}</div></div>
-              <div style={{ width: "1px", height: "30px", background: "var(--border-primary)" }} />
-              <div><div style={{ fontSize: "0.6rem", color: "var(--text-muted)", marginBottom: "1px" }}>주간 변화율</div><div style={{ fontSize: isMobile ? "0.9rem" : "1rem", fontFamily: "'Outfit', sans-serif", fontWeight: 700, color: tool.change >= 0 ? "var(--color-green)" : "var(--color-red)" }}>{tool.change >= 0 ? "▲" : "▼"} {Math.abs(tool.change)}%</div></div>
+          <div style={{ marginBottom: isMobile ? "20px" : "18px", padding: isMobile ? "10px 12px" : "12px 14px", background: "var(--bg-secondary)", borderRadius: "16px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "10px" }}>
+              <div><div style={{ fontSize: "0.65rem", color: "var(--text-muted)", marginBottom: "2px" }}>종합 점수</div><div style={{ fontSize: isMobile ? "1.5rem" : "1.7rem", fontFamily: "'Outfit', sans-serif", fontWeight: 800, color: getScoreTextColor(tool.score), lineHeight: 1 }}>{tool.score}</div></div>
+              <div style={{ width: "1px", height: "34px", background: "var(--border-primary)" }} />
+              <div><div style={{ fontSize: "0.65rem", color: "var(--text-muted)", marginBottom: "2px" }}>주간 변화율</div><div style={{ fontSize: isMobile ? "0.95rem" : "1.05rem", fontFamily: "'Outfit', sans-serif", fontWeight: 700, color: tool.change >= 0 ? "var(--color-green)" : "var(--color-red)" }}>{tool.change >= 0 ? "▲" : "▼"} {Math.abs(tool.change)}%</div></div>
             </div>
             <SparkChart data={generateSparkData(tool)} color={getScoreTextColor(tool.score)} />
-            <div style={{ display: "flex", justifyContent: "space-between", marginTop: "2px" }}><span style={{ fontSize: "0.55rem", color: "var(--text-muted)" }}>7일 전</span><span style={{ fontSize: "0.55rem", color: "var(--text-muted)" }}>오늘</span></div>
+            <div style={{ display: "flex", justifyContent: "space-between", marginTop: "4px" }}><span style={{ fontSize: "0.6rem", color: "var(--text-muted)" }}>7일 전</span><span style={{ fontSize: "0.6rem", color: "var(--text-muted)" }}>오늘</span></div>
           </div>
 
-          {tool.features && ( <div style={{ marginBottom: isMobile ? "16px" : "20px" }}><div style={{ fontSize: "0.72rem", fontWeight: 600, color: "var(--text-muted)", marginBottom: isMobile ? "8px" : "10px" }}>핵심 기능</div><ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: isMobile ? "5px" : "6px" }}>{tool.features.map((f, i) => ( <li key={i} style={{ display: "flex", alignItems: "flex-start", gap: "8px" }}><span style={{ color: "var(--accent-indigo)", fontWeight: 700, fontSize: "0.75rem", marginTop: "1px", flexShrink: 0 }}>✓</span><span style={{ fontSize: isMobile ? "0.8rem" : "0.82rem", color: "var(--text-secondary)", lineHeight: 1.5 }}>{f}</span></li>))}</ul></div>)}
+          {tool.features && ( <div style={{ marginBottom: isMobile ? "20px" : "24px" }}><div style={{ fontSize: "0.75rem", fontWeight: 700, color: "var(--text-muted)", marginBottom: "10px" }}>핵심 기능</div><ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: "8px" }}>{tool.features.map((f, i) => ( <li key={i} style={{ display: "flex", alignItems: "flex-start", gap: "10px" }}><span style={{ color: "var(--accent-indigo)", fontWeight: 800, fontSize: "0.8rem", marginTop: "2px", flexShrink: 0 }}>✓</span><span style={{ fontSize: "0.85rem", color: "var(--text-secondary)", lineHeight: 1.5 }}>{f}</span></li>))}</ul></div>)}
 
-          <div style={{ display: "flex", gap: "6px", flexWrap: "wrap", marginBottom: isMobile ? "16px" : "20px" }}>{tool.tags.filter(tag => tag !== "무료" && tag !== "유료").map((tag) => ( <span key={tag} style={{ fontSize: isMobile ? "0.62rem" : "0.65rem", padding: isMobile ? "2px 6px" : "3px 8px", borderRadius: "6px", background: "var(--tag-bg)", color: "var(--tag-color)", border: "1px solid var(--tag-border)", fontWeight: 500 }}>{tag}</span>))}</div>
+          <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginBottom: isMobile ? "20px" : "24px" }}>{tool.tags.filter(tag => tag !== "무료" && tag !== "유료").map((tag) => ( <span key={tag} style={{ fontSize: "0.7rem", padding: "4px 10px", borderRadius: "8px", background: "var(--tag-bg)", color: "var(--tag-color)", border: "1px solid var(--tag-border)", fontWeight: 600 }}>{tag}</span>))}</div>
 
-          <div style={{ marginBottom: isMobile ? "16px" : "20px", display: "flex", flexDirection: "column", gap: isMobile ? "8px" : "10px" }}>
-            {tool.cat && ( <div style={{ display: "flex", alignItems: "center", gap: "8px" }}><span style={{ fontSize: "0.65rem", fontWeight: 600, color: "var(--text-muted)", flexShrink: 0 }}>카테고리</span><span style={{ fontSize: "0.68rem", padding: "3px 10px", borderRadius: "20px", background: "var(--accent-gradient)", color: "#fff", fontWeight: 600 }}>{CAT_LABEL[tool.cat] ?? tool.cat}</span></div>)}
-            {tool.life?.length > 0 && ( <div style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}><span style={{ fontSize: "0.65rem", fontWeight: 600, color: "var(--text-muted)", flexShrink: 0 }}>추천 대상</span><div style={{ display: "flex", gap: "5px", flexWrap: "wrap" }}>{tool.life.map((l) => ( <span key={l} style={{ fontSize: "0.65rem", padding: "3px 8px", borderRadius: "6px", background: "var(--bg-tertiary)", color: "var(--text-secondary)", border: "1px solid var(--border-primary)", fontWeight: 500 }}>{LIFE_LABEL[l] ?? l}</span>))}</div></div>)}
+          <div style={{ marginBottom: "24px", display: "flex", flexDirection: "column", gap: "12px" }}>
+            {tool.cat && ( <div style={{ display: "flex", alignItems: "center", gap: "10px" }}><span style={{ fontSize: "0.7rem", fontWeight: 700, color: "var(--text-muted)", flexShrink: 0 }}>카테고리</span><span style={{ fontSize: "0.75rem", padding: "4px 12px", borderRadius: "20px", background: "var(--accent-gradient)", color: "#fff", fontWeight: 700 }}>{CAT_LABEL[tool.cat] ?? tool.cat}</span></div>)}
+            {tool.life?.length > 0 && ( <div style={{ display: "flex", alignItems: "center", gap: "10px", flexWrap: "wrap" }}><span style={{ fontSize: "0.7rem", fontWeight: 700, color: "var(--text-muted)", flexShrink: 0 }}>추천 대상</span><div style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}>{tool.life.map((l) => ( <span key={l} style={{ fontSize: "0.7rem", padding: "4px 10px", borderRadius: "8px", background: "var(--bg-tertiary)", color: "var(--text-secondary)", border: "1px solid var(--border-primary)", fontWeight: 600 }}>{LIFE_LABEL[l] ?? l}</span>))}</div></div>)}
           </div>
 
-          {tool.url && ( <a href={tool.url} target="_blank" rel="noopener noreferrer" style={{ display: "block", textAlign: "center", padding: isMobile ? "11px" : "12px", borderRadius: "12px", background: "linear-gradient(135deg, var(--accent-indigo), var(--accent-cyan))", color: "#fff", fontFamily: "'Outfit', sans-serif", fontWeight: 700, fontSize: isMobile ? "0.85rem" : "0.9rem", textDecoration: "none", transition: "opacity 0.2s ease" }} onMouseEnter={(e) => e.currentTarget.style.opacity = "0.85"} onMouseLeave={(e) => e.currentTarget.style.opacity = "1"}>공식 사이트 바로가기 →</a>)}
+          {tool.url && ( <a href={tool.url} target="_blank" rel="noopener noreferrer" style={{ display: "block", textAlign: "center", padding: "14px", borderRadius: "16px", background: "linear-gradient(135deg, var(--accent-indigo), var(--accent-cyan))", color: "#fff", fontFamily: "'Outfit', sans-serif", fontWeight: 800, fontSize: "1rem", textDecoration: "none", transition: "all 0.2s ease", boxShadow: "0 8px 16px rgba(79, 70, 229, 0.2)" }} onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 12px 20px rgba(79, 70, 229, 0.3)"; }} onMouseLeave={(e) => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 8px 16px rgba(79, 70, 229, 0.2)"; }}>공식 사이트 방문 →</a>)}
         </div>
 
-        {/* [오른쪽] 심층 분석 카드 (SNS 분석 + 유튜브 썸네일) */}
+        {/* [오른쪽] 심층 분석 카드 */}
         <ToolAnalysisCard tool={tool} />
 
       </div>
