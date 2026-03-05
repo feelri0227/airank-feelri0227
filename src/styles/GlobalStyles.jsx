@@ -141,6 +141,139 @@ const GlobalStyles = () => (
       width: 100%;
     }
 
+    /* ── 네비게이션 스타일 ── */
+    .navbar-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      borderBottom: 1px solid var(--border-primary);
+      backdropFilter: blur(16px);
+      background: var(--bg-nav);
+      transition: all 0.35s ease;
+      display: flex;
+      flex-direction: column; /* 기본적으로 세로 배치 가능성 열어둠 */
+    }
+
+    .navbar-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      padding: 0 1.5rem;
+      width: 100%;
+    }
+
+    .navbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .navbar-nav {
+      display: flex;
+      gap: 0.25rem;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    /* PC 버전: 네비게이션이 상단 행 중앙에 위치 */
+    @media (min-width: 851px) {
+      .navbar-nav {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    /* 태블릿/모바일 버전: 네비게이션이 별도 행으로 내려감 */
+    @media (max-width: 850px) {
+      .navbar-header {
+        height: auto !important;
+      }
+      .navbar-nav {
+        width: 100%;
+        padding: 8px 1rem;
+        border-top: 1px solid var(--border-primary);
+        justify-content: flex-start;
+        overflow-x: auto;
+        white-space: nowrap;
+        scrollbar-width: none;
+      }
+      .navbar-nav::-webkit-scrollbar { display: none; }
+      
+      .navbar-top-row {
+        height: 60px;
+        padding: 0 1rem;
+      }
+      .user-name {
+        max-width: 60px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
+    .nav-link {
+      padding: 6px 14px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-family: 'Pretendard', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 400;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .nav-link.active {
+      background: var(--accent-gradient);
+      color: #fff !important;
+      font-weight: 600;
+    }
+
+    /* 드롭다운 스타일 */
+    .navbar-dropdown {
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
+      background: var(--bg-card);
+      border: 1px solid var(--border-primary);
+      border-radius: 12px;
+      padding: 8px;
+      min-width: 240px;
+      max-height: 320px;
+      overflow-y: auto;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+      z-index: 200;
+    }
+    .dropdown-label { fontSize: 0.65rem; fontWeight: 600; color: var(--text-muted); padding: 4px 8px 6px; }
+    .dropdown-empty { fontSize: 0.78rem; color: var(--text-muted); padding: 8px; textAlign: center; }
+    .dropdown-item { display: block; width: 100%; padding: 6px 8px; borderRadius: 8px; border: none; background: transparent; color: var(--text-primary); fontSize: 0.82rem; textAlign: left; cursor: pointer; textDecoration: none; }
+    .dropdown-item:hover { background: var(--bg-tertiary); }
+    .dropdown-divider { height: 1px; background: var(--border-primary); margin: 6px 0; }
+    .dropdown-logout { display: block; width: 100%; padding: 6px 8px; borderRadius: 8px; border: none; background: transparent; color: var(--text-muted); fontSize: 0.78rem; textAlign: left; cursor: pointer; }
+    .dropdown-logout:hover { background: var(--bg-tertiary); }
+
+    /* 로그인 버튼 */
+    .navbar-login-btn {
+      padding: 7px 18px;
+      border-radius: 8px;
+      border: 1px solid var(--border-primary);
+      background: transparent;
+      color: var(--text-primary);
+      font-family: 'Pretendard', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    /* ── 그리드 스타일 ── */
     .main-grid {
       display: grid;
       grid-template-columns: 1fr 380px;
@@ -161,34 +294,9 @@ const GlobalStyles = () => (
       .main-grid { grid-template-columns: 1fr !important; padding: 0 1.25rem; }
       .sidebar-right { display: none !important; }
     }
-
-    @media (max-width: 850px) {
-      /* 네비게이션바 원래 디자인을 유지하되, 요소가 너무 많으면 가로 스크롤 허용 */
-      .navbar-header {
-        justify-content: flex-start !important;
-        gap: 20px !important;
-        overflow-x: auto;
-        white-space: nowrap;
-        scrollbar-width: none;
-      }
-      .navbar-header::-webkit-scrollbar { display: none; }
-      
-      .navbar-nav {
-        position: static !important;
-        transform: none !important;
-        flex: 0 0 auto !important;
-      }
-    }
-
     @media (max-width: 768px) {
       .main-grid { padding: 0 1rem; }
       .tools-grid { grid-template-columns: 1fr !important; gap: 12px; }
-      
-      /* 전체 페이지 좌우 흔들림 방지 */
-      html, body {
-        position: relative;
-        overflow-x: hidden;
-      }
     }
 
     @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
