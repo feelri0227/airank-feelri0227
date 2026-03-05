@@ -10,23 +10,29 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   const handleUser = async (u) => {
-    if (!u) {
-      setUser(null);
-      return;
+    try {
+      if (!u) {
+        setUser(null);
+        return;
+      }
+      const userRef = doc(db, "users", u.uid);
+      const userSnap = await getDoc(userRef);
+      if (!userSnap.exists()) {
+        // 새로운 사용자라면 Firestore에 사용자 정보 저장
+        await setDoc(userRef, {
+          uid: u.uid,
+          displayName: u.displayName,
+          email: u.email,
+          photoURL: u.photoURL,
+          createdAt: new Date(),
+        });
+      }
+      setUser(u);
+    } catch (error) {
+      console.error("🔴 Error handling user:", error);
+      // 에러가 발생하더라도 UI는 계속 진행되어야 합니다.
+      // 필요하다면 여기에 에러 처리 로직을 추가할 수 있습니다.
     }
-    const userRef = doc(db, "users", u.uid);
-    const userSnap = await getDoc(userRef);
-    if (!userSnap.exists()) {
-      // 새로운 사용자라면 Firestore에 사용자 정보 저장
-      await setDoc(userRef, {
-        uid: u.uid,
-        displayName: u.displayName,
-        email: u.email,
-        photoURL: u.photoURL,
-        createdAt: new Date(),
-      });
-    }
-    setUser(u);
   };
 
   useEffect(() => {
