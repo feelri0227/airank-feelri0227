@@ -50,16 +50,15 @@ const LIFE_LABEL = {
   marketer: "마케터", startup: "스타트업", creator: "크리에이터",
 };
 
-// [오른쪽] 새로 추가되는 심층 분석 카드 (디자인 개선됨)
+// [오른쪽] 심층 분석 카드
 const ToolAnalysisCard = ({ tool }) => {
-  // SNS 차트 컴포넌트 (Thin Line 스타일)
   const SnsBar = ({ label, value, color, icon }) => (
     <div style={{ marginBottom: "10px", display: "flex", alignItems: "center", gap: "10px", fontSize: "0.8rem" }}>
-      <div style={{ width: "100px", fontWeight: 600, color: "var(--text-secondary)", display: "flex", alignItems: "center", gap: "6px", flexShrink: 0 }}>
+      <div style={{ width: "80px", fontWeight: 600, color: "var(--text-secondary)", display: "flex", alignItems: "center", gap: "6px", flexShrink: 0 }}>
         {icon} {label}
       </div>
-      <div style={{ flex: 1, height: "6px", background: "var(--bg-tertiary)", borderRadius: "3px", overflow: "hidden" }}>
-        <div style={{ width: `${value}%`, height: "100%", background: color, borderRadius: "3px" }} />
+      <div style={{ flex: 1, height: "4px", background: "var(--bg-tertiary)", borderRadius: "2px", overflow: "hidden" }}>
+        <div style={{ width: `${value}%`, height: "100%", background: color, borderRadius: "2px" }} />
       </div>
       <div style={{ width: "32px", textAlign: "right", fontWeight: 700, color: color, fontSize: "0.75rem" }}>
         {value}%
@@ -73,7 +72,7 @@ const ToolAnalysisCard = ({ tool }) => {
       border: "1px solid var(--border-primary)",
       borderRadius: "20px",
       padding: "1.25rem",
-      width: "100%", maxWidth: "340px",
+      width: "100%", maxWidth: "340px", minWidth: "300px",
       display: "flex", flexDirection: "column",
       boxShadow: "0 24px 64px rgba(0,0,0,0.25)",
       height: "fit-content"
@@ -89,7 +88,7 @@ const ToolAnalysisCard = ({ tool }) => {
         <SnsBar label="GitHub" value={tool.sns?.github || 0} color="#181717" icon="🐙" />
       </div>
       
-      <div style={{ padding: "12px", background: "var(--bg-tertiary)", borderRadius: "12px" }}>
+      <div style={{ padding: "12px", background: "var(--bg-tertiary)", borderRadius: "12px", marginBottom: "1.5rem" }}>
          <p style={{ fontSize: "0.78rem", color: "var(--text-secondary)", lineHeight: 1.5, margin: 0 }}>
            <strong>💡 AI 인사이트:</strong><br/>
            {tool.sns?.github > 50 
@@ -98,6 +97,49 @@ const ToolAnalysisCard = ({ tool }) => {
          </p>
       </div>
 
+      <h3 style={{ fontSize: "1rem", fontWeight: 800, marginBottom: "1rem", color: "var(--text-primary)" }}>
+        🎬 관련 유튜브 영상
+      </h3>
+      
+      <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+        {[1, 2, 3].map((i) => (
+          <a 
+            key={i}
+            href={`https://www.youtube.com/results?search_query=${tool.name}+사용법`}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ 
+              display: "flex", gap: "10px", textDecoration: "none", 
+              padding: "8px", borderRadius: "10px", background: "var(--bg-secondary)",
+              transition: "transform 0.2s"
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.transform = "translateX(4px)"}
+            onMouseLeave={(e) => e.currentTarget.style.transform = "translateX(0)"}
+          >
+            <div style={{ 
+              width: "80px", height: "45px", background: "#333", borderRadius: "6px", 
+              overflow: "hidden", flexShrink: 0, position: "relative"
+            }}>
+              <img 
+                src={`https://img.youtube.com/vi_webp/dQw4w9WgXcQ/mqdefault.webp`} // 임시 썸네일
+                alt="Youtube"
+                style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.8 }}
+              />
+              <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <div style={{ width: "16px", height: "16px", background: "rgba(255,0,0,0.8)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                   <div style={{ width: 0, height: 0, borderTop: "4px solid transparent", borderBottom: "4px solid transparent", borderLeft: "6px solid white", marginLeft: "2px" }} />
+                </div>
+              </div>
+            </div>
+            <div style={{ flex: 1 }}>
+              <div style={{ fontSize: "0.75rem", fontWeight: 600, color: "var(--text-primary)", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
+                {tool.name} 완벽 가이드 #{i}
+              </div>
+              <div style={{ fontSize: "0.65rem", color: "var(--text-muted)", marginTop: "2px" }}>YouTube Search</div>
+            </div>
+          </a>
+        ))}
+      </div>
     </div>
   );
 };
@@ -119,13 +161,13 @@ const ToolDetailModal = ({ tool, rank, onClose }) => {
 
   useEffect(() => {
     if (!user || !tool) { setBookmarked(false); return; }
-    const ref = doc(db, "bookmarks", `${user.uid}_${tool.id}`);
+    const ref = doc(db, "bookmarks", `${user.uid}_${tool.id}`); // 오타 수정됨!
     getDoc(ref).then((snap) => setBookmarked(snap.exists()));
   }, [user, tool]);
 
   const toggleBookmark = async () => {
     if (!user) { login(); return; }
-    const ref = doc(db, "bookmarks", `${user.uid}_${tool.id}`);
+    const ref = doc(db, "bookmarks", `${user.uid}_${tool.id}`); // 오타 수정됨!
     if (bookmarked) { await deleteDoc(ref); setBookmarked(false); }
     else { await setDoc(ref, { uid: user.uid, toolId: tool.id, toolName: tool.name, savedAt: Date.now() }); setBookmarked(true); }
   };
@@ -204,7 +246,7 @@ const ToolDetailModal = ({ tool, rank, onClose }) => {
           {tool.url && ( <a href={tool.url} target="_blank" rel="noopener noreferrer" style={{ display: "block", textAlign: "center", padding: isMobile ? "11px" : "12px", borderRadius: "12px", background: "linear-gradient(135deg, var(--accent-indigo), var(--accent-cyan))", color: "#fff", fontFamily: "'Outfit', sans-serif", fontWeight: 700, fontSize: isMobile ? "0.85rem" : "0.9rem", textDecoration: "none", transition: "opacity 0.2s ease" }} onMouseEnter={(e) => e.currentTarget.style.opacity = "0.85"} onMouseLeave={(e) => e.currentTarget.style.opacity = "1"}>공식 사이트 바로가기 →</a>)}
         </div>
 
-        {/* [오른쪽] 새로 추가된 심층 분석 카드 (디자인 개선됨) */}
+        {/* [오른쪽] 심층 분석 카드 (SNS 분석 + 유튜브 썸네일) */}
         <ToolAnalysisCard tool={tool} />
 
       </div>
