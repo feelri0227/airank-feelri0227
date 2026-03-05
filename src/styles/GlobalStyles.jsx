@@ -64,20 +64,83 @@ const GlobalStyles = () => (
       --modal-overlay: rgba(0, 0, 0, 0.8);
     }
 
-    /* 리셋 & 글로벌 */
+    [data-theme="manus"] {
+      --bg-primary: #0c0c0c;
+      --bg-secondary: #141414;
+      --bg-tertiary: #1c1c1c;
+      --bg-card: #141414;
+      --bg-card-hover: #1c1c1c;
+      --bg-nav: rgba(12, 12, 12, 0.94);
+      --text-primary: #fafaf9;
+      --text-secondary: #a8a29e;
+      --text-muted: #57534e;
+      --border-primary: rgba(255, 255, 255, 0.06);
+      --border-hover: rgba(245, 158, 11, 0.4);
+      --accent-indigo: #f59e0b;
+      --accent-cyan: #fb923c;
+      --accent-gradient: linear-gradient(135deg, #f59e0b, #fb923c);
+      --color-green: #4ade80;
+      --color-red: #f87171;
+      --color-gold: #fbbf24;
+      --color-silver: #a8a29e;
+      --color-bronze: #f97316;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.5);
+      --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.6);
+      --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.4);
+      --blob-opacity: 0.08;
+      --noise-opacity: 0.25;
+      --ticker-bg: rgba(245, 158, 11, 0.05);
+      --ticker-border: rgba(245, 158, 11, 0.15);
+      --tag-bg: rgba(245, 158, 11, 0.1);
+      --tag-color: #fbbf24;
+      --tag-border: rgba(245, 158, 11, 0.25);
+      --modal-overlay: rgba(0, 0, 0, 0.8);
+    }
+
+    [data-theme="mono"] {
+      --bg-primary: #1c1c1c;
+      --bg-secondary: #242424;
+      --bg-tertiary: #2e2e2e;
+      --bg-card: #242424;
+      --bg-card-hover: #2e2e2e;
+      --bg-nav: rgba(28, 28, 28, 0.94);
+      --text-primary: #efefef;
+      --text-secondary: #a0a0a0;
+      --text-muted: #606060;
+      --border-primary: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(255, 255, 255, 0.25);
+      --accent-indigo: #c0c0c0;
+      --accent-cyan: #808080;
+      --accent-gradient: linear-gradient(135deg, #e0e0e0, #707070);
+      --color-green: #9a9a9a;
+      --color-red: #c0c0c0;
+      --color-gold: #b0b0b0;
+      --color-silver: #787878;
+      --color-bronze: #909090;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.5);
+      --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.3);
+      --blob-opacity: 0.06;
+      --noise-opacity: 0.2;
+      --ticker-bg: rgba(255, 255, 255, 0.03);
+      --ticker-border: rgba(255, 255, 255, 0.08);
+      --tag-bg: rgba(255, 255, 255, 0.08);
+      --tag-color: #b0b0b0;
+      --tag-border: rgba(255, 255, 255, 0.12);
+      --modal-overlay: rgba(0, 0, 0, 0.7);
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
-      width: 100%;
-      height: 100%;
-      overflow-x: hidden; /* 페이지 전체 흔들림 방지 */
-      position: relative;
+      width: 100%; overflow-x: hidden; position: relative;
     }
     body {
       font-family: 'Pretendard', -apple-system, sans-serif;
       background: var(--bg-primary);
       color: var(--text-primary);
       transition: background 0.35s ease, color 0.35s ease;
-      -webkit-font-smoothing: antialiased;
     }
 
     /* ── 네비게이션 ── */
@@ -93,10 +156,33 @@ const GlobalStyles = () => (
       height: 64px; padding: 0 1.5rem; width: 100%;
     }
     .navbar-actions { display: flex; align-items: center; gap: 10px; }
+    
+    /* 로그인 버튼 스타일 보강 */
+    .navbar-login-btn {
+      padding: 7px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--border-primary);
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      font-family: 'Pretendard', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow-sm);
+    }
+    .navbar-login-btn:hover {
+      background: var(--bg-tertiary);
+      border-color: var(--accent-indigo);
+    }
+
     .navbar-nav {
       display: flex; gap: 0.25rem; align-items: center; justify-content: center;
       transition: all 0.3s ease;
-      -webkit-overflow-scrolling: touch;
     }
     @media (min-width: 851px) {
       .navbar-nav { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
@@ -105,8 +191,10 @@ const GlobalStyles = () => (
       .navbar-nav {
         width: 100%; padding: 8px 1rem; border-top: 1px solid var(--border-primary);
         justify-content: flex-start; overflow-x: auto; white-space: nowrap; scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
       }
       .navbar-nav::-webkit-scrollbar { display: none; }
+      .navbar-top-row { height: 60px; padding: 0 1rem; }
     }
 
     .nav-link {
@@ -115,35 +203,20 @@ const GlobalStyles = () => (
     }
     .nav-link.active { background: var(--accent-gradient); color: #fff !important; font-weight: 600; }
 
-    /* ── 정렬 컨테이너 최적화 ── */
+    /* ── 정렬 및 그리드 ── */
     .sort-container {
-      display: flex;
-      justify-content: flex-end;
-      gap: 4px;
-      margin-bottom: 16px;
-      padding-bottom: 4px;
-      width: 100%;
-      overflow-x: auto;
-      scrollbar-width: none; /* 파이어폭스 */
-      -webkit-overflow-scrolling: touch; /* iOS 터치 스크롤 */
+      display: flex; justify-content: flex-end; gap: 4px; margin-bottom: 16px;
+      overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;
     }
-    .sort-container::-webkit-scrollbar { display: none; } /* 크롬, 사파리 */
-
-    @media (max-width: 768px) {
-      .sort-container {
-        justify-content: flex-start !important; /* 모바일에서 왼쪽 정렬해야 스크롤이 정상 작동 */
-        padding: 0 4px 8px;
-      }
-    }
+    .sort-container::-webkit-scrollbar { display: none; }
+    @media (max-width: 768px) { .sort-container { justify-content: flex-start !important; } }
 
     .sort-btn {
       padding: 6px 12px; border-radius: 8px; border: none; background: transparent;
-      color: var(--text-muted); font-size: 0.75rem; font-family: 'Pretendard', sans-serif;
-      cursor: pointer; white-space: nowrap; transition: all 0.2s ease;
+      color: var(--text-muted); font-size: 0.75rem; cursor: pointer; white-space: nowrap;
     }
     .sort-btn.active { background: var(--bg-tertiary); color: var(--text-primary); font-weight: 600; }
 
-    /* ── 그리드 시스템 ── */
     .main-grid {
       display: grid; grid-template-columns: 1fr 380px; gap: 24px;
       max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; width: 100%;
@@ -159,7 +232,18 @@ const GlobalStyles = () => (
       .tools-grid { grid-template-columns: 1fr !important; gap: 12px; }
     }
 
-    /* 키프레임 */
+    /* 드롭다운 등 기타 스타일 유지 */
+    .navbar-dropdown {
+      position: absolute; top: calc(100% + 10px); right: 0;
+      background: var(--bg-card); border: 1px solid var(--border-primary);
+      border-radius: 12px; padding: 8px; min-width: 240px; z-index: 200;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    }
+    .dropdown-item { display: block; width: 100%; padding: 6px 8px; border-radius: 8px; color: var(--text-primary); font-size: 0.82rem; text-decoration: none; text-align: left; background: transparent; border: none; cursor: pointer; }
+    .dropdown-item:hover { background: var(--bg-tertiary); }
+    .dropdown-divider { height: 1px; background: var(--border-primary); margin: 6px 0; }
+    .dropdown-label { font-size: 0.65rem; font-weight: 600; color: var(--text-muted); padding: 4px 8px 6px; }
+
     @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   `}</style>
 );
