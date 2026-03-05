@@ -64,8 +64,16 @@ const LIFE_LABEL = {
 const ToolDetailModal = ({ tool, rank, onClose }) => {
   const [iconError, setIconError] = useState(false);
   const [bookmarked, setBookmarked] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const { user, login } = useAuth();
   const faviconUrl = tool ? getFaviconUrl(tool.url) : null;
+
+  useEffect(() => {
+    const checkIsMobile = () => setIsMobile(window.innerWidth < 768);
+    checkIsMobile();
+    window.addEventListener('resize', checkIsMobile);
+    return () => window.removeEventListener('resize', checkIsMobile);
+  }, []);
 
   useEffect(() => {
     if (!user || !tool) { setBookmarked(false); return; }
@@ -108,10 +116,10 @@ const ToolDetailModal = ({ tool, rank, onClose }) => {
           background: "var(--bg-card)",
           border: "1px solid var(--border-primary)",
           borderRadius: "20px",
-          padding: "2rem",
+          padding: isMobile ? "1rem" : "1.25rem",
           width: "100%",
           maxWidth: "340px",
-          maxHeight: "90vh",
+          maxHeight: "85vh",
           overflowY: "auto",
           boxShadow: "0 24px 64px rgba(0,0,0,0.25)",
           position: "relative",
@@ -122,8 +130,8 @@ const ToolDetailModal = ({ tool, rank, onClose }) => {
           onClick={onClose}
           style={{
             position: "absolute",
-            top: "16px",
-            right: "16px",
+            top: isMobile ? "12px" : "16px",
+            right: isMobile ? "12px" : "16px",
             background: "var(--bg-tertiary)",
             border: "none",
             borderRadius: "8px",
@@ -146,8 +154,8 @@ const ToolDetailModal = ({ tool, rank, onClose }) => {
           title={user ? (bookmarked ? "북마크 해제" : "북마크 저장") : "로그인 후 북마크 가능"}
           style={{
             position: "absolute",
-            top: "16px",
-            right: "56px",
+            top: isMobile ? "12px" : "16px",
+            right: isMobile ? "52px" : "56px",
             background: bookmarked ? "rgba(239,68,68,0.1)" : "var(--bg-tertiary)",
             border: bookmarked ? "1px solid #ef4444" : "none",
             borderRadius: "8px",
@@ -165,32 +173,30 @@ const ToolDetailModal = ({ tool, rank, onClose }) => {
           {bookmarked ? "♥" : "♡"}
         </button>
 
-        {/* 헤더: 아이콘 + 이름 + 랭크 + 무료/유료 */}
-        <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "16px", paddingRight: "40px" }}>
+        {/* 헤더: 아이콘 + 이름 + 랭크 */}
+        <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "10px" }}>
           {!iconError && faviconUrl ? (
             <img
               src={faviconUrl}
               alt={tool.name}
-              width={40}
-              height={40}
+              width={isMobile ? 36 : 40}
+              height={isMobile ? 36 : 40}
               style={{ borderRadius: "10px", objectFit: "contain", flexShrink: 0 }}
               onError={() => setIconError(true)}
             />
           ) : (
-            <span style={{ fontSize: "2.2rem" }}>{tool.icon}</span>
+            <span style={{ fontSize: isMobile ? "2rem" : "2.2rem" }}>{tool.icon}</span>
           )}
           <div style={{ flex: 1 }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
-              <h2 style={{
-                fontFamily: "'Outfit', sans-serif",
-                fontSize: "1.4rem",
-                fontWeight: 800,
-                color: "var(--text-primary)",
-                margin: 0,
-              }}>
-                {tool.name}
-              </h2>
-            </div>
+            <h2 style={{
+              fontFamily: "'Outfit', sans-serif",
+              fontSize: isMobile ? "1.25rem" : "1.4rem",
+              fontWeight: 800,
+              color: "var(--text-primary)",
+              margin: 0,
+            }}>
+              {tool.name}
+            </h2>
             <div style={{ display: "flex", alignItems: "center", gap: "6px", marginTop: "4px" }}>
               <span style={{
                 fontSize: "0.78rem",
@@ -206,18 +212,18 @@ const ToolDetailModal = ({ tool, rank, onClose }) => {
 
         {/* 설명 */}
         <p style={{
-          fontSize: "0.88rem",
+          fontSize: isMobile ? "0.82rem" : "0.88rem",
           color: "var(--text-secondary)",
-          lineHeight: 1.7,
-          marginBottom: "20px",
+          lineHeight: 1.6,
+          marginBottom: isMobile ? "16px" : "20px",
         }}>
           {tool.desc}
         </p>
 
         {/* 점수 + 주간 변화율 + 스파크라인 */}
         <div style={{
-          marginBottom: "14px",
-          padding: "10px 12px",
+          marginBottom: isMobile ? "16px" : "14px",
+          padding: isMobile ? "8px 10px" : "10px 12px",
           background: "var(--bg-secondary)",
           borderRadius: "12px",
         }}>
@@ -225,7 +231,7 @@ const ToolDetailModal = ({ tool, rank, onClose }) => {
             <div>
               <div style={{ fontSize: "0.6rem", color: "var(--text-muted)", marginBottom: "1px" }}>종합 점수</div>
               <div style={{
-                fontSize: "1.6rem",
+                fontSize: isMobile ? "1.4rem" : "1.6rem",
                 fontFamily: "'Outfit', sans-serif",
                 fontWeight: 800,
                 color: getScoreTextColor(tool.score),
@@ -238,7 +244,7 @@ const ToolDetailModal = ({ tool, rank, onClose }) => {
             <div>
               <div style={{ fontSize: "0.6rem", color: "var(--text-muted)", marginBottom: "1px" }}>주간 변화율</div>
               <div style={{
-                fontSize: "1rem",
+                fontSize: isMobile ? "0.9rem" : "1rem",
                 fontFamily: "'Outfit', sans-serif",
                 fontWeight: 700,
                 color: tool.change >= 0 ? "var(--color-green)" : "var(--color-red)",
@@ -256,13 +262,13 @@ const ToolDetailModal = ({ tool, rank, onClose }) => {
 
         {/* 핵심 기능 */}
         {tool.features && (
-          <div style={{ marginBottom: "20px" }}>
-            <div style={{ fontSize: "0.72rem", fontWeight: 600, color: "var(--text-muted)", marginBottom: "10px" }}>핵심 기능</div>
-            <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: "6px" }}>
+          <div style={{ marginBottom: isMobile ? "16px" : "20px" }}>
+            <div style={{ fontSize: "0.72rem", fontWeight: 600, color: "var(--text-muted)", marginBottom: isMobile ? "8px" : "10px" }}>핵심 기능</div>
+            <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: isMobile ? "5px" : "6px" }}>
               {tool.features.map((f, i) => (
                 <li key={i} style={{ display: "flex", alignItems: "flex-start", gap: "8px" }}>
                   <span style={{ color: "var(--accent-indigo)", fontWeight: 700, fontSize: "0.75rem", marginTop: "1px", flexShrink: 0 }}>✓</span>
-                  <span style={{ fontSize: "0.82rem", color: "var(--text-secondary)", lineHeight: 1.5 }}>{f}</span>
+                  <span style={{ fontSize: isMobile ? "0.8rem" : "0.82rem", color: "var(--text-secondary)", lineHeight: 1.5 }}>{f}</span>
                 </li>
               ))}
             </ul>
@@ -270,11 +276,11 @@ const ToolDetailModal = ({ tool, rank, onClose }) => {
         )}
 
         {/* 태그 */}
-        <div style={{ display: "flex", gap: "6px", flexWrap: "wrap", marginBottom: "20px" }}>
+        <div style={{ display: "flex", gap: "6px", flexWrap: "wrap", marginBottom: isMobile ? "16px" : "20px" }}>
           {tool.tags.filter(tag => tag !== "무료" && tag !== "유료").map((tag) => (
             <span key={tag} style={{
-              fontSize: "0.65rem",
-              padding: "3px 8px",
+              fontSize: isMobile ? "0.62rem" : "0.65rem",
+              padding: isMobile ? "2px 6px" : "3px 8px",
               borderRadius: "6px",
               background: "var(--tag-bg)",
               color: "var(--tag-color)",
@@ -287,7 +293,7 @@ const ToolDetailModal = ({ tool, rank, onClose }) => {
         </div>
 
         {/* 카테고리 + 추천 직업군 */}
-        <div style={{ marginBottom: "20px", display: "flex", flexDirection: "column", gap: "10px" }}>
+        <div style={{ marginBottom: isMobile ? "16px" : "20px", display: "flex", flexDirection: "column", gap: isMobile ? "8px" : "10px" }}>
           {tool.cat && (
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
               <span style={{ fontSize: "0.65rem", fontWeight: 600, color: "var(--text-muted)", flexShrink: 0 }}>카테고리</span>
@@ -334,13 +340,13 @@ const ToolDetailModal = ({ tool, rank, onClose }) => {
             style={{
               display: "block",
               textAlign: "center",
-              padding: "12px",
+              padding: isMobile ? "11px" : "12px",
               borderRadius: "12px",
               background: "linear-gradient(135deg, var(--accent-indigo), var(--accent-cyan))",
               color: "#fff",
               fontFamily: "'Outfit', sans-serif",
               fontWeight: 700,
-              fontSize: "0.9rem",
+              fontSize: isMobile ? "0.85rem" : "0.9rem",
               textDecoration: "none",
               transition: "opacity 0.2s ease",
             }}
