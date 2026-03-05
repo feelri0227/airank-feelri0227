@@ -4,8 +4,6 @@ const GlobalStyles = () => (
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
     @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
-    /* ... (기존 테마 변수들은 동일) ... */
-
     :root {
       /* 배경 */
       --bg-primary: #fafafa;
@@ -180,6 +178,7 @@ const GlobalStyles = () => (
       background: var(--bg-primary);
       color: var(--text-primary);
       transition: background 0.35s ease, color 0.35s ease;
+      overflow-x: hidden; /* 가로 스크롤 방지 */
     }
 
     ::-webkit-scrollbar { width: 6px; }
@@ -190,11 +189,23 @@ const GlobalStyles = () => (
     .main-grid {
       display: grid;
       grid-template-columns: 1fr 380px;
-      gap: 20px;
+      gap: 24px;
       max-width: 1280px;
       margin: 0 auto;
       padding: 0 1.5rem;
     }
+
+    /* 도구 카드 그리드 */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* PC 기본 2열 (사이드바 있을 때) */
+      gap: 16px;
+    }
+
+    @media (min-width: 1400px) {
+       .tools-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
     .navbar-nav { display: flex; }
     .navbar-login { display: block; }
 
@@ -211,27 +222,28 @@ const GlobalStyles = () => (
       align-self: start;
     }
 
+    /* 태블릿 환경 (사이드바 제거 및 2열 유지) */
     @media (max-width: 1100px) {
-      .main-grid { grid-template-columns: 1fr !important; }
+      .main-grid { 
+        grid-template-columns: 1fr !important; 
+        padding: 0 1.25rem;
+      }
       .sidebar-right { display: none !important; }
+      .tools-grid { grid-template-columns: repeat(2, 1fr) !important; }
     }
 
+    /* 모바일 환경 (1열) */
     @media (max-width: 768px) {
+      .main-grid { padding: 0 1rem; }
+      
       /* 네비게이션 바 모바일 최적화 */
       .navbar-header {
-        flex-wrap: nowrap !important; /* 줄바꿈 방지 */
-        overflow-x: auto !important; /* 가로 스크롤 허용 */
-        height: 64px !important; /* 높이 고정 */
-        padding: 0 1rem !important;
+        padding: 0 0.75rem !important;
       }
-      .navbar-header::-webkit-scrollbar { display: none; } /* 스크롤바 숨김 */
-
-      .navbar-nav {
-        position: static !important;
-        transform: none !important;
-        order: 2; /* 로고 다음에 바로 오도록 순서 조정 */
-        width: auto;
-        flex-shrink: 0; /* 메뉴 너비가 줄어들지 않도록 설정 */
+      
+      .tools-grid { 
+        grid-template-columns: 1fr !important; 
+        gap: 12px;
       }
 
       /* 필터 행 가로 스크롤 */
@@ -246,7 +258,6 @@ const GlobalStyles = () => (
     }
 
     /* ── 키프레임 애니메이션 ── */
-    /* ... (애니메이션은 동일) ... */
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
