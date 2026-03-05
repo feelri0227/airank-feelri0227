@@ -9,7 +9,7 @@ import { useAuth } from "../../context/AuthContext";
 import { useTools } from "../../context/ToolContext";
 
 const Navbar = ({ theme, onToggleTheme }) => {
-  const { user, login, logout } = useAuth();
+  const { user, loginWithGoogle, loginWithGithub, loginWithTwitter, logout } = useAuth();
   const { tools, openToolDetail, newsBookmarks } = useTools();
   const [showDropdown, setShowDropdown] = useState(false);
   const [bookmarks, setBookmarks] = useState([]);
@@ -106,10 +106,20 @@ const Navbar = ({ theme, onToggleTheme }) => {
               )}
             </div>
           ) : (
-            <button onClick={login} className="navbar-login-btn">
-              <img src="https://www.google.com/favicon.ico" width={14} height={14} alt="Google" />
-              <span>로그인</span>
-            </button>
+            <div style={{ display: 'flex', gap: '8px' }}>
+              <button onClick={loginWithGoogle} className="navbar-login-btn">
+                <img src="https://www.google.com/favicon.ico" width={14} height={14} alt="Google" />
+                <span>Google</span>
+              </button>
+              <button onClick={loginWithGithub} className="navbar-login-btn">
+                <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width={14} height={14} alt="Github" />
+                <span>Github</span>
+              </button>
+              <button onClick={loginWithTwitter} className="navbar-login-btn">
+                <img src="https://abs.twimg.com/responsive-web/web/icon-default.png" width={14} height={14} alt="Twitter" />
+                <span>Twitter</span>
+              </button>
+            </div>
           )}
           <ThemeToggle />
         </div>
