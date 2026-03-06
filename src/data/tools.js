@@ -5,7 +5,7 @@
  */
 export const TOOLS_DATA = [
   {
-    id: 1, cat: "text", icon: "🤖", name: "ChatGPT", free: true,
+    id: 1, cat: "text", icon: "🤖", name: "ChatGPT", nameKo: "챗지피티", free: true,
     desc: "OpenAI의 대화형 AI. 보고서 작성, 이메일 초안, 브레인스토밍 등 일상 업무 전반에 활용되는 AI의 대명사.",
     url: "https://chat.openai.com",
     features: ["GPT-4o 기반 대화형 AI", "파일·이미지 첨부 분석", "웹 검색 실시간 지원", "코드 작성 및 디버깅", "커스텀 GPT 생성"],
@@ -13,7 +13,7 @@ export const TOOLS_DATA = [
     life: ["office", "student", "freelancer", "marketer", "startup", "creator"],
   },
   {
-    id: 2, cat: "text", icon: "🧠", name: "Claude", free: true,
+    id: 2, cat: "text", icon: "🧠", name: "Claude", nameKo: "클로드", free: true,
     desc: "Anthropic의 AI 어시스턴트. 긴 문서 요약, 코드 작성, 창의적 글쓰기에서 뛰어난 성능. 200K 컨텍스트 지원.",
     url: "https://claude.ai",
     features: ["200K 토큰 긴 문서 처리", "코드 생성 및 분석", "창의적 글쓰기", "Artifacts로 결과물 미리보기", "정확하고 안전한 답변"],
@@ -21,7 +21,7 @@ export const TOOLS_DATA = [
     life: ["office", "student", "freelancer", "startup"],
   },
   {
-    id: 3, cat: "text", icon: "💎", name: "Gemini", free: true,
+    id: 3, cat: "text", icon: "💎", name: "Gemini", nameKo: "제미나이", free: true,
     desc: "Google DeepMind의 멀티모달 AI. 텍스트·이미지·오디오·비디오를 동시에 이해하고 생성하는 구글의 최신 모델.",
     url: "https://gemini.google.com",
     features: ["텍스트·이미지·오디오 멀티모달", "Google 검색 실시간 연동", "Google Docs·Gmail 통합", "1M 토큰 초장문 컨텍스트", "Gemini Advanced 업무 자동화"],
@@ -29,7 +29,7 @@ export const TOOLS_DATA = [
     life: ["office", "student", "startup", "marketer"],
   },
   {
-    id: 4, cat: "text", icon: "🐋", name: "DeepSeek", free: true,
+    id: 4, cat: "text", icon: "🐋", name: "DeepSeek", nameKo: "딥시크", free: true,
     desc: "중국 스타트업의 오픈소스 AI. GPT-4급 성능을 대폭 저렴한 비용으로 구현해 AI 업계를 뒤흔든 화제의 모델.",
     url: "https://chat.deepseek.com",
     features: ["GPT-4급 성능을 오픈소스로", "수학·코딩 특화 추론 능력", "API 비용 ChatGPT의 1/10 수준", "Chain-of-Thought 추론 공개", "로컬 실행 가능한 오픈소스"],
@@ -37,7 +37,7 @@ export const TOOLS_DATA = [
     life: ["office", "student", "startup", "freelancer"],
   },
   {
-    id: 5, cat: "text", icon: "🦅", name: "Grok", free: false,
+    id: 5, cat: "text", icon: "🦅", name: "Grok", nameKo: "그록", free: false,
     desc: "Elon Musk의 xAI가 만든 AI. 실시간 X 데이터 접근과 유머러스하고 직설적인 답변이 특징인 차세대 LLM.",
     url: "https://grok.x.ai",
     features: ["실시간 X(트위터) 데이터 접근", "직설적이고 유머러스한 답변", "검열이 적은 자유로운 응답", "Grok-2 비전 모델 지원", "X Premium 구독으로 이용"],
@@ -45,7 +45,7 @@ export const TOOLS_DATA = [
     life: ["office", "startup", "student"],
   },
   {
-    id: 6, cat: "text", icon: "🦙", name: "Llama", free: true,
+    id: 6, cat: "text", icon: "🦙", name: "Llama", nameKo: "라마", free: true,
     desc: "Meta의 오픈소스 LLM. 로컬 실행부터 파인튜닝까지 자유롭게 활용 가능한 개발자 친화적 AI 모델.",
     url: "https://llama.meta.com",
     features: ["로컬 완전 무료 실행 가능", "파인튜닝 및 커스터마이즈 자유", "8B~405B 다양한 크기 선택", "상업적 이용 허가 (Meta 정책)", "Ollama 등 다양한 방법으로 실행"],
@@ -78,7 +78,7 @@ export const TOOLS_DATA = [
   },
 
   {
-    id: 10, cat: "image", icon: "🎨", name: "Midjourney", free: false,
+    id: 10, cat: "image", icon: "🎨", name: "Midjourney", nameKo: "미드저니", free: false,
     desc: "텍스트 프롬프트로 영화 같은 이미지를 만드는 AI. Discord 기반, 아티스트·디자이너 필수 도구.",
     url: "https://midjourney.com",
     features: ["고품질 아트·사진 수준 이미지", "Discord 명령어 기반 생성", "Style 파라미터로 스타일 조정", "Vary·Remix로 세밀한 수정", "커뮤니티 갤러리에서 프롬프트 학습"],
@@ -143,7 +143,7 @@ export const TOOLS_DATA = [
   },
 
   {
-    id: 18, cat: "code", icon: "💻", name: "GitHub Copilot", free: false,
+    id: 18, cat: "code", icon: "💻", name: "GitHub Copilot", nameKo: "깃허브 코파일럿", free: false,
     desc: "OpenAI와 GitHub이 만든 AI 코딩 어시스턴트. 코드 자동완성부터 함수 생성까지 개발 생산성 극대화.",
     url: "https://github.com/features/copilot",
     features: ["VS Code·JetBrains 등 IDE 통합", "코드 자동완성 및 함수 생성", "Chat 기능으로 코드 질문·설명", "PR 설명 자동 작성", "CLI 터미널 명령어 제안"],
@@ -151,7 +151,7 @@ export const TOOLS_DATA = [
     life: ["office", "freelancer", "student", "startup"],
   },
   {
-    id: 19, cat: "code", icon: "🖱️", name: "Cursor", free: true,
+    id: 19, cat: "code", icon: "🖱️", name: "Cursor", nameKo: "커서", free: true,
     desc: "AI가 내장된 차세대 코드 에디터. 자연어로 코딩하고 코드베이스 전체를 AI와 함께 리팩토링.",
     url: "https://cursor.sh",
     features: ["VS Code 기반 AI 내장 에디터", "코드베이스 전체 맥락 이해", "Composer로 멀티파일 동시 수정", "자연어로 코드 작성·리팩토링", "인터넷 검색 통합 코딩 지원"],
@@ -200,7 +200,7 @@ export const TOOLS_DATA = [
   },
 
   {
-    id: 25, cat: "video", icon: "🎬", name: "Sora", free: false,
+    id: 25, cat: "video", icon: "🎬", name: "Sora", nameKo: "소라", free: false,
     desc: "OpenAI의 텍스트-투-비디오 AI. 프롬프트 하나로 영화 수준의 고화질 영상을 자동 생성.",
     url: "https://sora.com",
     features: ["텍스트로 최대 1분 HD 영상 생성", "이미지→영상 변환 기능", "영상 연장·편집 기능", "스토리보드 방식 씬 구성", "ChatGPT Plus/Pro 구독으로 이용"],
