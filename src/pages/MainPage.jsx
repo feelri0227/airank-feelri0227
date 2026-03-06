@@ -30,6 +30,7 @@ export default function MainPage() {
       const q = searchQuery.toLowerCase();
       data = data.filter((t) =>
         t.name.toLowerCase().includes(q) ||
+        (t.nameKo && t.nameKo.toLowerCase().includes(q)) ||
         t.desc.toLowerCase().includes(q) ||
         (t.ytKo && t.ytKo.toLowerCase().includes(q)) ||
         (t.gtKo && t.gtKo.toLowerCase().includes(q)) ||
