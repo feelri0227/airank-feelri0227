@@ -1,5 +1,27 @@
+import { useState } from "react";
 import { getRankBadge } from "../../utils";
 import { useTools } from "../../context/ToolContext";
+
+const getFaviconUrl = (url) => {
+  try { return `https://www.google.com/s2/favicons?domain=${new URL(url).hostname}&sz=64`; }
+  catch { return null; }
+};
+
+const ToolIcon = ({ tool, size = 24 }) => {
+  const [error, setError] = useState(false);
+  const faviconUrl = getFaviconUrl(tool.url);
+  if (!error && faviconUrl) {
+    return (
+      <img
+        src={faviconUrl}
+        alt={tool.name}
+        onError={() => setError(true)}
+        style={{ width: size, height: size, borderRadius: "6px", objectFit: "cover", flexShrink: 0 }}
+      />
+    );
+  }
+  return <span style={{ fontSize: `${size * 0.9}px`, lineHeight: 1, flexShrink: 0 }}>{tool.icon}</span>;
+};
 
 const LeftSidebar = ({ tools }) => {
   const { openToolDetail } = useTools();
@@ -50,7 +72,7 @@ const LeftSidebar = ({ tools }) => {
             onMouseLeave={e => e.currentTarget.style.background = "transparent"}
           >
             <span style={{ fontSize: "1.1rem" }}>{getRankBadge(i + 1)}</span>
-            <span style={{ fontSize: "1.1rem" }}>{tool.icon}</span>
+            <ToolIcon tool={tool} size={26} />
             <div style={{ flex: 1 }}>
               <div style={{ fontSize: "0.82rem", fontWeight: 600, color: "var(--text-primary)" }}>{tool.name}</div>
               <div style={{ fontSize: "0.7rem", color: "var(--text-muted)" }}>점수 {tool.score}</div>
@@ -94,7 +116,7 @@ const LeftSidebar = ({ tools }) => {
               onMouseEnter={e => e.currentTarget.style.background = "var(--bg-tertiary)"}
               onMouseLeave={e => e.currentTarget.style.background = "transparent"}
             >
-              <span style={{ fontSize: "1rem" }}>{tool.icon}</span>
+              <ToolIcon tool={tool} size={26} />
               <div style={{ flex: 1 }}>
                 <div style={{ fontSize: "0.82rem", fontWeight: 600, color: "var(--text-primary)" }}>{tool.name}</div>
               </div>
