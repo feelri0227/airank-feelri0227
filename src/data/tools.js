@@ -86,3 +86,27 @@ export const TOOLS_DATA = [
     naverKw: ["Poe AI", "포 AI"], yt: "Poe AI", ytKo: "포 AI", gt: "Poe AI", gtKo: "포 AI", github: "" // No official repo
   }
 ]
+
+export const WIZARD_Q1 = [
+  {
+    question: "어떤 종류의 작업을 주로 하시나요?",
+    answers: [
+      { label: "글쓰기 및 문서 작업", value: "office" },
+      { label: "디자인 및 이미지 생성", value: "creator" },
+      { label: "개발 및 코딩", value: "startup" },
+      { label: "재미있는 대화", value: "student" },
+    ],
+  },
+];
+
+export const WIZARD_Q2 = [
+  {
+    question: "어떤 성격의 AI를 선호하시나요?",
+    answers: [
+      { label: "가장 똑똑하고 성능 좋은 AI", value: "text" },
+      { label: "가장 창의적이고 영감을 주는 AI", value: "image" },
+      { label: "가장 빠르고 효율적인 AI", value: "code" },
+      { label: "가장 자유롭고 제약 없는 AI", value: "open-source" },
+    ],
+  },
+];
