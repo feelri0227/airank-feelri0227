@@ -1,7 +1,7 @@
 import { getRankBadge } from "../../utils";
 
 const LeftSidebar = ({ tools }) => {
-  const top3 = tools.slice(0, 3);
+  const top3 = [...tools].sort((a, b) => b.score - a.score).slice(0, 3);
   const trending = [...tools].sort((a, b) => b.change - a.change).slice(0, 3);
 
   return (
@@ -11,8 +11,8 @@ const LeftSidebar = ({ tools }) => {
       gap: "16px",
       minWidth: "220px",
       position: "sticky",
-      top: "100px",
-      height: "fit-content"
+      top: "80px",
+      alignSelf: "start",
     }}>
       {/* TOP 3 박스 */}
       <div style={{

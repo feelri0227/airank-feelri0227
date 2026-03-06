@@ -21,7 +21,7 @@ const MainContent = styled.main`
 
 const SidebarWrapper = styled.div`
   position: sticky;
-  top: 100px;
+  top: 80px;
   align-self: start;
   flex-shrink: 0;
 

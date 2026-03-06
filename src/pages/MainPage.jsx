@@ -94,7 +94,7 @@ export default function MainPage() {
         maxWidth: "1400px",
         margin: "0 auto",
         padding: "0 1.5rem",
-        alignItems: "flex-start"
+        alignItems: "start",
       }}>
         <LeftSidebar tools={tools} />
 

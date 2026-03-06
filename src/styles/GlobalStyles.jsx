@@ -281,13 +281,14 @@ const GlobalStyles = () => (
     .main-grid {
       display: grid; grid-template-columns: 1fr 380px; gap: 24px;
       max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; width: 100%;
-      align-items: flex-start; /* sticky를 위해 추가 */
+      align-items: start;
     }
     .tools-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; width: 100%; }
 
     @media (max-width: 1100px) {
       .main-grid { grid-template-columns: 1fr !important; padding: 0 1.25rem; }
       .sidebar-right { display: none !important; }
+      .sidebar-left { display: none !important; }
     }
     @media (max-width: 768px) {
       .main-grid { padding: 0 1rem; }

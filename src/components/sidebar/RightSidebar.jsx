@@ -29,8 +29,8 @@ const RightSidebar = () => {
       gap: "16px",
       minWidth: "360px",
       position: "sticky",
-      top: "100px",
-      height: "fit-content"
+      top: "80px",
+      alignSelf: "start",
     }}>
       {/* 뉴스 피드 */}
       <div style={{
