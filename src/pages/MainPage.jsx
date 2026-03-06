@@ -9,7 +9,7 @@ import HeroSection from "../components/hero/HeroSection";
 import { SORT_OPTIONS } from "../constants";
 
 export default function MainPage() {
-  const { tools, openToolDetail, bookmarkCounts, reactionCounts, news } = useTools();
+  const { tools, openToolDetail, bookmarkCounts, reactionCounts } = useTools();
   const [searchQuery, setSearchQuery] = useState("");
   const [category, setCategory] = useState("all");
   const [lifeFilter, setLifeFilter] = useState("all");
