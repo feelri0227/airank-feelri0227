@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
-import { collection, query, where, onSnapshot, addDoc, deleteDoc, doc, getDocs, setDoc } from "firebase/firestore";
+import { collection, query, where, onSnapshot, deleteDoc, doc, getDocs, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import ToolContext from "./ToolContext";
 import { useAuth } from "./AuthContext";
@@ -8,157 +8,101 @@ import { TOOLS_DATA } from "../data/tools";
 export function ToolProvider({ children }) {
   const { user } = useAuth();
   const [tools, setTools] = useState(TOOLS_DATA);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
   
-  // 기존 상세 모달 상태
   const [selectedTool, setSelectedTool] = useState(null);
   const [selectedRank, setSelectedRank] = useState(null);
-
-  // ★ 신규: 심층 분석 모달 상태 추가
   const [analysisTool, setAnalysisTool] = useState(null);
   const [analysisRank, setAnalysisRank] = useState(null);
 
-  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
-  const [selectedArticle, setSelectedArticle] = useState(() => {
-    const savedArticle = localStorage.getItem('selectedArticle');
-    return savedArticle ? JSON.parse(savedArticle) : null;
-  });
-  const [news, setNews] = useState({ items: [], lastUpdated: '' });
-  const [newsBookmarks, setNewsBookmarks] = useState([]);
   const [bookmarkCounts, setBookmarkCounts] = useState({});
   const [toolReactions, setToolReactions] = useState([]);
   const [reactionCounts, setReactionCounts] = useState({});
 
   useEffect(() => {
-    // 캐시 방지를 위해 타임스탬프 쿼리 추가
+    let isMounted = true;
     const timestamp = Date.now();
 
+    setIsLoading(true);
     fetch(`/scores.json?t=${timestamp}`)
-      .then((r) => r.json())
+      .then((r) => {
+        if (!r.ok) throw new Error("점수 데이터를 불러오지 못했습니다.");
+        return r.json();
+      })
       .then((data) => {
-        if (!data?.tools) return;
+        if (!isMounted || !data?.tools) return;
         setTools((prev) =>
           prev.map((tool) => {
             const live = data.tools[String(tool.id)];
             return live ? { ...tool, ...live } : tool;
           })
         );
+        setError(null);
       })
-      .catch(() => {});
+      .catch((err) => {
+        if (isMounted) setError(err.message);
+      })
+      .finally(() => {
+        if (isMounted) setIsLoading(false);
+      });
 
-    fetch(`/news.json?t=${timestamp}`)
-      .then((res) => res.json())
-      .then((data) => setNews(data))
-      .catch(() => {});
+    return () => { isMounted = false; };
   }, []);
 
   useEffect(() => {
-    getDocs(collection(db, "bookmarks"))
-      .then((snap) => {
-        const counts = {};
-        snap.docs.forEach((d) => {
-          const { toolId } = d.data();
-          if (toolId) counts[toolId] = (counts[toolId] || 0) + 1;
-        });
-        setBookmarkCounts(counts);
-      })
-      .catch(() => {});
+    const fetchCounts = async () => {
+      try {
+        const [bookmarkSnap, reactionSnap] = await Promise.all([
+          getDocs(collection(db, "bookmarks")),
+          getDocs(collection(db, "toolReactions"))
+        ]);
 
-    getDocs(collection(db, "toolReactions"))
-      .then((snap) => {
-        const counts = {};
-        snap.docs.forEach((d) => {
+        const bCounts = {};
+        bookmarkSnap.docs.forEach((d) => {
+          const { toolId } = d.data();
+          if (toolId) bCounts[toolId] = (bCounts[toolId] || 0) + 1;
+        });
+        setBookmarkCounts(bCounts);
+
+        const rCounts = {};
+        reactionSnap.docs.forEach((d) => {
           const { toolId, type } = d.data();
           if (!toolId) return;
-          if (!counts[toolId]) counts[toolId] = { likes: 0, dislikes: 0 };
-          if (type === "like") counts[toolId].likes++;
-          else if (type === "dislike") counts[toolId].dislikes++;
+          if (!rCounts[toolId]) rCounts[toolId] = { likes: 0, dislikes: 0 };
+          if (type === "like") rCounts[toolId].likes++;
+          else if (type === "dislike") rCounts[toolId].dislikes++;
         });
-        setReactionCounts(counts);
-      })
-      .catch(() => {});
+        setReactionCounts(rCounts);
+      } catch (err) {
+        console.error("Firebase data fetch error:", err);
+      }
+    };
+    fetchCounts();
   }, []);
-
-  useEffect(() => {
-    if (user) {
-      const q = query(collection(db, "newsBookmarks"), where("uid", "==", user.uid));
-      const unsub = onSnapshot(q, (snap) => {
-        setNewsBookmarks(snap.docs.map(d => ({...d.data(), id: d.id})))
-      });
-      return unsub;
-    } else {
-      setNewsBookmarks([]);
-    }
-  }, [user]);
 
   useEffect(() => {
     if (user) {
       const q = query(collection(db, "toolReactions"), where("uid", "==", user.uid));
-      const unsub = onSnapshot(q, (snap) => {
+      return onSnapshot(q, (snap) => {
         setToolReactions(snap.docs.map(d => d.data()));
       });
-      return unsub;
     } else {
       setToolReactions([]);
     }
   }, [user]);
-
-  useEffect(() => {
-    localStorage.setItem('theme', theme);
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
-
-  useEffect(() => {
-    if (selectedArticle) {
-      localStorage.setItem('selectedArticle', JSON.stringify(selectedArticle));
-    } else {
-      localStorage.removeItem('selectedArticle');
-    }
-  }, [selectedArticle]);
-
-  const toggleTheme = () => {
-    setTheme((prev) => prev === 'light' ? 'dark' : prev === 'dark' ? 'manus' : prev === 'manus' ? 'mono' : 'light');
-  };
-
-  const selectTheme = (newTheme) => setTheme(newTheme);
 
   const openToolDetail = (tool, rank) => {
     setSelectedTool(tool);
     setSelectedRank(rank);
   };
 
-  const closeToolDetail = () => {
-    setSelectedTool(null);
-  };
-
-  // ★ 신규: 심층 분석 모달 열기/닫기 함수
+  const closeToolDetail = () => setSelectedTool(null);
   const openAnalysis = (tool, rank) => {
     setAnalysisTool(tool);
     setAnalysisRank(rank);
   };
-
-  const closeAnalysis = () => {
-    setAnalysisTool(null);
-  };
-
-  const addNewsBookmark = useCallback(async (article) => {
-    if (!user) return;
-    await addDoc(collection(db, "newsBookmarks"), {
-      uid: user.uid,
-      link: article.link,
-      title: article.title,
-      description: article.description,
-      relativeTime: article.relativeTime
-    });
-  }, [user]);
-
-  const removeNewsBookmark = useCallback(async (bookmarkId) => {
-    if (!user) return;
-    await deleteDoc(doc(db, "newsBookmarks", bookmarkId));
-  }, [user]);
-
-  const isNewsBookmarked = useCallback((articleLink) => {
-    return newsBookmarks.some(b => b.link === articleLink);
-  }, [newsBookmarks]);
+  const closeAnalysis = () => setAnalysisTool(null);
 
   const getToolReaction = useCallback((toolId) => {
     const r = toolReactions.find(r => r.toolId === toolId);
@@ -169,7 +113,9 @@ export function ToolProvider({ children }) {
     if (!user) return;
     const docRef = doc(db, "toolReactions", `${user.uid}_${toolId}`);
     const existing = toolReactions.find(r => r.toolId === toolId);
+    
     if (existing?.type === type) {
+      await setDoc(docRef, { ...existing, type: null }); // 혹은 deleteDoc
       await deleteDoc(docRef);
       setReactionCounts(prev => {
         const c = prev[toolId] || { likes: 0, dislikes: 0 };
@@ -187,41 +133,24 @@ export function ToolProvider({ children }) {
     }
   }, [user, toolReactions]);
 
-  const toggleNewsBookmark = useCallback((article) => {
-    const existing = newsBookmarks.find(b => b.link === article.link);
-    if (existing) {
-      removeNewsBookmark(existing.id);
-    } else {
-      addNewsBookmark(article);
-    }
-  }, [newsBookmarks, addNewsBookmark, removeNewsBookmark]);
-
   const value = useMemo(() => ({
     tools,
+    isLoading,
+    error,
     openToolDetail,
     closeToolDetail,
     selectedTool,
     selectedRank,
-    // ★ 신규 상태 및 함수 전달
     analysisTool,
     analysisRank,
     openAnalysis,
     closeAnalysis,
-    theme,
-    toggleTheme,
-    selectTheme,
-    selectedArticle,
-    setSelectedArticle,
-    news,
-    newsBookmarks,
-    toggleNewsBookmark,
-    isNewsBookmarked,
     bookmarkCounts,
     toolReactions,
     toggleToolReaction,
     getToolReaction,
     reactionCounts,
-  }), [tools, selectedTool, selectedRank, analysisTool, analysisRank, theme, selectedArticle, news, newsBookmarks, toggleNewsBookmark, isNewsBookmarked, bookmarkCounts, toolReactions, toggleToolReaction, getToolReaction, reactionCounts]);
+  }), [tools, isLoading, error, selectedTool, selectedRank, analysisTool, analysisRank, bookmarkCounts, toolReactions, toggleToolReaction, getToolReaction, reactionCounts]);
 
   return (
     <ToolContext.Provider value={value}>
@@ -229,3 +158,4 @@ export function ToolProvider({ children }) {
     </ToolContext.Provider>
   );
 }
+

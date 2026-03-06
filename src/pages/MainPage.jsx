@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { useTools } from "../context/ToolContext";
+import { useNews } from "../context/NewsContext";
 
 import FilterBar from "../components/filters/FilterBar";
 import RightSidebar from "../components/sidebar/RightSidebar";
@@ -9,7 +10,8 @@ import HeroSection from "../components/hero/HeroSection";
 import { SORT_OPTIONS } from "../constants";
 
 export default function MainPage() {
-  const { tools, openToolDetail, bookmarkCounts, reactionCounts, news } = useTools();
+  const { tools, openToolDetail, bookmarkCounts, reactionCounts } = useTools();
+  const { news } = useNews();
   const [searchQuery, setSearchQuery] = useState("");
   const [category, setCategory] = useState("all");
   const [lifeFilter, setLifeFilter] = useState("all");

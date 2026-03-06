@@ -1,4 +1,4 @@
-import { useTools } from "../../context/ToolContext";
+import { useNews } from "../../context/NewsContext";
 import styled, { keyframes } from "styled-components";
 
 const ticker = keyframes`
@@ -37,7 +37,7 @@ const TickerItem = styled.a`
 `;
 
 const TickerBar = () => {
-  const { news } = useTools();
+  const { news } = useNews();
 
   if (!news || !news.items || news.items.length === 0) {
     return null;

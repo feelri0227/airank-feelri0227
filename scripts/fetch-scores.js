@@ -442,99 +442,93 @@ async function main() {
 
   const chunkSize = 5;
 
-  // ── Naver DataLab (5개씩 배치, 한/영 이미 포함) ──────────────────────────
-  if (process.env.NAVER_CLIENT_ID) {
-    console.log('🟢 Naver DataLab 수집 중...');
-    for (let i = 0; i < TOOLS.length; i += chunkSize) {
-      const chunk = TOOLS.slice(i, i + chunkSize);
-      const result = await fetchNaver(chunk);
-      for (const [id, val] of Object.entries(result)) raw.naver[id] = val;
-      await sleep(500);
+  // 플랫폼별 수집 태스크 정의
+  const tasks = [
+    // 1. Naver DataLab
+    async () => {
+      if (process.env.NAVER_CLIENT_ID) {
+        console.log('🟢 Naver DataLab 수집 중...');
+        for (let i = 0; i < TOOLS.length; i += chunkSize) {
+          const chunk = TOOLS.slice(i, i + chunkSize);
+          const result = await fetchNaver(chunk);
+          for (const [id, val] of Object.entries(result)) raw.naver[id] = val;
+          await sleep(500);
+        }
+        console.log('   ✅ Naver 완료');
+      } else {
+        console.log('⏭️  NAVER_CLIENT_ID 없음 → 건너뜀');
+      }
+    },
+
+    // 2. YouTube Trends (한/영 병렬 처리 지양 - 구글 트렌드 API 제한 고려)
+    async () => {
+      console.log('🔴 YouTube Trends 수집 중...');
+      const ytEn = Object.fromEntries(TOOLS.map((t) => [t.id, 0]));
+      const ytKo = Object.fromEntries(TOOLS.map((t) => [t.id, 0]));
+      
+      for (let i = 0; i < TOOLS.length; i += chunkSize) {
+        const chunk = TOOLS.slice(i, i + chunkSize);
+        
+        const [enRes, koRes] = await Promise.all([
+          fetchYoutubeTrends(chunk, 'yt'),
+          fetchYoutubeTrends(chunk, 'ytKo')
+        ]);
+        
+        for (const [id, val] of Object.entries(enRes)) ytEn[id] = val;
+        for (const [id, val] of Object.entries(koRes)) ytKo[id] = val;
+        
+        await sleep(2000); // 구글 API 부하 분산
+      }
+      
+      const ytMerged = mergeScores(ytEn, ytKo, toolIds);
+      for (const id of toolIds) raw.youtube[id] = ytMerged[id];
+      const ytTotal = Object.values(ytMerged).filter((v) => v > 0).length;
+      console.log(`   ✅ YouTube Trends 완료 (유효 데이터: ${ytTotal}개)`);
+    },
+
+    // 3. Google Trends
+    async () => {
+      console.log('📈 Google Trends 수집 중...');
+      const gtEn = Object.fromEntries(TOOLS.map((t) => [t.id, 0]));
+      const gtKo = Object.fromEntries(TOOLS.map((t) => [t.id, 0]));
+      
+      for (let i = 0; i < TOOLS.length; i += chunkSize) {
+        const chunk = TOOLS.slice(i, i + chunkSize);
+        
+        const [enRes, koRes] = await Promise.all([
+          fetchGoogleTrends(chunk, 'gt'),
+          fetchGoogleTrends(chunk, 'gtKo')
+        ]);
+        
+        for (const [id, val] of Object.entries(enRes)) gtEn[id] = val;
+        for (const [id, val] of Object.entries(koRes)) gtKo[id] = val;
+        
+        await sleep(2000);
+      }
+      
+      const gtMerged = mergeScores(gtEn, gtKo, toolIds);
+      for (const id of toolIds) raw.gtrends[id] = gtMerged[id];
+      const gtTotal = Object.values(gtMerged).filter((v) => v > 0).length;
+      console.log(`   ✅ Google Trends 완료 (유효 데이터: ${gtTotal}개)`);
+    },
+
+    // 4. GitHub (개별 API 호출이므로 독립 실행)
+    async () => {
+      console.log('🟣 GitHub 수집 중...');
+      // 깃허브는 호출 제한이 엄격하므로 순차적으로 하되 조금 더 빠르게 시도
+      for (const tool of TOOLS) {
+        raw.github[tool.id] = await fetchGitHub(tool);
+        await sleep(process.env.GITHUB_TOKEN ? 1000 : 2000);
+      }
+      console.log('   ✅ GitHub 완료');
     }
-    console.log('   ✅ Naver 완료');
-  } else {
-    console.log('⏭️  NAVER_CLIENT_ID 없음 → 건너뜀');
-  }
+  ];
 
-  // ── YouTube Trends: 영어 패스 ────────────────────────────────────────────
-  console.log('🔴 YouTube Trends 수집 중 (영어)...');
-  const ytEn = Object.fromEntries(TOOLS.map((t) => [t.id, 0]));
-  let ytEnSuccess = 0;
-  for (let i = 0; i < TOOLS.length; i += chunkSize) {
-    const chunk = TOOLS.slice(i, i + chunkSize);
-    const result = await fetchYoutubeTrends(chunk, 'yt');
-    for (const [id, val] of Object.entries(result)) {
-      ytEn[id] = val;
-      if (val > 0) ytEnSuccess++;
-    }
-    await sleep(1500);
-  }
-  console.log(`   영어 완료 (${ytEnSuccess}개)`);
-
-  // ── YouTube Trends: 한국어 패스 ─────────────────────────────────────────
-  console.log('🔴 YouTube Trends 수집 중 (한국어)...');
-  const ytKo = Object.fromEntries(TOOLS.map((t) => [t.id, 0]));
-  let ytKoSuccess = 0;
-  for (let i = 0; i < TOOLS.length; i += chunkSize) {
-    const chunk = TOOLS.slice(i, i + chunkSize);
-    const result = await fetchYoutubeTrends(chunk, 'ytKo');
-    for (const [id, val] of Object.entries(result)) {
-      ytKo[id] = val;
-      if (val > 0) ytKoSuccess++;
-    }
-    await sleep(1500);
-  }
-  console.log(`   한국어 완료 (${ytKoSuccess}개)`);
-
-  // 영어+한국어 평균 합산
-  const ytMerged = mergeScores(ytEn, ytKo, toolIds);
-  for (const id of toolIds) raw.youtube[id] = ytMerged[id];
-  const ytTotal = Object.values(ytMerged).filter((v) => v > 0).length;
-  console.log(`   ✅ YouTube Trends 완료 (유효 데이터: ${ytTotal}개)`);
-
-  // ── Google Trends: 영어 패스 ─────────────────────────────────────────────
-  console.log('📈 Google Trends 수집 중 (영어)...');
-  const gtEn = Object.fromEntries(TOOLS.map((t) => [t.id, 0]));
-  let gtEnSuccess = 0;
-  for (let i = 0; i < TOOLS.length; i += chunkSize) {
-    const chunk = TOOLS.slice(i, i + chunkSize);
-    const result = await fetchGoogleTrends(chunk, 'gt');
-    for (const [id, val] of Object.entries(result)) {
-      gtEn[id] = val;
-      if (val > 0) gtEnSuccess++;
-    }
-    await sleep(1500);
-  }
-  console.log(`   영어 완료 (${gtEnSuccess}개)`);
-
-  // ── Google Trends: 한국어 패스 ──────────────────────────────────────────
-  console.log('📈 Google Trends 수집 중 (한국어)...');
-  const gtKo = Object.fromEntries(TOOLS.map((t) => [t.id, 0]));
-  let gtKoSuccess = 0;
-  for (let i = 0; i < TOOLS.length; i += chunkSize) {
-    const chunk = TOOLS.slice(i, i + chunkSize);
-    const result = await fetchGoogleTrends(chunk, 'gtKo');
-    for (const [id, val] of Object.entries(result)) {
-      gtKo[id] = val;
-      if (val > 0) gtKoSuccess++;
-    }
-    await sleep(1500);
-  }
-  console.log(`   한국어 완료 (${gtKoSuccess}개)`);
-
-  // 영어+한국어 평균 합산
-  const gtMerged = mergeScores(gtEn, gtKo, toolIds);
-  for (const id of toolIds) raw.gtrends[id] = gtMerged[id];
-  const gtTotal = Object.values(gtMerged).filter((v) => v > 0).length;
-  console.log(`   ✅ Google Trends 완료 (유효 데이터: ${gtTotal}개)`);
-
-  // ── GitHub ──────────────────────────────────────────────────────────────
-  console.log('🟣 GitHub 수집 중...');
-  for (const tool of TOOLS) {
-    raw.github[tool.id] = await fetchGitHub(tool);
-    await sleep(process.env.GITHUB_TOKEN ? 2100 : 1200);
-  }
-  console.log('   ✅ GitHub 완료');
+  // 모든 플랫폼 태스크를 "가능한 한" 병렬로 실행
+  // 주의: 구글 계열(YT, GT)은 동일 IP에서 동시에 대량 호출 시 차단 위험이 있으므로 
+  // 실제로는 Naver, GitHub와 함께 실행하되 구글 태스크끼리는 간격을 두는 것이 좋음.
+  // 여기서는 구조적 병렬화만 도입
+  await Promise.all(tasks.map(t => t()));
 
   // ── 정규화 ──────────────────────────────────────────────────────────────
   const norm = {
@@ -545,7 +539,7 @@ async function main() {
   };
 
   // ── 활성 플랫폼 가중치 자동 조정 ────────────────────────────────────────
-  // score = 네이버×0.25 + YouTube Trends×0.25 + Google Trends×0.25 + GitHub×0.25
+  // ... (나머지 로직 동일)
   const baseWeights = { naver: 0.25, youtube: 0.25, gtrends: 0.25, github: 0.25 };
   const active = {
     naver:   !!process.env.NAVER_CLIENT_ID,

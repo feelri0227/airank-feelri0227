@@ -7,11 +7,13 @@ import ThemeToggle from "../ui/ThemeToggle";
 import { NAV_ITEMS } from "../../constants";
 import { useAuth } from "../../context/AuthContext";
 import { useTools } from "../../context/ToolContext";
+import { useNews } from "../../context/NewsContext";
 import LoginModal from "../modals/LoginModal";
 
 const Navbar = ({ theme, onToggleTheme }) => {
   const { user, loginWithGoogle, logout } = useAuth();
-  const { tools, openToolDetail, newsBookmarks } = useTools();
+  const { tools, openToolDetail } = useTools();
+  const { newsBookmarks } = useNews();
   
   const [showDropdown, setShowDropdown] = useState(false); // 로그인 후 프로필 드롭다운
   const [showLoginDropdown, setShowLoginDropdown] = useState(false); // 로그인 전 메뉴 드롭다운

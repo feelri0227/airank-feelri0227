@@ -1,4 +1,4 @@
-import { useTools } from '../../context/ToolContext';
+import { useTheme } from '../../context/ThemeContext';
 
 const BLOB_COLORS = {
   light:  { a: '#6366f1', b: '#06b6d4' },
@@ -8,7 +8,7 @@ const BLOB_COLORS = {
 };
 
 const BackgroundEffects = () => {
-  const { theme } = useTools();
+  const { theme } = useTheme();
   const colors = BLOB_COLORS[theme] ?? BLOB_COLORS.dark;
 
   return (

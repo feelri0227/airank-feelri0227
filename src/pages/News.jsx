@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import styled from 'styled-components';
-import { useTools } from '../context/ToolContext';
+import { useNews } from '../context/NewsContext';
 import { useAuth } from '../context/AuthContext';
 import ToolListSidebar from '../components/layout/ToolListSidebar';
 
@@ -121,7 +121,7 @@ const PAGE_SIZE = 15;
 
 function NewsPage() {
   const { user } = useAuth();
-  const { news, selectedArticle, setSelectedArticle, toggleNewsBookmark, isNewsBookmarked } = useTools();
+  const { news, selectedArticle, setSelectedArticle, toggleNewsBookmark, isNewsBookmarked } = useNews();
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
   const handleItemClick = (item) => {

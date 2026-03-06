@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { useTools } from "../../context/ToolContext";
+import { useTheme } from "../../context/ThemeContext";
 
 const THEMES = [
   { id: 'light', icon: '☀️', label: '라이트' },
@@ -18,7 +18,7 @@ const TRACK_COLORS = {
 };
 
 const ThemeToggle = () => {
-  const { theme, selectTheme } = useTools();
+  const { theme, selectTheme } = useTheme();
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
   const current = THEMES.find((t) => t.id === theme) || THEMES[1];

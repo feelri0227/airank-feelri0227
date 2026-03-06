@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
+import { ThemeProvider } from "./context/ThemeContext";
+import { NewsProvider } from "./context/NewsContext";
 import { ToolProvider } from "./context/ToolProvider";
 import { useTools } from "./context/ToolContext";
 
@@ -10,7 +12,7 @@ import Community from "./pages/Community";
 import CommunityPost from "./pages/CommunityPost";
 import CommunityWrite from "./pages/CommunityWrite";
 import ToolDetailModal from "./components/modals/ToolDetailModal";
-import ToolAnalysisModal from "./components/modals/ToolAnalysisModal"; // 추가
+import ToolAnalysisModal from "./components/modals/ToolAnalysisModal";
 
 const ModalWrapper = () => {
   const { 
@@ -41,21 +43,25 @@ const ModalWrapper = () => {
 export default function App() {
   return (
     <AuthProvider>
-      <ToolProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<MainLayout />}>
-              <Route index element={<MainPage />} />
-              <Route path="news" element={<NewsPage />} />
-              <Route path="community" element={<Community />} />
-              <Route path="community/write" element={<CommunityWrite />} />
-              <Route path="community/:postId" element={<CommunityPost />} />
-              <Route path="community/:postId/edit" element={<CommunityWrite />} />
-            </Route>
-          </Routes>
-          <ModalWrapper />
-        </BrowserRouter>
-      </ToolProvider>
+      <ThemeProvider>
+        <NewsProvider>
+          <ToolProvider>
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<MainLayout />}>
+                  <Route index element={<MainPage />} />
+                  <Route path="news" element={<NewsPage />} />
+                  <Route path="community" element={<Community />} />
+                  <Route path="community/write" element={<CommunityWrite />} />
+                  <Route path="community/:postId" element={<CommunityPost />} />
+                  <Route path="community/:postId/edit" element={<CommunityWrite />} />
+                </Route>
+              </Routes>
+              <ModalWrapper />
+            </BrowserRouter>
+          </ToolProvider>
+        </NewsProvider>
+      </ThemeProvider>
     </AuthProvider>
   );
 }

@@ -1,5 +1,5 @@
 import { Outlet, useLocation } from "react-router-dom";
-import { useTools } from "../context/ToolContext";
+import { useTheme } from "../context/ThemeContext";
 
 import GlobalStyles from "../styles/GlobalStyles";
 import BackgroundEffects from "../components/layout/BackgroundEffects";
@@ -8,7 +8,7 @@ import TickerBar from "../components/layout/TickerBar";
 import Footer from "../components/layout/Footer";
 
 export default function MainLayout() {
-  const { theme, toggleTheme } = useTools();
+  const { theme, toggleTheme } = useTheme();
   const location = useLocation();
 
   return (
