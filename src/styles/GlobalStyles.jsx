@@ -37,7 +37,6 @@ const GlobalStyles = () => (
       --tag-color: #6366f1;
       --tag-border: rgba(99, 102, 241, 0.2);
       --modal-overlay: rgba(0, 0, 0, 0.4);
-      --bg-secondary-accent: rgba(99, 102, 241, 0.06);
       --font-main: 'Pretendard', -apple-system, sans-serif;
       --font-title: 'Outfit', sans-serif;
     }
@@ -66,7 +65,6 @@ const GlobalStyles = () => (
       --tag-color: #818cf8;
       --tag-border: rgba(99, 102, 241, 0.3);
       --modal-overlay: rgba(0, 0, 0, 0.8);
-      --bg-secondary-accent: rgba(99, 102, 241, 0.1);
     }
 
     [data-theme="manus"] {
@@ -101,7 +99,6 @@ const GlobalStyles = () => (
       --tag-color: #fbbf24;
       --tag-border: rgba(245, 158, 11, 0.25);
       --modal-overlay: rgba(0, 0, 0, 0.8);
-      --bg-secondary-accent: rgba(245, 158, 11, 0.08);
     }
 
     [data-theme="mono"] {
@@ -136,7 +133,6 @@ const GlobalStyles = () => (
       --tag-color: #b0b0b0;
       --tag-border: rgba(255, 255, 255, 0.12);
       --modal-overlay: rgba(0, 0, 0, 0.7);
-      --bg-secondary-accent: rgba(255, 255, 255, 0.05);
     }
 
     /* ── 조선 머슴 테마 (chosun) ── */
@@ -176,7 +172,6 @@ const GlobalStyles = () => (
       --font-title: 'Nanum Myeongjo', serif;
       --ticker-bg: rgba(188, 170, 164, 0.1);
       --ticker-border: rgba(188, 170, 164, 0.2);
-      --bg-secondary-accent: rgba(141, 110, 99, 0.08);
     }
 
     /* 조선 테마에서 제목 굵기 조정 및 가로 흔들림 방지 */

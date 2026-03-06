@@ -10,26 +10,6 @@ import WizardModal from "../components/modals/WizardModal";
 import HeroSection from "../components/hero/HeroSection";
 import { SORT_OPTIONS } from "../constants";
 
-const MobileNewsSection = ({ news }) => {
-  if (!news || !news.items) return null;
-  return (
-    <div className="mobile-news-box">
-      <div className="mobile-news-header">
-        <span style={{ fontSize: "0.95rem", fontWeight: 700 }}>📰 실시간 주요 뉴스</span>
-        <a href="/news" style={{ fontSize: "0.75rem", color: "var(--accent-indigo)", textDecoration: "none", fontWeight: 600 }}>전체보기 ❯</a>
-      </div>
-      <div className="mobile-news-list">
-        {news.items.slice(0, 5).map((item, idx) => (
-          <a key={idx} href={item.link} target="_blank" rel="noopener noreferrer" className="mobile-news-item">
-            <span className="dot">•</span>
-            <span className="title">{item.title}</span>
-          </a>
-        ))}
-      </div>
-    </div>
-  );
-};
-
 export default function MainPage() {
   const { tools, openToolDetail, bookmarkCounts, reactionCounts } = useTools();
   const { news } = useNews();
@@ -66,6 +46,28 @@ export default function MainPage() {
   useEffect(() => {
     setVisibleCount(10);
   }, [category, lifeFilter, searchQuery, sortBy]);
+
+  // 모바일 전용 뉴스 섹션 컴포넌트
+  const MobileNewsSection = () => {
+    if (!news || !news.items) return null;
+    
+    return (
+      <div className="mobile-news-box">
+        <div className="mobile-news-header">
+          <span style={{ fontSize: "0.95rem", fontWeight: 700 }}>📰 실시간 주요 뉴스</span>
+          <a href="/news" style={{ fontSize: "0.75rem", color: "var(--accent-indigo)", textDecoration: "none", fontWeight: 600 }}>전체보기 ❯</a>
+        </div>
+        <div className="mobile-news-list">
+          {news.items.slice(0, 5).map((item, idx) => (
+            <a key={idx} href={item.link} target="_blank" rel="noopener noreferrer" className="mobile-news-item">
+              <span className="dot">•</span> 
+              <span className="title">{item.title}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    );
+  };
 
   return (
     <>
@@ -152,7 +154,7 @@ export default function MainPage() {
               )}
 
               {/* 3. 뉴스 섹션 (더보기 버튼 아래) */}
-              <MobileNewsSection news={news} />
+              <MobileNewsSection />
             </>
           )}
         </main>

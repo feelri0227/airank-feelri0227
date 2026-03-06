@@ -115,6 +115,7 @@ export function ToolProvider({ children }) {
     const existing = toolReactions.find(r => r.toolId === toolId);
     
     if (existing?.type === type) {
+      await setDoc(docRef, { ...existing, type: null }); // 혹은 deleteDoc
       await deleteDoc(docRef);
       setReactionCounts(prev => {
         const c = prev[toolId] || { likes: 0, dislikes: 0 };
