@@ -1,6 +1,6 @@
 {
-  "updated": "2026-03-06T09:12:20.717Z",
-  "topN": 10,
+  "updated": "2026-03-06T09:17:31.997Z",
+  "topN": 30,
   "videos": {
     "1": [
       {
@@ -82,6 +82,66 @@
         "thumbnail": "https://i.ytimg.com/vi/4j6J-9hxfhk/mqdefault.jpg"
       }
     ],
+    "5": [
+      {
+        "videoId": "-NxD0-2whjQ",
+        "title": "그록의 클래스 🤓 #테슬라 #그록 #자율주행 #tesla #grok #fsd #shorts",
+        "channelTitle": "by Somi",
+        "thumbnail": "https://i.ytimg.com/vi/-NxD0-2whjQ/mqdefault.jpg"
+      },
+      {
+        "videoId": "CoHpSAt-z4c",
+        "title": "이건 진짜 미쳤다… 3초 만에 아이돌 실사 Ai로 뽑는다? (무료임)",
+        "channelTitle": "원카Ai Wonka",
+        "thumbnail": "https://i.ytimg.com/vi/CoHpSAt-z4c/mqdefault.jpg"
+      },
+      {
+        "videoId": "Cv1IpNcDsEg",
+        "title": "제발 돈 낭비는 그만.. AI에 500만 원 쓴 사람이 알려주는 AI 선택 가이드",
+        "channelTitle": "알린 ALINN",
+        "thumbnail": "https://i.ytimg.com/vi/Cv1IpNcDsEg/mqdefault.jpg"
+      }
+    ],
+    "6": [
+      {
+        "videoId": "FqF6C56O-08",
+        "title": "How To Use Llama 2 👩‍💻 [Tutorial]",
+        "channelTitle": "Prof MAD",
+        "thumbnail": "https://i.ytimg.com/vi/FqF6C56O-08/mqdefault.jpg"
+      },
+      {
+        "videoId": "eNxAgYBdJ2A",
+        "title": "Llama-3 기반 실용적인 한국어 모델 3종 소개 및 코랩 실습 (라마3 성능 조타!)",
+        "channelTitle": "빵형의 개발도상국",
+        "thumbnail": "https://i.ytimg.com/vi/eNxAgYBdJ2A/mqdefault.jpg"
+      },
+      {
+        "videoId": "kZXE5KyFcHo",
+        "title": "메타 라마3 설치 사용방법 - OLLAMA | Llama 3 - Meta AI | 윈도우, 맥북, 리눅스 설치 가능",
+        "channelTitle": "감자나라ai",
+        "thumbnail": "https://i.ytimg.com/vi/kZXE5KyFcHo/mqdefault.jpg"
+      }
+    ],
+    "8": [
+      {
+        "videoId": "ZkO1VpsMpmU",
+        "title": "3초만에 초고퀄 사진 만들어주는 제미나이 (나노바나나)",
+        "channelTitle": "GPT 연대경영",
+        "thumbnail": "https://i.ytimg.com/vi/ZkO1VpsMpmU/mqdefault.jpg"
+      },
+      {
+        "videoId": "n3-ypz8H9xE",
+        "title": "오지콤 자극하는 캐릭터와 대화하기 ㅋㅋㅋㅋ",
+        "channelTitle": "지컨",
+        "thumbnail": "https://i.ytimg.com/vi/n3-ypz8H9xE/mqdefault.jpg"
+      },
+      {
+        "videoId": "7pwrolSUvXs",
+        "title": "AI가 애니 업계에 미치는 영향 ㄷㄷ",
+        "channelTitle": "숏펀지",
+        "thumbnail": "https://i.ytimg.com/vi/7pwrolSUvXs/mqdefault.jpg"
+      }
+    ],
     "10": [
       {
         "videoId": "vIh8nu1tcDI",
@@ -122,6 +182,46 @@
         "thumbnail": "https://i.ytimg.com/vi/vVdNmnEb--E/mqdefault.jpg"
       }
     ],
+    "12": [
+      {
+        "videoId": "Bsi4QGplI0c",
+        "title": "챗GPT 사용법 강의 (2시간 30분) | 최신 GPT4 Turbo &amp; GPTs 포함",
+        "channelTitle": "감자나라ai",
+        "thumbnail": "https://i.ytimg.com/vi/Bsi4QGplI0c/mqdefault.jpg"
+      },
+      {
+        "videoId": "r5MyPeD9qk8",
+        "title": "AI 이미지 생성 프로그램 끝판왕 등장 - ChatGPT를 품은 Dall E 3!",
+        "channelTitle": "최첨단 카이 - 테슬라, 테크, AI 이야기",
+        "thumbnail": "https://i.ytimg.com/vi/r5MyPeD9qk8/mqdefault.jpg"
+      },
+      {
+        "videoId": "nVNxZPCXoe8",
+        "title": "Dall E 3 + ChatGPT로 원하는 이미지를 매우 쉽게 만드는 방법",
+        "channelTitle": "최첨단 카이 - 테슬라, 테크, AI 이야기",
+        "thumbnail": "https://i.ytimg.com/vi/nVNxZPCXoe8/mqdefault.jpg"
+      }
+    ],
+    "13": [
+      {
+        "videoId": "oUFyFDW6jmw",
+        "title": "Text Effect using Adobe Illustrator + Adobe Firefly",
+        "channelTitle": "Utix Grapix",
+        "thumbnail": "https://i.ytimg.com/vi/oUFyFDW6jmw/mqdefault.jpg"
+      },
+      {
+        "videoId": "2VpG5HMoC5A",
+        "title": "어도비가 드디어 돈값을 합니다 ㄷㄷ 파이어플라이로 촬영 한 컷도 없이 영상 만드는 법 공개 / 오목교 전자상가",
+        "channelTitle": "오목교 전자상가",
+        "thumbnail": "https://i.ytimg.com/vi/2VpG5HMoC5A/mqdefault.jpg"
+      },
+      {
+        "videoId": "Rkq_eDeGIMw",
+        "title": "Adobe Firefly V3: A Complete 3D Tutorial",
+        "channelTitle": "Will Paterson",
+        "thumbnail": "https://i.ytimg.com/vi/Rkq_eDeGIMw/mqdefault.jpg"
+      }
+    ],
     "18": [
       {
         "videoId": "EPyyyB23NUU",
@@ -140,6 +240,66 @@
         "title": "Getting started with GitHub Copilot | Tutorial",
         "channelTitle": "GitHub",
         "thumbnail": "https://i.ytimg.com/vi/n0NlxUyA7FI/mqdefault.jpg"
+      }
+    ],
+    "19": [
+      {
+        "videoId": "ocMOZpuAMw4",
+        "title": "Cursor Tutorial for Beginners (AI Code Editor)",
+        "channelTitle": "Tech With Tim",
+        "thumbnail": "https://i.ytimg.com/vi/ocMOZpuAMw4/mqdefault.jpg"
+      },
+      {
+        "videoId": "f-Izv0ZIeQs",
+        "title": "이거 보고 커서에디터 삭제했다 (Gemini CLI)",
+        "channelTitle": "코딩애플",
+        "thumbnail": "https://i.ytimg.com/vi/f-Izv0ZIeQs/mqdefault.jpg"
+      },
+      {
+        "videoId": "3289vhOUdKA",
+        "title": "Cursor AI Tutorial for Beginners",
+        "channelTitle": "Volo Builds",
+        "thumbnail": "https://i.ytimg.com/vi/3289vhOUdKA/mqdefault.jpg"
+      }
+    ],
+    "20": [
+      {
+        "videoId": "5zfOitaKfmM",
+        "title": "Bolt.New AI Tutorial for Beginners: Create an App in Under 20 Minutes!",
+        "channelTitle": "Darrel Wilson",
+        "thumbnail": "https://i.ytimg.com/vi/5zfOitaKfmM/mqdefault.jpg"
+      },
+      {
+        "videoId": "hLd3t3TPE_A",
+        "title": "아넥스 볼트리무버 사용법. 빠가난 나사 푸는법. 히다리탭 사용법.",
+        "channelTitle": "불꽃놀이",
+        "thumbnail": "https://i.ytimg.com/vi/hLd3t3TPE_A/mqdefault.jpg"
+      },
+      {
+        "videoId": "ZjIaKIgi9hU",
+        "title": "쉐보레 신형 볼트 EUV 한테 한수 배워야 한다! 가격까지!  보조금 감안 하면 3천 만원대! 단종되지 마라 제발! #쇼츠 #shorts",
+        "channelTitle": "자이언트Car (자카)",
+        "thumbnail": "https://i.ytimg.com/vi/ZjIaKIgi9hU/mqdefault.jpg"
+      }
+    ],
+    "22": [
+      {
+        "videoId": "aaendvL3OEU",
+        "title": "10초만에 웹디자인 다 해주는 AI",
+        "channelTitle": "코딩애플",
+        "thumbnail": "https://i.ytimg.com/vi/aaendvL3OEU/mqdefault.jpg"
+      },
+      {
+        "videoId": "4RCBcV2Ucpo",
+        "title": "Cursor, V0, ChatGPT 조합이면 코딩 시간 절반으로 줄일 수 있습니다.",
+        "channelTitle": "개발동생",
+        "thumbnail": "https://i.ytimg.com/vi/4RCBcV2Ucpo/mqdefault.jpg"
+      },
+      {
+        "videoId": "TPBPbEeJyF0",
+        "title": "Vercel V0 사용법 완벽 정리 | 프론트엔드 개발 방식이 변하고 있습니다",
+        "channelTitle": "개발동생",
+        "thumbnail": "https://i.ytimg.com/vi/TPBPbEeJyF0/mqdefault.jpg"
       }
     ],
     "25": [
@@ -162,6 +322,46 @@
         "thumbnail": "https://i.ytimg.com/vi/2t2-RHnzdis/mqdefault.jpg"
       }
     ],
+    "33": [
+      {
+        "videoId": "z0sD2BvUfM0",
+        "title": "How to Use ElevenLabs - Best Text to Speech AI Voices (FULL GUIDE)",
+        "channelTitle": "Alec Wilcock",
+        "thumbnail": "https://i.ytimg.com/vi/z0sD2BvUfM0/mqdefault.jpg"
+      },
+      {
+        "videoId": "KrZ9JcmOpiM",
+        "title": "일레븐랩스 사용법 - 완벽한 ai 성우 생성",
+        "channelTitle": "광장",
+        "thumbnail": "https://i.ytimg.com/vi/KrZ9JcmOpiM/mqdefault.jpg"
+      },
+      {
+        "videoId": "pnTkWAZCj5U",
+        "title": "실제 사람보다 더 사람같은 AI 음성 TTS 서비스 일레븐랩스 (ElevenLabs)",
+        "channelTitle": "나다울 디자인",
+        "thumbnail": "https://i.ytimg.com/vi/pnTkWAZCj5U/mqdefault.jpg"
+      }
+    ],
+    "36": [
+      {
+        "videoId": "YoWdogtZRw8",
+        "title": "Learn 80% of Perplexity in under 10 minutes!",
+        "channelTitle": "Jeff Su",
+        "thumbnail": "https://i.ytimg.com/vi/YoWdogtZRw8/mqdefault.jpg"
+      },
+      {
+        "videoId": "PbqUAIsUJQ8",
+        "title": "업무효율 300% 올려주는 대세 AI툴 5가지",
+        "channelTitle": "AI김박사",
+        "thumbnail": "https://i.ytimg.com/vi/PbqUAIsUJQ8/mqdefault.jpg"
+      },
+      {
+        "videoId": "CreVjkdbYOc",
+        "title": "Perplexity(퍼플렉시티) Pro 1년 무료 이용 방법(SKT사용자만 가능) #퍼플렉시티 #perplexity #perplexityai",
+        "channelTitle": "우주보스",
+        "thumbnail": "https://i.ytimg.com/vi/CreVjkdbYOc/mqdefault.jpg"
+      }
+    ],
     "39": [
       {
         "videoId": "cH9ag0hNab0",
@@ -182,6 +382,86 @@
         "thumbnail": "https://i.ytimg.com/vi/PfzXwT7XJf4/mqdefault.jpg"
       }
     ],
+    "40": [
+      {
+        "videoId": "ktvRbNcAtwc",
+        "title": "노션 초보자를 위한, 60분 총정리 특강 | 노션 공식 컨설턴트가 알려주는 노션의 모든 것",
+        "channelTitle": "오빠두엑셀 l 엑셀 강의 대표채널",
+        "thumbnail": "https://i.ytimg.com/vi/ktvRbNcAtwc/mqdefault.jpg"
+      },
+      {
+        "videoId": "eeJz8HAyTk0",
+        "title": "직장인이라면 지금 당장 써야 할 무료 AI | 노트북LM 실전 활용법 12가지 (최신 가이드)",
+        "channelTitle": "오빠두엑셀 l 엑셀 강의 대표채널",
+        "thumbnail": "https://i.ytimg.com/vi/eeJz8HAyTk0/mqdefault.jpg"
+      },
+      {
+        "videoId": "L4xIFhMnGic",
+        "title": "충격적인 AI 업무 활용 테크닉🫨 AI로 이런 자동화는 처음 봤습니다",
+        "channelTitle": "방구석 리뷰룸",
+        "thumbnail": "https://i.ytimg.com/vi/L4xIFhMnGic/mqdefault.jpg"
+      }
+    ],
+    "48": [
+      {
+        "videoId": "jzWxBuvwuwQ",
+        "title": "MASTER CANVA IN 15 MINUTES! Canva Tutorial For Beginners",
+        "channelTitle": "Aurelius Tjin",
+        "thumbnail": "https://i.ytimg.com/vi/jzWxBuvwuwQ/mqdefault.jpg"
+      },
+      {
+        "videoId": "roAORBdDTDI",
+        "title": "제미나이 미친 기능 나노바나나 ai무료로 써보세요!",
+        "channelTitle": "스마트 라라힐",
+        "thumbnail": "https://i.ytimg.com/vi/roAORBdDTDI/mqdefault.jpg"
+      },
+      {
+        "videoId": "SSOcdCSCeyM",
+        "title": "안쓰면 후회하는 미친 AI 활용법 공개🔥",
+        "channelTitle": "마케팅뷰 서별님",
+        "thumbnail": "https://i.ytimg.com/vi/SSOcdCSCeyM/mqdefault.jpg"
+      }
+    ],
+    "49": [
+      {
+        "videoId": "Yf00MKUfcIY",
+        "title": "Food Ordering Mobile App Design in Figma | UI/UX (Wireframe, Prototype) Figma tutorial",
+        "channelTitle": "DSCODE",
+        "thumbnail": "https://i.ytimg.com/vi/Yf00MKUfcIY/mqdefault.jpg"
+      },
+      {
+        "videoId": "djDZHAi75dk",
+        "title": "3 Ways to Build ACTUALLY Beautiful Websites Using Cursor AI",
+        "channelTitle": "AI LABS",
+        "thumbnail": "https://i.ytimg.com/vi/djDZHAi75dk/mqdefault.jpg"
+      },
+      {
+        "videoId": "J7CzwVTYDi8",
+        "title": "These Are Better Than Figma AI! — Motiff, Visily, Uizard #shorts #figma #ai",
+        "channelTitle": "Punit Chawla",
+        "thumbnail": "https://i.ytimg.com/vi/J7CzwVTYDi8/mqdefault.jpg"
+      }
+    ],
+    "62": [
+      {
+        "videoId": "MhoM2iPHXHo",
+        "title": "스테이블 디퓨전으로 AI 실사 쉽게 만들기! (Stable diffusion 사용법)",
+        "channelTitle": "모르면 끝",
+        "thumbnail": "https://i.ytimg.com/vi/MhoM2iPHXHo/mqdefault.jpg"
+      },
+      {
+        "videoId": "UT6uvlntOWA",
+        "title": "Make an easy LoRA with CivitAi",
+        "channelTitle": "Ai Foundry",
+        "thumbnail": "https://i.ytimg.com/vi/UT6uvlntOWA/mqdefault.jpg"
+      },
+      {
+        "videoId": "t2ajilR0d7E",
+        "title": "스테이블 디퓨전(Stable diffusion) 체크포인트(checkpiont), 로라(loRA) 사용법과 VAE, CLIP 기본 개념",
+        "channelTitle": "생성형 AI(Generative AI)와 ICT 훔쳐보기",
+        "thumbnail": "https://i.ytimg.com/vi/t2ajilR0d7E/mqdefault.jpg"
+      }
+    ],
     "69": [
       {
         "videoId": "RDhQMJm5rrw",
@@ -200,6 +480,126 @@
         "title": "✨️조회수 터지는 카페 홍보 영상 제작법! #릴쏸 #영상편집 #AI #capcut #higgsfieldai #꿀팁 #higgsfield #viral #viralvideo",
         "channelTitle": "릴쏸ᝰ",
         "thumbnail": "https://i.ytimg.com/vi/2yKNlIW6o9g/mqdefault.jpg"
+      }
+    ],
+    "85": [
+      {
+        "videoId": "AUejmYbxKtA",
+        "title": "How to Use Grammarly AI to Improve Your Writing",
+        "channelTitle": "Kevin Stratvert",
+        "thumbnail": "https://i.ytimg.com/vi/AUejmYbxKtA/mqdefault.jpg"
+      },
+      {
+        "videoId": "5LjKA1eLQ_0",
+        "title": "How to Use Grammarly",
+        "channelTitle": "Kevin Stratvert",
+        "thumbnail": "https://i.ytimg.com/vi/5LjKA1eLQ_0/mqdefault.jpg"
+      },
+      {
+        "videoId": "CdXJSRoUo0Q",
+        "title": "How to Use Grammarly Premium 2021 || Paraphrasing || Grammarly plagiarism checker",
+        "channelTitle": "Researchify",
+        "thumbnail": "https://i.ytimg.com/vi/CdXJSRoUo0Q/mqdefault.jpg"
+      }
+    ],
+    "97": [
+      {
+        "videoId": "PWZOMFFW9_0",
+        "title": "Use This Gimp Tip to Remove Picture Backgrounds Quickly",
+        "channelTitle": "uzr",
+        "thumbnail": "https://i.ytimg.com/vi/PWZOMFFW9_0/mqdefault.jpg"
+      },
+      {
+        "videoId": "ZmhRN7a0Eaw",
+        "title": "Remove Background  ! 🤯😎 #shorts #photoshop",
+        "channelTitle": "ComaFix Photoshop ",
+        "thumbnail": "https://i.ytimg.com/vi/ZmhRN7a0Eaw/mqdefault.jpg"
+      },
+      {
+        "videoId": "7vE3V-hkmuk",
+        "title": "How To Remove Background In Photopea - Full Guide",
+        "channelTitle": "GuideRealm",
+        "thumbnail": "https://i.ytimg.com/vi/7vE3V-hkmuk/mqdefault.jpg"
+      }
+    ],
+    "103": [
+      {
+        "videoId": "Hrm73c60mfc",
+        "title": "카메라 달린 레이밴 선글라스 메타 글래스2 사봄!",
+        "channelTitle": "가전주부 GJJB",
+        "thumbnail": "https://i.ytimg.com/vi/Hrm73c60mfc/mqdefault.jpg"
+      },
+      {
+        "videoId": "JtX4i5KDi58",
+        "title": "[최초공개] 내 안경보다 100배 좋은 Meta 인공지능 스마트 안경 리미티드 에디션! 스마트 안경 최신 기능 총정리!",
+        "channelTitle": "커리어해커 알렉스",
+        "thumbnail": "https://i.ytimg.com/vi/JtX4i5KDi58/mqdefault.jpg"
+      },
+      {
+        "videoId": "zgXLwvOxoTU",
+        "title": "AI 거품론 참교육한 메타",
+        "channelTitle": "군림보",
+        "thumbnail": "https://i.ytimg.com/vi/zgXLwvOxoTU/mqdefault.jpg"
+      }
+    ],
+    "138": [
+      {
+        "videoId": "F-oLLqILsAU",
+        "title": "Introducing Duolingo Max",
+        "channelTitle": "Duolingo",
+        "thumbnail": "https://i.ytimg.com/vi/F-oLLqILsAU/mqdefault.jpg"
+      },
+      {
+        "videoId": "ppjCshd7te4",
+        "title": "Duolingo Max",
+        "channelTitle": "Mimikyu1026",
+        "thumbnail": "https://i.ytimg.com/vi/ppjCshd7te4/mqdefault.jpg"
+      },
+      {
+        "videoId": "-AVFc44IDv4",
+        "title": "Super Duolingo vs Duolingo Max",
+        "channelTitle": "EnzoCubeHead",
+        "thumbnail": "https://i.ytimg.com/vi/-AVFc44IDv4/mqdefault.jpg"
+      }
+    ],
+    "145": [
+      {
+        "videoId": "pbb5QT-heFI",
+        "title": "2024 구글 어시스턴트, 구글 번역기 사용법 I 해외여행 가서 외국어 몰라도 스마트폰으로 외국인과 실시간 대화 I 사진, 텍스트 보이는 거 다 번역해주는 구글렌즈까지",
+        "channelTitle": "시니어콜센터_바쁠텐데",
+        "thumbnail": "https://i.ytimg.com/vi/pbb5QT-heFI/mqdefault.jpg"
+      },
+      {
+        "videoId": "q9-gX3V0nGo",
+        "title": "How to Use a Macro Lens",
+        "channelTitle": "Wex Photo Video",
+        "thumbnail": "https://i.ytimg.com/vi/q9-gX3V0nGo/mqdefault.jpg"
+      },
+      {
+        "videoId": "fZTdbjg1VSw",
+        "title": "이미지를 텍스트로 추출하는 5가지 방법",
+        "channelTitle": "누나IT",
+        "thumbnail": "https://i.ytimg.com/vi/fZTdbjg1VSw/mqdefault.jpg"
+      }
+    ],
+    "159": [
+      {
+        "videoId": "NdnJFScW-Ss",
+        "title": "GPT4를 공짜로 무제한 쓰는 꿀팁! #뤼튼 #챗GPT #꿀팁공유 #무료어플추천",
+        "channelTitle": "조코딩 JoCoding",
+        "thumbnail": "https://i.ytimg.com/vi/NdnJFScW-Ss/mqdefault.jpg"
+      },
+      {
+        "videoId": "aMcKL_YX7Ak",
+        "title": "Chat GPT 4 무료로 사용하는 방법#shorts#AI꿀팁",
+        "channelTitle": "디지털레시피",
+        "thumbnail": "https://i.ytimg.com/vi/aMcKL_YX7Ak/mqdefault.jpg"
+      },
+      {
+        "videoId": "W5qbDluc2UE",
+        "title": "챗GPT를 무료로 무제한 쓰고 싶다면, 이것만 보세요. 한국어 잘하는 생성형 AI 뤼튼]",
+        "channelTitle": "기자 김연지",
+        "thumbnail": "https://i.ytimg.com/vi/W5qbDluc2UE/mqdefault.jpg"
       }
     ]
   }
