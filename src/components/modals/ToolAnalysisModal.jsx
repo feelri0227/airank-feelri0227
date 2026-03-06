@@ -1,23 +1,15 @@
 import { createPortal } from "react-dom";
 import { getRankBadge } from "../../utils";
 
+const SNS_PLATFORMS = [
+  { key: "naver",   label: "Naver",   domain: "naver.com",   color: "#03C75A" },
+  { key: "youtube", label: "YouTube", domain: "youtube.com", color: "#FF0000" },
+  { key: "google",  label: "Google",  domain: "google.com",  color: "#4285F4" },
+  { key: "github",  label: "GitHub",  domain: "github.com",  color: "#8b949e" },
+];
+
 const ToolAnalysisModal = ({ tool, rank, onClose }) => {
   if (!tool) return null;
-
-  // SNS 인기도 시각화 컴포넌트
-  const SnsChart = ({ label, value, color, icon }) => (
-    <div style={{ marginBottom: "16px" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "6px", fontSize: "0.85rem" }}>
-        <span style={{ fontWeight: 600, color: "var(--text-primary)", display: "flex", alignItems: "center", gap: "6px" }}>
-          {icon} {label}
-        </span>
-        <span style={{ fontWeight: 700, color: color }}>{value}%</span>
-      </div>
-      <div style={{ width: "100%", height: "10px", background: "var(--bg-tertiary)", borderRadius: "6px", overflow: "hidden" }}>
-        <div style={{ width: `${value}%`, height: "100%", background: color, borderRadius: "6px" }} />
-      </div>
-    </div>
-  );
 
   return createPortal(
     <div
@@ -33,7 +25,7 @@ const ToolAnalysisModal = ({ tool, rank, onClose }) => {
         onClick={(e) => e.stopPropagation()}
         style={{
           background: "var(--bg-card)", border: "1px solid var(--border-primary)",
-          borderRadius: "24px", padding: "1.5rem", width: "100%", maxWidth: "400px",
+          borderRadius: "24px", padding: "1.5rem", width: "100%", maxWidth: "380px",
           boxShadow: "0 24px 64px rgba(0,0,0,0.5)", position: "relative",
           maxHeight: "85vh", overflowY: "auto"
         }}
@@ -55,20 +47,39 @@ const ToolAnalysisModal = ({ tool, rank, onClose }) => {
           </div>
         </div>
 
-        <h3 style={{ fontSize: "1rem", marginBottom: "1.2rem", color: "var(--text-primary)" }}>📊 SNS 트렌드 분석</h3>
-        
-        <div style={{ padding: "1rem", background: "var(--bg-secondary)", borderRadius: "16px", marginBottom: "1.5rem" }}>
-          <SnsChart label="Naver 검색" value={tool.sns?.naver || 0} color="#03C75A" icon="🇳" />
-          <SnsChart label="YouTube 관심도" value={tool.sns?.youtube || 0} color="#FF0000" icon="▶" />
-          <SnsChart label="Google 트렌드" value={tool.sns?.google || 0} color="#4285F4" icon="🇬" />
-          <SnsChart label="GitHub 활동" value={tool.sns?.github || 0} color="#181717" icon="🐙" />
+        <h3 style={{ fontSize: "0.95rem", fontWeight: 700, marginBottom: "0.9rem", color: "var(--text-primary)" }}>📊 실시간 트렌드 지표</h3>
+
+        {/* 플랫폼 점수 2x2 그리드 */}
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px", marginBottom: "1.25rem" }}>
+          {SNS_PLATFORMS.map(({ key, label, domain, color }) => {
+            const value = tool.sns?.[key] || 0;
+            return (
+              <div key={key} style={{
+                display: "flex", alignItems: "center", gap: "10px",
+                padding: "12px 14px",
+                background: "var(--bg-secondary)",
+                borderRadius: "14px",
+                border: "1px solid var(--border-primary)",
+              }}>
+                <img
+                  src={`https://www.google.com/s2/favicons?domain=${domain}&sz=32`}
+                  alt={label}
+                  style={{ width: 18, height: 18, borderRadius: "4px", flexShrink: 0 }}
+                />
+                <div>
+                  <div style={{ fontSize: "0.62rem", color: "var(--text-muted)", fontWeight: 500 }}>{label}</div>
+                  <div style={{ fontSize: "1.1rem", fontWeight: 800, color, lineHeight: 1.2, fontFamily: "'Outfit', sans-serif" }}>{value}</div>
+                </div>
+              </div>
+            );
+          })}
         </div>
 
-        <p style={{ fontSize: "0.85rem", color: "var(--text-secondary)", lineHeight: 1.5, marginBottom: "1.5rem" }}>
-          * 위 데이터는 각 플랫폼에서의 검색량, 조회수, 언급량을 종합하여 산출된 <strong>실시간 인기 지표</strong>입니다.
-        </p>
+        <div style={{ padding: "12px 14px", background: "var(--bg-secondary)", borderRadius: "12px", marginBottom: "1.5rem", border: "1px solid var(--border-primary)", fontSize: "0.8rem", color: "var(--text-secondary)", lineHeight: 1.6 }}>
+          위 데이터는 각 플랫폼 검색량·조회수·언급량을 종합한 <strong>실시간 인기 지표</strong>입니다 (0~100 정규화).
+        </div>
 
-        <button 
+        <button
           onClick={() => window.open(tool.url, "_blank")}
           style={{
             width: "100%", padding: "14px", borderRadius: "14px",
