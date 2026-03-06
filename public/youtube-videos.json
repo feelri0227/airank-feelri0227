@@ -1,129 +1,33 @@
 {
-  "updated": "2026-03-06T09:04:49.110Z",
+  "updated": "2026-03-06T09:12:20.717Z",
   "topN": 10,
   "videos": {
     "1": [
       {
-        "videoId": "znlWTLJFw4E",
-        "title": "Resume Tips You Should Use",
-        "channelTitle": "Gohar Khan",
-        "thumbnail": "https://i.ytimg.com/vi/znlWTLJFw4E/mqdefault.jpg"
+        "videoId": "vimZVv74FL8",
+        "title": "챗GPT 성능 올릴 때",
+        "channelTitle": "꿀무새",
+        "thumbnail": "https://i.ytimg.com/vi/vimZVv74FL8/mqdefault.jpg"
       },
       {
-        "videoId": "5XaBBL88KRk",
-        "title": "Avoid Saying This in Your Essay",
-        "channelTitle": "Gohar Khan",
-        "thumbnail": "https://i.ytimg.com/vi/5XaBBL88KRk/mqdefault.jpg"
+        "videoId": "r8X9l_P0VoU",
+        "title": "ChatGPT 검열 뚫기 도전!",
+        "channelTitle": "1분만",
+        "thumbnail": "https://i.ytimg.com/vi/r8X9l_P0VoU/mqdefault.jpg"
       },
       {
-        "videoId": "btgLXPgLXzo",
-        "title": "Funny ChatGPT Conversations!",
-        "channelTitle": "cardogjones",
-        "thumbnail": "https://i.ytimg.com/vi/btgLXPgLXzo/mqdefault.jpg"
+        "videoId": "jb4z0HfGQ-g",
+        "title": "다들 몰래 쓰는, 챗GPT 벼락치기법",
+        "channelTitle": "AI모아둠",
+        "thumbnail": "https://i.ytimg.com/vi/jb4z0HfGQ-g/mqdefault.jpg"
       }
     ],
     "2": [
       {
-        "videoId": "LMgoJHRMHbI",
-        "title": "✅ Claude Healing Tutorial by Renyaaa",
-        "channelTitle": "Renyaaa",
-        "thumbnail": "https://i.ytimg.com/vi/LMgoJHRMHbI/mqdefault.jpg"
-      },
-      {
-        "videoId": "MsQACpcuTkU",
-        "title": "You&#39;ve Been Using AI the Hard Way (Use This Instead)",
-        "channelTitle": "NetworkChuck",
-        "thumbnail": "https://i.ytimg.com/vi/MsQACpcuTkU/mqdefault.jpg"
-      },
-      {
-        "videoId": "HyzlYwjoXOQ",
-        "title": "Claude&#39;s Model Context Protocol is here... Let&#39;s test it",
-        "channelTitle": "Fireship",
-        "thumbnail": "https://i.ytimg.com/vi/HyzlYwjoXOQ/mqdefault.jpg"
-      },
-      {
-        "videoId": "h4s4Pe0E-Nk",
-        "title": "✅ Claude Counter Ultimate Tutorial by Renyaaa",
-        "channelTitle": "Renyaaa",
-        "thumbnail": "https://i.ytimg.com/vi/h4s4Pe0E-Nk/mqdefault.jpg"
-      },
-      {
-        "videoId": "gKNlZzDHiMw",
-        "title": "Do you know Claude&#39;s ultimate damage mechanic?",
-        "channelTitle": "Elgin",
-        "thumbnail": "https://i.ytimg.com/vi/gKNlZzDHiMw/mqdefault.jpg"
-      },
-      {
-        "videoId": "6eBSHbLKuN0",
-        "title": "Mastering Claude Code in 30 minutes",
-        "channelTitle": "Anthropic",
-        "thumbnail": "https://i.ytimg.com/vi/6eBSHbLKuN0/mqdefault.jpg"
-      },
-      {
-        "videoId": "HNmFSZgPnYA",
-        "title": "Tutorial lawan Claude pake Karie, Claude vs KARIE",
-        "channelTitle": "ALOMONEYI ",
-        "thumbnail": "https://i.ytimg.com/vi/HNmFSZgPnYA/mqdefault.jpg"
-      },
-      {
-        "videoId": "AJpK3YTTKZ4",
-        "title": "Introducing Claude Code",
-        "channelTitle": "Anthropic",
-        "thumbnail": "https://i.ytimg.com/vi/AJpK3YTTKZ4/mqdefault.jpg"
-      },
-      {
-        "videoId": "DeKZG_bg6VM",
-        "title": "Ilmu Claude yang Disesatin Banyak Orang #mlbb #mobilelegends #claude #mm",
-        "channelTitle": "Kajuhikoo",
-        "thumbnail": "https://i.ytimg.com/vi/DeKZG_bg6VM/mqdefault.jpg"
-      },
-      {
-        "videoId": "V1Kl-N4ZfcQ",
-        "title": "✅ Claude Tutorial by Renyaaa",
-        "channelTitle": "Renyaaa",
-        "thumbnail": "https://i.ytimg.com/vi/V1Kl-N4ZfcQ/mqdefault.jpg"
-      },
-      {
-        "videoId": "97uW83G6Q2Y",
-        "title": "Claude AI Built This entire Website in SECONDS!",
-        "channelTitle": "Varun Mayya",
-        "thumbnail": "https://i.ytimg.com/vi/97uW83G6Q2Y/mqdefault.jpg"
-      },
-      {
-        "videoId": "Uc18mso08Ro",
-        "title": "I Accidentally Turned Claude Into a Hacker...",
-        "channelTitle": "NetworkChuck",
-        "thumbnail": "https://i.ytimg.com/vi/Uc18mso08Ro/mqdefault.jpg"
-      },
-      {
-        "videoId": "Ffh9OeJ7yxw",
-        "title": "800+ hours of Learning Claude Code in 8 minutes (2026 tutorial / unknown tricks / newest model)",
-        "channelTitle": "Edmund Yong",
-        "thumbnail": "https://i.ytimg.com/vi/Ffh9OeJ7yxw/mqdefault.jpg"
-      },
-      {
-        "videoId": "SUysp3sJHbA",
-        "title": "Claude Code Tutorial #1 - Introduction &amp; Setup",
-        "channelTitle": "Net Ninja",
-        "thumbnail": "https://i.ytimg.com/vi/SUysp3sJHbA/mqdefault.jpg"
-      },
-      {
-        "videoId": "1MSVWUiNmxs",
-        "title": "The fastest way to build a beautiful website with AI (bolt.new tutorial)",
-        "channelTitle": "Moritz | AI Builder",
-        "thumbnail": "https://i.ytimg.com/vi/1MSVWUiNmxs/mqdefault.jpg"
-      },
-      {
-        "videoId": "RudrWy9uPZE",
-        "title": "I Switched 50% of My AI Work to Claude, Here&#39;s Why",
-        "channelTitle": "Jeff Su",
-        "thumbnail": "https://i.ytimg.com/vi/RudrWy9uPZE/mqdefault.jpg"
-      },
-      {
-        "videoId": "QoQBzR1NIqI",
-        "title": "CLAUDE CODE FULL COURSE 4 HOURS: Build &amp; Sell (2026)",
-        "channelTitle": "Nick Saraev",
-        "thumbnail": "https://i.ytimg.com/vi/QoQBzR1NIqI/mqdefault.jpg"
+        "videoId": "brtbMmCkghM",
+        "title": "AI &#39;클로드 코워크&#39;에 시장 &#39;출렁&#39;‥기존 소프트웨어 다 망한다? (2026.02.06/뉴스데스크/MBC)",
+        "channelTitle": "MBCNEWS",
+        "thumbnail": "https://i.ytimg.com/vi/brtbMmCkghM/mqdefault.jpg"
       },
       {
         "videoId": "eMZmDH3T2bY",
@@ -132,386 +36,98 @@
         "thumbnail": "https://i.ytimg.com/vi/eMZmDH3T2bY/mqdefault.jpg"
       },
       {
-        "videoId": "ZeWfksNXlbU",
-        "title": "Claude COWORK Clearly Explained (&amp; how to use it for beginners)",
-        "channelTitle": "Eliot Prince",
-        "thumbnail": "https://i.ytimg.com/vi/ZeWfksNXlbU/mqdefault.jpg"
-      },
-      {
-        "videoId": "RrBl73duB84",
-        "title": "60% Winrate Claude S33 Build! Mobile Legends #mobilelegends #mlbb #gaming",
-        "channelTitle": "EMELFACTS",
-        "thumbnail": "https://i.ytimg.com/vi/RrBl73duB84/mqdefault.jpg"
-      },
-      {
-        "videoId": "a12B_mBb4S8",
-        "title": "Claude Guide 1 | Don&#39;t Focus on Getting Stacks | Master the Basics | Claude Gameplay | MLBB",
-        "channelTitle": "Master the Basics",
-        "thumbnail": "https://i.ytimg.com/vi/a12B_mBb4S8/mqdefault.jpg"
-      },
-      {
-        "videoId": "Ll1UyM8kBNc",
-        "title": "This is why I quit Cursor and switched to Claude Code",
-        "channelTitle": "onjsdev",
-        "thumbnail": "https://i.ytimg.com/vi/Ll1UyM8kBNc/mqdefault.jpg"
-      },
-      {
-        "videoId": "0fpUQN0a20Q",
-        "title": "How to transfer all of your memories from ChatGPT to Claude… #c#carterpcstech #chatgpt #claude #ai",
-        "channelTitle": "CarterPCs",
-        "thumbnail": "https://i.ytimg.com/vi/0fpUQN0a20Q/mqdefault.jpg"
-      },
-      {
-        "videoId": "gv0WHhKelSE",
-        "title": "Claude Code best practices | Code w/ Claude",
-        "channelTitle": "Anthropic",
-        "thumbnail": "https://i.ytimg.com/vi/gv0WHhKelSE/mqdefault.jpg"
-      },
-      {
-        "videoId": "bjdBVZa66oU",
-        "title": "What are skills?",
-        "channelTitle": "Claude",
-        "thumbnail": "https://i.ytimg.com/vi/bjdBVZa66oU/mqdefault.jpg"
+        "videoId": "RRPRtFTfFoI",
+        "title": "AI 장인들이 쓴다는 클로드, 옵시디언 활용법",
+        "channelTitle": "AI모아둠",
+        "thumbnail": "https://i.ytimg.com/vi/RRPRtFTfFoI/mqdefault.jpg"
       }
     ],
     "3": [
       {
-        "videoId": "meUr8fjy8lQ",
-        "title": "Vibe Coding with Gemini 3 in Google AI Studio",
-        "channelTitle": "Google DeepMind",
-        "thumbnail": "https://i.ytimg.com/vi/meUr8fjy8lQ/mqdefault.jpg"
+        "videoId": "j-yX6klmRSQ",
+        "title": "1초만에 외국어 실시간 통역! 시니어 해외여행 꿀팁 4가지+항공권 보안",
+        "channelTitle": "시니어 정보탐정",
+        "thumbnail": "https://i.ytimg.com/vi/j-yX6klmRSQ/mqdefault.jpg"
       },
       {
-        "videoId": "F8ABSl5EOuQ",
-        "title": "Take your test with Gemini ✅😅",
-        "channelTitle": "Trick Pilot",
-        "thumbnail": "https://i.ytimg.com/vi/F8ABSl5EOuQ/mqdefault.jpg"
+        "videoId": "9yLZKa5m270",
+        "title": "[이런뉴스] “부탁해요, 챗GPT” 공손함이 가져온 뜻밖의 결과는? / KBS 2025.04.22.",
+        "channelTitle": "KBS News",
+        "thumbnail": "https://i.ytimg.com/vi/9yLZKa5m270/mqdefault.jpg"
       },
       {
-        "videoId": "m9QEPCvdGLc",
-        "title": "Trending Instagram Ai Photo Editing || Gemini Ai Photo Editing Boys Prompt #gemini #aiphotoediting",
-        "channelTitle": "Md Editing",
-        "thumbnail": "https://i.ytimg.com/vi/m9QEPCvdGLc/mqdefault.jpg"
-      },
-      {
-        "videoId": "8sxsj6XVyIg",
-        "title": "Ai Photo Editing In Google Gemini | Instagram Trending 3d Model Ai Photo Editing | 3d Model Photo",
-        "channelTitle": "Technical Rohit Vyas",
-        "thumbnail": "https://i.ytimg.com/vi/8sxsj6XVyIg/mqdefault.jpg"
-      },
-      {
-        "videoId": "-20q1FmeV7g",
-        "title": "Google Gemini ✨➡️➡️Google Assistant| Change Default Assistant App onAndroid | AUR TechTips",
-        "channelTitle": "Active Satish",
-        "thumbnail": "https://i.ytimg.com/vi/-20q1FmeV7g/mqdefault.jpg"
-      },
-      {
-        "videoId": "LKwfiR3OEa0",
-        "title": "trending instagram viral photo editing| google gemini viral photo editing | Ai photo editing #ai",
-        "channelTitle": "Apna tech 21",
-        "thumbnail": "https://i.ytimg.com/vi/LKwfiR3OEa0/mqdefault.jpg"
-      },
-      {
-        "videoId": "pmcT5vcTW-w",
-        "title": "Gemini photo edit | Trending instagram photo editing | Google Gemini photo Editing#shorts",
-        "channelTitle": "AVNIT ZONE",
-        "thumbnail": "https://i.ytimg.com/vi/pmcT5vcTW-w/mqdefault.jpg"
-      },
-      {
-        "videoId": "BqwNqiaj8zE",
-        "title": "Gemini Photo Edit | Trending Instagram Photo Editing | Google Gemini Photo Editing #gemini",
-        "channelTitle": "Montu Edits",
-        "thumbnail": "https://i.ytimg.com/vi/BqwNqiaj8zE/mqdefault.jpg"
-      },
-      {
-        "videoId": "miHJvusqp_4",
-        "title": "ChatGPT vs Gemini Make Geometry Dash From Scratch",
-        "channelTitle": "Minimunch",
-        "thumbnail": "https://i.ytimg.com/vi/miHJvusqp_4/mqdefault.jpg"
-      },
-      {
-        "videoId": "qvzzkYw7pCs",
-        "title": "Instagram Viral🤩 Boys Retro Style Vintage Photo Editing Prompts |  Google Gemini New Photo Editing",
-        "channelTitle": "Edit By Anup Sagar",
-        "thumbnail": "https://i.ytimg.com/vi/qvzzkYw7pCs/mqdefault.jpg"
-      },
-      {
-        "videoId": "7JUfqJuI14g",
-        "title": "Gemini Photo Edit | Google Gemini Photo Editing | Gemini Photo Kaise Banaen | Trending Photo Editing",
-        "channelTitle": "Spreading Gyan",
-        "thumbnail": "https://i.ytimg.com/vi/7JUfqJuI14g/mqdefault.jpg"
-      },
-      {
-        "videoId": "V_DtULPo5xQ",
-        "title": "Trending Instagram Viral Photo Editing | Google Gemini Viral Photo Editing | Ai photo Editing #ai",
-        "channelTitle": "Amrit_Creation_photography ",
-        "thumbnail": "https://i.ytimg.com/vi/V_DtULPo5xQ/mqdefault.jpg"
-      },
-      {
-        "videoId": "PEn6qOvSUIY",
-        "title": "Just Say “Hey Google”🚀😳 #voicecontrol #gemini #androidhacks",
-        "channelTitle": "Techrohann",
-        "thumbnail": "https://i.ytimg.com/vi/PEn6qOvSUIY/mqdefault.jpg"
-      },
-      {
-        "videoId": "1UyhMcHHPeI",
-        "title": "Geminified Photos #aiart #repairoldphoto #gemini #tech #mallumojo",
-        "channelTitle": "Mallu Mojo",
-        "thumbnail": "https://i.ytimg.com/vi/1UyhMcHHPeI/mqdefault.jpg"
-      },
-      {
-        "videoId": "vuD5cGhGWBc",
-        "title": "Ai Retro Style Vintage Photo Editing Prompts | Google Gemini Viral Photo Editing - Nano Banana Ai",
-        "channelTitle": "Tech Lokesh",
-        "thumbnail": "https://i.ytimg.com/vi/vuD5cGhGWBc/mqdefault.jpg"
-      },
-      {
-        "videoId": "kTmlQ9arZE8",
-        "title": "Trending Couple Ai photo kaise banaye | How to make Trending gemini Ai photo #coupleaiphoto #aiphoto",
-        "channelTitle": "NiraTechAI",
-        "thumbnail": "https://i.ytimg.com/vi/kTmlQ9arZE8/mqdefault.jpg"
-      },
-      {
-        "videoId": "FtSuIqa5fkM",
-        "title": "Trending Instagram Viral Photo Editing | Google Gemini Viral Photo Editing | Retro style editing🔥",
-        "channelTitle": "Ekta Singh",
-        "thumbnail": "https://i.ytimg.com/vi/FtSuIqa5fkM/mqdefault.jpg"
-      },
-      {
-        "videoId": "Jhq4Bw7Sf4I",
-        "title": "Google Gemini ✨➡️➡️Google Assistant| Change Default Assistant App onAndroid | AUR TechTips",
-        "channelTitle": "Active Satish",
-        "thumbnail": "https://i.ytimg.com/vi/Jhq4Bw7Sf4I/mqdefault.jpg"
-      },
-      {
-        "videoId": "KCp0NBny7W4",
-        "title": "Google Gemini se photo edit kaise kare ! Ai Prompt #Google #gemini #photography #editing #ytshort",
-        "channelTitle": "Tech4Sam",
-        "thumbnail": "https://i.ytimg.com/vi/KCp0NBny7W4/mqdefault.jpg"
-      },
-      {
-        "videoId": "e23qsMuCVik",
-        "title": "Instagram Viral🤩 Retro Style Vintage AI Photo Editing | Google Gemini Retro Photo Editing",
-        "channelTitle": "Edit By Anup Sagar",
-        "thumbnail": "https://i.ytimg.com/vi/e23qsMuCVik/mqdefault.jpg"
-      },
-      {
-        "videoId": "RSH6X5M_YSA",
-        "title": "Trending Photo Editing | AI Trending Photo Kaise Banaye | Google Gemini 3D Photo Editing Tutorial ✅",
-        "channelTitle": "AVNIT PATEL",
-        "thumbnail": "https://i.ytimg.com/vi/RSH6X5M_YSA/mqdefault.jpg"
-      },
-      {
-        "videoId": "9_d1RgM1Ccw",
-        "title": "Trending Photo Editing In Google Gemini | Gemini Se Ai Photo Editing Kaise Kare | Gemini Photo Edit",
-        "channelTitle": "Tech Lokesh",
-        "thumbnail": "https://i.ytimg.com/vi/9_d1RgM1Ccw/mqdefault.jpg"
-      },
-      {
-        "videoId": "pPynT2KYPLI",
-        "title": "Instagram Trending Ai Photo Editing | AI Trending Photo Kaise Banaye | Google Gemini Photo Editing",
-        "channelTitle": "Md Editing",
-        "thumbnail": "https://i.ytimg.com/vi/pPynT2KYPLI/mqdefault.jpg"
-      },
-      {
-        "videoId": "dkz36XnLtYs",
-        "title": "Gemini Ai couple photo Editing prompt Trending Photo Editing in Gemini Ai se photo kaise banaye #ai",
-        "channelTitle": "Ai Pro Mind",
-        "thumbnail": "https://i.ytimg.com/vi/dkz36XnLtYs/mqdefault.jpg"
-      },
-      {
-        "videoId": "4n8jswc2pAI",
-        "title": "Google Gemini 全系列教學 (上集)！這21個超強AI應用，很多還免費！95%的人都還不知道，ChatGPT要哭了｜簡報製作｜APP設計｜NotebookLM",
-        "channelTitle": "大有牧森 Austin Chou",
-        "thumbnail": "https://i.ytimg.com/vi/4n8jswc2pAI/mqdefault.jpg"
+        "videoId": "VHMD2iF1Tf4",
+        "title": "[갤럭시 Z 플립7] Galaxy Z Flip7 - Google Gemini 편 | 삼성전자",
+        "channelTitle": "삼성전자 Samsung Electronics",
+        "thumbnail": "https://i.ytimg.com/vi/VHMD2iF1Tf4/mqdefault.jpg"
       }
     ],
     "4": [
       {
-        "videoId": "o1sN1lB76EA",
-        "title": "OpenAI&#39;s nightmare: Deepseek R1 on a Raspberry Pi",
-        "channelTitle": "Jeff Geerling",
-        "thumbnail": "https://i.ytimg.com/vi/o1sN1lB76EA/mqdefault.jpg"
+        "videoId": "oxQ65WlwiuU",
+        "title": "챗GPT 대항마, 딥시크 (DeepSeek) 제대로 알고 사용하는 법! 중국의 미친 무료 인공지능 사용 후기",
+        "channelTitle": "커리어해커 알렉스",
+        "thumbnail": "https://i.ytimg.com/vi/oxQ65WlwiuU/mqdefault.jpg"
       },
       {
-        "videoId": "ZN6XS2d_izI",
-        "title": "How to install DeepSeek on a Raspberry Pi",
-        "channelTitle": "mryeester",
-        "thumbnail": "https://i.ytimg.com/vi/ZN6XS2d_izI/mqdefault.jpg"
+        "videoId": "DuAt7TgiE_M",
+        "title": "ChatGPT vs DeepSeek V3 성능비교 및 사용법",
+        "channelTitle": "에이정",
+        "thumbnail": "https://i.ytimg.com/vi/DuAt7TgiE_M/mqdefault.jpg"
       },
       {
-        "videoId": "55xm9gR4h-U",
-        "title": "9 ChatGPT vs Gemini vs DeepSeek vs Claude — Chaotic Double Pendulum Animation (HTML/CSS/JS)",
-        "channelTitle": "AI Code Arena",
-        "thumbnail": "https://i.ytimg.com/vi/55xm9gR4h-U/mqdefault.jpg"
+        "videoId": "4j6J-9hxfhk",
+        "title": "Deepseek+Exaone+Docling으로 오픈소스 Reasoning RAG 구축하기",
+        "channelTitle": "모두의AI",
+        "thumbnail": "https://i.ytimg.com/vi/4j6J-9hxfhk/mqdefault.jpg"
       }
     ],
     "10": [
       {
-        "videoId": "TKk3hzUOm1o",
-        "title": "3 Inteligências Artificiais GRÁTIS que vc PRECISA CONHECER",
-        "channelTitle": "TecnoGeek",
-        "thumbnail": "https://i.ytimg.com/vi/TKk3hzUOm1o/mqdefault.jpg"
+        "videoId": "vIh8nu1tcDI",
+        "title": "미드저니 마스터하기: 초보자를 위한 완벽 가이드 #1",
+        "channelTitle": "초인쌤",
+        "thumbnail": "https://i.ytimg.com/vi/vIh8nu1tcDI/mqdefault.jpg"
       },
       {
-        "videoId": "zf4z8A-OWBY",
-        "title": "How To Generate INSANE AI Art For Beginners (Midjourney)",
-        "channelTitle": "The AI Advantage",
-        "thumbnail": "https://i.ytimg.com/vi/zf4z8A-OWBY/mqdefault.jpg"
+        "videoId": "mLri7SZgR_4",
+        "title": "&quot;초보부터 8분 완벽 정리&quot; 미드저니v7(Midjourney)",
+        "channelTitle": "찍봇",
+        "thumbnail": "https://i.ytimg.com/vi/mLri7SZgR_4/mqdefault.jpg"
       },
       {
-        "videoId": "nHQSpxKGoms",
-        "title": "Ranking The Best AI Image Generation Tools",
-        "channelTitle": "Till Musshoff",
-        "thumbnail": "https://i.ytimg.com/vi/nHQSpxKGoms/mqdefault.jpg"
+        "videoId": "y3F8w6Pra7A",
+        "title": "王 쉽게 설명한 초보자를 위한 미드저니 튜터리얼 가이드 | Midjourney 계정 만들기 부터 이미지 만들기 사용법 까지 | 미드저니 ai 사용법",
+        "channelTitle": "감자나라ai",
+        "thumbnail": "https://i.ytimg.com/vi/y3F8w6Pra7A/mqdefault.jpg"
       }
     ],
     "11": [
       {
-        "videoId": "uW13BzNcy-k",
-        "title": "Testing Stable Diffusion inpainting on video footage #shorts",
-        "channelTitle": "karenxcheng",
-        "thumbnail": "https://i.ytimg.com/vi/uW13BzNcy-k/mqdefault.jpg"
+        "videoId": "1KYcpUGwVWk",
+        "title": "Ai 자동 그림 프로그램 엄청나네요....스테이블 디퓨전 WEBUI",
+        "channelTitle": "playsin플레이신",
+        "thumbnail": "https://i.ytimg.com/vi/1KYcpUGwVWk/mqdefault.jpg"
       },
       {
-        "videoId": "EOep1eY-MYI",
-        "title": "I attempted stable diffusion using only my phone…",
-        "channelTitle": "Nicolas Grant",
-        "thumbnail": "https://i.ytimg.com/vi/EOep1eY-MYI/mqdefault.jpg"
+        "videoId": "emObTucGMOA",
+        "title": "AI 창작 시대! 지금 당장 배워야할 Stable Diffusion Web UI 최신 설치 및 사용법 완벽 가이드",
+        "channelTitle": "조코딩 JoCoding",
+        "thumbnail": "https://i.ytimg.com/vi/emObTucGMOA/mqdefault.jpg"
       },
       {
-        "videoId": "XWIBoEJ8jts",
-        "title": "How to make Trippy AI Video! 🫡AI Trend tutorial  #aiart #stablediffusion #tutorial",
-        "channelTitle": "Taeho Favre",
-        "thumbnail": "https://i.ytimg.com/vi/XWIBoEJ8jts/mqdefault.jpg"
+        "videoId": "vVdNmnEb--E",
+        "title": "전세계가 경악중인 최신 AI 사용법 왕초보 실전 가이드 (ft. Stable Diffusion)",
+        "channelTitle": "조코딩 JoCoding",
+        "thumbnail": "https://i.ytimg.com/vi/vVdNmnEb--E/mqdefault.jpg"
       }
     ],
     "18": [
       {
-        "videoId": "Ez8F0nW6S-w",
-        "title": "Complete Git and GitHub Tutorial for Beginners",
-        "channelTitle": "Apna College",
-        "thumbnail": "https://i.ytimg.com/vi/Ez8F0nW6S-w/mqdefault.jpg"
-      },
-      {
-        "videoId": "MsQACpcuTkU",
-        "title": "You&#39;ve Been Using AI the Hard Way (Use This Instead)",
-        "channelTitle": "NetworkChuck",
-        "thumbnail": "https://i.ytimg.com/vi/MsQACpcuTkU/mqdefault.jpg"
-      },
-      {
-        "videoId": "dutyOc_cAEU",
-        "title": "VS Code Agent Mode Just Changed Everything",
-        "channelTitle": "Visual Studio Code",
-        "thumbnail": "https://i.ytimg.com/vi/dutyOc_cAEU/mqdefault.jpg"
-      },
-      {
-        "videoId": "o3qURBllpGM",
-        "title": "GitHub Copilot is like a second brain",
-        "channelTitle": "Visual Studio Code",
-        "thumbnail": "https://i.ytimg.com/vi/o3qURBllpGM/mqdefault.jpg"
-      },
-      {
-        "videoId": "E2DEHOEbzks",
-        "title": "Model Context Protocol (MCP) Explained for Beginners: AI Flight Booking Demo!",
-        "channelTitle": "KodeKloud",
-        "thumbnail": "https://i.ytimg.com/vi/E2DEHOEbzks/mqdefault.jpg"
-      },
-      {
-        "videoId": "jXp5D5ZnxGM",
-        "title": "Get to know GitHub Copilot in VS Code and be productive IMMEDIATELY",
-        "channelTitle": "Visual Studio Code",
-        "thumbnail": "https://i.ytimg.com/vi/jXp5D5ZnxGM/mqdefault.jpg"
-      },
-      {
-        "videoId": "RY1NRd-aoyI",
-        "title": "How to Use Microsoft Copilot in Outlook &amp; Teams: Enhance Your Communications",
-        "channelTitle": "Kevin Stratvert",
-        "thumbnail": "https://i.ytimg.com/vi/RY1NRd-aoyI/mqdefault.jpg"
-      },
-      {
-        "videoId": "Ffh9OeJ7yxw",
-        "title": "800+ hours of Learning Claude Code in 8 minutes (2026 tutorial / unknown tricks / newest model)",
-        "channelTitle": "Edmund Yong",
-        "thumbnail": "https://i.ytimg.com/vi/Ffh9OeJ7yxw/mqdefault.jpg"
-      },
-      {
-        "videoId": "c2R41mfidIg",
-        "title": "Top 3 AI Tools for Programmers 👨‍💻",
-        "channelTitle": "Website Learners",
-        "thumbnail": "https://i.ytimg.com/vi/c2R41mfidIg/mqdefault.jpg"
-      },
-      {
-        "videoId": "-PlkQno5q50",
-        "title": "GitHub Copilot is DONE #programmer #coder #softwareengineer #dev #webdev #ai #github #copilot",
-        "channelTitle": "PGT",
-        "thumbnail": "https://i.ytimg.com/vi/-PlkQno5q50/mqdefault.jpg"
-      },
-      {
-        "videoId": "em3vIT9aUsg",
-        "title": "Spec Kit: Github&#39;s NEW tool That FINALLY Fixes AI Coding",
-        "channelTitle": "Better Stack",
-        "thumbnail": "https://i.ytimg.com/vi/em3vIT9aUsg/mqdefault.jpg"
-      },
-      {
-        "videoId": "a9eR1xsfvHg",
-        "title": "The ONLY guide you&#39;ll need for GitHub Spec Kit",
-        "channelTitle": "Den Delimarsky",
-        "thumbnail": "https://i.ytimg.com/vi/a9eR1xsfvHg/mqdefault.jpg"
-      },
-      {
-        "videoId": "X_Aet9ndh_Y",
-        "title": "Get started with Copilot Free in VS Code",
-        "channelTitle": "Visual Studio Code",
-        "thumbnail": "https://i.ytimg.com/vi/X_Aet9ndh_Y/mqdefault.jpg"
-      },
-      {
-        "videoId": "dX9MJM5EokE",
-        "title": "How to Use Microsoft Copilot Studio (Step-by-Step Tutorial)",
-        "channelTitle": "Kevin Stratvert",
-        "thumbnail": "https://i.ytimg.com/vi/dX9MJM5EokE/mqdefault.jpg"
-      },
-      {
-        "videoId": "H3M95i4iS5c",
-        "title": "Essential AI prompts for developers",
-        "channelTitle": "Visual Studio Code",
-        "thumbnail": "https://i.ytimg.com/vi/H3M95i4iS5c/mqdefault.jpg"
-      },
-      {
-        "videoId": "DMXq2LTGjCQ",
-        "title": "Google hace la jugada maestra a Github Copilot",
-        "channelTitle": "Linkfy",
-        "thumbnail": "https://i.ytimg.com/vi/DMXq2LTGjCQ/mqdefault.jpg"
-      },
-      {
-        "videoId": "Wl5NJVieiBM",
-        "title": "Github Copilot vs Cursor: which AI coding assistant is better?",
-        "channelTitle": "Steve (Builder.io)",
-        "thumbnail": "https://i.ytimg.com/vi/Wl5NJVieiBM/mqdefault.jpg"
-      },
-      {
-        "videoId": "vdBxfFVXnc0",
-        "title": "Get Started with GitHub Copilot in VS Code (2025)",
-        "channelTitle": "Visual Studio Code",
-        "thumbnail": "https://i.ytimg.com/vi/vdBxfFVXnc0/mqdefault.jpg"
-      },
-      {
-        "videoId": "zmuVrC3tgmQ",
-        "title": "3 AI tools for programmers",
-        "channelTitle": "Sahil & Sarra",
-        "thumbnail": "https://i.ytimg.com/vi/zmuVrC3tgmQ/mqdefault.jpg"
-      },
-      {
-        "videoId": "S7lBI05wzec",
-        "title": "GitHub Copilot - FREE Forever!! (Legal Way)",
-        "channelTitle": "CodeWithHarry",
-        "thumbnail": "https://i.ytimg.com/vi/S7lBI05wzec/mqdefault.jpg"
-      },
-      {
-        "videoId": "dhfTaSGYQ4o",
-        "title": "Coding with an AI pair programmer: Getting started with GitHub Copilot",
+        "videoId": "EPyyyB23NUU",
+        "title": "Introducing the GitHub Copilot coding agent",
         "channelTitle": "GitHub",
-        "thumbnail": "https://i.ytimg.com/vi/dhfTaSGYQ4o/mqdefault.jpg"
+        "thumbnail": "https://i.ytimg.com/vi/EPyyyB23NUU/mqdefault.jpg"
       },
       {
         "videoId": "Z6BYhJl9hV8",
@@ -520,214 +136,70 @@
         "thumbnail": "https://i.ytimg.com/vi/Z6BYhJl9hV8/mqdefault.jpg"
       },
       {
-        "videoId": "qQESlmIseJ8",
-        "title": "GitHub Copilot Chat in Visual Studio 2022",
+        "videoId": "n0NlxUyA7FI",
+        "title": "Getting started with GitHub Copilot | Tutorial",
         "channelTitle": "GitHub",
-        "thumbnail": "https://i.ytimg.com/vi/qQESlmIseJ8/mqdefault.jpg"
-      },
-      {
-        "videoId": "9JGONx_X4ho",
-        "title": "GitHub Copilot Tutorial | How useful is it for Cloud and DevOps?",
-        "channelTitle": "TechWorld with Nana",
-        "thumbnail": "https://i.ytimg.com/vi/9JGONx_X4ho/mqdefault.jpg"
-      },
-      {
-        "videoId": "jsHAyBmFZlo",
-        "title": "10 MOTIVOS para usar GITHUB COPILOT como PROGRAMADOR",
-        "channelTitle": "MoureDev by Brais Moure",
-        "thumbnail": "https://i.ytimg.com/vi/jsHAyBmFZlo/mqdefault.jpg"
+        "thumbnail": "https://i.ytimg.com/vi/n0NlxUyA7FI/mqdefault.jpg"
       }
     ],
     "25": [
       {
-        "videoId": "tRKoAs32bNs",
-        "title": "Video AI lucu dari Sora 2 #videoai #funny #veo3 #videoailucu #sora #videolucu",
-        "channelTitle": "Gokil Kreasi",
-        "thumbnail": "https://i.ytimg.com/vi/tRKoAs32bNs/mqdefault.jpg"
+        "videoId": "CsIwEXMiRFc",
+        "title": "[AI왕기초] 최신 2025 ver. ChatGPT 챗지피티 완전 입력문 가이드 영상! 이 영상 단독입니다!",
+        "channelTitle": "CONNECT AI LAB",
+        "thumbnail": "https://i.ytimg.com/vi/CsIwEXMiRFc/mqdefault.jpg"
       },
       {
-        "videoId": "INdoMc_4Tm0",
-        "title": "Ranking  Best sora ai videos PART 2",
-        "channelTitle": "Clips4You",
-        "thumbnail": "https://i.ytimg.com/vi/INdoMc_4Tm0/mqdefault.jpg"
+        "videoId": "kv0gzV6qCII",
+        "title": "영상 제작 AI는 소라2 이전과 이후로 나뉩니다  open ai sora2",
+        "channelTitle": "피피티프로",
+        "thumbnail": "https://i.ytimg.com/vi/kv0gzV6qCII/mqdefault.jpg"
       },
       {
-        "videoId": "Zd9oUXEXKM4",
-        "title": "Sora AI is getting too realistic 🤦🏻‍♂️ #relatablestories #comedy #funnymemes",
-        "channelTitle": "Tyler Vitelli",
-        "thumbnail": "https://i.ytimg.com/vi/Zd9oUXEXKM4/mqdefault.jpg"
+        "videoId": "2t2-RHnzdis",
+        "title": "진짜 AI 전문가가 알려주는, &quot;AI 영상 제작&quot; 완벽 가이드 | Sora2 + Veo3 | SoyLab 최돈현 대표",
+        "channelTitle": "오빠두엑셀 l 엑셀 강의 대표채널",
+        "thumbnail": "https://i.ytimg.com/vi/2t2-RHnzdis/mqdefault.jpg"
       }
     ],
     "39": [
       {
-        "videoId": "I_60-sjXuNA",
-        "title": "Microsoft 365 Copilot For Microsoft 365 | Nonprofits",
-        "channelTitle": "Microsoft 365",
-        "thumbnail": "https://i.ytimg.com/vi/I_60-sjXuNA/mqdefault.jpg"
+        "videoId": "cH9ag0hNab0",
+        "title": "사진, PDF → 엑셀 변환, 이제 코파일럿으로 해결하세요 #코파일럿 #직장인꿀팁",
+        "channelTitle": "오빠두엑셀 l 엑셀 강의 대표채널",
+        "thumbnail": "https://i.ytimg.com/vi/cH9ag0hNab0/mqdefault.jpg"
       },
       {
-        "videoId": "CIgalluD8Hw",
-        "title": "How I used Copilot in OneNote to make cooking so much easier",
-        "channelTitle": "Microsoft 365",
-        "thumbnail": "https://i.ytimg.com/vi/CIgalluD8Hw/mqdefault.jpg"
+        "videoId": "RY1NRd-aoyI",
+        "title": "How to Use Microsoft Copilot in Outlook &amp; Teams: Enhance Your Communications",
+        "channelTitle": "Kevin Stratvert",
+        "thumbnail": "https://i.ytimg.com/vi/RY1NRd-aoyI/mqdefault.jpg"
       },
       {
-        "videoId": "S7xTBa93TX8",
-        "title": "Introducing Microsoft 365 Copilot | Your Copilot for Work",
-        "channelTitle": "Microsoft 365",
-        "thumbnail": "https://i.ytimg.com/vi/S7xTBa93TX8/mqdefault.jpg"
+        "videoId": "PfzXwT7XJf4",
+        "title": "Microsoft Copilot in Excel – Full Tutorial for Beginners (2025 Guide)",
+        "channelTitle": "Accounts Expert",
+        "thumbnail": "https://i.ytimg.com/vi/PfzXwT7XJf4/mqdefault.jpg"
       }
     ],
     "69": [
       {
-        "videoId": "gx9_8inQ9oA",
-        "title": "Turning Red Voice Over ✨ #voiceacting #capcut #edit",
-        "channelTitle": "AJ Cleo シ",
-        "thumbnail": "https://i.ytimg.com/vi/gx9_8inQ9oA/mqdefault.jpg"
+        "videoId": "RDhQMJm5rrw",
+        "title": "Alight Motion vs CapCut || #shorts #edit",
+        "channelTitle": "EQUINOX",
+        "thumbnail": "https://i.ytimg.com/vi/RDhQMJm5rrw/mqdefault.jpg"
       },
       {
-        "videoId": "gfn57YD9Yj0",
-        "title": "My capcut editing steps🍞 #fyp #tiktok #recommended #popular #bread",
-        "channelTitle": "MarkIQ_Ed1ts",
-        "thumbnail": "https://i.ytimg.com/vi/gfn57YD9Yj0/mqdefault.jpg"
+        "videoId": "jopHfnHzcgM",
+        "title": "54만 유튜버가 추천하는 편집 프로그램 3가지!",
+        "channelTitle": "비됴클래스",
+        "thumbnail": "https://i.ytimg.com/vi/jopHfnHzcgM/mqdefault.jpg"
       },
       {
-        "videoId": "oyxI9T7bVg4",
-        "title": "How to edit to FAKE a flip! #capcut",
-        "channelTitle": "Winchumbo",
-        "thumbnail": "https://i.ytimg.com/vi/oyxI9T7bVg4/mqdefault.jpg"
-      },
-      {
-        "videoId": "M42m5xk6g4w",
-        "title": "Faded 🔥// Capcut editing tutorial, ff edit tutorial, lobby edit ff #shorts​",
-        "channelTitle": "DHRUVESH 79",
-        "thumbnail": "https://i.ytimg.com/vi/M42m5xk6g4w/mqdefault.jpg"
-      },
-      {
-        "videoId": "9R1scH3yzns",
-        "title": "CAPCUT OR AFTER EFFECTS?😶 #shorts",
-        "channelTitle": "geniev12",
-        "thumbnail": "https://i.ytimg.com/vi/9R1scH3yzns/mqdefault.jpg"
-      },
-      {
-        "videoId": "5D0t2C3xbWY",
-        "title": "Did I Glow up #CapCut #pleasedontbeuglychallange #pleasedontbeuglychallenge #fypシ",
-        "channelTitle": "Capri Joelle",
-        "thumbnail": "https://i.ytimg.com/vi/5D0t2C3xbWY/mqdefault.jpg"
-      },
-      {
-        "videoId": "tHzfsCsWL6M",
-        "title": "CapCut | Smooth Zoom Out AND Tremor Strobe Tutorial 💀🔥 | #shorts #tutorial",
-        "channelTitle": "Orcyl Edits ",
-        "thumbnail": "https://i.ytimg.com/vi/tHzfsCsWL6M/mqdefault.jpg"
-      },
-      {
-        "videoId": "bO2BZLiGLbM",
-        "title": "CapCut Tutorial: How to Generate Epic Ai Video for FREE (Dreamina)",
-        "channelTitle": "Deny King",
-        "thumbnail": "https://i.ytimg.com/vi/bO2BZLiGLbM/mqdefault.jpg"
-      },
-      {
-        "videoId": "wfy9sIfAZIM",
-        "title": "Capcut App Video Editing Tutorial | Capcut Se Video Editing Kaise Kare | How To Edit Video In Capcut",
-        "channelTitle": "Ka Production",
-        "thumbnail": "https://i.ytimg.com/vi/wfy9sIfAZIM/mqdefault.jpg"
-      },
-      {
-        "videoId": "nu_fFiL2WFs",
-        "title": "HOW IS THIS CAPCUT TEMPLATE?!😭",
-        "channelTitle": "geniev12",
-        "thumbnail": "https://i.ytimg.com/vi/nu_fFiL2WFs/mqdefault.jpg"
-      },
-      {
-        "videoId": "0dNlon6Xxr8",
-        "title": "How To Convert Normal Video To 4K | CapCut 4K Quality Tutorial 2023 | 4K Ultra Hd Video Editing",
-        "channelTitle": "Rajan editz",
-        "thumbnail": "https://i.ytimg.com/vi/0dNlon6Xxr8/mqdefault.jpg"
-      },
-      {
-        "videoId": "ccxIotg4df0",
-        "title": "CAPCUT OR AFTER EFFECTS? 🫢",
-        "channelTitle": "alvoreyxo",
-        "thumbnail": "https://i.ytimg.com/vi/ccxIotg4df0/mqdefault.jpg"
-      },
-      {
-        "videoId": "ht7HOArSeRY",
-        "title": "Which one is best 🔥// Alight motion vs CapCut, ff edit tutorial, lobby edit ff #shorts",
-        "channelTitle": "DHRUVESH 79",
-        "thumbnail": "https://i.ytimg.com/vi/ht7HOArSeRY/mqdefault.jpg"
-      },
-      {
-        "videoId": "lb8UILJRrZs",
-        "title": "CapCut | New Smooth Transition Tutorial 🔥💀 | #viral #shorts #tutorial",
-        "channelTitle": "Orcyl Edits ",
-        "thumbnail": "https://i.ytimg.com/vi/lb8UILJRrZs/mqdefault.jpg"
-      },
-      {
-        "videoId": "13dMTwMmpQU",
-        "title": "Win Black Friday with CapCut Desktop | The Ultimate AI Design &amp; Video Toolkit for E-commerce",
-        "channelTitle": "CapCut",
-        "thumbnail": "https://i.ytimg.com/vi/13dMTwMmpQU/mqdefault.jpg"
-      },
-      {
-        "videoId": "qfHX2cNA4MY",
-        "title": "CapCut Video Editing Tutorial – Full Course for Beginners",
-        "channelTitle": "Dave Ying",
-        "thumbnail": "https://i.ytimg.com/vi/qfHX2cNA4MY/mqdefault.jpg"
-      },
-      {
-        "videoId": "CJyUwbXixmY",
-        "title": "Install Capcut in iphone #india #capcut #shorts",
-        "channelTitle": "Manna Kaur",
-        "thumbnail": "https://i.ytimg.com/vi/CJyUwbXixmY/mqdefault.jpg"
-      },
-      {
-        "videoId": "5QUSuMPD95k",
-        "title": "How to Edit a Cinematic Video in CapCut [With AI] Editing Tutorial",
-        "channelTitle": "Joris Hermans",
-        "thumbnail": "https://i.ytimg.com/vi/5QUSuMPD95k/mqdefault.jpg"
-      },
-      {
-        "videoId": "ekHG5RL9xAQ",
-        "title": "Ai Video Kaise Banaye || Free Ai Video Generator🔥 #aivideo #shorts #ai #aivideogenerator",
-        "channelTitle": "Invisible Gyan",
-        "thumbnail": "https://i.ytimg.com/vi/ekHG5RL9xAQ/mqdefault.jpg"
-      },
-      {
-        "videoId": "_FS366vPOck",
-        "title": "Capcut | Invisible Watermark Tutorial 💀🔥 | #shorts #tutorial",
-        "channelTitle": "Orcyl Edits ",
-        "thumbnail": "https://i.ytimg.com/vi/_FS366vPOck/mqdefault.jpg"
-      },
-      {
-        "videoId": "NI1iEBGNDb0",
-        "title": "Master Masking in CapCut Step-by-Step Editing Tutorial CapCut Explained Beginner to Pro Guide",
-        "channelTitle": "BAKAR EDITORIAL ",
-        "thumbnail": "https://i.ytimg.com/vi/NI1iEBGNDb0/mqdefault.jpg"
-      },
-      {
-        "videoId": "rDzJDqyxLyk",
-        "title": "Ripple Transition Tutorial 💀🔥 | CapCut Tutorial #shorts #tutorial",
-        "channelTitle": "Orcyl Edits ",
-        "thumbnail": "https://i.ytimg.com/vi/rDzJDqyxLyk/mqdefault.jpg"
-      },
-      {
-        "videoId": "CV33irIBzLU",
-        "title": "create text to video using ai #lumen5",
-        "channelTitle": "mytechtool",
-        "thumbnail": "https://i.ytimg.com/vi/CV33irIBzLU/mqdefault.jpg"
-      },
-      {
-        "videoId": "blfsxN8NxrE",
-        "title": "AI Documentary Video Making Tutorial✅ | Free Tools, No Watermark!",
-        "channelTitle": "Sandeep Goswami",
-        "thumbnail": "https://i.ytimg.com/vi/blfsxN8NxrE/mqdefault.jpg"
-      },
-      {
-        "videoId": "jETi3Av9pow",
-        "title": "CapCut Tutorial: Achieve the Mesmerizing Eye Glow Effect in Anime Videos #shorts",
-        "channelTitle": "SAM EDITOR",
-        "thumbnail": "https://i.ytimg.com/vi/jETi3Av9pow/mqdefault.jpg"
+        "videoId": "2yKNlIW6o9g",
+        "title": "✨️조회수 터지는 카페 홍보 영상 제작법! #릴쏸 #영상편집 #AI #capcut #higgsfieldai #꿀팁 #higgsfield #viral #viralvideo",
+        "channelTitle": "릴쏸ᝰ",
+        "thumbnail": "https://i.ytimg.com/vi/2yKNlIW6o9g/mqdefault.jpg"
       }
     ]
   }
