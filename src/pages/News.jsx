@@ -11,6 +11,7 @@ const NewsPageContainer = styled.div`
   padding: 2rem;
   display: flex;
   gap: 2.5rem;
+  align-items: flex-start; // sticky를 위해 추가
 `;
 
 const MainContent = styled.main`
@@ -19,7 +20,7 @@ const MainContent = styled.main`
 
 const SidebarWrapper = styled.div`
   position: sticky;
-  top: 80px;
+  top: 100px; // 네비게이션 높이 고려하여 조정
   align-self: start;
 
   @media (max-width: 768px) {
@@ -132,8 +133,8 @@ function NewsPage() {
     toggleNewsBookmark(item);
   };
 
-  const visibleItems = news.items.slice(0, visibleCount);
-  const hasMore = visibleCount < news.items.length;
+  const visibleItems = (news?.items || []).slice(0, visibleCount);
+  const hasMore = visibleCount < (news?.items?.length || 0);
 
   return (
     <NewsPageContainer>

@@ -241,7 +241,7 @@ const GlobalStyles = () => (
       display: none;
       background: var(--bg-card);
       border: 1px solid var(--border-primary);
-      border-radius: 16px;
+      border-radius: 166px;
       padding: 1.2rem;
       margin-top: 24px;
       margin-bottom: 40px;
@@ -281,6 +281,7 @@ const GlobalStyles = () => (
     .main-grid {
       display: grid; grid-template-columns: 1fr 380px; gap: 24px;
       max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; width: 100%;
+      align-items: flex-start; /* sticky를 위해 추가 */
     }
     .tools-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; width: 100%; }
 
