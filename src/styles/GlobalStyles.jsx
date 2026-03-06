@@ -241,7 +241,7 @@ const GlobalStyles = () => (
       display: none;
       background: var(--bg-card);
       border: 1px solid var(--border-primary);
-      border-radius: 166px;
+      border-radius: 16px;
       padding: 1.2rem;
       margin-top: 24px;
       margin-bottom: 40px;
