@@ -1,7 +1,9 @@
 import { useState, useEffect, useMemo } from "react";
 import { useTools } from "../context/ToolContext";
+import { useNews } from "../context/NewsContext";
 
 import FilterBar from "../components/filters/FilterBar";
+import LeftSidebar from "../components/sidebar/LeftSidebar";
 import RightSidebar from "../components/sidebar/RightSidebar";
 import ToolCard from "../components/tools/ToolCard";
 import WizardModal from "../components/modals/WizardModal";
@@ -10,6 +12,7 @@ import { SORT_OPTIONS } from "../constants";
 
 export default function MainPage() {
   const { tools, openToolDetail, bookmarkCounts, reactionCounts } = useTools();
+  const { news } = useNews();
   const [searchQuery, setSearchQuery] = useState("");
   const [category, setCategory] = useState("all");
   const [lifeFilter, setLifeFilter] = useState("all");
@@ -41,22 +44,26 @@ export default function MainPage() {
   }, [category, lifeFilter, searchQuery, sortBy]);
 
   // 모바일 전용 뉴스 섹션 컴포넌트
-  const MobileNewsSection = () => (
-    <div className="mobile-news-box">
-      <div className="mobile-news-header">
-        <span style={{ fontSize: "0.95rem", fontWeight: 700 }}>📰 실시간 주요 뉴스</span>
-        <a href="/news" style={{ fontSize: "0.75rem", color: "var(--accent-indigo)", textDecoration: "none", fontWeight: 600 }}>전체보기 ❯</a>
+  const MobileNewsSection = () => {
+    if (!news || !news.items) return null;
+    
+    return (
+      <div className="mobile-news-box">
+        <div className="mobile-news-header">
+          <span style={{ fontSize: "0.95rem", fontWeight: 700 }}>📰 실시간 주요 뉴스</span>
+          <a href="/news" style={{ fontSize: "0.75rem", color: "var(--accent-indigo)", textDecoration: "none", fontWeight: 600 }}>전체보기 ❯</a>
+        </div>
+        <div className="mobile-news-list">
+          {news.items.slice(0, 5).map((item, idx) => (
+            <a key={idx} href={item.link} target="_blank" rel="noopener noreferrer" className="mobile-news-item">
+              <span className="dot">•</span> 
+              <span className="title">{item.title}</span>
+            </a>
+          ))}
+        </div>
       </div>
-      <div className="mobile-news-list">
-        {(news.items || []).slice(0, 5).map((item, idx) => (
-          <a key={idx} href={item.link} target="_blank" rel="noopener noreferrer" className="mobile-news-item">
-            <span className="dot">•</span> 
-            <span className="title">{item.title}</span>
-          </a>
-        ))}
-      </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <>
@@ -73,7 +80,17 @@ export default function MainPage() {
         onLifeFilterChange={setLifeFilter}
       />
 
-      <div className="main-grid">
+      <div className="main-grid" style={{
+        display: "grid",
+        gridTemplateColumns: "240px 1fr 380px",
+        gap: "24px",
+        maxWidth: "1400px",
+        margin: "0 auto",
+        padding: "0 1.5rem",
+        alignItems: "flex-start"
+      }}>
+        <LeftSidebar tools={tools} />
+
         <main style={{ minWidth: 0 }}>
           <div className="sort-container">
             {SORT_OPTIONS.map((opt) => (
