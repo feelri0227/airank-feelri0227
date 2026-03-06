@@ -182,7 +182,7 @@ const GlobalStyles = () => (
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
-      width: 100%; overflow-x: hidden; position: relative;
+      width: 100%; overflow-x: clip; position: relative;
     }
     body {
       font-family: var(--font-main);

@@ -1,6 +1,8 @@
 import { getRankBadge } from "../../utils";
+import { useTools } from "../../context/ToolContext";
 
 const LeftSidebar = ({ tools }) => {
+  const { openToolDetail } = useTools();
   const top3 = [...tools].sort((a, b) => b.score - a.score).slice(0, 3);
   const trending = [...tools].sort((a, b) => b.change - a.change).slice(0, 3);
 
@@ -32,13 +34,21 @@ const LeftSidebar = ({ tools }) => {
           🏆 TOP 3
         </h3>
         {top3.map((tool, i) => (
-          <div key={tool.id} style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "10px",
-            padding: "8px 0",
-            borderBottom: i < 2 ? "1px solid var(--border-primary)" : "none",
-          }}>
+          <div key={tool.id}
+            onClick={() => openToolDetail(tool, i + 1)}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+              padding: "8px 4px",
+              borderBottom: i < 2 ? "1px solid var(--border-primary)" : "none",
+              cursor: "pointer",
+              borderRadius: "8px",
+              transition: "background 0.15s",
+            }}
+            onMouseEnter={e => e.currentTarget.style.background = "var(--bg-tertiary)"}
+            onMouseLeave={e => e.currentTarget.style.background = "transparent"}
+          >
             <span style={{ fontSize: "1.1rem" }}>{getRankBadge(i + 1)}</span>
             <span style={{ fontSize: "1.1rem" }}>{tool.icon}</span>
             <div style={{ flex: 1 }}>
@@ -66,27 +76,38 @@ const LeftSidebar = ({ tools }) => {
         }}>
           🚀 급상승
         </h3>
-        {trending.map((tool, i) => (
-          <div key={tool.id} style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "10px",
-            padding: "8px 0",
-            borderBottom: i < 2 ? "1px solid var(--border-primary)" : "none",
-          }}>
-            <span style={{ fontSize: "1rem" }}>{tool.icon}</span>
-            <div style={{ flex: 1 }}>
-              <div style={{ fontSize: "0.82rem", fontWeight: 600, color: "var(--text-primary)" }}>{tool.name}</div>
+        {trending.map((tool, i) => {
+          const rank = [...tools].sort((a, b) => b.score - a.score).findIndex(t => t.id === tool.id) + 1;
+          return (
+            <div key={tool.id}
+              onClick={() => openToolDetail(tool, rank)}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                padding: "8px 4px",
+                borderBottom: i < 2 ? "1px solid var(--border-primary)" : "none",
+                cursor: "pointer",
+                borderRadius: "8px",
+                transition: "background 0.15s",
+              }}
+              onMouseEnter={e => e.currentTarget.style.background = "var(--bg-tertiary)"}
+              onMouseLeave={e => e.currentTarget.style.background = "transparent"}
+            >
+              <span style={{ fontSize: "1rem" }}>{tool.icon}</span>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontSize: "0.82rem", fontWeight: 600, color: "var(--text-primary)" }}>{tool.name}</div>
+              </div>
+              <span style={{
+                fontSize: "0.72rem",
+                fontWeight: 700,
+                color: "var(--color-green)",
+              }}>
+                ▲ {tool.change}%
+              </span>
             </div>
-            <span style={{
-              fontSize: "0.72rem",
-              fontWeight: 700,
-              color: "var(--color-green)",
-            }}>
-              ▲ {tool.change}%
-            </span>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </aside>
   );
