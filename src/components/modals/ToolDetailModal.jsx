@@ -79,27 +79,25 @@ const ToolAnalysisCard = ({ tool }) => {
       boxShadow: "0 24px 64px rgba(0,0,0,0.25)",
       height: "fit-content"
     }}>
-      <h3 style={{ fontSize: "1rem", fontWeight: 800, marginBottom: "1rem", display: "flex", alignItems: "center", gap: "8px", color: "var(--text-primary)" }}>
-        📊 실시간 트렌드 지표
+      <h3 style={{ fontSize: "1rem", fontWeight: 800, marginBottom: "1rem", color: "var(--text-primary)" }}>
+        실시간 트렌드 지표
       </h3>
 
-      {/* 플랫폼 점수 그리드 */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px", marginBottom: "1.25rem" }}>
+      {/* 플랫폼 점수 1행 */}
+      <div style={{ display: "flex", gap: "4px", marginBottom: "1.25rem" }}>
         {SNS_PLATFORMS.map(({ key, label, domain, color }) => {
           const value = tool.sns?.[key] || 0;
           return (
             <div key={key} style={{
-              display: "flex", alignItems: "center", gap: "8px",
-              padding: "10px 12px",
+              flex: 1,
+              display: "flex", flexDirection: "column", alignItems: "center", gap: "6px",
+              padding: "12px 8px",
               background: "var(--bg-secondary)",
               borderRadius: "12px",
-              border: "1px solid var(--border-primary)",
             }}>
-              <PlatformLogo domain={domain} size={16} />
-              <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ fontSize: "0.65rem", color: "var(--text-muted)", fontWeight: 500 }}>{label}</div>
-                <div style={{ fontSize: "1rem", fontWeight: 800, color, lineHeight: 1.2, fontFamily: "'Outfit', sans-serif" }}>{value}</div>
-              </div>
+              <PlatformLogo domain={domain} size={24} />
+              <div style={{ fontSize: "0.6rem", color: "var(--text-muted)", fontWeight: 500 }}>{label}</div>
+              <div style={{ fontSize: "1.05rem", fontWeight: 800, color, lineHeight: 1, fontFamily: "'Outfit', sans-serif" }}>{value}</div>
             </div>
           );
         })}

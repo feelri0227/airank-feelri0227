@@ -47,29 +47,27 @@ const ToolAnalysisModal = ({ tool, rank, onClose }) => {
           </div>
         </div>
 
-        <h3 style={{ fontSize: "0.95rem", fontWeight: 700, marginBottom: "0.9rem", color: "var(--text-primary)" }}>📊 실시간 트렌드 지표</h3>
+        <h3 style={{ fontSize: "0.95rem", fontWeight: 700, marginBottom: "0.9rem", color: "var(--text-primary)" }}>실시간 트렌드 지표</h3>
 
-        {/* 플랫폼 점수 2x2 그리드 */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px", marginBottom: "1.25rem" }}>
+        {/* 플랫폼 점수 1행 */}
+        <div style={{ display: "flex", gap: "4px", marginBottom: "1.25rem" }}>
           {SNS_PLATFORMS.map(({ key, label, domain, color }) => {
             const value = tool.sns?.[key] || 0;
             return (
               <div key={key} style={{
-                display: "flex", alignItems: "center", gap: "10px",
-                padding: "12px 14px",
+                flex: 1,
+                display: "flex", flexDirection: "column", alignItems: "center", gap: "6px",
+                padding: "12px 8px",
                 background: "var(--bg-secondary)",
-                borderRadius: "14px",
-                border: "1px solid var(--border-primary)",
+                borderRadius: "12px",
               }}>
                 <img
                   src={`https://www.google.com/s2/favicons?domain=${domain}&sz=32`}
                   alt={label}
-                  style={{ width: 18, height: 18, borderRadius: "4px", flexShrink: 0 }}
+                  style={{ width: 24, height: 24, borderRadius: "6px", flexShrink: 0 }}
                 />
-                <div>
-                  <div style={{ fontSize: "0.62rem", color: "var(--text-muted)", fontWeight: 500 }}>{label}</div>
-                  <div style={{ fontSize: "1.1rem", fontWeight: 800, color, lineHeight: 1.2, fontFamily: "'Outfit', sans-serif" }}>{value}</div>
-                </div>
+                <div style={{ fontSize: "0.6rem", color: "var(--text-muted)", fontWeight: 500 }}>{label}</div>
+                <div style={{ fontSize: "1.05rem", fontWeight: 800, color, lineHeight: 1, fontFamily: "'Outfit', sans-serif" }}>{value}</div>
               </div>
             );
           })}
