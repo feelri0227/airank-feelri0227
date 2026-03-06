@@ -10,6 +10,9 @@ const LeftSidebar = ({ tools }) => {
       flexDirection: "column",
       gap: "16px",
       minWidth: "220px",
+      position: "sticky",
+      top: "100px",
+      height: "fit-content"
     }}>
       {/* TOP 3 박스 */}
       <div style={{

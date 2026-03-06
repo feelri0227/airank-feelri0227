@@ -3,6 +3,7 @@ import { useTools } from "../context/ToolContext";
 import { useNews } from "../context/NewsContext";
 
 import FilterBar from "../components/filters/FilterBar";
+import LeftSidebar from "../components/sidebar/LeftSidebar";
 import RightSidebar from "../components/sidebar/RightSidebar";
 import ToolCard from "../components/tools/ToolCard";
 import WizardModal from "../components/modals/WizardModal";
@@ -75,7 +76,17 @@ export default function MainPage() {
         onLifeFilterChange={setLifeFilter}
       />
 
-      <div className="main-grid">
+      <div className="main-grid" style={{
+        display: "grid",
+        gridTemplateColumns: "240px 1fr 380px",
+        gap: "24px",
+        maxWidth: "1400px",
+        margin: "0 auto",
+        padding: "0 1.5rem",
+        alignItems: "flex-start"
+      }}>
+        <LeftSidebar tools={tools} />
+
         <main style={{ minWidth: 0 }}>
           <div className="sort-container">
             {SORT_OPTIONS.map((opt) => (

@@ -11,19 +11,21 @@ const NewsPageContainer = styled.div`
   padding: 2rem;
   display: flex;
   gap: 2.5rem;
-  align-items: flex-start; // sticky를 위해 추가
+  align-items: flex-start; /* sticky가 작동하려면 부모의 align-items가 flex-start여야 함 */
 `;
 
 const MainContent = styled.main`
   flex-grow: 1;
+  min-width: 0;
 `;
 
 const SidebarWrapper = styled.div`
   position: sticky;
-  top: 100px; // 네비게이션 높이 고려하여 조정
+  top: 100px;
   align-self: start;
+  flex-shrink: 0;
 
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     display: none;
   }
 `;
