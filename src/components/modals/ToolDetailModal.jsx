@@ -68,6 +68,20 @@ const SNS_PLATFORMS = [
 
 // [오른쪽] 심층 분석 카드
 const ToolAnalysisCard = ({ tool }) => {
+  const [videos, setVideos] = useState(null); // null=로딩중, []=없음, [...]=있음
+
+  useEffect(() => {
+    fetch("/youtube-videos.json")
+      .then((r) => r.json())
+      .then((data) => {
+        const toolVideos = data.videos?.[String(tool.id)];
+        setVideos(toolVideos || []);
+      })
+      .catch(() => setVideos([]));
+  }, [tool.id]);
+
+  const searchUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent((tool.yt || tool.name) + " tutorial")}`;
+
   return (
     <div style={{
       background: "var(--bg-card)",
@@ -115,65 +129,96 @@ const ToolAnalysisCard = ({ tool }) => {
       <h3 style={{ fontSize: "1.1rem", fontWeight: 800, marginBottom: "1rem", color: "var(--text-primary)", display: "flex", alignItems: "center", gap: "8px" }}>
         🎥 튜토리얼 & 리뷰
       </h3>
-      
+
       <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-        {[1, 2, 3].map((i) => (
-          <a 
-            key={i}
-            href={`https://www.youtube.com/results?search_query=${tool.name}+사용법`}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ 
-              display: "flex", gap: "12px", textDecoration: "none", 
-              padding: "10px", borderRadius: "16px", background: "var(--bg-secondary)",
-              border: "1px solid var(--border-primary)",
-              transition: "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)"
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = "translateY(-2px)";
-              e.currentTarget.style.borderColor = "var(--accent-indigo)";
-              e.currentTarget.style.background = "var(--bg-tertiary)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.borderColor = "var(--border-primary)";
-              e.currentTarget.style.background = "var(--bg-secondary)";
-            }}
-          >
-            <div style={{ 
-              width: "90px", height: "50px", background: "#000", borderRadius: "10px", 
-              overflow: "hidden", flexShrink: 0, position: "relative"
-            }}>
-              <img 
-                src={`https://img.youtube.com/vi/dQw4w9WgXcQ/mqdefault.jpg`} 
-                alt="Youtube"
-                style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.7 }}
-              />
-              <div style={{ 
-                position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center",
-                background: "rgba(0,0,0,0.2)"
+        {videos === null ? (
+          // 로딩 중
+          [1, 2, 3].map((i) => (
+            <div key={i} style={{
+              height: "70px", borderRadius: "16px",
+              background: "var(--bg-secondary)", border: "1px solid var(--border-primary)",
+              animation: "pulse 1.5s ease-in-out infinite",
+            }} />
+          ))
+        ) : videos.length > 0 ? (
+          // 실제 YouTube 영상
+          videos.map((video) => (
+            <a
+              key={video.videoId}
+              href={`https://www.youtube.com/watch?v=${video.videoId}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "flex", gap: "12px", textDecoration: "none",
+                padding: "10px", borderRadius: "16px", background: "var(--bg-secondary)",
+                border: "1px solid var(--border-primary)",
+                transition: "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)"
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-2px)";
+                e.currentTarget.style.borderColor = "var(--accent-indigo)";
+                e.currentTarget.style.background = "var(--bg-tertiary)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.borderColor = "var(--border-primary)";
+                e.currentTarget.style.background = "var(--bg-secondary)";
+              }}
+            >
+              <div style={{
+                width: "90px", height: "50px", borderRadius: "10px",
+                overflow: "hidden", flexShrink: 0, position: "relative", background: "#000"
               }}>
-                <div style={{ 
-                  width: "20px", height: "20px", background: "#FF0000", borderRadius: "50%", 
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  boxShadow: "0 4px 8px rgba(255,0,0,0.3)"
+                <img
+                  src={video.thumbnail}
+                  alt={video.title}
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                />
+                <div style={{
+                  position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center",
+                  background: "rgba(0,0,0,0.2)"
                 }}>
-                   <div style={{ width: 0, height: 0, borderTop: "4px solid transparent", borderBottom: "4px solid transparent", borderLeft: "6px solid white", marginLeft: "1.5px" }} />
+                  <div style={{
+                    width: "20px", height: "20px", background: "#FF0000", borderRadius: "50%",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    boxShadow: "0 4px 8px rgba(255,0,0,0.3)"
+                  }}>
+                    <div style={{ width: 0, height: 0, borderTop: "4px solid transparent", borderBottom: "4px solid transparent", borderLeft: "6px solid white", marginLeft: "1.5px" }} />
+                  </div>
                 </div>
               </div>
-            </div>
-            <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center" }}>
-              <div style={{ 
-                fontSize: "0.8rem", fontWeight: 700, color: "var(--text-primary)", 
-                display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", 
-                overflow: "hidden", lineHeight: 1.3
-              }}>
-                {tool.name} 핵심 활용법 마스터하기 #{i}
+              <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                <div style={{
+                  fontSize: "0.8rem", fontWeight: 700, color: "var(--text-primary)",
+                  display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical",
+                  overflow: "hidden", lineHeight: 1.3
+                }}>
+                  {video.title}
+                </div>
+                <div style={{ fontSize: "0.65rem", color: "var(--text-muted)", marginTop: "4px" }}>{video.channelTitle}</div>
               </div>
-              <div style={{ fontSize: "0.65rem", color: "var(--text-muted)", marginTop: "4px" }}>YouTube 최신 영상</div>
-            </div>
+            </a>
+          ))
+        ) : (
+          // 영상 없음 → YouTube 검색 링크
+          <a
+            href={searchUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: "flex", alignItems: "center", justifyContent: "center", gap: "8px",
+              padding: "16px", borderRadius: "16px", background: "var(--bg-secondary)",
+              border: "1px solid var(--border-primary)", textDecoration: "none",
+              color: "var(--text-secondary)", fontSize: "0.85rem", fontWeight: 600,
+              transition: "all 0.2s"
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#FF0000"; e.currentTarget.style.color = "#FF0000"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.borderColor = "var(--border-primary)"; e.currentTarget.style.color = "var(--text-secondary)"; }}
+          >
+            <img src="https://www.google.com/s2/favicons?domain=youtube.com&sz=32" alt="YouTube" style={{ width: 20, height: 20 }} />
+            YouTube에서 검색하기 →
           </a>
-        ))}
+        )}
       </div>
     </div>
   );
