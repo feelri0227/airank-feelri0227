@@ -28,10 +28,12 @@ export default function MainPage() {
     if (lifeFilter !== "all") data = data.filter((t) => t.life.includes(lifeFilter));
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
-      data = data.filter((t) => 
-        t.name.toLowerCase().includes(q) || 
-        (t.nameKo && t.nameKo.includes(q)) || 
-        t.desc.toLowerCase().includes(q)
+      data = data.filter((t) =>
+        t.name.toLowerCase().includes(q) ||
+        t.desc.toLowerCase().includes(q) ||
+        (t.ytKo && t.ytKo.toLowerCase().includes(q)) ||
+        (t.gtKo && t.gtKo.toLowerCase().includes(q)) ||
+        (t.naverKw && t.naverKw.some(kw => kw.toLowerCase().includes(q)))
       );
     }
     if (sortBy === "score_desc") data.sort((a, b) => b.score - a.score);
