@@ -442,6 +442,9 @@ async function main() {
 
   const chunkSize = 5;
 
+  let ytTotal = 0;
+  let gtTotal = 0;
+
   // 플랫폼별 수집 태스크 정의
   const tasks = [
     // 1. Naver DataLab
@@ -540,7 +543,7 @@ async function main() {
 
   // ── 활성 플랫폼 가중치 자동 조정 ────────────────────────────────────────
   // ... (나머지 로직 동일)
-  const baseWeights = { naver: 0.25, youtube: 0.25, gtrends: 0.25, github: 0.25 };
+  const baseWeights = { naver: 0.30, youtube: 0.30, gtrends: 0.30, github: 0.10 };
   const active = {
     naver:   !!process.env.NAVER_CLIENT_ID,
     youtube: ytTotal > 0,
