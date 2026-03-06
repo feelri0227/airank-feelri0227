@@ -305,6 +305,10 @@ async function fetchNaver(chunk) {
 // kwField: 'yt' (영어) 또는 'ytKo' (한국어)
 async function fetchYoutubeTrends(chunk, kwField = 'yt') {
   try {
+    // 구글 차단 방지를 위해 랜덤 지연 추가 (1.5초 ~ 3.5초)
+    const extraWait = Math.floor(Math.random() * 2000);
+    await sleep(1500 + extraWait);
+
     const keywords = chunk.map((t) => t[kwField]);
     const raw = await googleTrends.interestOverTime({
       keyword: keywords,
@@ -329,8 +333,8 @@ async function fetchYoutubeTrends(chunk, kwField = 'yt') {
     });
     return out;
   } catch (e) {
-    console.warn(`YouTube Trends error [${kwField}]:`, e.message);
-    return {};
+    console.warn(`⚠️ YouTube Trends [${kwField}] 일시 차단됨 (건너뜀):`, e.message.substring(0, 50));
+    return null; // 실패 시 null 반환하여 기존 점수 유지 유도
   }
 }
 
@@ -338,6 +342,9 @@ async function fetchYoutubeTrends(chunk, kwField = 'yt') {
 // kwField: 'gt' (영어) 또는 'gtKo' (한국어)
 async function fetchGoogleTrends(chunk, kwField = 'gt') {
   try {
+    const extraWait = Math.floor(Math.random() * 2000);
+    await sleep(1500 + extraWait);
+
     const keywords = chunk.map((t) => t[kwField]);
     const raw = await googleTrends.interestOverTime({
       keyword: keywords,
@@ -361,8 +368,8 @@ async function fetchGoogleTrends(chunk, kwField = 'gt') {
     });
     return out;
   } catch (e) {
-    console.warn(`Google Trends error [${kwField}]:`, e.message);
-    return {};
+    console.warn(`⚠️ Google Trends [${kwField}] 일시 차단됨 (건너뜀):`, e.message.substring(0, 50));
+    return null;
   }
 }
 
@@ -561,16 +568,18 @@ async function main() {
   // ── 점수 계산 & 변화율 ──────────────────────────────────────────────────
   const tools = {};
   for (const tool of TOOLS) {
-    const n  = norm.naver[tool.id]   ?? 0;
-    const y  = norm.youtube[tool.id] ?? 0;
-    const gt = norm.gtrends[tool.id] ?? 0;
-    const g  = norm.github[tool.id]  ?? 0;
+    const prev = prevScores[String(tool.id)];
+    const prevSns = prev?.sns ?? { naver: 0, youtube: 0, google: 0, github: 0 };
+
+    const n  = norm.naver[tool.id]   ?? prevSns.naver;
+    const y  = norm.youtube[tool.id] ?? prevSns.youtube;
+    const gt = norm.gtrends[tool.id] ?? prevSns.google;
+    const g  = norm.github[tool.id]  ?? prevSns.github;
 
     const score = Math.round(
       n * weights.naver + y * weights.youtube + gt * weights.gtrends + g * weights.github
     );
 
-    const prev = prevScores[String(tool.id)];
     const change = prev?.score
       ? Math.round(((score - prev.score) / prev.score) * 1000) / 10
       : 0;
