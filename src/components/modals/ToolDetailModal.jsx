@@ -50,22 +50,24 @@ const LIFE_LABEL = {
   marketer: "마케터", startup: "스타트업", creator: "크리에이터",
 };
 
+// 플랫폼 로고 (Google Favicon API)
+const PlatformLogo = ({ domain, size = 18 }) => (
+  <img
+    src={`https://www.google.com/s2/favicons?domain=${domain}&sz=32`}
+    alt={domain}
+    style={{ width: size, height: size, borderRadius: "4px", flexShrink: 0 }}
+  />
+);
+
+const SNS_PLATFORMS = [
+  { key: "naver",   label: "Naver",   domain: "naver.com",   color: "#03C75A" },
+  { key: "youtube", label: "YouTube", domain: "youtube.com", color: "#FF0000" },
+  { key: "google",  label: "Google",  domain: "google.com",  color: "#4285F4" },
+  { key: "github",  label: "GitHub",  domain: "github.com",  color: "#8b949e" },
+];
+
 // [오른쪽] 심층 분석 카드
 const ToolAnalysisCard = ({ tool }) => {
-  const SnsBar = ({ label, value, color, icon }) => (
-    <div style={{ marginBottom: "12px", display: "flex", alignItems: "center", gap: "10px", fontSize: "0.8rem" }}>
-      <div style={{ width: "80px", fontWeight: 600, color: "var(--text-secondary)", display: "flex", alignItems: "center", gap: "6px", flexShrink: 0 }}>
-        {icon} {label}
-      </div>
-      <div style={{ flex: 1, height: "4px", background: "var(--bg-tertiary)", borderRadius: "2px", overflow: "hidden" }}>
-        <div style={{ width: `${value}%`, height: "100%", background: color, borderRadius: "2px" }} />
-      </div>
-      <div style={{ width: "32px", textAlign: "right", fontWeight: 700, color: color, fontSize: "0.75rem" }}>
-        {value}%
-      </div>
-    </div>
-  );
-
   return (
     <div style={{
       background: "var(--bg-card)",
@@ -77,22 +79,37 @@ const ToolAnalysisCard = ({ tool }) => {
       boxShadow: "0 24px 64px rgba(0,0,0,0.25)",
       height: "fit-content"
     }}>
-      <h3 style={{ fontSize: "1.1rem", fontWeight: 800, marginBottom: "1.25rem", display: "flex", alignItems: "center", gap: "8px", color: "var(--text-primary)" }}>
+      <h3 style={{ fontSize: "1rem", fontWeight: 800, marginBottom: "1rem", display: "flex", alignItems: "center", gap: "8px", color: "var(--text-primary)" }}>
         📊 실시간 트렌드 지표
       </h3>
 
-      <div style={{ marginBottom: "1.5rem" }}>
-        <SnsBar label="Naver" value={tool.sns?.naver || 0} color="#03C75A" icon="🇳" />
-        <SnsBar label="YouTube" value={tool.sns?.youtube || 0} color="#FF0000" icon="▶" />
-        <SnsBar label="Google" value={tool.sns?.google || 0} color="#4285F4" icon="🇬" />
-        <SnsBar label="GitHub" value={tool.sns?.github || 0} color="#555" icon="🐙" />
+      {/* 플랫폼 점수 그리드 */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px", marginBottom: "1.25rem" }}>
+        {SNS_PLATFORMS.map(({ key, label, domain, color }) => {
+          const value = tool.sns?.[key] || 0;
+          return (
+            <div key={key} style={{
+              display: "flex", alignItems: "center", gap: "8px",
+              padding: "10px 12px",
+              background: "var(--bg-secondary)",
+              borderRadius: "12px",
+              border: "1px solid var(--border-primary)",
+            }}>
+              <PlatformLogo domain={domain} size={16} />
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontSize: "0.65rem", color: "var(--text-muted)", fontWeight: 500 }}>{label}</div>
+                <div style={{ fontSize: "1rem", fontWeight: 800, color, lineHeight: 1.2, fontFamily: "'Outfit', sans-serif" }}>{value}</div>
+              </div>
+            </div>
+          );
+        })}
       </div>
-      
-      <div style={{ padding: "14px", background: "var(--bg-secondary)", borderRadius: "16px", marginBottom: "2rem", border: "1px solid var(--border-primary)" }}>
-         <p style={{ fontSize: "0.82rem", color: "var(--text-secondary)", lineHeight: 1.6, margin: 0 }}>
+
+      <div style={{ padding: "12px 14px", background: "var(--bg-secondary)", borderRadius: "12px", marginBottom: "1.5rem", border: "1px solid var(--border-primary)" }}>
+         <p style={{ fontSize: "0.8rem", color: "var(--text-secondary)", lineHeight: 1.6, margin: 0 }}>
            <span style={{ color: "var(--accent-indigo)", fontWeight: 700 }}>💡 분석결과:</span><br/>
-           {tool.sns?.github > 50 
-             ? "개발자 중심의 강력한 커뮤니티 지지를 받고 있습니다." 
+           {tool.sns?.github > 50
+             ? "개발자 중심의 강력한 커뮤니티 지지를 받고 있습니다."
              : "현재 영상 플랫폼을 중심으로 대중적 인지도가 급상승 중입니다."}
          </p>
       </div>
