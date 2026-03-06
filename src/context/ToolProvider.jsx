@@ -29,7 +29,10 @@ export function ToolProvider({ children }) {
   const [reactionCounts, setReactionCounts] = useState({});
 
   useEffect(() => {
-    fetch("/scores.json")
+    // 캐시 방지를 위해 타임스탬프 쿼리 추가
+    const timestamp = Date.now();
+
+    fetch(`/scores.json?t=${timestamp}`)
       .then((r) => r.json())
       .then((data) => {
         if (!data?.tools) return;
@@ -42,9 +45,10 @@ export function ToolProvider({ children }) {
       })
       .catch(() => {});
 
-    fetch('/news.json')
+    fetch(`/news.json?t=${timestamp}`)
       .then((res) => res.json())
-      .then((data) => setNews(data));
+      .then((data) => setNews(data))
+      .catch(() => {});
   }, []);
 
   useEffect(() => {
