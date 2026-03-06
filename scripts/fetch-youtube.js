@@ -18,11 +18,12 @@ import { TOOLS_DATA } from '../src/data/tools.js';
 async function searchYouTube(query) {
   const params = new URLSearchParams({
     part: 'snippet',
-    q: `${query} tutorial`,
+    q: `${query} 사용법`,
     type: 'video',
     order: 'viewCount',
-    maxResults: 3,
-    relevanceLanguage: 'en',
+    maxResults: 5,
+    relevanceLanguage: 'ko',
+    regionCode: 'KR',
     key: YOUTUBE_API_KEY,
   });
   const res = await fetch(`https://www.googleapis.com/youtube/v3/search?${params}`);
@@ -34,6 +35,7 @@ async function searchYouTube(query) {
   const json = await res.json();
   return (json.items || [])
     .filter(item => item.id?.videoId)
+    .slice(0, 3)
     .map(item => ({
       videoId: item.id.videoId,
       title: item.snippet.title,
@@ -67,7 +69,7 @@ async function main() {
 
   for (const tool of sortedTools) {
     const query = tool.yt || tool.name;
-    console.log(`  [${tool.id}] ${tool.name} → "${query} tutorial"`);
+    console.log(`  [${tool.id}] ${tool.name} → "${query} 사용법"`);
     try {
       const results = await searchYouTube(query);
       videos[String(tool.id)] = results;

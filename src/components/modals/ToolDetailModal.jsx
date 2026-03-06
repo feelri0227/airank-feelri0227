@@ -88,12 +88,12 @@ const ToolAnalysisCard = ({ tool }) => {
       border: "1px solid var(--border-primary)",
       borderRadius: "24px",
       padding: "1.5rem",
-      width: "100%", maxWidth: "340px", minWidth: "300px",
+      width: "100%", maxWidth: "380px", minWidth: "320px",
       display: "flex", flexDirection: "column",
       boxShadow: "0 24px 64px rgba(0,0,0,0.25)",
       height: "fit-content"
     }}>
-      <h3 style={{ fontSize: "1rem", fontWeight: 800, marginBottom: "1rem", color: "var(--text-primary)" }}>
+      <h3 style={{ fontSize: "1.05rem", fontWeight: 800, marginBottom: "1rem", color: "var(--text-primary)" }}>
         실시간 트렌드 지표
       </h3>
 
@@ -110,8 +110,8 @@ const ToolAnalysisCard = ({ tool }) => {
               borderRadius: "12px",
             }}>
               <PlatformLogo domain={domain} size={24} />
-              <div style={{ fontSize: "0.6rem", color: "var(--text-muted)", fontWeight: 500 }}>{label}</div>
-              <div style={{ fontSize: "1.05rem", fontWeight: 800, color, lineHeight: 1, fontFamily: "'Outfit', sans-serif" }}>{value}</div>
+              <div style={{ fontSize: "0.65rem", color: "var(--text-muted)", fontWeight: 500 }}>{label}</div>
+              <div style={{ fontSize: "1.15rem", fontWeight: 800, color, lineHeight: 1, fontFamily: "'Outfit', sans-serif" }}>{value}</div>
             </div>
           );
         })}
@@ -126,7 +126,7 @@ const ToolAnalysisCard = ({ tool }) => {
          </p>
       </div>
 
-      <h3 style={{ fontSize: "1.1rem", fontWeight: 800, marginBottom: "1rem", color: "var(--text-primary)", display: "flex", alignItems: "center", gap: "8px" }}>
+      <h3 style={{ fontSize: "1.15rem", fontWeight: 800, marginBottom: "1rem", color: "var(--text-primary)", display: "flex", alignItems: "center", gap: "8px" }}>
         🎥 튜토리얼 & 리뷰
       </h3>
 
@@ -141,8 +141,8 @@ const ToolAnalysisCard = ({ tool }) => {
             }} />
           ))
         ) : videos.length > 0 ? (
-          // 실제 YouTube 영상
-          videos.map((video) => (
+          // 실제 YouTube 영상 (최대 3개)
+          videos.slice(0, 3).map((video) => (
             <a
               key={video.videoId}
               href={`https://www.youtube.com/watch?v=${video.videoId}`}
@@ -166,7 +166,7 @@ const ToolAnalysisCard = ({ tool }) => {
               }}
             >
               <div style={{
-                width: "90px", height: "50px", borderRadius: "10px",
+                width: "100px", height: "56px", borderRadius: "10px",
                 overflow: "hidden", flexShrink: 0, position: "relative", background: "#000"
               }}>
                 <img
@@ -189,13 +189,13 @@ const ToolAnalysisCard = ({ tool }) => {
               </div>
               <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center" }}>
                 <div style={{
-                  fontSize: "0.8rem", fontWeight: 700, color: "var(--text-primary)",
+                  fontSize: "0.85rem", fontWeight: 700, color: "var(--text-primary)",
                   display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical",
-                  overflow: "hidden", lineHeight: 1.3
+                  overflow: "hidden", lineHeight: 1.35
                 }}>
                   {video.title}
                 </div>
-                <div style={{ fontSize: "0.65rem", color: "var(--text-muted)", marginTop: "4px" }}>{video.channelTitle}</div>
+                <div style={{ fontSize: "0.72rem", color: "var(--text-muted)", marginTop: "4px" }}>{video.channelTitle}</div>
               </div>
             </a>
           ))
