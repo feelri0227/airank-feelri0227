@@ -1,27 +1,8 @@
 {
-  "updated": "2026-03-06T09:17:31.997Z",
+  "updated": "2026-03-06T23:28:53.059Z",
   "topN": 30,
   "videos": {
-    "1": [
-      {
-        "videoId": "vimZVv74FL8",
-        "title": "챗GPT 성능 올릴 때",
-        "channelTitle": "꿀무새",
-        "thumbnail": "https://i.ytimg.com/vi/vimZVv74FL8/mqdefault.jpg"
-      },
-      {
-        "videoId": "r8X9l_P0VoU",
-        "title": "ChatGPT 검열 뚫기 도전!",
-        "channelTitle": "1분만",
-        "thumbnail": "https://i.ytimg.com/vi/r8X9l_P0VoU/mqdefault.jpg"
-      },
-      {
-        "videoId": "jb4z0HfGQ-g",
-        "title": "다들 몰래 쓰는, 챗GPT 벼락치기법",
-        "channelTitle": "AI모아둠",
-        "thumbnail": "https://i.ytimg.com/vi/jb4z0HfGQ-g/mqdefault.jpg"
-      }
-    ],
+    "1": [],
     "2": [
       {
         "videoId": "brtbMmCkghM",
@@ -162,26 +143,7 @@
         "thumbnail": "https://i.ytimg.com/vi/y3F8w6Pra7A/mqdefault.jpg"
       }
     ],
-    "11": [
-      {
-        "videoId": "1KYcpUGwVWk",
-        "title": "Ai 자동 그림 프로그램 엄청나네요....스테이블 디퓨전 WEBUI",
-        "channelTitle": "playsin플레이신",
-        "thumbnail": "https://i.ytimg.com/vi/1KYcpUGwVWk/mqdefault.jpg"
-      },
-      {
-        "videoId": "emObTucGMOA",
-        "title": "AI 창작 시대! 지금 당장 배워야할 Stable Diffusion Web UI 최신 설치 및 사용법 완벽 가이드",
-        "channelTitle": "조코딩 JoCoding",
-        "thumbnail": "https://i.ytimg.com/vi/emObTucGMOA/mqdefault.jpg"
-      },
-      {
-        "videoId": "vVdNmnEb--E",
-        "title": "전세계가 경악중인 최신 AI 사용법 왕초보 실전 가이드 (ft. Stable Diffusion)",
-        "channelTitle": "조코딩 JoCoding",
-        "thumbnail": "https://i.ytimg.com/vi/vVdNmnEb--E/mqdefault.jpg"
-      }
-    ],
+    "11": [],
     "12": [
       {
         "videoId": "Bsi4QGplI0c",
@@ -222,6 +184,7 @@
         "thumbnail": "https://i.ytimg.com/vi/Rkq_eDeGIMw/mqdefault.jpg"
       }
     ],
+    "14": [],
     "18": [
       {
         "videoId": "EPyyyB23NUU",
@@ -242,26 +205,7 @@
         "thumbnail": "https://i.ytimg.com/vi/n0NlxUyA7FI/mqdefault.jpg"
       }
     ],
-    "19": [
-      {
-        "videoId": "ocMOZpuAMw4",
-        "title": "Cursor Tutorial for Beginners (AI Code Editor)",
-        "channelTitle": "Tech With Tim",
-        "thumbnail": "https://i.ytimg.com/vi/ocMOZpuAMw4/mqdefault.jpg"
-      },
-      {
-        "videoId": "f-Izv0ZIeQs",
-        "title": "이거 보고 커서에디터 삭제했다 (Gemini CLI)",
-        "channelTitle": "코딩애플",
-        "thumbnail": "https://i.ytimg.com/vi/f-Izv0ZIeQs/mqdefault.jpg"
-      },
-      {
-        "videoId": "3289vhOUdKA",
-        "title": "Cursor AI Tutorial for Beginners",
-        "channelTitle": "Volo Builds",
-        "thumbnail": "https://i.ytimg.com/vi/3289vhOUdKA/mqdefault.jpg"
-      }
-    ],
+    "19": [],
     "20": [
       {
         "videoId": "5zfOitaKfmM",
@@ -302,26 +246,9 @@
         "thumbnail": "https://i.ytimg.com/vi/TPBPbEeJyF0/mqdefault.jpg"
       }
     ],
-    "25": [
-      {
-        "videoId": "CsIwEXMiRFc",
-        "title": "[AI왕기초] 최신 2025 ver. ChatGPT 챗지피티 완전 입력문 가이드 영상! 이 영상 단독입니다!",
-        "channelTitle": "CONNECT AI LAB",
-        "thumbnail": "https://i.ytimg.com/vi/CsIwEXMiRFc/mqdefault.jpg"
-      },
-      {
-        "videoId": "kv0gzV6qCII",
-        "title": "영상 제작 AI는 소라2 이전과 이후로 나뉩니다  open ai sora2",
-        "channelTitle": "피피티프로",
-        "thumbnail": "https://i.ytimg.com/vi/kv0gzV6qCII/mqdefault.jpg"
-      },
-      {
-        "videoId": "2t2-RHnzdis",
-        "title": "진짜 AI 전문가가 알려주는, &quot;AI 영상 제작&quot; 완벽 가이드 | Sora2 + Veo3 | SoyLab 최돈현 대표",
-        "channelTitle": "오빠두엑셀 l 엑셀 강의 대표채널",
-        "thumbnail": "https://i.ytimg.com/vi/2t2-RHnzdis/mqdefault.jpg"
-      }
-    ],
+    "25": [],
+    "27": [],
+    "32": [],
     "33": [
       {
         "videoId": "z0sD2BvUfM0",
@@ -342,26 +269,7 @@
         "thumbnail": "https://i.ytimg.com/vi/pnTkWAZCj5U/mqdefault.jpg"
       }
     ],
-    "36": [
-      {
-        "videoId": "YoWdogtZRw8",
-        "title": "Learn 80% of Perplexity in under 10 minutes!",
-        "channelTitle": "Jeff Su",
-        "thumbnail": "https://i.ytimg.com/vi/YoWdogtZRw8/mqdefault.jpg"
-      },
-      {
-        "videoId": "PbqUAIsUJQ8",
-        "title": "업무효율 300% 올려주는 대세 AI툴 5가지",
-        "channelTitle": "AI김박사",
-        "thumbnail": "https://i.ytimg.com/vi/PbqUAIsUJQ8/mqdefault.jpg"
-      },
-      {
-        "videoId": "CreVjkdbYOc",
-        "title": "Perplexity(퍼플렉시티) Pro 1년 무료 이용 방법(SKT사용자만 가능) #퍼플렉시티 #perplexity #perplexityai",
-        "channelTitle": "우주보스",
-        "thumbnail": "https://i.ytimg.com/vi/CreVjkdbYOc/mqdefault.jpg"
-      }
-    ],
+    "36": [],
     "39": [
       {
         "videoId": "cH9ag0hNab0",
@@ -402,6 +310,8 @@
         "thumbnail": "https://i.ytimg.com/vi/L4xIFhMnGic/mqdefault.jpg"
       }
     ],
+    "41": [],
+    "47": [],
     "48": [
       {
         "videoId": "jzWxBuvwuwQ",
@@ -442,6 +352,9 @@
         "thumbnail": "https://i.ytimg.com/vi/J7CzwVTYDi8/mqdefault.jpg"
       }
     ],
+    "54": [],
+    "55": [],
+    "59": [],
     "62": [
       {
         "videoId": "MhoM2iPHXHo",
@@ -462,6 +375,7 @@
         "thumbnail": "https://i.ytimg.com/vi/t2ajilR0d7E/mqdefault.jpg"
       }
     ],
+    "65": [],
     "69": [
       {
         "videoId": "RDhQMJm5rrw",
@@ -482,46 +396,12 @@
         "thumbnail": "https://i.ytimg.com/vi/2yKNlIW6o9g/mqdefault.jpg"
       }
     ],
-    "85": [
-      {
-        "videoId": "AUejmYbxKtA",
-        "title": "How to Use Grammarly AI to Improve Your Writing",
-        "channelTitle": "Kevin Stratvert",
-        "thumbnail": "https://i.ytimg.com/vi/AUejmYbxKtA/mqdefault.jpg"
-      },
-      {
-        "videoId": "5LjKA1eLQ_0",
-        "title": "How to Use Grammarly",
-        "channelTitle": "Kevin Stratvert",
-        "thumbnail": "https://i.ytimg.com/vi/5LjKA1eLQ_0/mqdefault.jpg"
-      },
-      {
-        "videoId": "CdXJSRoUo0Q",
-        "title": "How to Use Grammarly Premium 2021 || Paraphrasing || Grammarly plagiarism checker",
-        "channelTitle": "Researchify",
-        "thumbnail": "https://i.ytimg.com/vi/CdXJSRoUo0Q/mqdefault.jpg"
-      }
-    ],
-    "97": [
-      {
-        "videoId": "PWZOMFFW9_0",
-        "title": "Use This Gimp Tip to Remove Picture Backgrounds Quickly",
-        "channelTitle": "uzr",
-        "thumbnail": "https://i.ytimg.com/vi/PWZOMFFW9_0/mqdefault.jpg"
-      },
-      {
-        "videoId": "ZmhRN7a0Eaw",
-        "title": "Remove Background  ! 🤯😎 #shorts #photoshop",
-        "channelTitle": "ComaFix Photoshop ",
-        "thumbnail": "https://i.ytimg.com/vi/ZmhRN7a0Eaw/mqdefault.jpg"
-      },
-      {
-        "videoId": "7vE3V-hkmuk",
-        "title": "How To Remove Background In Photopea - Full Guide",
-        "channelTitle": "GuideRealm",
-        "thumbnail": "https://i.ytimg.com/vi/7vE3V-hkmuk/mqdefault.jpg"
-      }
-    ],
+    "80": [],
+    "85": [],
+    "87": [],
+    "94": [],
+    "97": [],
+    "101": [],
     "103": [
       {
         "videoId": "Hrm73c60mfc",
@@ -542,6 +422,9 @@
         "thumbnail": "https://i.ytimg.com/vi/zgXLwvOxoTU/mqdefault.jpg"
       }
     ],
+    "110": [],
+    "114": [],
+    "134": [],
     "138": [
       {
         "videoId": "F-oLLqILsAU",
@@ -562,6 +445,8 @@
         "thumbnail": "https://i.ytimg.com/vi/-AVFc44IDv4/mqdefault.jpg"
       }
     ],
+    "140": [],
+    "144": [],
     "145": [
       {
         "videoId": "pbb5QT-heFI",
@@ -582,6 +467,8 @@
         "thumbnail": "https://i.ytimg.com/vi/fZTdbjg1VSw/mqdefault.jpg"
       }
     ],
+    "147": [],
+    "152": [],
     "159": [
       {
         "videoId": "NdnJFScW-Ss",
@@ -601,6 +488,9 @@
         "channelTitle": "기자 김연지",
         "thumbnail": "https://i.ytimg.com/vi/W5qbDluc2UE/mqdefault.jpg"
       }
-    ]
+    ],
+    "173": [],
+    "185": [],
+    "199": []
   }
 }
