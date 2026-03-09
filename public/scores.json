@@ -1,33 +1,33 @@
 {
-  "updated": "2026-03-08T19:46:55.345Z",
+  "updated": "2026-03-09T20:05:56.613Z",
   "tools": {
     "1": {
-      "score": 85,
-      "change": -2.3,
+      "score": 92,
+      "change": 8.2,
       "sns": {
-        "naver": 86,
-        "youtube": 84,
-        "google": 84,
+        "naver": 95,
+        "youtube": 90,
+        "google": 90,
         "github": 92
       }
     },
     "2": {
-      "score": 17,
-      "change": 0,
+      "score": 18,
+      "change": 5.9,
       "sns": {
         "naver": 4,
-        "youtube": 13,
-        "google": 13,
-        "github": 78
+        "youtube": 14,
+        "google": 14,
+        "github": 79
       }
     },
     "3": {
-      "score": 72,
-      "change": 1.4,
+      "score": 70,
+      "change": -2.8,
       "sns": {
-        "naver": 43,
-        "youtube": 81,
-        "google": 81,
+        "naver": 47,
+        "youtube": 76,
+        "google": 76,
         "github": 100
       }
     },
@@ -52,12 +52,12 @@
       }
     },
     "6": {
-      "score": 67,
-      "change": 0,
+      "score": 65,
+      "change": -3,
       "sns": {
-        "naver": 19,
-        "youtube": 96,
-        "google": 96,
+        "naver": 20,
+        "youtube": 93,
+        "google": 93,
         "github": 32
       }
     },
@@ -73,91 +73,91 @@
     },
     "8": {
       "score": 15,
-      "change": 7.1,
+      "change": 0,
       "sns": {
-        "naver": 1,
-        "youtube": 24,
-        "google": 24,
+        "naver": 2,
+        "youtube": 23,
+        "google": 23,
         "github": 3
       }
     },
     "9": {
-      "score": 37,
-      "change": 15.6,
+      "score": 40,
+      "change": 8.1,
       "sns": {
-        "naver": 25,
-        "youtube": 42,
-        "google": 42,
+        "naver": 30,
+        "youtube": 44,
+        "google": 44,
         "github": 42
       }
     },
     "10": {
-      "score": 67,
-      "change": 3.1,
+      "score": 70,
+      "change": 4.5,
       "sns": {
-        "naver": 73,
-        "youtube": 74,
-        "google": 74,
+        "naver": 82,
+        "youtube": 76,
+        "google": 76,
         "github": 2
       }
     },
     "11": {
-      "score": 76,
-      "change": 4.1,
+      "score": 75,
+      "change": -1.3,
       "sns": {
-        "naver": 73,
-        "youtube": 88,
-        "google": 88,
+        "naver": 82,
+        "youtube": 83,
+        "google": 83,
         "github": 10
       }
     },
     "12": {
-      "score": 11,
-      "change": 22.2,
+      "score": 13,
+      "change": 18.2,
       "sns": {
         "naver": 7,
-        "youtube": 14,
-        "google": 14,
+        "youtube": 18,
+        "google": 18,
         "github": 1
       }
     },
     "13": {
-      "score": 56,
-      "change": 0,
+      "score": 58,
+      "change": 3.6,
       "sns": {
-        "naver": 68,
-        "youtube": 60,
-        "google": 60,
+        "naver": 76,
+        "youtube": 59,
+        "google": 59,
         "github": 0
       }
     },
     "14": {
-      "score": 72,
-      "change": 2.9,
+      "score": 73,
+      "change": 1.4,
       "sns": {
-        "naver": 61,
-        "youtube": 90,
-        "google": 90,
+        "naver": 68,
+        "youtube": 88,
+        "google": 88,
         "github": 0
       }
     },
     "15": {
-      "score": 23,
-      "change": 4.5,
+      "score": 22,
+      "change": -4.3,
       "sns": {
-        "naver": 9,
-        "youtube": 33,
-        "google": 33,
+        "naver": 10,
+        "youtube": 32,
+        "google": 32,
         "github": 0
       }
     },
     "16": {
-      "score": 40,
-      "change": 5.3,
+      "score": 42,
+      "change": 5,
       "sns": {
-        "naver": 28,
-        "youtube": 46,
-        "google": 46,
+        "naver": 32,
+        "youtube": 47,
+        "google": 47,
         "github": 38
       }
     },
@@ -165,29 +165,29 @@
       "score": 5,
       "change": 0,
       "sns": {
-        "naver": 10,
+        "naver": 12,
         "youtube": 3,
         "google": 3,
         "github": 0
       }
     },
     "18": {
-      "score": 27,
-      "change": 0,
+      "score": 29,
+      "change": 7.4,
       "sns": {
-        "naver": 19,
-        "youtube": 23,
-        "google": 23,
+        "naver": 22,
+        "youtube": 25,
+        "google": 25,
         "github": 75
       }
     },
     "19": {
-      "score": 79,
-      "change": 1.3,
+      "score": 84,
+      "change": 6.3,
       "sns": {
-        "naver": 78,
-        "youtube": 84,
-        "google": 84,
+        "naver": 88,
+        "youtube": 88,
+        "google": 88,
         "github": 50
       }
     },
@@ -206,8 +206,8 @@
       "change": 0,
       "sns": {
         "naver": 3,
-        "youtube": 8,
-        "google": 8,
+        "youtube": 9,
+        "google": 9,
         "github": 2
       }
     },
@@ -226,8 +226,8 @@
       "change": 0,
       "sns": {
         "naver": 1,
-        "youtube": 2,
-        "google": 2,
+        "youtube": 3,
+        "google": 3,
         "github": 1
       }
     },
@@ -242,92 +242,92 @@
       }
     },
     "25": {
-      "score": 83,
-      "change": -1.2,
+      "score": 88,
+      "change": 6,
       "sns": {
-        "naver": 88,
-        "youtube": 94,
-        "google": 94,
+        "naver": 97,
+        "youtube": 97,
+        "google": 97,
         "github": 6
       }
     },
     "26": {
-      "score": 46,
-      "change": 0,
+      "score": 50,
+      "change": 8.7,
       "sns": {
-        "naver": 26,
-        "youtube": 63,
-        "google": 63,
+        "naver": 31,
+        "youtube": 68,
+        "google": 68,
         "github": 0
       }
     },
     "27": {
-      "score": 75,
-      "change": 1.4,
+      "score": 79,
+      "change": 5.3,
       "sns": {
-        "naver": 91,
-        "youtube": 79,
-        "google": 79,
+        "naver": 100,
+        "youtube": 81,
+        "google": 81,
         "github": 0
       }
     },
     "28": {
-      "score": 9,
-      "change": 28.6,
+      "score": 7,
+      "change": -22.2,
       "sns": {
         "naver": 4,
-        "youtube": 13,
-        "google": 13,
+        "youtube": 10,
+        "google": 10,
         "github": 0
       }
     },
     "29": {
-      "score": 58,
-      "change": 5.5,
+      "score": 62,
+      "change": 6.9,
       "sns": {
-        "naver": 19,
-        "youtube": 87,
-        "google": 87,
+        "naver": 22,
+        "youtube": 93,
+        "google": 93,
         "github": 0
       }
     },
     "30": {
-      "score": 12,
-      "change": 9.1,
+      "score": 13,
+      "change": 8.3,
       "sns": {
         "naver": 8,
-        "youtube": 16,
-        "google": 16,
+        "youtube": 17,
+        "google": 17,
         "github": 0
       }
     },
     "31": {
-      "score": 10,
-      "change": 0,
+      "score": 11,
+      "change": 10,
       "sns": {
         "naver": 1,
-        "youtube": 12,
-        "google": 12,
+        "youtube": 13,
+        "google": 13,
         "github": 28
       }
     },
     "32": {
       "score": 79,
-      "change": 2.6,
+      "change": 0,
       "sns": {
-        "naver": 86,
-        "youtube": 85,
-        "google": 85,
+        "naver": 96,
+        "youtube": 81,
+        "google": 81,
         "github": 18
       }
     },
     "33": {
-      "score": 73,
-      "change": 0,
+      "score": 75,
+      "change": 2.7,
       "sns": {
-        "naver": 35,
-        "youtube": 94,
-        "google": 94,
+        "naver": 39,
+        "youtube": 96,
+        "google": 96,
         "github": 58
       }
     },
@@ -335,29 +335,29 @@
       "score": 9,
       "change": 0,
       "sns": {
-        "naver": 2,
+        "naver": 3,
         "youtube": 10,
         "google": 10,
         "github": 20
       }
     },
     "35": {
-      "score": 12,
-      "change": 9.1,
+      "score": 13,
+      "change": 8.3,
       "sns": {
         "naver": 2,
-        "youtube": 13,
-        "google": 13,
+        "youtube": 14,
+        "google": 14,
         "github": 35
       }
     },
     "36": {
-      "score": 81,
-      "change": 1.3,
+      "score": 84,
+      "change": 3.7,
       "sns": {
-        "naver": 78,
-        "youtube": 88,
-        "google": 88,
+        "naver": 87,
+        "youtube": 89,
+        "google": 89,
         "github": 48
       }
     },
@@ -382,32 +382,32 @@
       }
     },
     "39": {
-      "score": 48,
-      "change": 0,
+      "score": 51,
+      "change": 6.3,
       "sns": {
         "naver": 1,
-        "youtube": 67,
-        "google": 67,
+        "youtube": 73,
+        "google": 73,
         "github": 72
       }
     },
     "40": {
-      "score": 11,
-      "change": 0,
+      "score": 12,
+      "change": 9.1,
       "sns": {
         "naver": 2,
-        "youtube": 12,
-        "google": 12,
+        "youtube": 13,
+        "google": 13,
         "github": 35
       }
     },
     "41": {
-      "score": 72,
-      "change": -2.7,
+      "score": 69,
+      "change": -4.2,
       "sns": {
-        "naver": 77,
-        "youtube": 76,
-        "google": 76,
+        "naver": 86,
+        "youtube": 68,
+        "google": 68,
         "github": 28
       }
     },
@@ -432,22 +432,22 @@
       }
     },
     "44": {
-      "score": 6,
-      "change": 0,
+      "score": 3,
+      "change": -50,
       "sns": {
         "naver": 2,
-        "youtube": 6,
-        "google": 6,
+        "youtube": 0,
+        "google": 0,
         "github": 22
       }
     },
     "45": {
       "score": 70,
-      "change": 1.4,
+      "change": 0,
       "sns": {
-        "naver": 25,
-        "youtube": 97,
-        "google": 97,
+        "naver": 29,
+        "youtube": 95,
+        "google": 95,
         "github": 40
       }
     },
@@ -462,32 +462,32 @@
       }
     },
     "47": {
-      "score": 82,
-      "change": 0,
+      "score": 85,
+      "change": 3.7,
       "sns": {
-        "naver": 73,
-        "youtube": 85,
-        "google": 85,
+        "naver": 81,
+        "youtube": 86,
+        "google": 86,
         "github": 88
       }
     },
     "48": {
-      "score": 55,
-      "change": 1.9,
+      "score": 58,
+      "change": 5.5,
       "sns": {
-        "naver": 64,
+        "naver": 73,
         "youtube": 56,
         "google": 56,
         "github": 22
       }
     },
     "49": {
-      "score": 16,
-      "change": -5.9,
+      "score": 17,
+      "change": 6.3,
       "sns": {
-        "naver": 14,
-        "youtube": 10,
-        "google": 10,
+        "naver": 17,
+        "youtube": 11,
+        "google": 11,
         "github": 55
       }
     },
@@ -502,62 +502,62 @@
       }
     },
     "51": {
-      "score": 20,
-      "change": -9.1,
+      "score": 22,
+      "change": 10,
       "sns": {
-        "naver": 8,
-        "youtube": 19,
-        "google": 19,
+        "naver": 11,
+        "youtube": 22,
+        "google": 22,
         "github": 58
       }
     },
     "52": {
-      "score": 43,
-      "change": -4.4,
+      "score": 47,
+      "change": 9.3,
       "sns": {
-        "naver": 57,
-        "youtube": 28,
-        "google": 28,
+        "naver": 64,
+        "youtube": 32,
+        "google": 32,
         "github": 90
       }
     },
     "53": {
-      "score": 8,
-      "change": 0,
+      "score": 36,
+      "change": 350,
       "sns": {
         "naver": 0,
-        "youtube": 1,
-        "google": 1,
+        "youtube": 48,
+        "google": 48,
         "github": 72
       }
     },
     "54": {
-      "score": 72,
-      "change": -2.7,
+      "score": 68,
+      "change": -5.6,
       "sns": {
-        "naver": 77,
-        "youtube": 74,
-        "google": 74,
+        "naver": 88,
+        "youtube": 63,
+        "google": 63,
         "github": 42
       }
     },
     "55": {
-      "score": 54,
-      "change": -6.9,
+      "score": 59,
+      "change": 9.3,
       "sns": {
-        "naver": 28,
-        "youtube": 63,
-        "google": 63,
+        "naver": 31,
+        "youtube": 71,
+        "google": 71,
         "github": 75
       }
     },
     "56": {
-      "score": 14,
-      "change": 7.7,
+      "score": 13,
+      "change": -7.1,
       "sns": {
         "naver": 0,
-        "youtube": 9,
-        "google": 9,
+        "youtube": 8,
+        "google": 8,
         "github": 82
       }
     },
@@ -566,68 +566,68 @@
       "change": 0,
       "sns": {
         "naver": 0,
-        "youtube": 84,
-        "google": 84,
+        "youtube": 83,
+        "google": 83,
         "github": 70
       }
     },
     "58": {
-      "score": 64,
-      "change": 0,
+      "score": 63,
+      "change": -1.6,
       "sns": {
-        "naver": 25,
-        "youtube": 88,
-        "google": 88,
+        "naver": 24,
+        "youtube": 86,
+        "google": 86,
         "github": 38
       }
     },
     "59": {
-      "score": 80,
-      "change": 23.1,
+      "score": 86,
+      "change": 7.5,
       "sns": {
-        "naver": 72,
-        "youtube": 93,
-        "google": 93,
+        "naver": 77,
+        "youtube": 100,
+        "google": 100,
         "github": 25
       }
     },
     "60": {
-      "score": 17,
-      "change": 0,
+      "score": 16,
+      "change": -5.9,
       "sns": {
         "naver": 0,
-        "youtube": 24,
-        "google": 24,
+        "youtube": 22,
+        "google": 22,
         "github": 28
       }
     },
     "61": {
-      "score": 5,
-      "change": 0,
+      "score": 4,
+      "change": -20,
       "sns": {
-        "naver": 3,
-        "youtube": 1,
-        "google": 1,
+        "naver": 2,
+        "youtube": 0,
+        "google": 0,
         "github": 30
       }
     },
     "62": {
-      "score": 32,
-      "change": -39.6,
+      "score": 30,
+      "change": -6.2,
       "sns": {
-        "naver": 29,
-        "youtube": 25,
-        "google": 25,
+        "naver": 15,
+        "youtube": 29,
+        "google": 29,
         "github": 78
       }
     },
     "63": {
-      "score": 23,
-      "change": -34.3,
+      "score": 21,
+      "change": -8.7,
       "sns": {
-        "naver": 21,
-        "youtube": 25,
-        "google": 25,
+        "naver": 12,
+        "youtube": 26,
+        "google": 26,
         "github": 20
       }
     },
@@ -642,112 +642,112 @@
       }
     },
     "65": {
-      "score": 72,
-      "change": -14.3,
+      "score": 64,
+      "change": -11.1,
       "sns": {
-        "naver": 83,
-        "youtube": 66,
-        "google": 66,
+        "naver": 49,
+        "youtube": 69,
+        "google": 69,
         "github": 75
       }
     },
     "66": {
-      "score": 57,
-      "change": 0,
+      "score": 53,
+      "change": -7,
       "sns": {
         "naver": 19,
-        "youtube": 72,
-        "google": 72,
+        "youtube": 65,
+        "google": 65,
         "github": 80
       }
     },
     "67": {
-      "score": 19,
-      "change": -20.8,
+      "score": 22,
+      "change": 15.8,
       "sns": {
         "naver": 0,
-        "youtube": 21,
-        "google": 21,
+        "youtube": 26,
+        "google": 26,
         "github": 60
       }
     },
     "68": {
-      "score": 19,
-      "change": -9.5,
+      "score": 20,
+      "change": 5.3,
       "sns": {
-        "naver": 20,
-        "youtube": 6,
-        "google": 6,
+        "naver": 21,
+        "youtube": 7,
+        "google": 7,
         "github": 92
       }
     },
     "69": {
-      "score": 75,
-      "change": 1.4,
+      "score": 70,
+      "change": -6.7,
       "sns": {
-        "naver": 48,
-        "youtube": 91,
-        "google": 91,
+        "naver": 52,
+        "youtube": 81,
+        "google": 81,
         "github": 55
       }
     },
     "70": {
-      "score": 29,
-      "change": 7.4,
+      "score": 32,
+      "change": 10.3,
       "sns": {
-        "naver": 78,
+        "naver": 90,
         "youtube": 4,
         "google": 4,
         "github": 30
       }
     },
     "71": {
-      "score": 75,
-      "change": 11.9,
+      "score": 79,
+      "change": 5.3,
       "sns": {
-        "naver": 46,
-        "youtube": 93,
-        "google": 93,
+        "naver": 78,
+        "youtube": 85,
+        "google": 85,
         "github": 50
       }
     },
     "72": {
-      "score": 55,
-      "change": 5.8,
+      "score": 57,
+      "change": 3.6,
       "sns": {
-        "naver": 4,
-        "youtube": 85,
-        "google": 85,
+        "naver": 7,
+        "youtube": 87,
+        "google": 87,
         "github": 28
       }
     },
     "73": {
-      "score": 7,
-      "change": 0,
+      "score": 64,
+      "change": 814.3,
       "sns": {
         "naver": 0,
-        "youtube": 5,
-        "google": 5,
+        "youtube": 100,
+        "google": 100,
         "github": 42
       }
     },
     "74": {
-      "score": 26,
-      "change": -31.6,
+      "score": 27,
+      "change": 3.8,
       "sns": {
-        "naver": 2,
-        "youtube": 36,
-        "google": 36,
+        "naver": 4,
+        "youtube": 37,
+        "google": 37,
         "github": 35
       }
     },
     "75": {
-      "score": 10,
-      "change": 0,
+      "score": 11,
+      "change": 10,
       "sns": {
-        "naver": 2,
-        "youtube": 11,
-        "google": 11,
+        "naver": 4,
+        "youtube": 12,
+        "google": 12,
         "github": 28
       }
     },
@@ -763,7 +763,7 @@
     },
     "77": {
       "score": 18,
-      "change": -10,
+      "change": 0,
       "sns": {
         "naver": 3,
         "youtube": 22,
@@ -775,7 +775,7 @@
       "score": 5,
       "change": 0,
       "sns": {
-        "naver": 6,
+        "naver": 7,
         "youtube": 1,
         "google": 1,
         "github": 25
@@ -792,12 +792,12 @@
       }
     },
     "80": {
-      "score": 79,
-      "change": 1.3,
+      "score": 82,
+      "change": 3.8,
       "sns": {
-        "naver": 75,
-        "youtube": 86,
-        "google": 86,
+        "naver": 87,
+        "youtube": 85,
+        "google": 85,
         "github": 50
       }
     },
@@ -805,49 +805,49 @@
       "score": 14,
       "change": 0,
       "sns": {
-        "naver": 21,
-        "youtube": 3,
-        "google": 3,
+        "naver": 22,
+        "youtube": 2,
+        "google": 2,
         "github": 62
       }
     },
     "82": {
-      "score": 23,
-      "change": -4.2,
+      "score": 24,
+      "change": 4.3,
       "sns": {
-        "naver": 10,
-        "youtube": 23,
-        "google": 23,
+        "naver": 11,
+        "youtube": 24,
+        "google": 24,
         "github": 62
       }
     },
     "83": {
-      "score": 67,
-      "change": 0,
+      "score": 65,
+      "change": -3,
       "sns": {
-        "naver": 26,
-        "youtube": 91,
-        "google": 91,
+        "naver": 29,
+        "youtube": 86,
+        "google": 86,
         "github": 42
       }
     },
     "84": {
-      "score": 43,
-      "change": 0,
+      "score": 39,
+      "change": -9.3,
       "sns": {
         "naver": 6,
-        "youtube": 62,
-        "google": 62,
+        "youtube": 56,
+        "google": 56,
         "github": 40
       }
     },
     "85": {
-      "score": 77,
-      "change": 2.7,
+      "score": 82,
+      "change": 6.5,
       "sns": {
-        "naver": 73,
-        "youtube": 83,
-        "google": 83,
+        "naver": 86,
+        "youtube": 84,
+        "google": 84,
         "github": 58
       }
     },
@@ -862,12 +862,12 @@
       }
     },
     "87": {
-      "score": 80,
-      "change": -1.2,
+      "score": 76,
+      "change": -5,
       "sns": {
-        "naver": 77,
-        "youtube": 89,
-        "google": 89,
+        "naver": 84,
+        "youtube": 80,
+        "google": 80,
         "github": 32
       }
     },
@@ -892,82 +892,82 @@
       }
     },
     "90": {
-      "score": 5,
-      "change": 0,
+      "score": 56,
+      "change": 1020,
       "sns": {
         "naver": 0,
-        "youtube": 0,
-        "google": 0,
+        "youtube": 84,
+        "google": 84,
         "github": 52
       }
     },
     "91": {
-      "score": 59,
-      "change": -7.8,
+      "score": 64,
+      "change": 8.5,
       "sns": {
-        "naver": 11,
-        "youtube": 86,
-        "google": 86,
+        "naver": 0,
+        "youtube": 100,
+        "google": 100,
         "github": 38
       }
     },
     "92": {
-      "score": 17,
-      "change": 0,
+      "score": 16,
+      "change": -5.9,
       "sns": {
         "naver": 0,
-        "youtube": 22,
-        "google": 22,
+        "youtube": 21,
+        "google": 21,
         "github": 35
       }
     },
     "93": {
-      "score": 49,
-      "change": 4.3,
+      "score": 50,
+      "change": 2,
       "sns": {
-        "naver": 14,
-        "youtube": 65,
-        "google": 65,
+        "naver": 15,
+        "youtube": 67,
+        "google": 67,
         "github": 55
       }
     },
     "94": {
-      "score": 74,
-      "change": 0,
+      "score": 73,
+      "change": -1.4,
       "sns": {
-        "naver": 50,
-        "youtube": 94,
-        "google": 94,
+        "naver": 53,
+        "youtube": 90,
+        "google": 90,
         "github": 30
       }
     },
     "95": {
-      "score": 12,
-      "change": 0,
+      "score": 11,
+      "change": -8.3,
       "sns": {
         "naver": 0,
-        "youtube": 13,
-        "google": 13,
+        "youtube": 12,
+        "google": 12,
         "github": 42
       }
     },
     "96": {
       "score": 35,
-      "change": 6.1,
+      "change": 0,
       "sns": {
         "naver": 1,
-        "youtube": 49,
-        "google": 49,
+        "youtube": 50,
+        "google": 50,
         "github": 48
       }
     },
     "97": {
-      "score": 79,
-      "change": 1.3,
+      "score": 83,
+      "change": 5.1,
       "sns": {
-        "naver": 74,
-        "youtube": 89,
-        "google": 89,
+        "naver": 83,
+        "youtube": 90,
+        "google": 90,
         "github": 38
       }
     },
@@ -976,14 +976,14 @@
       "change": 0,
       "sns": {
         "naver": 1,
-        "youtube": 7,
-        "google": 7,
+        "youtube": 8,
+        "google": 8,
         "github": 32
       }
     },
     "99": {
       "score": 14,
-      "change": 7.7,
+      "change": 0,
       "sns": {
         "naver": 0,
         "youtube": 14,
@@ -992,42 +992,42 @@
       }
     },
     "100": {
-      "score": 15,
-      "change": 0,
+      "score": 16,
+      "change": 6.7,
       "sns": {
         "naver": 0,
-        "youtube": 18,
-        "google": 18,
+        "youtube": 19,
+        "google": 19,
         "github": 45
       }
     },
     "101": {
-      "score": 77,
-      "change": -7.2,
+      "score": 80,
+      "change": 3.9,
       "sns": {
-        "naver": 85,
-        "youtube": 80,
-        "google": 80,
+        "naver": 70,
+        "youtube": 92,
+        "google": 92,
         "github": 35
       }
     },
     "102": {
-      "score": 9,
-      "change": 0,
+      "score": 10,
+      "change": 11.1,
       "sns": {
         "naver": 0,
-        "youtube": 10,
-        "google": 10,
+        "youtube": 13,
+        "google": 13,
         "github": 25
       }
     },
     "103": {
-      "score": 58,
-      "change": 1.8,
+      "score": 59,
+      "change": 1.7,
       "sns": {
-        "naver": 6,
-        "youtube": 86,
-        "google": 86,
+        "naver": 5,
+        "youtube": 89,
+        "google": 89,
         "github": 45
       }
     },
@@ -1052,12 +1052,12 @@
       }
     },
     "106": {
-      "score": 50,
-      "change": 4.2,
+      "score": 43,
+      "change": -14,
       "sns": {
         "naver": 0,
-        "youtube": 80,
-        "google": 80,
+        "youtube": 68,
+        "google": 68,
         "github": 20
       }
     },
@@ -1072,12 +1072,12 @@
       }
     },
     "108": {
-      "score": 6,
-      "change": 20,
+      "score": 5,
+      "change": -16.7,
       "sns": {
         "naver": 0,
-        "youtube": 4,
-        "google": 4,
+        "youtube": 3,
+        "google": 3,
         "github": 35
       }
     },
@@ -1092,20 +1092,20 @@
       }
     },
     "110": {
-      "score": 77,
-      "change": 2.7,
+      "score": 83,
+      "change": 7.8,
       "sns": {
-        "naver": 75,
-        "youtube": 87,
-        "google": 87,
+        "naver": 90,
+        "youtube": 89,
+        "google": 89,
         "github": 25
       }
     },
     "111": {
-      "score": 27,
-      "change": 3.8,
+      "score": 31,
+      "change": 14.8,
       "sns": {
-        "naver": 59,
+        "naver": 71,
         "youtube": 14,
         "google": 14,
         "github": 10
@@ -1115,29 +1115,29 @@
       "score": 6,
       "change": 0,
       "sns": {
-        "naver": 15,
+        "naver": 16,
         "youtube": 1,
         "google": 1,
         "github": 8
       }
     },
     "113": {
-      "score": 60,
-      "change": -11.8,
+      "score": 63,
+      "change": 5,
       "sns": {
         "naver": 20,
-        "youtube": 88,
-        "google": 88,
+        "youtube": 92,
+        "google": 92,
         "github": 15
       }
     },
     "114": {
-      "score": 74,
-      "change": -9.8,
+      "score": 75,
+      "change": 1.4,
       "sns": {
-        "naver": 71,
-        "youtube": 85,
-        "google": 85,
+        "naver": 79,
+        "youtube": 84,
+        "google": 84,
         "github": 12
       }
     },
@@ -1156,28 +1156,28 @@
       "change": 0,
       "sns": {
         "naver": 0,
-        "youtube": 4,
-        "google": 4,
+        "youtube": 5,
+        "google": 5,
         "github": 12
       }
     },
     "117": {
-      "score": 52,
-      "change": -8.8,
+      "score": 56,
+      "change": 7.7,
       "sns": {
-        "naver": 22,
-        "youtube": 75,
-        "google": 75,
+        "naver": 24,
+        "youtube": 80,
+        "google": 80,
         "github": 8
       }
     },
     "118": {
-      "score": 20,
-      "change": -13,
+      "score": 23,
+      "change": 15,
       "sns": {
         "naver": 0,
-        "youtube": 31,
-        "google": 31,
+        "youtube": 36,
+        "google": 36,
         "github": 15
       }
     },
@@ -1185,19 +1185,19 @@
       "score": 67,
       "change": 0,
       "sns": {
-        "naver": 54,
-        "youtube": 84,
-        "google": 84,
+        "naver": 57,
+        "youtube": 81,
+        "google": 81,
         "github": 8
       }
     },
     "120": {
-      "score": 32,
-      "change": -8.6,
+      "score": 34,
+      "change": 6.3,
       "sns": {
         "naver": 2,
-        "youtube": 51,
-        "google": 51,
+        "youtube": 55,
+        "google": 55,
         "github": 8
       }
     },
@@ -1212,18 +1212,18 @@
       }
     },
     "122": {
-      "score": 67,
-      "change": 0,
+      "score": 69,
+      "change": 3,
       "sns": {
-        "naver": 56,
-        "youtube": 83,
-        "google": 83,
+        "naver": 58,
+        "youtube": 85,
+        "google": 85,
         "github": 8
       }
     },
     "123": {
       "score": 52,
-      "change": -8.8,
+      "change": 0,
       "sns": {
         "naver": 0,
         "youtube": 83,
@@ -1232,10 +1232,10 @@
       }
     },
     "124": {
-      "score": 24,
-      "change": 0,
+      "score": 27,
+      "change": 12.5,
       "sns": {
-        "naver": 66,
+        "naver": 75,
         "youtube": 2,
         "google": 2,
         "github": 28
@@ -1252,58 +1252,58 @@
       }
     },
     "126": {
-      "score": 69,
-      "change": -4.2,
+      "score": 70,
+      "change": 1.4,
       "sns": {
-        "naver": 39,
+        "naver": 42,
         "youtube": 93,
         "google": 93,
         "github": 18
       }
     },
     "127": {
-      "score": 13,
-      "change": -7.1,
+      "score": 8,
+      "change": -38.5,
       "sns": {
-        "naver": 10,
-        "youtube": 13,
-        "google": 13,
+        "naver": 11,
+        "youtube": 5,
+        "google": 5,
         "github": 20
       }
     },
     "128": {
       "score": 64,
-      "change": -5.9,
+      "change": 0,
       "sns": {
-        "naver": 55,
-        "youtube": 76,
-        "google": 76,
+        "naver": 61,
+        "youtube": 74,
+        "google": 74,
         "github": 15
       }
     },
     "129": {
-      "score": 25,
-      "change": 4.2,
+      "score": 28,
+      "change": 12,
       "sns": {
-        "naver": 7,
-        "youtube": 32,
-        "google": 32,
+        "naver": 8,
+        "youtube": 37,
+        "google": 37,
         "github": 38
       }
     },
     "130": {
       "score": 59,
-      "change": -6.3,
+      "change": 0,
       "sns": {
-        "naver": 60,
-        "youtube": 64,
-        "google": 64,
+        "naver": 65,
+        "youtube": 61,
+        "google": 61,
         "github": 28
       }
     },
     "131": {
       "score": 1,
-      "change": -98.4,
+      "change": 0,
       "sns": {
         "naver": 0,
         "youtube": 0,
@@ -1325,25 +1325,25 @@
       "score": 5,
       "change": 0,
       "sns": {
-        "naver": 8,
-        "youtube": 2,
-        "google": 2,
+        "naver": 9,
+        "youtube": 1,
+        "google": 1,
         "github": 18
       }
     },
     "134": {
-      "score": 85,
-      "change": 3.7,
+      "score": 84,
+      "change": -1.2,
       "sns": {
-        "naver": 77,
-        "youtube": 100,
-        "google": 100,
+        "naver": 90,
+        "youtube": 92,
+        "google": 92,
         "github": 22
       }
     },
     "135": {
       "score": 5,
-      "change": 25,
+      "change": 0,
       "sns": {
         "naver": 4,
         "youtube": 1,
@@ -1352,12 +1352,12 @@
       }
     },
     "136": {
-      "score": 39,
-      "change": -25,
+      "score": 45,
+      "change": 15.4,
       "sns": {
-        "naver": 6,
-        "youtube": 58,
-        "google": 58,
+        "naver": 8,
+        "youtube": 67,
+        "google": 67,
         "github": 25
       }
     },
@@ -1382,42 +1382,42 @@
       }
     },
     "139": {
-      "score": 4,
-      "change": 0,
+      "score": 5,
+      "change": 25,
       "sns": {
-        "naver": 9,
+        "naver": 11,
         "youtube": 1,
         "google": 1,
         "github": 8
       }
     },
     "140": {
-      "score": 86,
-      "change": 0,
+      "score": 88,
+      "change": 2.3,
       "sns": {
-        "naver": 87,
-        "youtube": 97,
-        "google": 97,
+        "naver": 97,
+        "youtube": 96,
+        "google": 96,
         "github": 12
       }
     },
     "141": {
-      "score": 35,
-      "change": -2.8,
+      "score": 36,
+      "change": 2.9,
       "sns": {
-        "naver": 15,
+        "naver": 19,
         "youtube": 48,
         "google": 48,
         "github": 15
       }
     },
     "142": {
-      "score": 3,
-      "change": -25,
+      "score": 4,
+      "change": 33.3,
       "sns": {
         "naver": 5,
-        "youtube": 1,
-        "google": 1,
+        "youtube": 2,
+        "google": 2,
         "github": 10
       }
     },
@@ -1432,42 +1432,42 @@
       }
     },
     "144": {
-      "score": 77,
-      "change": -1.3,
+      "score": 80,
+      "change": 3.9,
       "sns": {
-        "naver": 71,
-        "youtube": 91,
-        "google": 91,
+        "naver": 82,
+        "youtube": 90,
+        "google": 90,
         "github": 12
       }
     },
     "145": {
-      "score": 31,
-      "change": -3.1,
+      "score": 30,
+      "change": -3.2,
       "sns": {
         "naver": 6,
-        "youtube": 45,
-        "google": 45,
+        "youtube": 44,
+        "google": 44,
         "github": 18
       }
     },
     "146": {
-      "score": 57,
-      "change": 3.6,
+      "score": 54,
+      "change": -5.3,
       "sns": {
-        "naver": 81,
-        "youtube": 50,
-        "google": 50,
+        "naver": 92,
+        "youtube": 41,
+        "google": 41,
         "github": 22
       }
     },
     "147": {
-      "score": 75,
-      "change": 0,
+      "score": 80,
+      "change": 6.7,
       "sns": {
-        "naver": 74,
-        "youtube": 85,
-        "google": 85,
+        "naver": 81,
+        "youtube": 89,
+        "google": 89,
         "github": 18
       }
     },
@@ -1475,49 +1475,49 @@
       "score": 8,
       "change": 0,
       "sns": {
-        "naver": 6,
+        "naver": 7,
         "youtube": 8,
         "google": 8,
         "github": 10
       }
     },
     "149": {
-      "score": 27,
-      "change": -3.6,
+      "score": 25,
+      "change": -7.4,
       "sns": {
-        "naver": 31,
-        "youtube": 27,
-        "google": 27,
+        "naver": 34,
+        "youtube": 21,
+        "google": 21,
         "github": 18
       }
     },
     "150": {
-      "score": 7,
-      "change": 0,
+      "score": 6,
+      "change": -14.3,
       "sns": {
         "naver": 0,
-        "youtube": 8,
-        "google": 8,
+        "youtube": 6,
+        "google": 6,
         "github": 22
       }
     },
     "151": {
-      "score": 41,
-      "change": -29.3,
+      "score": 40,
+      "change": -2.4,
       "sns": {
         "naver": 0,
-        "youtube": 59,
-        "google": 59,
+        "youtube": 57,
+        "google": 57,
         "github": 55
       }
     },
     "152": {
-      "score": 70,
-      "change": -12.5,
+      "score": 57,
+      "change": -18.6,
       "sns": {
-        "naver": 83,
-        "youtube": 67,
-        "google": 67,
+        "naver": 49,
+        "youtube": 61,
+        "google": 61,
         "github": 52
       }
     },
@@ -1533,7 +1533,7 @@
     },
     "154": {
       "score": 7,
-      "change": -12.5,
+      "change": 0,
       "sns": {
         "naver": 0,
         "youtube": 2,
@@ -1543,7 +1543,7 @@
     },
     "155": {
       "score": 8,
-      "change": -11.1,
+      "change": 0,
       "sns": {
         "naver": 0,
         "youtube": 1,
@@ -1552,72 +1552,72 @@
       }
     },
     "156": {
-      "score": 26,
-      "change": 62.5,
+      "score": 25,
+      "change": -3.8,
       "sns": {
         "naver": 1,
-        "youtube": 29,
-        "google": 29,
+        "youtube": 28,
+        "google": 28,
         "github": 78
       }
     },
     "157": {
-      "score": 47,
-      "change": 51.6,
+      "score": 43,
+      "change": -8.5,
       "sns": {
-        "naver": 3,
-        "youtube": 65,
-        "google": 65,
+        "naver": 4,
+        "youtube": 58,
+        "google": 58,
         "github": 72
       }
     },
     "158": {
       "score": 50,
-      "change": 85.2,
+      "change": 0,
       "sns": {
-        "naver": 8,
+        "naver": 9,
         "youtube": 65,
         "google": 65,
         "github": 82
       }
     },
     "159": {
-      "score": 76,
-      "change": -1.3,
+      "score": 74,
+      "change": -2.6,
       "sns": {
-        "naver": 81,
-        "youtube": 78,
-        "google": 78,
+        "naver": 91,
+        "youtube": 69,
+        "google": 69,
         "github": 48
       }
     },
     "160": {
-      "score": 65,
-      "change": 91.2,
+      "score": 63,
+      "change": -3.1,
       "sns": {
         "naver": 3,
-        "youtube": 93,
-        "google": 93,
+        "youtube": 90,
+        "google": 90,
         "github": 85
       }
     },
     "161": {
-      "score": 48,
-      "change": 6.7,
+      "score": 51,
+      "change": 6.3,
       "sns": {
-        "naver": 25,
-        "youtube": 58,
-        "google": 58,
+        "naver": 28,
+        "youtube": 63,
+        "google": 63,
         "github": 52
       }
     },
     "162": {
-      "score": 62,
-      "change": 0,
+      "score": 64,
+      "change": 3.2,
       "sns": {
-        "naver": 30,
-        "youtube": 79,
-        "google": 79,
+        "naver": 34,
+        "youtube": 81,
+        "google": 81,
         "github": 55
       }
     },
@@ -1632,12 +1632,12 @@
       }
     },
     "164": {
-      "score": 61,
-      "change": 13,
+      "score": 69,
+      "change": 13.1,
       "sns": {
-        "naver": 75,
-        "youtube": 58,
-        "google": 58,
+        "naver": 87,
+        "youtube": 65,
+        "google": 65,
         "github": 35
       }
     },
@@ -1645,67 +1645,67 @@
       "score": 7,
       "change": 0,
       "sns": {
-        "naver": 11,
+        "naver": 12,
         "youtube": 1,
         "google": 1,
         "github": 30
       }
     },
     "166": {
-      "score": 58,
-      "change": 3.6,
+      "score": 62,
+      "change": 6.9,
       "sns": {
-        "naver": 50,
-        "youtube": 65,
-        "google": 65,
+        "naver": 54,
+        "youtube": 70,
+        "google": 70,
         "github": 35
       }
     },
     "167": {
-      "score": 44,
-      "change": 0,
+      "score": 50,
+      "change": 13.6,
       "sns": {
-        "naver": 48,
-        "youtube": 45,
-        "google": 45,
+        "naver": 63,
+        "youtube": 47,
+        "google": 47,
         "github": 30
       }
     },
     "168": {
-      "score": 65,
-      "change": 1.6,
+      "score": 71,
+      "change": 9.2,
       "sns": {
-        "naver": 42,
-        "youtube": 78,
-        "google": 78,
+        "naver": 59,
+        "youtube": 79,
+        "google": 79,
         "github": 55
       }
     },
     "169": {
-      "score": 91,
-      "change": 71.7,
+      "score": 48,
+      "change": -47.3,
       "sns": {
-        "naver": 100,
-        "youtube": 94,
-        "google": 94,
+        "naver": 82,
+        "youtube": 31,
+        "google": 31,
         "github": 48
       }
     },
     "170": {
-      "score": 78,
-      "change": 239.1,
+      "score": 79,
+      "change": 1.3,
       "sns": {
-        "naver": 50,
+        "naver": 54,
         "youtube": 100,
         "google": 100,
         "github": 28
       }
     },
     "171": {
-      "score": 9,
-      "change": 0,
+      "score": 8,
+      "change": -11.1,
       "sns": {
-        "naver": 10,
+        "naver": 9,
         "youtube": 3,
         "google": 3,
         "github": 38
@@ -1715,19 +1715,19 @@
       "score": 7,
       "change": 0,
       "sns": {
-        "naver": 7,
+        "naver": 8,
         "youtube": 2,
         "google": 2,
         "github": 38
       }
     },
     "173": {
-      "score": 91,
-      "change": 0,
+      "score": 88,
+      "change": -3.3,
       "sns": {
-        "naver": 73,
-        "youtube": 100,
-        "google": 100,
+        "naver": 81,
+        "youtube": 92,
+        "google": 92,
         "github": 88
       }
     },
@@ -1745,67 +1745,67 @@
       "score": 13,
       "change": 0,
       "sns": {
-        "naver": 9,
+        "naver": 10,
         "youtube": 8,
         "google": 8,
         "github": 52
       }
     },
     "176": {
-      "score": 72,
-      "change": 16.1,
+      "score": 71,
+      "change": -1.4,
       "sns": {
-        "naver": 46,
-        "youtube": 93,
-        "google": 93,
+        "naver": 78,
+        "youtube": 74,
+        "google": 74,
         "github": 28
       }
     },
     "177": {
-      "score": 61,
-      "change": -1.6,
+      "score": 62,
+      "change": 1.6,
       "sns": {
-        "naver": 1,
-        "youtube": 87,
-        "google": 87,
+        "naver": 3,
+        "youtube": 89,
+        "google": 89,
         "github": 80
       }
     },
     "178": {
-      "score": 56,
-      "change": -1.8,
+      "score": 57,
+      "change": 1.8,
       "sns": {
-        "naver": 4,
-        "youtube": 87,
-        "google": 87,
+        "naver": 8,
+        "youtube": 86,
+        "google": 86,
         "github": 25
       }
     },
     "179": {
-      "score": 17,
-      "change": -60.5,
+      "score": 64,
+      "change": 276.5,
       "sns": {
-        "naver": 3,
-        "youtube": 24,
-        "google": 24,
+        "naver": 5,
+        "youtube": 100,
+        "google": 100,
         "github": 20
       }
     },
     "180": {
-      "score": 45,
-      "change": -6.2,
+      "score": 47,
+      "change": 4.4,
       "sns": {
-        "naver": 3,
-        "youtube": 71,
-        "google": 71,
+        "naver": 6,
+        "youtube": 72,
+        "google": 72,
         "github": 18
       }
     },
     "181": {
       "score": 15,
-      "change": 7.1,
+      "change": 0,
       "sns": {
-        "naver": 15,
+        "naver": 17,
         "youtube": 13,
         "google": 13,
         "github": 22
@@ -1822,38 +1822,38 @@
       }
     },
     "183": {
-      "score": 9,
-      "change": 0,
+      "score": 6,
+      "change": -33.3,
       "sns": {
         "naver": 5,
-        "youtube": 9,
-        "google": 9,
+        "youtube": 4,
+        "google": 4,
         "github": 22
       }
     },
     "184": {
-      "score": 3,
-      "change": -25,
+      "score": 10,
+      "change": 233.3,
       "sns": {
-        "naver": 3,
-        "youtube": 1,
-        "google": 1,
+        "naver": 4,
+        "youtube": 12,
+        "google": 12,
         "github": 18
       }
     },
     "185": {
-      "score": 88,
-      "change": -1.1,
+      "score": 94,
+      "change": 6.8,
       "sns": {
-        "naver": 82,
-        "youtube": 91,
-        "google": 91,
+        "naver": 94,
+        "youtube": 95,
+        "google": 95,
         "github": 92
       }
     },
     "186": {
       "score": 63,
-      "change": 293.8,
+      "change": 0,
       "sns": {
         "naver": 3,
         "youtube": 100,
@@ -1872,42 +1872,42 @@
       }
     },
     "188": {
-      "score": 4,
-      "change": 0,
+      "score": 5,
+      "change": 25,
       "sns": {
         "naver": 0,
-        "youtube": 1,
-        "google": 1,
+        "youtube": 2,
+        "google": 2,
         "github": 38
       }
     },
     "189": {
-      "score": 32,
-      "change": 0,
+      "score": 33,
+      "change": 3.1,
       "sns": {
         "naver": 1,
-        "youtube": 47,
-        "google": 47,
+        "youtube": 48,
+        "google": 48,
         "github": 35
       }
     },
     "190": {
-      "score": 75,
-      "change": 1.4,
+      "score": 81,
+      "change": 8,
       "sns": {
-        "naver": 74,
-        "youtube": 82,
-        "google": 82,
+        "naver": 86,
+        "youtube": 87,
+        "google": 87,
         "github": 32
       }
     },
     "191": {
       "score": 62,
-      "change": 3.3,
+      "change": 0,
       "sns": {
-        "naver": 70,
-        "youtube": 66,
-        "google": 66,
+        "naver": 78,
+        "youtube": 61,
+        "google": 61,
         "github": 18
       }
     },
@@ -1922,12 +1922,12 @@
       }
     },
     "193": {
-      "score": 60,
-      "change": 1.7,
+      "score": 59,
+      "change": -1.7,
       "sns": {
         "naver": 0,
-        "youtube": 95,
-        "google": 95,
+        "youtube": 94,
+        "google": 94,
         "github": 28
       }
     },
@@ -1942,22 +1942,22 @@
       }
     },
     "195": {
-      "score": 4,
-      "change": 0,
+      "score": 3,
+      "change": -25,
       "sns": {
         "naver": 0,
-        "youtube": 2,
-        "google": 2,
+        "youtube": 1,
+        "google": 1,
         "github": 25
       }
     },
     "196": {
-      "score": 60,
-      "change": -13,
+      "score": 71,
+      "change": 18.3,
       "sns": {
-        "naver": 62,
-        "youtube": 56,
-        "google": 56,
+        "naver": 70,
+        "youtube": 70,
+        "google": 70,
         "github": 78
       }
     },
@@ -1972,32 +1972,32 @@
       }
     },
     "198": {
-      "score": 41,
-      "change": -6.8,
+      "score": 44,
+      "change": 7.3,
       "sns": {
         "naver": 0,
-        "youtube": 54,
-        "google": 54,
+        "youtube": 59,
+        "google": 59,
         "github": 90
       }
     },
     "199": {
-      "score": 77,
-      "change": 0,
+      "score": 80,
+      "change": 3.9,
       "sns": {
-        "naver": 72,
-        "youtube": 78,
-        "google": 78,
+        "naver": 73,
+        "youtube": 82,
+        "google": 82,
         "github": 88
       }
     },
     "200": {
-      "score": 15,
-      "change": 0,
+      "score": 16,
+      "change": 6.7,
       "sns": {
         "naver": 0,
-        "youtube": 12,
-        "google": 12,
+        "youtube": 13,
+        "google": 13,
         "github": 82
       }
     }
