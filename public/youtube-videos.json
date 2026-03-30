@@ -1,5 +1,5 @@
 {
-  "updated": "2026-03-09T21:03:53.248Z",
+  "updated": "2026-03-30T22:01:01.616Z",
   "topN": 30,
   "videos": {
     "1": [],
@@ -23,26 +23,7 @@
         "thumbnail": "https://i.ytimg.com/vi/RRPRtFTfFoI/mqdefault.jpg"
       }
     ],
-    "3": [
-      {
-        "videoId": "j-yX6klmRSQ",
-        "title": "1초만에 외국어 실시간 통역! 시니어 해외여행 꿀팁 4가지+항공권 보안",
-        "channelTitle": "시니어 정보탐정",
-        "thumbnail": "https://i.ytimg.com/vi/j-yX6klmRSQ/mqdefault.jpg"
-      },
-      {
-        "videoId": "9yLZKa5m270",
-        "title": "[이런뉴스] “부탁해요, 챗GPT” 공손함이 가져온 뜻밖의 결과는? / KBS 2025.04.22.",
-        "channelTitle": "KBS News",
-        "thumbnail": "https://i.ytimg.com/vi/9yLZKa5m270/mqdefault.jpg"
-      },
-      {
-        "videoId": "VHMD2iF1Tf4",
-        "title": "[갤럭시 Z 플립7] Galaxy Z Flip7 - Google Gemini 편 | 삼성전자",
-        "channelTitle": "삼성전자 Samsung Electronics",
-        "thumbnail": "https://i.ytimg.com/vi/VHMD2iF1Tf4/mqdefault.jpg"
-      }
-    ],
+    "3": [],
     "4": [
       {
         "videoId": "oxQ65WlwiuU",
@@ -123,26 +104,7 @@
         "thumbnail": "https://i.ytimg.com/vi/7pwrolSUvXs/mqdefault.jpg"
       }
     ],
-    "10": [
-      {
-        "videoId": "vIh8nu1tcDI",
-        "title": "미드저니 마스터하기: 초보자를 위한 완벽 가이드 #1",
-        "channelTitle": "초인쌤",
-        "thumbnail": "https://i.ytimg.com/vi/vIh8nu1tcDI/mqdefault.jpg"
-      },
-      {
-        "videoId": "mLri7SZgR_4",
-        "title": "&quot;초보부터 8분 완벽 정리&quot; 미드저니v7(Midjourney)",
-        "channelTitle": "찍봇",
-        "thumbnail": "https://i.ytimg.com/vi/mLri7SZgR_4/mqdefault.jpg"
-      },
-      {
-        "videoId": "y3F8w6Pra7A",
-        "title": "王 쉽게 설명한 초보자를 위한 미드저니 튜터리얼 가이드 | Midjourney 계정 만들기 부터 이미지 만들기 사용법 까지 | 미드저니 ai 사용법",
-        "channelTitle": "감자나라ai",
-        "thumbnail": "https://i.ytimg.com/vi/y3F8w6Pra7A/mqdefault.jpg"
-      }
-    ],
+    "10": [],
     "11": [],
     "12": [
       {
@@ -406,6 +368,7 @@
     ],
     "110": [],
     "114": [],
+    "126": [],
     "134": [],
     "138": [
       {
@@ -454,6 +417,7 @@
     "159": [],
     "170": [],
     "173": [],
+    "176": [],
     "185": [],
     "190": [],
     "199": []
