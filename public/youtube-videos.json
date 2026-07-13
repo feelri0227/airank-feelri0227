@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-06T21:25:33.102Z",
+  "updated": "2026-07-13T20:53:08.467Z",
   "topN": 30,
   "videos": {
     "1": [],
@@ -126,26 +126,7 @@
         "thumbnail": "https://i.ytimg.com/vi/nVNxZPCXoe8/mqdefault.jpg"
       }
     ],
-    "13": [
-      {
-        "videoId": "oUFyFDW6jmw",
-        "title": "Text Effect using Adobe Illustrator + Adobe Firefly",
-        "channelTitle": "Utix Grapix",
-        "thumbnail": "https://i.ytimg.com/vi/oUFyFDW6jmw/mqdefault.jpg"
-      },
-      {
-        "videoId": "2VpG5HMoC5A",
-        "title": "어도비가 드디어 돈값을 합니다 ㄷㄷ 파이어플라이로 촬영 한 컷도 없이 영상 만드는 법 공개 / 오목교 전자상가",
-        "channelTitle": "오목교 전자상가",
-        "thumbnail": "https://i.ytimg.com/vi/2VpG5HMoC5A/mqdefault.jpg"
-      },
-      {
-        "videoId": "Rkq_eDeGIMw",
-        "title": "Adobe Firefly V3: A Complete 3D Tutorial",
-        "channelTitle": "Will Paterson",
-        "thumbnail": "https://i.ytimg.com/vi/Rkq_eDeGIMw/mqdefault.jpg"
-      }
-    ],
+    "13": [],
     "14": [],
     "18": [
       {
