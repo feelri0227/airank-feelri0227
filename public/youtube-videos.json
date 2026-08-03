@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-27T21:05:21.312Z",
+  "updated": "2026-08-03T20:58:11.395Z",
   "topN": 30,
   "videos": {
     "1": [],
@@ -64,26 +64,7 @@
         "thumbnail": "https://i.ytimg.com/vi/Cv1IpNcDsEg/mqdefault.jpg"
       }
     ],
-    "6": [
-      {
-        "videoId": "FqF6C56O-08",
-        "title": "How To Use Llama 2 👩‍💻 [Tutorial]",
-        "channelTitle": "Prof MAD",
-        "thumbnail": "https://i.ytimg.com/vi/FqF6C56O-08/mqdefault.jpg"
-      },
-      {
-        "videoId": "eNxAgYBdJ2A",
-        "title": "Llama-3 기반 실용적인 한국어 모델 3종 소개 및 코랩 실습 (라마3 성능 조타!)",
-        "channelTitle": "빵형의 개발도상국",
-        "thumbnail": "https://i.ytimg.com/vi/eNxAgYBdJ2A/mqdefault.jpg"
-      },
-      {
-        "videoId": "kZXE5KyFcHo",
-        "title": "메타 라마3 설치 사용방법 - OLLAMA | Llama 3 - Meta AI | 윈도우, 맥북, 리눅스 설치 가능",
-        "channelTitle": "감자나라ai",
-        "thumbnail": "https://i.ytimg.com/vi/kZXE5KyFcHo/mqdefault.jpg"
-      }
-    ],
+    "6": [],
     "8": [
       {
         "videoId": "ZkO1VpsMpmU",
@@ -235,6 +216,7 @@
       }
     ],
     "41": [],
+    "45": [],
     "47": [],
     "48": [],
     "49": [
@@ -285,6 +267,7 @@
     "69": [],
     "71": [],
     "80": [],
+    "83": [],
     "85": [],
     "87": [],
     "93": [],
