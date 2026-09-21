@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-14T22:55:04.977Z",
+  "updated": "2026-09-21T22:58:11.383Z",
   "topN": 30,
   "videos": {
     "1": [],
@@ -243,26 +243,7 @@
     "55": [],
     "58": [],
     "59": [],
-    "62": [
-      {
-        "videoId": "MhoM2iPHXHo",
-        "title": "스테이블 디퓨전으로 AI 실사 쉽게 만들기! (Stable diffusion 사용법)",
-        "channelTitle": "모르면 끝",
-        "thumbnail": "https://i.ytimg.com/vi/MhoM2iPHXHo/mqdefault.jpg"
-      },
-      {
-        "videoId": "UT6uvlntOWA",
-        "title": "Make an easy LoRA with CivitAi",
-        "channelTitle": "Ai Foundry",
-        "thumbnail": "https://i.ytimg.com/vi/UT6uvlntOWA/mqdefault.jpg"
-      },
-      {
-        "videoId": "t2ajilR0d7E",
-        "title": "스테이블 디퓨전(Stable diffusion) 체크포인트(checkpiont), 로라(loRA) 사용법과 VAE, CLIP 기본 개념",
-        "channelTitle": "생성형 AI(Generative AI)와 ICT 훔쳐보기",
-        "thumbnail": "https://i.ytimg.com/vi/t2ajilR0d7E/mqdefault.jpg"
-      }
-    ],
+    "62": [],
     "65": [],
     "69": [],
     "71": [],
@@ -340,6 +321,7 @@
     "190": [],
     "191": [],
     "196": [],
+    "198": [],
     "199": []
   }
 }
